@@ -1,7 +1,11 @@
 doorbroken = False
 playerpos = 0
+playerdead = False
+playerchoke = 2
+ouch = 1
+brokenhand = False
 
-while doorbroken == False:
+while doorbroken == False and playerdead == False:
     player = input("There is a door here. \n").lower()
 
     if player == 'look north':
@@ -43,17 +47,30 @@ while doorbroken == False:
     
     elif player == 'quit':
         print('Game over.')
-        playerpos = 1
-        doorbroken = True
+        playerdead = True
         
     else:
         print("Your thoughts seem incomprehensible.")
 
-while playerpos == 0:
+while playerpos == 0 and playerdead == False:
     player = input("There is no longer a door here. \n").lower()
 
     if player == "check door":
         print("Nothing but splinters.")
+
+    elif player == 'check wall':
+        print('A red brick wall. The surface ripples when you touch it.')
+
+    elif player == 'break wall' and ouch != 3 and brokenhand == False:
+        print('You violently punch the wall. Your hand hurts.')
+        ouch = ouch + 1
+
+    elif player == 'break wall' and ouch == 3 and brokenhand == False:
+        print('You violently punch the wall. Your hand is now broken. You can\'t break anymore.')
+        brokenhand = True
+
+    elif player == 'break wall' and brokenhand == True:
+        print("You wish you could do that, moron.")
 
     elif player == "look north":
         print("A brick wall standing in a doorframe. The surface ripples when you touch it.")
@@ -75,10 +92,10 @@ while playerpos == 0:
 
     elif player == 'quit':
         print('Game over.')
-        playerpos = 1
+        playerdead = True
 
     elif player == 'go north':
-        print('You pass through brick like water. You choked to death. This is the end. \n Game Over')
+        print('You pass through brick like water. You choked to death. This is the end.\nGame Over\n\n\n\n  or is it?')
         playerpos = 1
 
     elif player == 'go east':
@@ -92,3 +109,26 @@ while playerpos == 0:
     
     else:
         print("Your thoughts seem incomprehensible.")
+
+while playerpos == 1 and playerdead == False:
+    player = input("There is no               here. \n").lower().split()
+
+    if playerchoke == 0:
+        print("You choked to death. Again. I will not give you another chance. \n\nGame over.")
+        playerdead = True
+
+    if player[0] == 'break' and brokenhand == False:
+        print('you broke \n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
+        playerpos = 2
+
+    elif player[0] == 'break' and brokenhand == True:
+        print('you wish you could.')
+        playerchoke = playerchoke - 1
+
+    else:
+        print('Wrong answer. You feel your lungs lose air.')
+        playerchoke = playerchoke - 1
+            
+                
+while playerpos == 2 and playerdead == False:
+    player = input('What now?')
