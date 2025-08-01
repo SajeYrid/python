@@ -56,7 +56,7 @@ while playerpos == 0:
         print("Nothing but splinters.")
 
     elif player == "look north":
-        print("A brick wall standing in a doorframe.")
+        print("A brick wall standing in a doorframe. The surface ripples when you touch it.")
 
     elif player == "look west":
         print("Nothing.")
