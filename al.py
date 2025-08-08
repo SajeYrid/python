@@ -19,7 +19,7 @@ while doorbroken == False and plydead == False:
     if ply == "look north" or ply == "check north":
         print("The same thing as usual.")
 
-    elif ply == "look west" or ply == "check north":
+    elif ply == "look west" or ply == "check west":
         print("Nothing. A blank void.")
 
     elif ply == 'look east' and 'Stool' not in inventory:
@@ -29,13 +29,15 @@ while doorbroken == False and plydead == False:
         print("There is a small golden key lying on the floor.")
 
     elif ply == 'take key':
-        print("your hand passes through the key like it wasn't even there.")
+        print("Your hand passes through the key like it wasn't even there.")
 
-    elif ply == 'check inventory':
-        for x in inventory:
-            print(x)
+    elif ply == 'eat key':
+        print("You heard a loud crunch sound. You didn't bite down yet.")
 
-    elif ply == 'inventory':
+    elif ply == 'check key' or ply == 'inspect key':
+        print("The key is the same color as the floor.")
+
+    elif ply == 'check inventory' or ply == 'inventory':
         for x in inventory:
             print(x)
 
@@ -152,11 +154,11 @@ while plypos == 1 and plydead == False:
     ply = input("There is no               here. \n").lower().split()
 
     if plychoke == 0:
-        print("You choked to death. Again. I will not give you another chance. \n\nGame over.")
+        print("You somehow managed to choke to death for a second time. There aren't third chances in this world. \n\nGame over.")
         plydead = True
 
     if 'break' in ply and brokenhand == False:
-        print('you broke. you lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
+        print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
         plypos = 2
         plychoke = 3
         inventory.remove('Nothing')
@@ -170,12 +172,12 @@ while plypos == 1 and plydead == False:
             print(x)
 
     elif 'break' in ply and brokenhand == True:
-        print('you wish you could.')
+        print('You wish you could.')
         plychoke -= 1
 
     else:
         plychoke -= 1
-        print('Wrong answer. You feel your lungs lose air.')
+        print('There isn't a way to do that. You feel your lungs lose air.')
 
 
 while plypos ==2 and plydead == False and "Stool" not in inventory:
