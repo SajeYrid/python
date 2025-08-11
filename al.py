@@ -56,11 +56,24 @@ while doorbroken == False and plydead == False:
     elif ply == 'open door':
         print("You jiggle the handle. The door is locked.")
 
+    elif ply == 'close door':
+        print("You close the closed door.")
+
     elif ply == 'check door':
         print("It's just a simple door. It looks fragile, though.")
     
     elif ply == 'break door':
         print("You broke down the door. There is nothing beyond the frame but a brick wall.")
+        doorbroken = True
+
+    elif ply == 'eat door':
+        print("You try to eat the door. Your mouth is too small unfortunatly.")
+
+    elif ply == 'unlock door':
+        print("You try to unlock the door. Your finger does not fit through the lock.")
+
+    elif ply == 'kill door':
+        print("You violently attack the door until it is nothing but rubble. There is nothing beyond the frame but a brick wall.")
         doorbroken = True
 
     elif ply == 'go north':
@@ -74,6 +87,12 @@ while doorbroken == False and plydead == False:
 
     elif ply == 'go south':
         print('You attempt to go backwards. You trip over your own feet. When you get back up, you haven\'t moved at all.')
+
+    elif ply == "think":
+        print("You thought about something. The door eats your thought.")
+
+    elif ply == "kill me" or ply == "kill myself":
+        print("You punched yourself multiple times. You're too weak to deal any damage.")
     
     elif ply == 'quit':
         print('Game over. ')
@@ -134,6 +153,9 @@ while plypos == 0 and plydead == False:
 
     elif ply == 'break door':
         print("It's already broken.")
+
+    elif ply == "close door":
+        print("You try to figure out how to inact this outrageous thought. You come up with nothing.")
 
     elif ply == 'quit':
         print('Game over.')
