@@ -206,6 +206,11 @@ while plypos ==2 and "Stool" not in inventory and plydead == False:
 
     elif ply == "check dinosaur":
         print("You go to check the dinosaur. It reacts. \nBATTLE START!")
+        print("""
+Your actions are:
+ATTACK
+DEFEND
+CHARGE""")
         plypos = 3
         
     elif ply == 'look west':
@@ -218,12 +223,6 @@ while plypos ==2 and "Stool" not in inventory and plydead == False:
         print("Your thoughts seem incomprehensible.")
 
 while plypos == 3 and plydead == False:
-
-    print("""
-Your actions are:
-ATTACK
-DEFEND
-CHARGE""")
 
     ply = input(f"Your health is: {plyhealth}. PLASTIC DINO's health is {dinohealth}. What do you do?\n").lower()
 
@@ -288,7 +287,6 @@ CHARGE""")
     elif ply == ('defend'):
         print('You defended! You won\'t take damage this turn.')
         plyatck = 5
-        plycharge = False
         dinodefense = False
         import random
         dinoaction = random.randint(1, 10)
@@ -309,7 +307,6 @@ CHARGE""")
 
         elif dinoaction == 5 and dinocharge == True:
             print("PLASTIC DINO tried to charge! But it already did.")
-            plydefense = False
 
         else:
             print("This will only print if something went horribly wrong.")
@@ -382,6 +379,7 @@ CHARGE""")
         print("That isn't an action you can do.")
 
     if plyhealth == 0:
+        print("You died! Loser!")
         plydead = True
 
     if dinohealth == 0:
