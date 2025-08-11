@@ -11,11 +11,13 @@ dinodead = False
 plyhealth = 10
 plyatck = 5
 plycharge = False
+dinohealth = 30
+dinoatck = 2
+dinodefense = False
+dinocharge = False
+dinoaction = 0
 
-if plydead == True:
-    plypos = -1
-
-while doorbroken == False:
+while doorbroken == False and plydead == False:
     
     ply = input("There is a door here. \n").lower()
 
@@ -80,7 +82,7 @@ while doorbroken == False:
     else:
         print("Your thoughts seem incomprehensible.")
 
-while plypos == 0:
+while plypos == 0 and plydead == False:
     ply = input("There is no longer a door here. \n").lower()
 
     if ply == "check door":
@@ -153,14 +155,19 @@ while plypos == 0:
     else:
         print("Your thoughts seem incomprehensible.")
 
-while plypos == 1:
+while plypos == 1 and plydead == False:
+
     ply = input("There is no               here. \n").lower().split()
 
     if plychoke == 0:
         print("You somehow managed to choke to death for a second time. There aren't third chances in this world. \n\nGame over.")
         plydead = True
 
-    if 'break' in ply and brokenhand == False:
+    elif 'break' in ply and brokenhand == False and plychoke == 1:
+        print("You tried. but you failed. You felt the last bit of air escape your lungs.")
+        plychoke == 0
+
+    elif 'break' in ply and brokenhand == False and plychoke != 1:
         print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
         plypos = 2
         plychoke = 3
@@ -183,7 +190,7 @@ while plypos == 1:
         print('There isn\'t a way to do that. You feel your lungs lose air.')
 
 
-while plypos ==2 and "Stool" not in inventory:
+while plypos ==2 and "Stool" not in inventory and plydead == False:
     ply = input('What now? \n').lower()
 
     if ply == "look north":
@@ -210,21 +217,15 @@ while plypos ==2 and "Stool" not in inventory:
     else:
         print("Your thoughts seem incomprehensible.")
 
-while plypos == 3:
+while plypos == 3 and plydead == False:
 
-    dinohealth = 30
-    dinoatck = 2
-    dinodefense = False
-    dinocharge = False
-    dinoaction = 0
-
-    print("""PLASTIC DINO started a battle with you.
+    print("""
 Your actions are:
 ATTACK
 DEFEND
 CHARGE""")
 
-    ply = input(f"Your health is: {plyhealth}. PLASTIC DINO's health is {dinohealth}. What do you do?").lower()
+    ply = input(f"Your health is: {plyhealth}. PLASTIC DINO's health is {dinohealth}. What do you do?\n").lower()
 
     if ply == ('attack'):
         print(f'You attacked PLASTIC DINO for {plyatck} damage!')
@@ -376,8 +377,20 @@ CHARGE""")
 
         else:
             print("This will only print if something went horribly wrong.")
+
+    else:
+        print("That isn't an action you can do.")
+
+    if plyhealth == 0:
+        plydead = True
+
+    if dinohealth == 0:
+        dinodead = True
+        print("You won!")
+        plypos = 2
+
             
-while plypos == 2 and "Stool" in inventory:
+while plypos == 2 and "Stool" in inventory and plydead == False:
 
     ply = input('What now? \n').lower()
 
