@@ -58,10 +58,31 @@ while doorbroken == False and plydead == False:
 
     elif ply == 'check door':
         print("It's just a simple door. It looks fragile, though.")
+
+    elif ply == 'eat door':
+        print("You put your mouth on the door. The door is too big to be eaten in one sitting.")
     
     elif ply == 'break door':
         print("You broke down the door. There is nothing beyond the frame but a brick wall.")
         doorbroken = True
+
+    elif ply == 'fight door':
+        print("You prep for battle against a door.")
+        doorFight = input("What will you do? \n").lower()
+        if doorFight == 'attack' or doorFight == 'kill':
+            print("You attack the door with brute force. It instantly breaks down. \n There is only a brick wall beyond the frame.")
+            doorbroken = True
+        elif doorFight == 'defend':
+            print("You defended. The door doesn't do anything. You stop fighting it.")
+        elif doorFight == 'charge':
+            print("You charged. The door doesn't do anything. Perhaps it's best you save your energy for something else.")
+        else:
+            print("You can't think of how to perform that on a door. You disengage in combat.")
+
+    elif ply == 'kill door':
+        print("You brutally attack the door until it's nothing but rubble. \nYour hand hurts, but there is now a brick wall where the door was.")
+        doorbroken = True
+        ouch += 1
 
     elif ply == 'go north':
         print('You bang your head against the door.')
@@ -74,6 +95,9 @@ while doorbroken == False and plydead == False:
 
     elif ply == 'go south':
         print('You attempt to go backwards. You trip over your own feet. When you get back up, you haven\'t moved at all.')
+
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print('You tried to think. You observe that there is a unbroken door in front of you.')
     
     elif ply == 'quit':
         print('Game over. ')
@@ -101,7 +125,7 @@ while plypos == 0 and plydead == False:
 
     elif ply == 'break wall' and ouch != 3 and brokenhand == False:
         print('You violently punch the wall. Your hand hurts.')
-        ouch = ouch + 1
+        ouch += 1
 
     elif ply == 'break wall' and ouch == 3 and brokenhand == False:
         print('You violently punch the wall. Your hand is now broken. You can\'t break anymore.')
@@ -151,6 +175,9 @@ while plypos == 0 and plydead == False:
 
     elif ply == 'go south':
         print('You trip over your own feet. When you get back up, you haven\'t moved at all.')
+
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print('You tried to think. You observe that the Brick Wall looks unnatrual.')
     
     else:
         print("Your thoughts seem incomprehensible.")
@@ -183,6 +210,10 @@ while plypos == 1 and plydead == False:
 
     elif 'break' in ply and brokenhand == True:
         print('You wish you could.')
+        plychoke -= 1
+
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print('You tried to think. You thought about breaking.')
         plychoke -= 1
 
     else:
@@ -218,6 +249,9 @@ CHARGE""")
 
     elif ply == 'look south':
         print("Fake grass. There is an air vent embedded in the ground")
+
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print('You tried to think. You observe a suspicous looking dinosaur')
 
     else:
         print("Your thoughts seem incomprehensible.")
@@ -422,6 +456,9 @@ while plypos == 2 and "Stool" in inventory and plydead == False:
 
     elif ply == 'look south':
         print("Fake grass. There is an air vent embedded in the ground")
+
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print('You tried to think. You thought about climbing the stool.')
 
     else:
         print("Your thoughts seem incomprehensible.")
