@@ -23,3 +23,10 @@ Area 3 (Battle Against a True Dinosaur)
     Attack: Deals 5 Damage to the Dinosaur if it isn't defending.
     Defend: Allows you to take 0 Damage This Turn
     Charge: Powers up Attack to deal Double Damage next turn
+  An error occurs when the Dinosaur attacks:
+    Traceback (most recent call last):
+    File "C:\Users\THunt001\Documents\GitHub\Python\door.py", line 325, in <module>
+      dinomove()
+    File "C:\Users\THunt001\Documents\GitHub\Python\door.py", line 280, in dinomove
+      print(f"PLASTIC DINO bit you for {dinoatck}!")
+  UnboundLocalError: cannot access local variable 'dinoatck' where it is not associated with a value
