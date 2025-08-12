@@ -334,14 +334,14 @@ while plypos == 3 and plydead == False:
     else:
         print("That isn't an action you can do.")
     
-        if plyhealth == 0:
-            print("You died! Loser!")
-            plydead = True
+    if plyhealth == 0:
+        print("You died! Loser!")
+        plydead = True
     
-        if dinohealth == 0:
-            dinodead = True
-            print("You won!")
-            plypos = 2
+    if dinohealth == 0:
+        dinodead = True
+        print("You won!")
+        plypos = 2
 
             
 while plypos == 2 and tookstool == True and plydead == False:
