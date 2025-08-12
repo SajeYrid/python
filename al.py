@@ -72,7 +72,11 @@ while doorbroken == False and plydead == False:
         doorbroken = True
 
     elif ply == 'fight door':
-        print("You prep for battle against a door.")
+        print("""You prep for battle against a door.
+Your actions are:
+ATTACK
+DEFEND
+CHARGE""")
         doorFight = input("What will you do? \n").lower()
         if doorFight == 'attack' or doorFight == 'kill':
             print("You attack the door with brute force. It instantly breaks down. \n There is only a brick wall beyond the frame.")
