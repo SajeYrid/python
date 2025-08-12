@@ -10,12 +10,16 @@ dinodead = False
 
 plyhealth = 10
 plyatck = 5
+plydefense = False
 plycharge = False
 dinohealth = 30
 dinoatck = 2
 dinodefense = False
 dinocharge = False
 dinoaction = 0
+
+ventopen = False
+tookstool = False
 
 while doorbroken == False and plydead == False:
     
@@ -49,6 +53,7 @@ while doorbroken == False and plydead == False:
     elif ply == 'take stool' and 'Stool' not in inventory:
         print('You took the stool.')
         inventory.append('Stool')
+        tookstool = True
 
     elif ply == 'look south':
         print("You aren't an owl, are you?")
@@ -149,6 +154,7 @@ while plypos == 0 and plydead == False:
     elif ply == 'take stool' and 'Stool' not in inventory:
         print('You took the stool.')
         inventory.append('Stool')
+        tookstool = True
 
     elif ply == "look south":
         print("You aren't an owl, are you?")
@@ -221,11 +227,14 @@ while plypos == 1 and plydead == False:
         print('There isn\'t a way to do that. You feel your lungs lose air.')
 
 
-while plypos ==2 and "Stool" not in inventory and plydead == False:
+while plypos == 2 and tookstool == False and plydead == False:
     ply = input('What now? \n').lower()
 
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
+
+    elif ply == 'break glass':
+        print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
 
     elif ply == 'check inventory':
         for x in inventory:
@@ -248,7 +257,10 @@ CHARGE""")
         print("Big plastic dinosaur. It looks suprisingly life-like.")
 
     elif ply == 'look south':
-        print("Fake grass. There is an air vent embedded in the ground")
+        print("Fake grass.")
+
+    elif ply == 'look east':
+        print('A basic beige wall.')
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You observe a suspicous looking dinosaur')
@@ -260,169 +272,79 @@ while plypos == 3 and plydead == False:
 
     ply = input(f"Your health is: {plyhealth}. PLASTIC DINO's health is {dinohealth}. What do you do?\n").lower()
 
-    if ply == ('attack'):
-        print(f'You attacked PLASTIC DINO for {plyatck} damage!')
-        dinohealth = dinohealth - plyatck
-        plyatck = 5
-        plycharge = False
+    def dinomove():
         import random
         dinoaction = random.randint(1, 10)
-        
+            
         if dinoaction > 5:
             print(f"PLASTIC DINO bit you for {dinoatck}!")
             plyhealth = plyhealth - dinoatck
             dinoatck = 2
             dinocharge = False
-            
+                
         elif dinoaction < 5:
             print("PLASTIC DINO defended! It won't take damage next turn!")
             dinodefense = True
-
+    
         elif dinoaction == 5 and dinocharge == False:
             print("PLASTIC DINO charged! Its next attack will do double damage!")
             dinocharge = True
             dinoatck = 4
-
+    
         elif dinoaction == 5 and dinocharge == True:
             print("PLASTIC DINO tried to charge! But it already did.")
-
+    
         else:
             print("This will only print if something went horribly wrong.")
+
+    if ply == ('attack'):
+        print(f'You attacked PLASTIC DINO for {plyatck} damage!')
+        dinohealth = dinohealth - plyatck
+        plyatck = 5
+        plycharge = False
+        dinomove()
 
     elif ply == ('attack') and dinodefense == True:
         print('You attacked PLASTIC DINO! But it defended.')
         plyatck = 5
         plycharge = False
         dinodefense = False
-        import random
-        dinoaction = random.randint(1, 10)
-        
-        if dinoaction > 5:
-            print(f"PLASTIC DINO bit you for {dinoatck}!")
-            plyhealth = plyhealth - dinoatck
-            dinoatck = 2
-            dinocharge = False
-            
-        elif dinoaction < 5:
-            print("PLASTIC DINO defended! It won't take damage next turn!")
-            dinodefense = True
-
-        elif dinoaction == 5 and dinocharge == False:
-            print("PLASTIC DINO charged! Its next attack will do double damage!")
-            dinocharge = True
-            dinoatck = 4
-
-        elif dinoaction == 5 and dinocharge == True:
-            print("PLASTIC DINO tried to charge! But it already did.")
-
-        else:
-            print("This will only print if something went horribly wrong.")
+        dinomove()
 
     elif ply == ('defend'):
         print('You defended! You won\'t take damage this turn.')
         plyatck = 5
         dinodefense = False
-        import random
-        dinoaction = random.randint(1, 10)
-
-        if dinoaction > 5:
-            print(f"PLASTIC DINO bit you! But you defended!")
-            dinoatck = 2
-            dinocharge = False
-            
-        elif dinoaction < 5:
-            print("PLASTIC DINO defended! It won't take damage next turn!")
-            dinodefense = True
-
-        elif dinoaction == 5 and dinocharge == False:
-            print("PLASTIC DINO charged! Its next attack will do double damage!")
-            dinocharge = True
-            dinoatck = 4
-
-        elif dinoaction == 5 and dinocharge == True:
-            print("PLASTIC DINO tried to charge! But it already did.")
-
-        else:
-            print("This will only print if something went horribly wrong.")
+        dinomove()
 
     elif ply == ('charge'):
         print('You charged! You will do double damage on your next attack!')
         plyatck = 10
         plycharge = True
         dinodefense = False
-        import random
-        dinoaction = random.randint(1, 10)
+        dinomove()
 
-        if dinoaction > 5:
-            print(f"PLASTIC DINO bit you for {dinoatck}!")
-            plyhealth = plyhealth - dinoatck
-            dinoatck = 2
-            dinocharge = False
-            
-        elif dinoaction < 5:
-            print("PLASTIC DINO defended! It won't take damage next turn!")
-            plydefense = False
-            dinodefense = True
-
-        elif dinoaction == 5 and dinocharge == False:
-            print("PLASTIC DINO charged! Its next attack will do double damage!")
-            plydefense = False
-            dinocharge = True
-            dinoatck = 4
-
-        elif dinoaction == 5 and dinocharge == True:
-            print("PLASTIC DINO tried to charge! But it already did.")
-            plydefense = False
-
-        else:
-            print("This will only print if something went horribly wrong.")
-
-    elif ply == ('charge'):
+    elif ply == ('charge') and plycharge == True:
         print('You tried to charge again! But nothing happened...')
         plyatck = 10
         plycharge = True
         dinodefense = False
-        import random
-        dinoaction = random.randint(1, 10)
-
-        if dinoaction > 5:
-            print(f"PLASTIC DINO bit you for {dinoatck}!")
-            plyhealth = plyhealth - dinoatck
-            dinoatck = 2
-            dinocharge = False
-            
-        elif dinoaction < 5:
-            print("PLASTIC DINO defended! It won't take damage next turn!")
-            plydefense = False
-            dinodefense = True
-
-        elif dinoaction == 5 and dinocharge == False:
-            print("PLASTIC DINO charged! Its next attack will do double damage!")
-            plydefense = False
-            dinocharge = True
-            dinoatck = 4
-
-        elif dinoaction == 5 and dinocharge == True:
-            print("PLASTIC DINO tried to charge! But it already did.")
-            plydefense = False
-
-        else:
-            print("This will only print if something went horribly wrong.")
+        dinomove()
 
     else:
         print("That isn't an action you can do.")
-
-    if plyhealth == 0:
-        print("You died! Loser!")
-        plydead = True
-
-    if dinohealth == 0:
-        dinodead = True
-        print("You won!")
-        plypos = 2
+    
+        if plyhealth == 0:
+            print("You died! Loser!")
+            plydead = True
+    
+        if dinohealth == 0:
+            dinodead = True
+            print("You won!")
+            plypos = 2
 
             
-while plypos == 2 and "Stool" in inventory and plydead == False:
+while plypos == 2 and tookstool == True and plydead == False:
 
     ply = input('What now? \n').lower()
 
@@ -442,6 +364,9 @@ while plypos == 2 and "Stool" in inventory and plydead == False:
 
     elif ply == 'look east':
         print('A basic beige wall.')
+    
+    elif ply == 'break glass':
+        print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
 
     elif ply == "check dinosaur":
         print("A large chunk of plastic in the shape of a dinosaur.")
@@ -458,7 +383,17 @@ while plypos == 2 and "Stool" in inventory and plydead == False:
         print("Fake grass. There is an air vent embedded in the ground")
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
-        print('You tried to think. You thought about climbing the stool.')
+        print('You tried to think. You thought about using the stool to get the crowbar.')
+
+    elif ply == 'open vent' and 'Crowbar' in inventory and ventopen == False:
+        print("You pry open the vent with the crowbar. It's too small to climb inside, but there is a red brick inside.")
+        ventopen = True
+
+    elif ply == 'open vent' and 'Crowbar' in inventory and ventopen == True:
+        print("You close the vent just so you can open it. Again.")
+
+    elif ply == 'open vent' and 'Crowbar' not in inventory:
+        print('You try to pull open the vent with your bare hands. It dosen\'t work.')
 
     else:
         print("Your thoughts seem incomprehensible.")
