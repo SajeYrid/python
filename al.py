@@ -1,7 +1,7 @@
 doorbroken = False
 plypos = 0
 plydead = False
-plychoke = 3
+plychoke = 5
 ouch = 1
 brokenhand = False
 inventory = ['Nothing']
@@ -207,8 +207,14 @@ while plypos == 1 and plydead == False:
     elif 'break' in ply and brokenhand == False:
         print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
         plypos = 2
-        plychoke = 3
+        plychoke = 5
         inventory.remove('Nothing')
+
+    elif 'eat' in ply:
+        print('As soon as you open your mouth, you feel the air rush out. Bad idea.')
+        plychoke -= 2
+        if plychoke >= 3:
+            print(f'You have {plychoke} actions left.')
         
     elif 'inventory' in ply:
         for x in inventory:
@@ -217,19 +223,28 @@ while plypos == 1 and plydead == False:
     elif 'kill' in ply and 'myself' in ply:
         print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
         plypos = 2
-        plychoke = 3
+        plychoke = 5
         inventory.remove('Nothing')
 
     elif 'break' in ply and brokenhand == True:
         print('You wish you could.')
         plychoke -= 1
+        if plychoke >= 3:
+            print(f'You have {plychoke} actions left.')
 
     elif 'think' in ply or 'check' in ply or 'hint' in ply:
         print('You tried to think. You thought about breaking.')
 
+    elif 'open' in ply:
+        print('You opened. You felt a change. \n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
+        plypos = 2
+        plychoke = 5
+
     else:
         plychoke -= 1
         print('There isn\'t a way to do that. You feel your lungs lose air.')
+        if plychoke >= 3:
+            print(f'You have {plychoke} actions left.')
 
 
 while plypos == 2 and tookstool == False and plydead == False:
@@ -384,6 +399,11 @@ while plypos == 3 and plydead == False:
         dinodefense = False
         dinomove()
 
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print(f"""ATTACK: Deals {plyatck} Damage to the Dinosaur if it isn't defending.
+        DEFEND: Allows you to take 0 Damage this turn.
+        CHARGE: Powers up attack to deal double damage next attack.""")
+
     else:
         print("That isn't an action you can do.")
     
@@ -421,16 +441,32 @@ while plypos == 2 and tookstool == True and plydead == False:
     elif ply == "check dinosaur" and dinoseen == True:
         print("A large chunk of plastic in the shape of a dinosaur.")
 
+    elif ply == "check dinosaur" and dinoseen == False:
+        print("What dinosaur?")
+
     elif ply == 'look west' and 'Crowbar' in inventory:
         print("Big plastic dinosaur. It looks fake.")
 
     elif ply == 'take crowbar':
-        print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. Crowbar was added to inventory.")
+        print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. Crowbar was added to inventory. When you step off the stool, it dissovles into dust.")
         inventory.append('Crowbar')
         inventory.remove('Stool')
 
     elif ply == 'look south':
         print("Fake grass. There is an air vent embedded in the ground")
+
+    elif ply == 'go north':
+        print("You smack your face into the glass.")
+
+    elif ply == 'go south':
+        print('This room is too small to meaningfully move in any direction.')
+
+    elif ply == 'go east':
+        print('This room is too small to meaningfully move in any direction.')
+
+    elif ply == 'go west':
+        print('It appears there is a giant plastic dinosaur in the way.')
+        dinoseen = True
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You thought about using the stool to get the crowbar.')
