@@ -1,7 +1,7 @@
 doorbroken = False
 plypos = 0
 plydead = False
-plychoke = 3
+plychoke = 5
 ouch = 1
 brokenhand = False
 inventory = ['Nothing']
