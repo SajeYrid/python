@@ -200,9 +200,7 @@ while plypos == 0 and plydead == False:
             print("You charged. The wall violently ripples. You look confused and stop fighting.")
         else:
             print("You can't think of how to perform that on a wall. You disengage in combat.")
-    
-    else:
-        print("Your thoughts seem incomprehensible.")
+
     elif ply == "look east" and 'Stool' not in inventory:
         print("There is a stool with nothing on it whatsoever.")
 
@@ -227,7 +225,7 @@ while plypos == 0 and plydead == False:
     elif ply == 'go north':
         print('You pass through brick like water. You choked to death. This is the end.\nGame Over\n\n\n\n  or is it?\nThere is no here.')
         plypos = 1
-       if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == False:
+        if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == False:
             print("You attempt to attack the wall. Your hand passes right through the wall.")
             ouch += 1
             if ouch != 3:
@@ -243,9 +241,7 @@ while plypos == 0 and plydead == False:
             print("You charged. The wall violently ripples. You look confused and stop fighting.")
         else:
             print("You can't think of how to perform that on a wall. You disengage in combat.")
-    
-    else:
-        print("Your thoughts seem incomprehensible.")
+
     elif ply == 'go east':
         print('You trip over your own feet. When you get back up, you haven\'t moved at all.')
 
