@@ -6,7 +6,7 @@ to do:
 Area 1 (Unbroken Door)
 
 Area 1 (Broken Door)
-
+  Fight Wall should start combat like with the door. However, attacking the wall will result in the same result as "break wall"
 Area 2 (Void)
   Think, Check, and Help needs to be fixed to work in that area.
   Kill yourself should result in you breaking
@@ -14,7 +14,11 @@ Area 3 (Museum)
   Moving in directions should be possible in this area or at the very least have a note saying you can't.
   Dinosaur:
     Think, Check, and Help shouldn't mention the dinosaur if it hasn't been seen yet.
-    Fight Dinosaur should perform the same command
+    Fight Dinosaur should perform the same command as Check Dinosaur
+  After using the Stool to get the Crowbar, there should either:
+        Be a way to take back the stool
+        Mention that the stool broke and is no longer in your inventory
+        Not remove the stool from inventory
 Area 3 (Battle Against a True Dinosaur)
   Think, Check, and Help should explain what Attack, Defend, and Charge do
     Attack: Deals 5 Damage to the Dinosaur if it isn't defending.
