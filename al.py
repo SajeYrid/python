@@ -1,7 +1,7 @@
 doorbroken = False
 plypos = 0
 plydead = False
-plychoke = 5
+plychoke = 3
 ouch = 1
 brokenhand = False
 inventory = ['Nothing']
@@ -21,6 +21,8 @@ dinoaction = 0
 
 ventopen = False
 tookstool = False
+tookSplinter = False
+pretendLMAO = False
 
 print("There is a door here. You are facing north.")
 while doorbroken == False and plydead == False:
@@ -71,24 +73,27 @@ while doorbroken == False and plydead == False:
 
     elif ply == 'eat door':
         print("You put your mouth on the door. The door is too big to be eaten in one sitting.")
+
+    elif ply == 'take door':
+        print("You attempt to take the door. It's lodged into the door frame")
     
     elif ply == 'break door':
         print("You broke down the door. There is nothing beyond the frame but a brick wall. \nThere is no longer a door here")
         doorbroken = True
 
     elif ply == 'fight door':
-        print("""You prepare for battle against a true door.
+        print("""You prepare for battle against a true door. Your health is: {plyhealth}. DOOR's health is ???
 Your actions are:
 ATTACK
 DEFEND
 CHARGE""")
         doorfight = input("What will you do? \n").lower()
-        if doorfight == 'attack' or doorfight == 'kill' or doorfight == 'punch' or doorfight == 'fight door':
+        if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door':
             print("You attack the door with brute force. It instantly breaks down. \n There is only a brick wall beyond the frame.\nThere is no longer a door here")
             doorbroken = True
-        elif doorfight == 'defend':
+        elif miscfight == 'defend':
             print("You defended. The door doesn't do anything. You stop fighting it.")
-        elif doorfight == 'charge':
+        elif miscfight == 'charge':
             print("You charged. The door doesn't do anything. Perhaps it's best you save your energy for something else.")
         else:
             print("You can't think of how to perform that on a door. You disengage in combat.")
@@ -126,8 +131,32 @@ while plypos == 0 and plydead == False:
     if ply == "check door":
         print("Nothing but splinters.")
 
+    elif ply == 'take door' and tookSplinter == False:
+        print("You cannot take the door as it is broken. You take splinters in remembrance of the broken door. \nSPLINTERS added into your INVENTORY")
+        inventory.append('Splinters')
+        tookSplinter = True
+
+    elif ply == 'take door' and tookSplinter == True and pretendLMAO == False:
+        print("You already took the splinters. You pretended to take more splinters. \nPRETEND SPLINTERS added to your INVENTORY")
+        inventory.append('Pretend Splinters')
+        pretendLMAO = True
+
+    elif ply == 'take door' and tookSplinter == True and pretendLMAO == True:
+        print("You already took the pretend splinters. You cannot fathom about what comes after pretend splinters.")
+
     elif ply == 'check wall' or ply == 'check brick wall':
         print('A red brick wall. The surface ripples when you touch it.')
+
+    elif ply == 'take wall' or ply == 'take brick wall' and ouch != 3 and brokenhand == False:
+        print('You attempt to take the wall. Your hand passes right through the wall. \nOnce you took out your hand, it felt injured.')
+        ouch += 1
+
+    elif ply == 'take wall' or ply == 'take brick wall' and ouch == 3 and brokenhand == False:
+        print('You attempt to take the wall. Your hand passes right through the wall. \nOnce you took out your hand, if felt broken. You can\'t use your hand anymore.')
+        brokenhand = True
+
+    elif ply == 'take wall' or ply == 'take brick wall' and brokenhand == True:
+        print("You attempt to take the wall. You have a bad reaction. You stop your attempt to take the wall.")
 
     elif ply == 'eat wall' or ply == 'eat brick wall':
         print('You sink your teeth into the wall. Suprisingly, your teeth glide through it. Tastes like water.')
@@ -137,15 +166,15 @@ while plypos == 0 and plydead == False:
             print(x)
 
     elif ply == 'break wall' or ply == 'break brick wall' and ouch != 3 and brokenhand == False:
-        print('You violently punch the wall. Your hand hurts.')
+        print('You violently punch the wall. Your hand passes right through the wall. \nOnce you took out your hand, it felt injured.')
         ouch += 1
 
     elif ply == 'break wall' or ply == 'break brick wall' and ouch == 3 and brokenhand == False:
-        print('You violently punch the wall. Your hand is now broken. You can\'t break anymore.')
+        print('You violently punch the wall. Your hand passes right through the wall. \nOnce you took out your hand, if felt broken. You can\'t use your hand anymore.')
         brokenhand = True
 
     elif ply == 'break wall' or ply == 'break brick wall' and brokenhand == True:
-        print("You wish you could do that, moron.")
+        print("You unfortunately don't have the strength to do that.")
 
     elif ply == "look north":
         print("A brick wall standing in a doorframe. The surface ripples when you touch it.")
@@ -155,7 +184,25 @@ while plypos == 0 and plydead == False:
 
     elif ply == "look east" and 'Stool' in inventory:
         print("There was a stool here.")
-
+       if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == False:
+            print("You attempt to attack the wall. Your hand passes right through the wall.")
+            ouch += 1
+            if ouch != 3:
+                print("Once you pulled out your hand, it felt injured.")
+            elif ouch == 3:
+                print("Once you pulled out your hand, if felt broken. You cannot use it anymore.")
+                brokenhand == True
+        elif miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == True:
+            print("You try to attack the wall. Your hand doesn't move. You cannot fight it in this state.")
+        elif miscfight == 'defend':
+            print("You defended. The wall slightly ripples. You stop fighting it.")
+        elif miscfight == 'charge':
+            print("You charged. The wall violently ripples. You look confused and stop fighting.")
+        else:
+            print("You can't think of how to perform that on a wall. You disengage in combat.")
+    
+    else:
+        print("Your thoughts seem incomprehensible.")
     elif ply == "look east" and 'Stool' not in inventory:
         print("There is a stool with nothing on it whatsoever.")
 
@@ -180,7 +227,25 @@ while plypos == 0 and plydead == False:
     elif ply == 'go north':
         print('You pass through brick like water. You choked to death. This is the end.\nGame Over\n\n\n\n  or is it?\nThere is no here.')
         plypos = 1
-
+       if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == False:
+            print("You attempt to attack the wall. Your hand passes right through the wall.")
+            ouch += 1
+            if ouch != 3:
+                print("Once you pulled out your hand, it felt injured.")
+            elif ouch == 3:
+                print("Once you pulled out your hand, if felt broken. You cannot use it anymore.")
+                brokenhand == True
+        elif miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == True:
+            print("You try to attack the wall. Your hand doesn't move. You cannot fight it in this state.")
+        elif miscfight == 'defend':
+            print("You defended. The wall slightly ripples. You stop fighting it.")
+        elif miscfight == 'charge':
+            print("You charged. The wall violently ripples. You look confused and stop fighting.")
+        else:
+            print("You can't think of how to perform that on a wall. You disengage in combat.")
+    
+    else:
+        print("Your thoughts seem incomprehensible.")
     elif ply == 'go east':
         print('You trip over your own feet. When you get back up, you haven\'t moved at all.')
 
@@ -192,6 +257,30 @@ while plypos == 0 and plydead == False:
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You observe that the Brick Wall looks unnatural.')
+
+    elif ply == 'fight wall':
+        print("""You prepare for battle against a brick wall. Your health is: {plyhealth}. WALL's health is 0
+Your actions are:
+ATTACK
+DEFEND
+CHARGE""")
+        miscfight = input("What will you do? \n").lower()
+        if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == False:
+            print("You attempt to attack the wall. Your hand passes right through the wall.")
+            ouch += 1
+            if ouch != 3:
+                print("Once you pulled out your hand, it felt injured.")
+            elif ouch == 3:
+                print("Once you pulled out your hand, if felt broken. You cannot use it anymore.")
+                brokenhand == True
+        elif miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == True:
+            print("You try to attack the wall. Your hand doesn't move. You cannot fight it in this state.")
+        elif miscfight == 'defend':
+            print("You defended. The wall slightly ripples. You stop fighting it.")
+        elif miscfight == 'charge':
+            print("You charged. The wall violently ripples. You look confused and stop fighting.")
+        else:
+            print("You can't think of how to perform that on a wall. You disengage in combat.")
     
     else:
         print("Your thoughts seem incomprehensible.")
