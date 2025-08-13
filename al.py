@@ -184,7 +184,7 @@ while plypos == 0 and plydead == False:
 
     elif ply == "look east" and 'Stool' in inventory:
         print("There was a stool here.")
-       if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == False:
+        if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door' and brokenhand == False:
             print("You attempt to attack the wall. Your hand passes right through the wall.")
             ouch += 1
             if ouch != 3:
