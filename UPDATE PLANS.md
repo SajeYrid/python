@@ -8,7 +8,8 @@ Area 1 (Unbroken Door)
   Door Fight:
     NONE
 Area 1 (Broken Door)
-  NONE
+  Wall Fight:
+    Fix attacking the wall breaking your hand in only 2 attacks rather than 3
 Area 2 (Void)
   NONE
 Area 3 (Museum)
