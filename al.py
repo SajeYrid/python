@@ -267,7 +267,7 @@ while plypos == 1 and plydead == False:
     elif 'eat' in ply:
         print('As soon as you open your mouth, you feel the air rush out. Bad idea.')
         plychoke -= 2
-        if plychoke >= 3:
+        if plychoke <= 3 and plychoke != 0:
             print(f'You have {plychoke} actions left.')
         
     elif 'inventory' in ply:
@@ -283,7 +283,7 @@ while plypos == 1 and plydead == False:
     elif 'break' in ply and brokenhand == True:
         print('You wish you could.')
         plychoke -= 1
-        if plychoke >= 3:
+        if plychoke <= 3 and plychoke != 0:
             print(f'You have {plychoke} actions left.')
 
     elif 'think' in ply or 'check' in ply or 'hint' in ply:
@@ -297,7 +297,7 @@ while plypos == 1 and plydead == False:
     else:
         plychoke -= 1
         print('There isn\'t a way to do that. You feel your lungs lose air.')
-        if plychoke >= 3:
+        if plychoke <= 3 and plychoke != 0:
             print(f'You have {plychoke} actions left.')
 
 
@@ -362,7 +362,7 @@ CHARGE""")
 
     elif ply == 'go west' and dinoseen == False:
         print('Without looking first, you casually walk staight into the jaws of a prehistoric predator. \nGame over.')
-        plydead == True
+        plydead = True
 
     elif ply == 'go west' and dinoseen == True:
         print('Wanting to investigate the dinosaur, you walk west. The dinosaur reacts. \nBATTLE START!')
