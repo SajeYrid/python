@@ -1,4 +1,4 @@
-# The holy variable block
+# the holy and pure and innocent variable block
 # booleans
 doorbroken = False
 plydead = False
@@ -28,7 +28,9 @@ dinoatck = 2
 dinoaction = 0
 
 
-# The unholy while loops
+# the unholy and devilish and evil while loops
+
+# area 1 (unbroken door)
 
 print("There is a door here. You are facing north.")
 while doorbroken == False and plydead == False:
@@ -64,7 +66,7 @@ while doorbroken == False and plydead == False:
             print(x)
 
     elif ply == 'take stool' and 'Stool' not in inventory:
-        print('You took the stool.')
+        print('You took the stool. STOOL added to your INVENTORY.')
         inventory.append('Stool')
         tookstool = True
 
@@ -130,6 +132,8 @@ CHARGE""")
         
     else:
         print("Your thoughts seem incomprehensible.")
+        
+# area 1 (broken door)
 
 while plypos == 0 and plydead == False:
     ply = input().lower()
@@ -255,6 +259,8 @@ CHARGE""")
     else:
         print("Your thoughts seem incomprehensible.")
 
+# area 2 (void)
+
 while plypos == 1 and plydead == False:
 
     ply = input().lower().split()
@@ -263,8 +269,8 @@ while plypos == 1 and plydead == False:
         print("You somehow managed to choke to death for a second time. There aren't third chances in this world. \n\nGame over.")
         plydead = True
 
-    elif 'break' in ply and brokenhand == False:
-        print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
+    elif ('break' in ply and not brokenhand) or ('kill' in ply and 'myself' in ply):
+        print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
         plypos = 2
         plychoke = 5
         inventory.remove('Nothing')
@@ -279,12 +285,6 @@ while plypos == 1 and plydead == False:
         for x in inventory:
             print(x)
 
-    elif 'kill' in ply and 'myself' in ply:
-        print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
-        plypos = 2
-        plychoke = 5
-        inventory.remove('Nothing')
-
     elif 'break' in ply and brokenhand == True:
         print('You wish you could.')
         plychoke -= 1
@@ -295,7 +295,7 @@ while plypos == 1 and plydead == False:
         print('You tried to think. You thought about breaking.')
 
     elif 'open' in ply:
-        print('You opened. You felt a change. \n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.')
+        print('You opened. You felt a change. \n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
         plypos = 2
         plychoke = 5
 
@@ -305,9 +305,10 @@ while plypos == 1 and plydead == False:
         if plychoke <= 3 and plychoke != 0:
             print(f'You have {plychoke} actions left.')
 
+# area 3 (museum without stool)
 
 while plypos == 2 and tookstool == False and plydead == False:
-    ply = input('What now? \n').lower()
+    ply = input().lower()
 
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
@@ -347,7 +348,7 @@ CHARGE""")
         plypos = 3
         
     elif ply == 'look west':
-        print("Big plastic dinosaur. It looks suprisingly life-like.")
+        print("Big plastic dinosaur. It looks surprisingly life-like.")
         dinoseen = True
 
     elif ply == 'look south':
@@ -366,7 +367,7 @@ CHARGE""")
         print('This room is too small to meaningfully move in any direction.')
 
     elif ply == 'go west' and dinoseen == False:
-        print('Without looking first, you casually walk staight into the jaws of a prehistoric predator. \nGame over.')
+        print('Without looking first, you casually walk straight into the jaws of a prehistoric predator. \nGame over.')
         plydead = True
 
     elif ply == 'go west' and dinoseen == True:
@@ -382,53 +383,52 @@ CHARGE""")
         print('You tried to think. You observe a strange feeling of being watched.')
 
     elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == True:
-        print('You tried to think. You observe a suspicous looking dinosaur')
+        print('You tried to think. You observe a suspicious looking dinosaur')
 
     else:
         print("Your thoughts seem incomprehensible.")
 
+# area 4 (battle against a true dino)
+
 while plypos == 3 and plydead == False:
+
+    import random
 
     ply = input(f"Your health is: {plyhealth}. PLASTIC DINO's health is {dinohealth}. What do you do?\n").lower()
 
     def dinomove():
         
-        global plyhealth
-        global dinoatck
-        global dinocharge
-        global dinodefense
-        global plydefense
+        global plyhealth, dinoatck, dinocharge, dinodefense, plydefense
         
-        import random
         dinoaction = random.randint(0, 10)
             
-        if dinoaction > 5 and plydefense == True:
+        if dinoaction > 3 and plydefense == True:
             print(f"PLASTIC DINO bit you! But you defended!")
             dinoatck = 2
             dinocharge = False
             dinodefense = False
             plydefense = False
 
-        elif dinoaction > 5 and plydefense == False:
+        elif dinoaction > 3 and plydefense == False:
             print(f"PLASTIC DINO bit you for {dinoatck}!")
             plyhealth = plyhealth - dinoatck
             dinoatck = 2
             dinocharge = False
             dinodefense = False
                 
-        elif dinoaction < 5:
+        elif dinoaction < 3:
             print("PLASTIC DINO defended! It won't take damage next turn!")
             dinodefense = True
             plydefense = False
     
-        elif dinoaction == 5 and dinocharge == False:
+        elif dinoaction == 3 and dinocharge == False:
             print("PLASTIC DINO charged! Its next attack will do double damage!")
             dinocharge = True
             dinoatck = 4
             dinodefense = False
             plydefense = False
     
-        elif dinoaction == 5 and dinocharge == True:
+        elif dinoaction == 3 and dinocharge == True:
             print("PLASTIC DINO tried to charge! But it already did.")
             plydefense = False
     
@@ -475,6 +475,10 @@ while plypos == 3 and plydead == False:
         DEFEND: Allows you to take 0 Damage this turn.
         CHARGE: Powers up attack to deal double damage next attack.""")
 
+    elif ply == 'quit':
+        print('Game over.')
+        plydead = True
+
     else:
         print("That isn't an action you can do.")
     
@@ -487,7 +491,8 @@ while plypos == 3 and plydead == False:
         print("You won!")
         plypos = 2
 
-            
+# area 3 (museum with stool)
+
 while plypos == 2 and tookstool == True and plydead == False:
 
     ply = input('What now? \n').lower()
@@ -519,7 +524,7 @@ while plypos == 2 and tookstool == True and plydead == False:
         print("Big plastic dinosaur. It looks fake.")
 
     elif ply == 'take crowbar':
-        print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. Crowbar was added to inventory. When you step off the stool, it dissovles into dust.")
+        print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it dissovles into dust. CROWBAR was added to inventory. ")
         inventory.append('Crowbar')
         inventory.remove('Stool')
 
