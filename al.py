@@ -137,8 +137,7 @@ CHARGE""")
         print('You tried to think. You observe that there is a unbroken door in front of you.')
     
     elif ply == 'quit':
-        print('Game over. ')
-        plydead = True
+        quit()
         
     else:
         print("Your thoughts seem incomprehensible.")
@@ -223,8 +222,7 @@ while plypos == 0 and plydead == False:
         print("It's already broken.")
 
     elif ply == 'quit':
-        print('Game over.')
-        plydead = True
+        quit()
 
     elif ply == 'go north':
         print('You pass through brick like water. You choked to death. This is the end.\nGame Over\n\n\n\n  or is it?\nThere is no here.')
@@ -266,6 +264,8 @@ CHARGE""")
             print("You defended. The wall slightly ripples. You stop fighting it.")
         elif miscfight == 'charge':
             print("You charged. The wall violently ripples. You look confused and stop fighting.")
+        elif ply == 'quit':
+            quit()
         else:
             print("You can't think of how to perform that on a wall. You disengage in combat.")
     
@@ -306,6 +306,9 @@ while plypos == 1 and plydead == False:
 
     elif 'think' in ply or 'check' in ply or 'hint' in ply:
         print('You tried to think. You thought about breaking.')
+
+    elif ply == 'quit':
+        quit()
 
     elif 'open' in ply:
         print('You opened. You felt a change. \n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
@@ -410,6 +413,9 @@ CHARGE""")
     elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == True:
         print('You tried to think. You observe a suspicious looking dinosaur')
 
+    elif ply == 'quit':
+        quit()
+
     else:
         print("Your thoughts seem incomprehensible.")
 
@@ -501,8 +507,7 @@ while plypos == 3 and plydead == False:
         CHARGE: Powers up attack to deal double damage next attack.""")
 
     elif ply == 'quit':
-        print('Game over.')
-        plydead = True
+        quit()
 
     else:
         print("That isn't an action you can do.")
@@ -570,6 +575,10 @@ while plypos == 2 and tookstool == False and plydead == False and dinodead == Tr
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You observe a sense of satisfaction from killing a dinosaur.')
+
+    elif ply == 'quit':
+        quit()
+
     else:
         print("Your thoughts seem incomprehensible.")
 
@@ -606,7 +615,7 @@ while plypos == 2 and tookstool == True and plydead == False:
         print('A basic beige wall.')
     
     elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
-        if brokenhand == False
+        if brokenhand == False:
             print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
         else:
             print('If you were to try, your hand would hurt even more than it already does.')
@@ -649,10 +658,10 @@ while plypos == 2 and tookstool == True and plydead == False:
         ventopen = True
 
     elif ply == 'take brick' or ply == 'take red brick':
-        if ventopen == True and 'Brick' is not in inventory:
+        if ventopen == True and 'Brick' not in inventory:
             print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it keeps its shape. BRICK added into your INVENTORY')
             inventory.append('Brick')
-        elif ventopen == True and 'Brick' is in inventory:
+        elif ventopen == True and 'Brick' in inventory:
             print('You already took it.')
         else:
             print('What brick?')
@@ -662,6 +671,9 @@ while plypos == 2 and tookstool == True and plydead == False:
 
     elif ply == 'open vent' and 'Crowbar' not in inventory:
         print('You try to pull open the vent with your bare hands. It dosen\'t work.')
+
+    elif ply == 'quit':
+        quit()
 
     else:
         print("Your thoughts seem incomprehensible.")
