@@ -27,6 +27,7 @@ IMPLEMENTED/FIXED:
 GENERAL CHANGES:
   CHANGED: Made the minor fights use the "miscfight" input to make coding a bit easier
   ADDED: Added # Areas for convience purposes.
+  CHANGED: Quitting now uses quit() to close the program rather than simply saying "GAME OVER"
 
 Area 1 (Unbroken Door)
   GENERAL:
