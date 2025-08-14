@@ -1,3 +1,4 @@
+# The holy variable block
 doorbroken = False
 plypos = 0
 plydead = False
@@ -5,10 +6,8 @@ plychoke = 5
 ouch = 1
 brokenhand = False
 inventory = ['Nothing']
-
 dinodead = False
 dinoseen = False
-
 plyhealth = 10
 plyatck = 5
 plydefense = False
@@ -18,11 +17,13 @@ dinoatck = 2
 dinodefense = False
 dinocharge = False
 dinoaction = 0
-
 ventopen = False
 tookstool = False
 tookSplinter = False
 pretendLMAO = False
+
+
+# The unholy while loops
 
 print("There is a door here. You are facing north.")
 while doorbroken == False and plydead == False:
@@ -147,15 +148,15 @@ while plypos == 0 and plydead == False:
     elif ply == 'check wall' or ply == 'check brick wall':
         print('A red brick wall. The surface ripples when you touch it.')
 
-    elif ply == 'take wall' or ply == 'take brick wall' and ouch != 3 and brokenhand == False:
+    elif (ply == 'take wall' or ply == 'take brick wall') and ouch != 3 and brokenhand == False:
         print('You attempt to take the wall. Your hand passes right through the wall. \nOnce you took out your hand, it felt injured.')
         ouch += 1
 
-    elif ply == 'take wall' or ply == 'take brick wall' and ouch == 3 and brokenhand == False:
+    elif (ply == 'take wall' or ply == 'take brick wall') and ouch == 3 and brokenhand == False:
         print('You attempt to take the wall. Your hand passes right through the wall. \nOnce you took out your hand, if felt broken. You can\'t use your hand anymore.')
         brokenhand = True
 
-    elif ply == 'take wall' or ply == 'take brick wall' and brokenhand == True:
+    elif (ply == 'take wall' or ply == 'take brick wall') and brokenhand == True:
         print("You attempt to take the wall. You have a bad reaction. You stop your attempt to take the wall.")
 
     elif ply == 'eat wall' or ply == 'eat brick wall':
@@ -165,15 +166,15 @@ while plypos == 0 and plydead == False:
         for x in inventory:
             print(x)
 
-    elif ply == 'break wall' or ply == 'break brick wall' and ouch != 3 and brokenhand == False:
+    elif (ply == 'break wall' or ply == 'break brick wall') and ouch != 3 and brokenhand == False:
         print('You violently punch the wall. Your hand passes right through the wall. \nOnce you took out your hand, it felt injured.')
         ouch += 1
 
-    elif ply == 'break wall' or ply == 'break brick wall' and ouch == 3 and brokenhand == False:
+    elif (ply == 'break wall' or ply == 'break brick wall') and ouch == 3 and brokenhand == False:
         print('You violently punch the wall. Your hand passes right through the wall. \nOnce you took out your hand, if felt broken. You can\'t use your hand anymore.')
         brokenhand = True
 
-    elif ply == 'break wall' or ply == 'break brick wall' and brokenhand == True:
+    elif (ply == 'break wall' or ply == 'break brick wall') and brokenhand == True:
         print("You unfortunately don't have the strength to do that.")
 
     elif ply == "look north":
@@ -229,7 +230,7 @@ ATTACK
 DEFEND
 CHARGE""")
         miscfight = input("What will you do? \n").lower()
-        if miscfight == 'attack' and brokenhand == False or miscfight == 'kill' and brokenhand == False or miscfight == 'punch' and brokenhand == False or miscfight == 'fight wall' and brokenhand == False or miscfight == 'fight brick wall' and brokenhand == False:
+        if (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == False:
             print("You attempt to attack the wall. Your hand passes right through the wall.")
             if ouch != 3:
                 print("Once you pulled out your hand, it felt injured.")
@@ -237,7 +238,7 @@ CHARGE""")
             elif ouch == 3:
                 print("Once you pulled out your hand, if felt broken. You cannot use it anymore.")
                 brokenhand == True
-        elif miscfight == 'attack' and brokenhand == True or miscfight == 'kill' and brokenhand == True or miscfight == 'punch' and brokenhand == True or miscfight == 'fight wall' and brokenhand == True or miscfight == 'fight brick wall' and brokenhand == True:
+        elif (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == True:
             print("You try to attack the wall. Your hand doesn't move. You cannot fight it in this state.")
         elif miscfight == 'defend':
             print("You defended. The wall slightly ripples. You stop fighting it.")
@@ -306,10 +307,10 @@ while plypos == 2 and tookstool == False and plydead == False:
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
 
-    elif ply == 'break glass' and brokenhand == False or ply == 'break window' and brokenhand == False:
+    elif (ply == 'break glass' or ply == 'break window') and brokenhand == False:
         print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
 
-    elif ply == 'break glass' and brokenhand == True or ply == 'break window' and brokenhand == True:
+    elif (ply == 'break glass' or ply == 'break window') and brokenhand == True:
         print('If you were to try, your hand would hurt even more than it already does.')
 
     elif ply == 'check inventory' or ply == 'inventory':
@@ -372,10 +373,10 @@ DEFEND
 CHARGE""")
         plypos = 3
 
-    elif ply == 'think' and dinoseen == False or ply == 'check' and dinoseen == False or ply == 'hint' and dinoseen == False:
+    elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == False:
         print('You tried to think. You observe a strange feeling of being watched.')
 
-    elif ply == 'think' and dinoseen == True or ply == 'check' and dinoseen == True or ply == 'hint' and dinoseen == True:
+    elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == True:
         print('You tried to think. You observe a suspicous looking dinosaur')
 
     else:
@@ -418,34 +419,34 @@ while plypos == 3 and plydead == False:
         else:
             print("This will only print if something went horribly wrong.")
 
-    if ply == ('attack') and dinodefense == False:
+    if ply == 'attack' and dinodefense == False:
         print(f'You attacked PLASTIC DINO for {plyatck} damage!')
         dinohealth = dinohealth - plyatck
         plyatck = 5
         plycharge = False
         dinomove()
 
-    elif ply == ('attack') and dinodefense == True:
+    elif ply == 'attack' and dinodefense == True:
         print('You attacked PLASTIC DINO! But it defended.')
         plyatck = 5
         plycharge = False
         dinodefense = False
         dinomove()
 
-    elif ply == ('defend'):
+    elif ply == 'defend':
         print('You defended! You won\'t take damage this turn.')
         plyatck = 5
         dinodefense = False
         dinomove()
 
-    elif ply == ('charge') and plycharge == False:
+    elif ply == 'charge' and plycharge == False:
         print('You charged! You will do double damage on your next attack!')
         plyatck = 10
         plycharge = True
         dinodefense = False
         dinomove()
 
-    elif ply == ('charge') and plycharge == True:
+    elif ply == 'charge' and plycharge == True:
         print('You tried to charge again! But nothing happened...')
         plyatck = 10
         plycharge = True
