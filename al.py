@@ -1,26 +1,31 @@
 # The holy variable block
+# booleans
 doorbroken = False
-plypos = 0
 plydead = False
-plychoke = 5
-ouch = 1
 brokenhand = False
-inventory = ['Nothing']
 dinodead = False
 dinoseen = False
-plyhealth = 10
-plyatck = 5
 plydefense = False
 plycharge = False
-dinohealth = 30
-dinoatck = 2
 dinodefense = False
 dinocharge = False
-dinoaction = 0
 ventopen = False
 tookstool = False
 tookSplinter = False
 pretendLMAO = False
+
+# list. singular.
+inventory = ['Nothing']
+
+# integers
+plypos = 0
+plychoke = 5
+ouch = 1
+plyhealth = 10
+plyatck = 5
+dinohealth = 30
+dinoatck = 2
+dinoaction = 0
 
 
 # The unholy while loops
@@ -404,7 +409,7 @@ while plypos == 3 and plydead == False:
             dinodefense = False
             plydefense = False
 
-        if dinoaction > 5 and plydefense == False:
+        elif dinoaction > 5 and plydefense == False:
             print(f"PLASTIC DINO bit you for {dinoatck}!")
             plyhealth = plyhealth - dinoatck
             dinoatck = 2
