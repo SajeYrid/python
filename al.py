@@ -69,7 +69,7 @@ while doorbroken == False and plydead == False:
             print(x)
 
     elif ply == 'take stool' and 'Stool' not in inventory:
-        print('You took the stool. STOOL added to your INVENTORY.')
+        print('You took the stool. STOOL added into your INVENTORY.')
         inventory.append('Stool')
         tookstool = True
 
@@ -156,7 +156,7 @@ while plypos == 0 and plydead == False:
         tookSplinter = True
 
     elif ply == 'take door' and tookSplinter == True and pretendLMAO == False:
-        print("You already took the splinters. You pretended to take more splinters. \nPRETEND SPLINTERS added to your INVENTORY")
+        print("You already took the splinters. You pretended to take more splinters. \nPRETEND SPLINTERS added into your INVENTORY")
         inventory.append('Pretend Splinters')
         pretendLMAO = True
 
@@ -281,7 +281,7 @@ while plypos == 1 and plydead == False:
         print("You somehow managed to choke to death for a second time. There aren't third chances in this world. \n\nGame over.")
         plydead = True
 
-    elif ('break' in ply and not brokenhand) or ('kill' in ply and 'myself' in ply):
+    elif ('break' in ply and brokenhand == False) or ('kill' in ply and 'myself' in ply):
         print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
         plypos = 2
         plychoke = 5
@@ -325,10 +325,10 @@ while plypos == 2 and tookstool == False and plydead == False:
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
 
-    elif (ply == 'break glass' or ply == 'break window') and brokenhand == False:
+    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
         print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
 
-    elif (ply == 'break glass' or ply == 'break window') and brokenhand == True:
+    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == True:
         print('If you were to try, your hand would hurt even more than it already does.')
 
     elif ply == 'check inventory' or ply == 'inventory':
@@ -339,7 +339,7 @@ while plypos == 2 and tookstool == False and plydead == False:
         print("What dinosaur?")
 
     elif ply == 'fight dinosaur' and dinoseen == False:
-        print("Your prehistoric rage goes unquenched, as you haven't seen any dinosaurs.")
+        print("Your prehistoric rage goes unquenched, as you haven't seen any dinosaurs so far.")
 
     elif ply == 'fight dinosaur' and dinoseen == True:
         print("You initiate a battle with the dinosaur. \nBATTLE START!")
@@ -507,7 +507,7 @@ while plypos == 3 and plydead == False:
 
 while plypos == 2 and tookstool == True and plydead == False:
 
-    ply = input('What now? \n').lower()
+    ply = input().lower()
 
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
@@ -523,8 +523,11 @@ while plypos == 2 and tookstool == True and plydead == False:
     elif ply == 'look east':
         print('A basic beige wall.')
     
-    elif ply == 'break glass':
-        print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
+    elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
+        if brokenhand == False
+            print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
+        else:
+            print('If you were to try, your hand would hurt even more than it already does.')
 
     elif ply == "check dinosaur" and dinoseen == True:
         print("A large chunk of plastic in the shape of a dinosaur.")
@@ -536,7 +539,7 @@ while plypos == 2 and tookstool == True and plydead == False:
         print("Big plastic dinosaur. It looks fake.")
 
     elif ply == 'take crowbar':
-        print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it dissovles into dust. CROWBAR was added to inventory. ")
+        print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it dissovles into dust. CROWBAR added into your INVENTORY. ")
         inventory.append('Crowbar')
         inventory.remove('Stool')
 
@@ -562,6 +565,13 @@ while plypos == 2 and tookstool == True and plydead == False:
     elif ply == 'open vent' and 'Crowbar' in inventory and ventopen == False:
         print("You pry open the vent with the crowbar. It's too small to climb inside, but there is a red brick inside.")
         ventopen = True
+
+    elif ply == 'take brick' or ply == 'take red brick':
+        if ventopen == True:
+            print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it keeps its shape. BRICK added into your INVENTORY')
+            inventory.append('Brick')
+        else:
+            print('What brick?')
 
     elif ply == 'open vent' and 'Crowbar' in inventory and ventopen == True:
         print("You close the vent just so you can open it. Again.")
