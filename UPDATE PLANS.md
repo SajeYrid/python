@@ -1,7 +1,7 @@
 This will be all the stored commands + ideas that we would like to program soon.
 
 
-to do:
+TO DO:
 
 Area 1 (Unbroken Door)
   NONE
@@ -21,6 +21,12 @@ Area 3 (Battle Against a True Dinosaur)
   If you end up dying and killing the dinosaur at the same time, both the you died and you won text show up. To fix this, either:
     Make killing the dinosaur the inititave so the player can progress
     Make unique dialog that says "As you see the dinosaur collapse, you slowly lose conscience and fall over. YOU DIED"
+
+
+FUTURE IDEAS (Later Areas):
+
+Area 6 (Glass Room):
+  NONE
 
 IMPLEMENTED/FIXED:
 
