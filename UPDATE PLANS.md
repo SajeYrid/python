@@ -8,13 +8,15 @@ Area 1 (Unbroken Door)
   Door Fight:
     NONE
 Area 1 (Broken Door)
-  Wall Fight:
-    Fix attacking the wall breaking your hand in only 2 attacks rather than 3
+  NONE
+
 Area 2 (Void)
   NONE
+
 Area 3 (Museum)
   STOOL:
     If the player hasn't taken the splinters from the door, they should be able to take splinters from the broken stool.
+
 Area 3 (Battle Against a True Dinosaur)
   If you end up dying and killing the dinosaur at the same time, both the you died and you won text show up. To fix this, either:
     Make killing the dinosaur the inititave so the player can progress
@@ -23,7 +25,8 @@ Area 3 (Battle Against a True Dinosaur)
 IMPLEMENTED/FIXED:
 
 GENERAL CHANGES:
-  Made the minor fights use the "miscfight" input to make coding a bit easier
+  CHANGED: Made the minor fights use the "miscfight" input to make coding a bit easier
+  ADDED: Added # Areas for convience purposes.
 
 Area 1 (Unbroken Door)
   GENERAL:
@@ -44,6 +47,7 @@ Area 1 (Broken Door)
     ADDED: You can now engage in combat with the Wall
     CHANGED: Break wall now has edited dialog to fit with other actions.
     ADDED: Take Wall should result in the players hand going right through the wall.
+    FIXED: Fix attacking the wall breaking your hand in only 2 attacks rather than 3
 
 Area 2 (Void)
     GENERAL:
