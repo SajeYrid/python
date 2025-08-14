@@ -16,7 +16,9 @@ Area 3 (Museum)
   STOOL:
     If the player hasn't taken the splinters from the door, they should be able to take splinters from the broken stool.
 Area 3 (Battle Against a True Dinosaur)
-  NONE
+  If you end up dying and killing the dinosaur at the same time, both the you died and you won text show up. To fix this, either:
+    Make killing the dinosaur the inititave so the player can progress
+    Make unique dialog that says "As you see the dinosaur collapse, you slowly lose conscience and fall over. YOU DIED"
 
 IMPLEMENTED/FIXED:
 
