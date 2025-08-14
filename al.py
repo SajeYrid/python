@@ -254,7 +254,7 @@ while plypos == 1 and plydead == False:
 
     ply = input().lower().split()
 
-    if plychoke == 0:
+    if plychoke <= 0:
         print("You somehow managed to choke to death for a second time. There aren't third chances in this world. \n\nGame over.")
         plydead = True
 
