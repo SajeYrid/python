@@ -46,6 +46,9 @@ while doorbroken == False and plydead == False:
     elif ply == 'look around':
         print("Perhaps you should try to specify what direction you want to look in.")
 
+    elif ply == "kill me" or ply == "kill myself":
+        print("You punched yourself multiple times. You're too weak to deal any damage.")
+
     elif ply == 'look east' and 'Stool' not in inventory:
         print("There is a small golden key lying on a stool.")
 
@@ -82,6 +85,12 @@ while doorbroken == False and plydead == False:
     elif ply == 'eat door':
         print("You put your mouth on the door. The door is too big to be eaten in one sitting.")
 
+    elif ply == 'close door':
+        print("You close the closed door.")
+
+    elif ply == 'unlock door':
+        print("You try to unlock the door. Your finger does not fit through the lock.")
+    
     elif ply == 'take door':
         print("You attempt to take the door. It's lodged into the door frame")
     
@@ -231,6 +240,9 @@ while plypos == 0 and plydead == False:
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You observe that the Brick Wall looks unnatural.')
+
+    elif ply == "close door":
+        print("You try to figure out how to inact this outrageous thought. You come up with nothing.")
 
     elif ply == 'fight wall':
         print(f"""You prepare for battle against a brick wall. Your health is: {plyhealth}. WALL's health is 0
