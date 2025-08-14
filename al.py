@@ -13,6 +13,7 @@ ventopen = False
 tookstool = False
 tookSplinter = False
 pretendLMAO = False
+plywallBroken = False
 
 # list. singular.
 inventory = ['Nothing']
@@ -643,7 +644,7 @@ while plypos == 2 and tookstool == True and plydead == False:
     elif ply == 'go south':
         print('This room is too small to meaningfully move in any direction.')
 
-    elif ply == 'go east':
+    elif ply == 'go east' and:
         print('This room is too small to meaningfully move in any direction.')
 
     elif ply == 'go west':
@@ -659,7 +660,7 @@ while plypos == 2 and tookstool == True and plydead == False:
 
     elif ply == 'take brick' or ply == 'take red brick':
         if ventopen == True and 'Brick' not in inventory:
-            print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it keeps its shape. BRICK added into your INVENTORY')
+            print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it\'s still solid enough to break something. BRICK added into your INVENTORY')
             inventory.append('Brick')
         elif ventopen == True and 'Brick' in inventory:
             print('You already took it.')
@@ -671,6 +672,19 @@ while plypos == 2 and tookstool == True and plydead == False:
 
     elif ply == 'open vent' and 'Crowbar' not in inventory:
         print('You try to pull open the vent with your bare hands. It dosen\'t work.')
+
+    elif ply == 'check wall':
+        print('A thin plywood wall painted beige. You could probably break it with something heavy enough.'
+
+    elif ply == 'break wall':
+        plysecondary = input('With what?').lower()
+        if plysecondary == 'brick' and 'Brick' in inventory:
+            print('You throw the brick at the wall. After the brick impacts, the wall is seemingly completely decimated.'
+            plywallBroken = True
+        elif plysecondary == 'brick' and 'Brick' not in inventory:
+            print('You don\'t have one of those')
+        else:
+            print('You know already that that wouldn\'t work.')
 
     elif ply == 'quit':
         quit()
