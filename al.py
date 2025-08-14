@@ -237,7 +237,7 @@ CHARGE""")
                 ouch += 1
             elif ouch == 3:
                 print("Once you pulled out your hand, if felt broken. You cannot use it anymore.")
-                brokenhand == True
+                brokenhand = True
         elif (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == True:
             print("You try to attack the wall. Your hand doesn't move. You cannot fight it in this state.")
         elif miscfight == 'defend':
