@@ -26,6 +26,7 @@ plyatck = 5
 dinohealth = 30
 dinoatck = 2
 dinoaction = 0
+glassTicker = 2
 
 
 # the unholy and devilish and evil while loops
@@ -319,7 +320,7 @@ while plypos == 1 and plydead == False:
 
 # area 3 (museum without stool)
 
-while plypos == 2 and tookstool == False and plydead == False:
+while plypos == 2 and tookstool == False and plydead == False and dinodead == False:
     ply = input().lower()
 
     if ply == "look north":
@@ -330,6 +331,18 @@ while plypos == 2 and tookstool == False and plydead == False:
 
     elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == True:
         print('If you were to try, your hand would hurt even more than it already does.')
+
+    elif ply == 'check glass':
+        if glassTicker == 2:
+            print('For some reason, there is an absurd amount of condensation on the glass. You try to wipe if off, but the water refuses to part from the window. Perhaps you should look again?')
+            glassTicker -= 1
+        elif glassTicker == 1:
+            print('You inspect the glass even further. when you look closer, you see that the condensation isn\'t condensation. There is a sort of film covering the entirety of the surface of the glass. Maybe you should look just once more.')
+            glassTicker -=1
+        elif glassTicker == 0:
+            print('You look even closer. Then, you realize, the glass isn\'t foggy, the museum is. You blink. when your eyes flutter open, the glass is clear again. In fact, everything is clear. You aren\'t where you were before. \nWhat did you do?')
+            glassTicker = 2
+            plypos = 5
 
     elif ply == 'check inventory' or ply == 'inventory':
         for x in inventory:
@@ -364,7 +377,7 @@ CHARGE""")
         dinoseen = True
 
     elif ply == 'look south':
-        print("Fake grass.")
+        print("Fake grass. There is a metal vent embedded in the ground.")
 
     elif ply == 'look east':
         print('A basic beige wall.')
@@ -494,14 +507,71 @@ while plypos == 3 and plydead == False:
     else:
         print("That isn't an action you can do.")
     
-    if plyhealth <= 0:
+    if plyhealth <= 0 and dinohealth > 0:
         print("You died! Loser!")
         plydead = True
     
-    if dinohealth <= 0:
+    if dinohealth <= 0 and plyhealth > 0:
         dinodead = True
-        print("You won!")
+        print("You won! \nThe dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
         plypos = 2
+
+    if dinohealth <= 0 and plyhealth <= 0:
+        print('As you see the dinosaur collapse, you slowly lose conscience and fall over.\nGame over.')
+        plydead = True
+
+while plypos == 2 and tookstool == False and plydead == False and dinodead == True:
+
+    ply = input().lower()
+
+    if ply == "look north":
+        print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
+
+    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
+        print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
+
+    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == True:
+        print('If you were to try, your hand would hurt even more than it already does.')
+
+    elif ply == 'check glass':
+        print('When you look closer, you see the glass is entirely clear. However, you still cannot see anything through it.')
+
+    elif ply == 'check inventory' or ply == 'inventory':
+        for x in inventory:
+            print(x)
+
+    elif ply == "check dinosaur":
+        print("What dinosaur?")
+
+    elif ply == 'fight dinosaur':
+        print("You already killed it. How would you go about fighting a pile of dust?")
+        
+    elif ply == 'look west':
+        print("There is a large pile of... dust? A particularly large tooth lays at the top.")
+        dinoseen = True
+
+    elif ply == 'look south':
+        print("Fake grass. There is a metal vent embedded in the ground.")
+
+    elif ply == 'look east':
+        print('A basic beige wall.')
+
+    elif ply == 'go north':
+        print("You smack your face into the glass.")
+
+    elif ply == 'go south':
+        print('This room is too small to meaningfully move in any direction.')
+
+    elif ply == 'go east':
+        print('This room is too small to meaningfully move in any direction.')
+
+    elif ply == 'go west':
+        print('There is a giant pile of presumably plastic in your way.')
+
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print('You tried to think. You observe a sense of satisfaction from killing a dinosaur.')
+    else:
+        print("Your thoughts seem incomprehensible.")
 
 # area 3 (museum with stool)
 
@@ -515,6 +585,18 @@ while plypos == 2 and tookstool == True and plydead == False:
     elif ply == 'check inventory' or ply == 'inventory':
         for x in inventory:
             print(x)
+
+    elif ply == 'check glass':
+        if glassTicker == 2:
+            print('For some reason, there is an absurd amount of condensation on the glass. You try to wipe if off, but the water refuses to part from the window. Perhaps you should look again?')
+            glassTicker -= 1
+        elif glassTicker == 1:
+            print('You inspect the glass even further. when you look closer, you see that the condensation isn\'t condensation. There is a sort of film covering the entirety of the surface of the glass. Maybe you should look just once more.')
+            glassTicker -=1
+        elif glassTicker == 0:
+            print('You look even closer. Then, you realize, the glass isn\'t foggy, the museum is. You blink. when your eyes flutter open, the glass is clear again. In fact, everything is clear. You aren\'t where you were before. \nWhat did you do?')
+            glassTicker = 2
+            plypos = 5
 
     elif ply == 'look west' and 'Crowbar' not in inventory:
         print("Big plastic dinosaur. A crowbar dangles from its mouth.")
@@ -567,9 +649,11 @@ while plypos == 2 and tookstool == True and plydead == False:
         ventopen = True
 
     elif ply == 'take brick' or ply == 'take red brick':
-        if ventopen == True:
+        if ventopen == True and 'Brick' is not in inventory:
             print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it keeps its shape. BRICK added into your INVENTORY')
             inventory.append('Brick')
+        elif ventopen == True and 'Brick' is in inventory:
+            print('You already took it.')
         else:
             print('What brick?')
 
