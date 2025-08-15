@@ -49,7 +49,7 @@
   Area 2: V O I D
   Area 3: Museum
     Take the Crowbar, Break down the Beige Wall
-  Area 1C: COMING STRAIGHT FROM YOUR HOUSE
+  Area 1C: coming straight from YOUR house
     
 
 D Route: Dead Hand Route
