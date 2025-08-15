@@ -645,8 +645,13 @@ while plypos == 2 and tookstool == True and plydead == False:
         elif 'Crowbar' in inventory:
             print('You already have it.')
 
-    elif ply == 'take stool' and stoolExplode == True:
+    elif ply == 'take stool' and stoolExplode == True and tookSplinter == False:
         print('The stool is sadly dead. You grab a handful of splinters to honor the late stool. SPLINTERS added into your INVENTORY')
+        inventory.append('Splinters')
+        tookSplinter = True
+
+    elif ply == 'take stool' and stoolExplode == True and tookSplinter == True:
+        print('You already took the splinters. You can\'t really think of anything else to do.')
         inventory.append('Splinters')
         tookSplinter = True
 
