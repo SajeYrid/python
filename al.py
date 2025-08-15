@@ -433,35 +433,35 @@ while plypos == 3 and plydead == False:
         
         global plyhealth, dinoatck, dinocharge, dinodefense, plydefense
         
-        dinoaction = random.randint(0, 10)
+        dinoaction = random.randint(1, 9)
             
-        if dinoaction > 3 and plydefense == True:
+        if dinoaction > 6 and plydefense == True:
             print(f"PLASTIC DINO bit you! But you defended!")
             dinoatck = 2
             dinocharge = False
             dinodefense = False
             plydefense = False
 
-        elif dinoaction > 3 and plydefense == False:
+        elif dinoaction > 6 and plydefense == False:
             print(f"PLASTIC DINO bit you for {dinoatck}!")
             plyhealth = plyhealth - dinoatck
             dinoatck = 2
             dinocharge = False
             dinodefense = False
                 
-        elif dinoaction < 3:
+        elif dinoaction < 4:
             print("PLASTIC DINO defended! It won't take damage next turn!")
             dinodefense = True
             plydefense = False
     
-        elif dinoaction == 3 and dinocharge == False:
+        elif dinoaction > 3 and dinoaction < 7 and dinocharge == False:
             print("PLASTIC DINO charged! Its next attack will do double damage!")
             dinocharge = True
             dinoatck = 4
             dinodefense = False
             plydefense = False
     
-        elif dinoaction == 3 and dinocharge == True:
+        elif dinoaction > 3 and dinoaction < 7 and dinocharge == True:
             print("PLASTIC DINO tried to charge! But it already did.")
             plydefense = False
     
