@@ -3,34 +3,45 @@
 
 ** A Route: Default Main Route (Neutral Ending)
   Area 1: Doors
+    Break the door and pass through the brick wall
   Area 2: V O I D
+    Break
   Area 3: Museum
     Fight the Dinosaur
   Area 4: The Vents
+    Navigate the vents before getting got by the vent creature
   Area 5: Security
-  Area 6:
-  Area 7:
-  Area 8:
-  Area 9:
-  Area 10:
+    solve some sorta puzzle
+  Area 6: Gift Shop
+    beat the plush amalgamation
+  Area 7: Bliss
+    dig
+  Area 8: outside
+    fall outside the world and solve an environmental puzzle from outside
+  Area 9: core
+    die and beome a ghost
+    explode the core of the world
+  Area 10: Wake up
+    end. fin. game complete.
 
-* B Route: Brick Route (EVIL Ending)
+* B Route: Brick Route 
   Area 1: Doors
     Take the stool
   Area 2: V O I D
   Area 3: Museum
     Take the Crowbar, Use it on the vent, take brick, break glass wall
-  Area 1B: Glass Area
+  Area 1B: Glass House
   Area 2B: Sewers
   Area 3B: Back Alley
-    Fight and KILL unknown person.
-  Area 4B: City
-    Set the city on fire
-  Area 5B: Police
-    (Death Penalty GAME OVER by default)
-    Kill police to move on
-  Area 6B: Your house
-    Wake up (You find yourself in a never ending loop of burning to death) ENDING
+    Fight but don't kill Unknown Figure
+  Area 4B: Bar
+    Steal a drink and leave
+  Area 5B: Forge
+    Give blacksmith drink, get sword
+  area 6b: Wild
+    fight everything.
+  Area 7B: Your house
+    Wake up, die, repeat.
 
 * C Route: Crowbar Route
   Area 1: Doors
@@ -39,6 +50,7 @@
   Area 3: Museum
     Take the Crowbar, Break down the Beige Wall
   Area 1C: COMING STRAIGHT FROM YOUR HOUSE
+    
 
 D Route: Dead Hand Route
   Area 1: Doors
@@ -49,9 +61,11 @@ D Route: Dead Hand Route
     While fighting Dinosaur, never attempt to attack. After 10 turns, hint by saying the dinosaur looks exahusted. After 15 turns, make the dinosaur faint due to exhaustion, allowing the player to climb the dinosaur to access a hidden passage over the glass.
   Area 1D: Infirmary
     Unplug YOUR life support
-  Area 1E: whitespace
+    get up, solve puzzle
+  Area 2D: whitespace
     Think will hint that the player is falling. To escape, use fly / Jump
     NOTE: This area will only have dialog that has no spaces like this: ("Youattemptedtousefly,itdideverything.Youleftthewhitespace.)
+  area
 
 E Route: Endure Route
   Area 1: Doors
