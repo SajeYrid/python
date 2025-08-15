@@ -644,7 +644,7 @@ while plypos == 2 and tookstool == True and plydead == False:
     elif ply == 'go south':
         print('This room is too small to meaningfully move in any direction.')
 
-    elif ply == 'go east' and:
+    elif ply == 'go east':
         print('This room is too small to meaningfully move in any direction.')
 
     elif ply == 'go west':
@@ -674,12 +674,12 @@ while plypos == 2 and tookstool == True and plydead == False:
         print('You try to pull open the vent with your bare hands. It dosen\'t work.')
 
     elif ply == 'check wall':
-        print('A thin plywood wall painted beige. You could probably break it with something heavy enough.'
+        print('A thin plywood wall painted beige. You could probably break it with something heavy enough.')
 
     elif ply == 'break wall':
         plysecondary = input('With what?').lower()
         if plysecondary == 'brick' and 'Brick' in inventory:
-            print('You throw the brick at the wall. After the brick impacts, the wall is seemingly completely decimated.'
+            print('You throw the brick at the wall. After the brick impacts, the wall is seemingly completely decimated.')
             plywallBroken = True
         elif plysecondary == 'brick' and 'Brick' not in inventory:
             print('You don\'t have one of those')
