@@ -14,14 +14,12 @@ Area 2 (Void)
   NONE
 
 Area 3 (Museum)
+  NONE
   STOOL:
-    If the player hasn't taken the splinters from the door, they should be able to take splinters from the broken stool.
+    NONE
 
 Area 3 (Battle Against a True Dinosaur)
-  If you end up dying and killing the dinosaur at the same time, both the you died and you won text show up. To fix this, either:
-    Make killing the dinosaur the inititave so the player can progress
-    Make unique dialog that says "As you see the dinosaur collapse, you slowly lose conscience and fall over. YOU DIED"
-
+  NONE
 
 FUTURE IDEAS (Later Areas):
 
@@ -75,6 +73,7 @@ Area 3 (Museum)
         Be a way to take back the stool
         Mention that the stool broke and is no longer in your inventory
         Not remove the stool from inventory
+      ADDED: If the player hasn't taken the splinters from the door, they should be able to take splinters from the broken stool.
 
 Area 3 (Battle Against a True Dinosaur)
     GENERAL:
@@ -82,3 +81,6 @@ Area 3 (Battle Against a True Dinosaur)
         Attack: Deals 5 Damage to the Dinosaur if it isn't defending.
         Defend: Allows you to take 0 Damage This Turn
         Charge: Powers up Attack to deal Double Damage next turn
+      ADDED: If you end up dying and killing the dinosaur at the same time, both the you died and you won text show up. To fix this, either:
+        Make killing the dinosaur the inititave so the player can progress
+        Make unique dialog that says "As you see the dinosaur collapse, you slowly lose conscience and fall over. YOU DIED"
