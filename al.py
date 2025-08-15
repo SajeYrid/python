@@ -523,7 +523,7 @@ while plypos == 3 and plydead == False:
         plypos = 2
 
     if dinohealth <= 0 and plyhealth <= 0:
-        print('As you see the dinosaur collapse, you slowly lose conscience and fall over.\nGame over.')
+        print('As you see the dinosaur collapse, you slowly lose conscious and fall over.\nGame over.')
         plydead = True
 
 while plypos == 2 and tookstool == False and plydead == False and dinodead == True:
@@ -554,7 +554,6 @@ while plypos == 2 and tookstool == False and plydead == False and dinodead == Tr
         
     elif ply == 'look west':
         print("There is a large pile of... dust? A particularly large tooth lays at the top.")
-        dinoseen = True
 
     elif ply == 'look south':
         print("Fake grass. There is a metal vent embedded in the ground.")
