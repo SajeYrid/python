@@ -433,35 +433,35 @@ while plypos == 3 and plydead == False:
         
         global plyhealth, dinoatck, dinocharge, dinodefense, plydefense
         
-        dinoaction = random.randint(1, 9)
+        dinoaction = random.randint(0, 10)
             
-        if dinoaction > 6 and plydefense == True:
+        if dinoaction > 3 and plydefense == True:
             print(f"PLASTIC DINO bit you! But you defended!")
             dinoatck = 2
             dinocharge = False
             dinodefense = False
             plydefense = False
 
-        elif dinoaction > 6 and plydefense == False:
+        elif dinoaction > 3 and plydefense == False:
             print(f"PLASTIC DINO bit you for {dinoatck}!")
             plyhealth = plyhealth - dinoatck
             dinoatck = 2
             dinocharge = False
             dinodefense = False
                 
-        elif dinoaction < 4:
+        elif dinoaction < 3:
             print("PLASTIC DINO defended! It won't take damage next turn!")
             dinodefense = True
             plydefense = False
     
-        elif dinoaction > 3 and dinoaction < 7 and dinocharge == False:
+        elif dinoaction == 3 and dinocharge == False:
             print("PLASTIC DINO charged! Its next attack will do double damage!")
             dinocharge = True
             dinoatck = 4
             dinodefense = False
             plydefense = False
     
-        elif dinoaction > 3 and dinoaction < 7 and dinocharge == True:
+        elif dinoaction == 3 and dinocharge == True:
             print("PLASTIC DINO tried to charge! But it already did.")
             plydefense = False
     
@@ -703,6 +703,14 @@ while plypos == 2 and tookstool == True and plydead == False:
             plywallBroken = True
         elif plysecondary == 'brick' and 'Brick' not in inventory:
             print('You don\'t have one of those')
+        elif plysecondary != 'brick' and plysecondary in inventory:
+            print('You take out ' + plysecondary + '. You don\'t know what to do with it. You put it away.')
+        elif plysecondary == 'hand' or plysecondary == 'head' or plysecondary == 'me' or plysecondary == 'foot':
+            print('You would prefer not to risk breaking any bones. Maybe try using an item instead.')
+        elif plysecondary == 'think' and 'Brick' not in inventory or plysecondary == 'check' and 'Brick' not in inventory or plysecondary == 'hint' and 'Brick' not in inventory:
+            print('You tried to think. You feel as if what you need to break the wall is somewhere around here.')
+        elif plysecondary == 'think' and 'Brick' in inventory or plysecondary == 'check' and 'Brick' in inventory or plysecondary == 'hint' and 'Brick' in inventory:
+            print('You tried to think. You feel as if what you need to break the wall is somewhere in your INVENTORY.')
         else:
             print('You know already that that wouldn\'t work.')
 
