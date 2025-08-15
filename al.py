@@ -36,13 +36,13 @@ glassTicker = 2
 # Title screen
 
 print("""           88 88                         
-           88 ""                         
+           88 \"\"                         
            88                            
 ,adPPYYba, 88 88  ,adPPYba, 8b,dPPYba,   
-""     `Y8 88 88 a8P_____88 88P'   `"8a  
-,adPPPPP88 88 88 8PP""""""" 88       88  
+\"\"     `Y8 88 88 a8P_____88 88P'   `"8a  
+,adPPPPP88 88 88 8PP\"\"\"\"\"\"\" 88       88  
 88,    ,88 88 88 "8b,   ,aa 88       88  
-`"8bbdP"Y8 88 88  `"Ybbd8"' 88       88  """
+`\"8bbdP\"Y8 88 88  `\"Ybbd8\"\' 88       88  """)
 
 # area 1 (unbroken door)
 
