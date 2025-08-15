@@ -14,6 +14,7 @@ tookstool = False
 tookSplinter = False
 pretendLMAO = False
 plywallBroken = False
+stoolExplode = False
 
 # list. singular.
 inventory = ['Nothing']
@@ -526,6 +527,8 @@ while plypos == 3 and plydead == False:
         print('As you see the dinosaur collapse, you slowly lose conscious and fall over.\nGame over.')
         plydead = True
 
+# area 3 (haha that dino is dead)
+
 while plypos == 2 and tookstool == False and plydead == False and dinodead == True:
 
     ply = input().lower()
@@ -630,9 +633,22 @@ while plypos == 2 and tookstool == True and plydead == False:
         print("Big plastic dinosaur. It looks fake.")
 
     elif ply == 'take crowbar':
-        print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it dissovles into dust. CROWBAR added into your INVENTORY. ")
-        inventory.append('Crowbar')
-        inventory.remove('Stool')
+        if tookSplinter == True and 'Crowbar' not in inventory:
+            print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it dissovles into dust. CROWBAR added into your INVENTORY. ")
+            inventory.append('Crowbar')
+            inventory.remove('Stool')
+        elif tookSplinter == False and 'Crowbar' not in inventory:
+            print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it spontaneously explodes into a pile of splinters. CROWBAR added into your INVENTORY. ")
+            inventory.append('Crowbar')
+            inventory.remove('Stool')
+            stoolExplode = True
+        elif 'Crowbar' in inventory:
+            print('You already have it.')
+
+    elif ply == 'take stool' and stoolExplode == True:
+        print('The stool is sadly dead. You grab a handful of splinters to honor the late stool. SPLINTERS added into your INVENTORY')
+        inventory.append('Splinters')
+        tookSplinter = True
 
     elif ply == 'look south':
         print("Fake grass. There is an air vent embedded in the ground")
