@@ -4,6 +4,8 @@ This will be all the stored commands + ideas that we would like to program soon.
 TO DO:
 
 GENERAL:
+  start game? y/n option on title screen
+  'up' commands (look up, go up, stuff like that)
   Add a function of commands you should be able to do in every room. These commands include
     Quitting the game
     Thinking for a hint
@@ -40,6 +42,7 @@ Area 1 (Broken Door)
 
 Area 2 (Void)
   Check void should initiate the command 'You checked the Void. You couldn't notice anything except what looked like broken glass.'
+  better hinting
 
 Area 3 (Museum)
   GENERAL AREA 3 STUFF:
