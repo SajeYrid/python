@@ -25,7 +25,7 @@ GENERAL:
       YOU
       CURRENT HP: {plyhealth}
       ATTACK: {plyattack}(atk_item)
-      DEFENCE: {plydefense}(def_item)
+      DEFENSE: {plydefense}(def_item)
       EXTRA INFO BASED ON WHAT IS GOING ON, SUCH AS:
         Area 1 (Unbroken Door): Trying to investigate this strange door that they found.
         Area 1 (Broken Door): Certified Door Breaker
