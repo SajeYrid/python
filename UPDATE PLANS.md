@@ -46,7 +46,7 @@ Area 3 (Museum)
     NONE
 
 Area 3 (Battle Against a True Dinosaur)
-  NONE
+  Equipped items should increase the amount of damage you deal / take.
 
 Area 3 (Museum WITH STOOL)
   NONE
