@@ -16,10 +16,11 @@ pretendLMAO = False
 plywallBroken = False
 stoolExplode = False
 
-# strings for player input
+# strings
 ply = ""
 plysecondary = ""
 miscfight = ""
+equippeditem = None
 
 # lists
 inventory = ['Nothing']
@@ -133,6 +134,13 @@ def globalcommands():
       CURRENT HP: {plyhealth}
       ATTACK: {plyatck}
       DEFENSE: {plydefense}""")
+    elif ply.startswith("equip "):
+        item_to_equip = ply[6:].strip().title()
+        if item_to_equip in inventory:
+            equipped_item = item_to_equip
+            print(f"You equipped the {equipped_item}.")
+        else:
+            print(f"You don't have a {item_to_equip} in your inventory.")
 
 # the unholy and devilish and evil while loops
 # Title screen
@@ -164,9 +172,10 @@ while plypos == 1 and doorbroken == False and plydead == False:
     
     ply = input("").lower()
 
-    globalcommands()
+    if globalcommands():
+        pass
 
-    if ply == "look north":
+    elif ply == "look north":
         print("The same thing as usual.")
 
     elif ply == "look west":
@@ -259,9 +268,10 @@ CHARGE""")
 while plypos == 1 and doorbroken == True and plydead == False:
     ply = input().lower()
 
-    globalcommands()
+    if globalcommands():
+        pass
 
-    if ply == "check door":
+    elif ply == "check door":
         print("Nothing but splinters.")
 
     elif ply == 'take door' and tookSplinter == False:
@@ -430,9 +440,10 @@ while plypos == 2 and plydead == False:
 while plypos == 3 and tookstool == False and plydead == False and dinodead == False:
     ply = input().lower()
 
-    globalcommands()
+    if globalcommands():
+        pass
 
-    if ply == "look north":
+    elif ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
 
     elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
@@ -574,9 +585,10 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Tr
 
     ply = input().lower()
 
-    globalcommands()
+    if globalcommands():
+        pass
 
-    if ply == "look north":
+    elif ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
 
     elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
@@ -627,9 +639,10 @@ while plypos == 3 and tookstool == True and plydead == False:
 
     ply = input().lower()
 
-    globalcommands()
+    if globalcommands():
+        pass
 
-    if ply == "look north":
+    elif ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
 
     elif ply == 'check glass':
