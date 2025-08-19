@@ -133,7 +133,8 @@ def globalcommands():
 
 # Title screen
 
-print("""           88 88                         
+print("""
+           88 88                         
            88 \"\"                         
            88                            
 ,adPPYYba, 88 88  ,adPPYba, 8b,dPPYba,   
@@ -146,6 +147,7 @@ while plypos == 0:
     ply = input().lower()
     if ply == 'y':
         plypos = 1
+        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint. \nGood luck. \n")
         print("There is a door here. You are facing north.")
     elif ply == 'n':
         quit()
