@@ -5,7 +5,7 @@ plydead = False
 brokenhand = False
 dinodead = False
 dinoseen = False
-plydefense = False
+plydefending = False
 plycharge = False
 dinodefense = False
 dinocharge = False
@@ -21,7 +21,7 @@ ply = ""
 plysecondary = ""
 miscfight = ""
 
-# list. singular.
+# lists
 inventory = ['Nothing']
 
 # integers
@@ -30,12 +30,13 @@ plychoke = 5
 ouch = 1
 plyhealth = 10
 plyatck = 5
+plydefense = 0
 dinohealth = 30
 dinoatck = 2
 dinoaction = 0
 glassTicker = 2
 
-# dictionary. also singular
+# dictionaries
 #   'item name' : 'item description'
 items = {
     'nothing' : 'Empty air. Why is this here? Perhaps you can do something with it before it\'s gone forever.',
@@ -56,7 +57,6 @@ roomhints = {
 }
 
 # the truly neutral functions
-
 def glasscheck():
     global glassTicker
     global plypos
@@ -73,15 +73,15 @@ def glasscheck():
 
 def dinomove():
     import random
-    global plyhealth, dinoatck, dinocharge, dinodefense, plydefense
+    global plyhealth, dinoatck, dinocharge, dinodefense, plydefending
     dinoaction = random.randint(1, 9)
-    if dinoaction > 6 and plydefense == True:
+    if dinoaction > 6 and plydefending == True:
         print(f"PLASTIC DINO bit you! But you defended!")
         dinoatck = 2
         dinocharge = False
         dinodefense = False
-        plydefense = False
-    elif dinoaction > 6 and plydefense == False:
+        plydefending = False
+    elif dinoaction > 6 and plydefending == False:
         print(f"PLASTIC DINO bit you for {dinoatck}!")
         plyhealth = plyhealth - dinoatck
         dinoatck = 2
@@ -90,27 +90,27 @@ def dinomove():
     elif dinoaction < 4:
         print("PLASTIC DINO defended! It won't take damage next turn!")
         dinodefense = True
-        plydefense = False
+        plydefending = False
     elif dinoaction > 3 and dinoaction < 7 and dinocharge == False:
         print("PLASTIC DINO charged! Its next attack will do double damage!")
         dinocharge = True
         dinoatck = 4
         dinodefense = False
-        plydefense = False
+        plydefending = False
     elif dinoaction > 3 and dinoaction < 7 and dinocharge == True:
         print("PLASTIC DINO tried to charge! But it already did.")
-        plydefense = False
+        plydefending = False
     else:
         print("This will only print if something went horribly wrong.")
 
 def globalcommands():
     # skip the void for this one, it parses commands differently
-    global ply, inventory
+    global ply, inventory, plyhealth, plydefense
     if ply == 'look around' or ply == 'look':
         print("Perhaps you should try to specify what direction you want to look in.")
     elif ply == "kill me" or ply == "kill myself":
         print("You punched yourself multiple times. You're too weak to deal any damage.")
-    elif ply == 'check inventory' or ply == 'inventory':
+    elif ply == 'check inventory' or ply == 'inventory' or ply == 'open inventory':
         for x in inventory:
             print(x)
     elif ply == 'quit':
@@ -128,9 +128,13 @@ def globalcommands():
             print(roomhints[5])
         elif plypos == 3 and tookstool == True and plydead == False:
             print(roomhints[6])
+    elif ply == "check me" or ply == "check myself" or ply == "check self":
+        print(f"""YOU
+      CURRENT HP: {plyhealth}
+      ATTACK: {plyatck}
+      DEFENSE: {plydefense}""")
 
 # the unholy and devilish and evil while loops
-
 # Title screen
 
 print("""
@@ -523,7 +527,7 @@ while plypos == 4 and plydead == False:
         print('You defended! You won\'t take damage this turn.')
         plyatck = 5
         dinodefense = False
-        plydefense = True
+        plydefending = True
         dinomove()
 
     elif ply == 'charge' and plycharge == False:
@@ -561,7 +565,7 @@ while plypos == 4 and plydead == False:
         plypos = 3
 
     elif dinohealth <= 0 and plyhealth <= 0:
-        print('As you see the dinosaur collapse, you slowly lose conscious and fall over.\nGame over.')
+        print('As you see the dinosaur collapse, you slowly lose consciousness and fall over.\nGame over.')
         plydead = True
 
 # area 3 (haha that dino is dead)
