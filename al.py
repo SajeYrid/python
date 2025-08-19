@@ -38,12 +38,21 @@ glassTicker = 2
 # dictionary. also singular
 #   'item name' : 'item description'
 items = {
-    'Nothing' : 'Empty air. Why is this here? Perhaps you can do something with it before it\'s gone forever.',
-    'Stool' : 'An old wooden stool. It doesn\'t look like it\'ll last very long.',
-    'Splinters' : 'A collection of broken little bits of wood.',
-    'Pretend Splinters' : 'A fake collection of little broken bits of wood.',
-    'Crowbar' : 'A sturdy piece of curved aluminium made for prying things open.',
-    'Tooth' : 'A fake tooth from a plastic prehistoric predator.'
+    'nothing' : 'Empty air. Why is this here? Perhaps you can do something with it before it\'s gone forever.',
+    'stool' : 'An old wooden stool. It doesn\'t look like it\'ll last very long.',
+    'splinters' : 'A collection of broken little bits of wood.',
+    'pretend splinters' : 'A fake collection of little broken bits of wood.',
+    'crowbar' : 'A sturdy piece of curved aluminium made for prying things open.',
+    'tooth' : 'A fake tooth from a plastic prehistoric predator.'
+}
+
+roomhints = {
+    1 : 'You tried to think. You observe that there is a unbroken door in front of you.',
+    2 : 'You tried to think. You observe that the brick wall in the doorframe looks unnatural.',
+    3 : 'You tried to think. You observe a strange feeling of being watched.',
+    4 : 'You tried to think. You observe a suspicious looking dinosaur.',
+    5 : 'You tried to think. You observe a sense of satisfaction from killing a dinosaur.',
+    6 : 'You tried to think. You thought about using the stool to get the crowbar.'
 }
 
 # the truly neutral functions
@@ -95,6 +104,7 @@ def dinomove():
         print("This will only print if something went horribly wrong.")
 
 def globalcommands():
+    # skip the void for this one, it parses commands differently
     global ply, inventory
     if ply == 'look around' or ply == 'look':
         print("Perhaps you should try to specify what direction you want to look in.")
@@ -105,6 +115,19 @@ def globalcommands():
             print(x)
     elif ply == 'quit':
         quit()
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        if plypos == 1 and doorbroken == False and plydead == False:
+            print(roomhints[1])
+        elif plypos == 1 and doorbroken == True and plydead == False:
+            print(roomhints[2])
+        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == False:
+            print(roomhints[3])
+        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == True:
+            print(roomhints[4])
+        elif plypos == 3 and tookstool == False and plydead == False and dinodead == True:
+            print(roomhints[5])
+        elif plypos == 3 and tookstool == True and plydead == False:
+            print(roomhints[6])
 
 # the unholy and devilish and evil while loops
 
@@ -221,9 +244,6 @@ CHARGE""")
 
     elif ply == 'go south':
         print('You attempt to go backwards. You trip over your own feet. When you get back up, you haven\'t moved at all.')
-
-    elif ply == 'think' or ply == 'check' or ply == 'hint':
-        print('You tried to think. You observe that there is a unbroken door in front of you.')
         
     else:
         print("Your thoughts seem incomprehensible.")
@@ -317,9 +337,6 @@ while plypos == 1 and doorbroken == True and plydead == False:
 
     elif ply == 'go south':
         print('You trip over your own feet. When you get back up, you haven\'t moved at all.')
-
-    elif ply == 'think' or ply == 'check' or ply == 'hint':
-        print('You tried to think. You observe that the Brick Wall looks unnatural.')
 
     elif ply == "close door":
         print("You try to figure out how to inact this outrageous thought. You come up with nothing.")
@@ -476,12 +493,6 @@ ATTACK
 DEFEND
 CHARGE""")
         plypos = 4
-
-    elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == False:
-        print('You tried to think. You observe a strange feeling of being watched.')
-
-    elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == True:
-        print('You tried to think. You observe a suspicious looking dinosaur')
 
     else:
         print("Your thoughts seem incomprehensible.")
@@ -678,9 +689,6 @@ while plypos == 3 and tookstool == True and plydead == False:
     elif ply == 'go west':
         print('It appears there is a giant plastic dinosaur in the way.')
         dinoseen = True
-
-    elif ply == 'think' or ply == 'check' or ply == 'hint':
-        print('You tried to think. You thought about using the stool to get the crowbar.')
 
     elif ply == 'open vent' and 'Crowbar' in inventory and ventopen == False:
         print("You pry open the vent with the crowbar. It's too small to climb inside, but there is a red brick inside.")
