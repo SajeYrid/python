@@ -109,11 +109,14 @@ def globalcommands():
     global ply, inventory, plyhealth, plydefense
     if ply == 'look around' or ply == 'look':
         print("Perhaps you should try to specify what direction you want to look in.")
+        return True
     elif ply == "kill me" or ply == "kill myself":
         print("You punched yourself multiple times. You're too weak to deal any damage.")
+        return True
     elif ply == 'check inventory' or ply == 'inventory' or ply == 'open inventory':
         for x in inventory:
             print(x)
+        return True
     elif ply == 'quit':
         quit()
     elif ply == 'think' or ply == 'check' or ply == 'hint':
@@ -129,11 +132,13 @@ def globalcommands():
             print(roomhints[5])
         elif plypos == 3 and tookstool == True and plydead == False:
             print(roomhints[6])
+        return True
     elif ply == "check me" or ply == "check myself" or ply == "check self":
         print(f"""YOU
       CURRENT HP: {plyhealth}
       ATTACK: {plyatck}
       DEFENSE: {plydefense}""")
+        return True
     elif ply.startswith("equip "):
         item_to_equip = ply[6:].strip().title()
         if item_to_equip in inventory:
@@ -141,6 +146,9 @@ def globalcommands():
             print(f"You equipped the {equipped_item}.")
         else:
             print(f"You don't have a {item_to_equip} in your inventory.")
+        return True
+    else:
+        return False
 
 # the unholy and devilish and evil while loops
 # Title screen
