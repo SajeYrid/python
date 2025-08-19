@@ -30,7 +30,6 @@ GENERAL:
         Area 1 (Broken Door): Certified Door Breaker
         Area 2 (V O I D): Has no idea what they are getting themselves into.
         stuff like this y'know.
-  'open inventory' should perform the same command as 'inventory'
 
 Area 1 (Unbroken Door)
   Trying to perform actions on the key such as 'throw key', 'punch key', 'fight key' should initiate the same command as 'take key'
@@ -69,6 +68,7 @@ GENERAL CHANGES:
   ADDED: Added # Areas for convience purposes.
   CHANGED: Quitting now uses quit() to close the program rather than simply saying "GAME OVER"
   ADDED: start game? y/n option on title screen
+  ADDED: 'open inventory' should perform the same command as 'inventory'
 
 Area 1 (Unbroken Door)
   GENERAL:
