@@ -4,11 +4,8 @@ This will be all the stored commands + ideas that we would like to program soon.
 TO DO:
 
 GENERAL:
-  'up' commands (look up, go up, stuff like that)
-  Add a function of commands you should be able to do in every room. These commands include
-    Quitting the game
-    Thinking for a hint
-    Opening your inventory
+  GLOBAL COMMANDS:
+    Bug: Using any global commands currently displays "Your thoughts seemed incomprehensible" after running the command
     Equiping items in your inventory (such as Crowbar and Splinters)
       The Crowbar should increase your attack by 1
       The Splinters should increase your defense by 1
@@ -19,20 +16,18 @@ GENERAL:
         Attempting to equip an item you already have equipped should say "You already have (ITEM) equipped.)
         If an item isn't equippable or the item isn't in their inventory/doesn't exist, it should say "You can't equip (ITEM)" or "You don't have (ITEM) yet (even if it isn't a real item)"
         If the item that is equipped ends up being used up (like the crowbar breaking in a room if that ever happens), that item should be replaced by nothing in the equip menu.
-    Add the ability to check yourself by saying "check me" or "check myself" or "check self". It should list this.
-    look around ('look' should also initiate this command)
-      YOU
-      CURRENT HP: {plyhealth}
-      ATTACK: {plyattack}(atk_item)
-      DEFENSE: {plydefense}(def_item)
-      EXTRA INFO BASED ON WHAT IS GOING ON, SUCH AS:
+    Checking Yourself should also:
+      Disply what item you have next to your attack and defense stats like this
+        attack = 2 (Crowbar)
+        defense = 1 (Nothing)
+      DISPLAY EXTRA INFO BASED ON WHAT IS GOING ON, SUCH AS:
         Area 1 (Unbroken Door): Trying to investigate this strange door that they found.
         Area 1 (Broken Door): Certified Door Breaker
         Area 2 (V O I D): Has no idea what they are getting themselves into.
         stuff like this y'know.
 
 Area 1 (Unbroken Door)
-  Trying to perform actions on the key such as 'throw key', 'punch key', 'fight key' should initiate the same command as 'take key'
+  SUGGESTION: The key command of your hand phasing through the key should activate if 'key' is included in the command the player gives rather than needing the specific 'take key' command.
   Door Fight:
     NONE
     
@@ -53,8 +48,7 @@ Area 3 (Battle Against a True Dinosaur)
   NONE
 
 Area 3 (Museum WITH STOOL)
-  When obtaining the brick, there should be a way to eat/drink the brick.
-  If you have the brick, typing the command 'break (fourth/4th) wall' should say 'You attempt to smash the fourth wall. You succeeded, but not in the way that you think.'
+  NONE
 
 FUTURE IDEAS (Later Areas):
 
@@ -64,6 +58,11 @@ Area 6 (Glass Room):
 IMPLEMENTED/FIXED:
 
 GENERAL CHANGES:
+  ADDED: Global Commands, which include
+    Quitting the game
+    Thinking for a hint
+    Opening your inventory
+    Checking Yourself to display your stats.
   CHANGED: Made the minor fights use the "miscfight" input to make coding a bit easier
   ADDED: Added # Areas for convience purposes.
   CHANGED: Quitting now uses quit() to close the program rather than simply saying "GAME OVER"
@@ -110,6 +109,8 @@ Area 3 (Museum)
         Be a way to take back the stool
         Mention that the stool broke and is no longer in your inventory
         Not remove the stool from inventory
+      ADDED: When obtaining the brick, there should be a way to eat/drink the brick.
+      ADDED: If you have the brick, typing the command 'break (fourth/4th) wall' should say 'You attempt to smash the fourth wall. You succeeded, but not in the way that you think.'
       ADDED: If the player hasn't taken the splinters from the door, they should be able to take splinters from the broken stool.
 
 Area 3 (Battle Against a True Dinosaur)
