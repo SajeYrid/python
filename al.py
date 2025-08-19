@@ -30,6 +30,53 @@ dinoatck = 2
 dinoaction = 0
 glassTicker = 2
 
+# the truly neutral functions
+
+def glasscheck():
+    global glassTicker
+    global plypos
+    if glassTicker == 2:
+        print('For some reason, there is an absurd amount of condensation on the glass. You try to wipe if off, but the water refuses to part from the window. Perhaps you should look again?')
+        glassTicker -= 1
+    elif glassTicker == 1:
+        print('You inspect the glass even further. when you look closer, you see that the condensation isn\'t condensation. There is a sort of film covering the entirety of the surface of the glass. Maybe you should look just once more.')
+        glassTicker -=1
+    elif glassTicker == 0:
+        print('You look even closer. Then, you realize, the glass isn\'t foggy, the museum is. You blink. when your eyes flutter open, the glass is clear again. In fact, everything is clear. You aren\'t where you were before. \nWhat did you do?')
+        glassTicker = 2
+        plypos = 5
+
+def dinomove():
+    import random
+    global plyhealth, dinoatck, dinocharge, dinodefense, plydefense
+    dinoaction = random.randint(1, 9)
+    if dinoaction > 6 and plydefense == True:
+        print(f"PLASTIC DINO bit you! But you defended!")
+        dinoatck = 2
+        dinocharge = False
+        dinodefense = False
+        plydefense = False
+    elif dinoaction > 6 and plydefense == False:
+        print(f"PLASTIC DINO bit you for {dinoatck}!")
+        plyhealth = plyhealth - dinoatck
+        dinoatck = 2
+        dinocharge = False
+        dinodefense = False
+    elif dinoaction < 4:
+        print("PLASTIC DINO defended! It won't take damage next turn!")
+        dinodefense = True
+        plydefense = False
+    elif dinoaction > 3 and dinoaction < 7 and dinocharge == False:
+        print("PLASTIC DINO charged! Its next attack will do double damage!")
+        dinocharge = True
+        dinoatck = 4
+        dinodefense = False
+        plydefense = False
+    elif dinoaction > 3 and dinoaction < 7 and dinocharge == True:
+        print("PLASTIC DINO tried to charge! But it already did.")
+        plydefense = False
+    else:
+        print("This will only print if something went horribly wrong.")
 
 # the unholy and devilish and evil while loops
 
@@ -349,16 +396,7 @@ while plypos == 2 and tookstool == False and plydead == False and dinodead == Fa
         print('If you were to try, your hand would hurt even more than it already does.')
 
     elif ply == 'check glass':
-        if glassTicker == 2:
-            print('For some reason, there is an absurd amount of condensation on the glass. You try to wipe if off, but the water refuses to part from the window. Perhaps you should look again?')
-            glassTicker -= 1
-        elif glassTicker == 1:
-            print('You inspect the glass even further. when you look closer, you see that the condensation isn\'t condensation. There is a sort of film covering the entirety of the surface of the glass. Maybe you should look just once more.')
-            glassTicker -=1
-        elif glassTicker == 0:
-            print('You look even closer. Then, you realize, the glass isn\'t foggy, the museum is. You blink. when your eyes flutter open, the glass is clear again. In fact, everything is clear. You aren\'t where you were before. \nWhat did you do?')
-            glassTicker = 2
-            plypos = 5
+        glasscheck()
 
     elif ply == 'check inventory' or ply == 'inventory':
         for x in inventory:
@@ -436,48 +474,7 @@ CHARGE""")
 
 while plypos == 3 and plydead == False:
 
-    import random
-
     ply = input(f"Your health is: {plyhealth}. PLASTIC DINO's health is {dinohealth}. What do you do?\n").lower()
-
-    def dinomove():
-        
-        global plyhealth, dinoatck, dinocharge, dinodefense, plydefense
-        
-        dinoaction = random.randint(1, 9)
-            
-        if dinoaction > 6 and plydefense == True:
-            print(f"PLASTIC DINO bit you! But you defended!")
-            dinoatck = 2
-            dinocharge = False
-            dinodefense = False
-            plydefense = False
-
-        elif dinoaction > 6 and plydefense == False:
-            print(f"PLASTIC DINO bit you for {dinoatck}!")
-            plyhealth = plyhealth - dinoatck
-            dinoatck = 2
-            dinocharge = False
-            dinodefense = False
-                
-        elif dinoaction < 4:
-            print("PLASTIC DINO defended! It won't take damage next turn!")
-            dinodefense = True
-            plydefense = False
-    
-        elif dinoaction > 3 and dinoaction < 7 and dinocharge == False:
-            print("PLASTIC DINO charged! Its next attack will do double damage!")
-            dinocharge = True
-            dinoatck = 4
-            dinodefense = False
-            plydefense = False
-    
-        elif dinoaction > 3 and dinoaction < 7 and dinocharge == True:
-            print("PLASTIC DINO tried to charge! But it already did.")
-            plydefense = False
-    
-        else:
-            print("This will only print if something went horribly wrong.")
 
     if ply == 'attack' and dinodefense == False:
         print(f'You attacked PLASTIC DINO for {plyatck} damage!')
@@ -610,16 +607,7 @@ while plypos == 2 and tookstool == True and plydead == False:
             print(x)
 
     elif ply == 'check glass':
-        if glassTicker == 2:
-            print('For some reason, there is an absurd amount of condensation on the glass. You try to wipe if off, but the water refuses to part from the window. Perhaps you should look again?')
-            glassTicker -= 1
-        elif glassTicker == 1:
-            print('You inspect the glass even further. when you look closer, you see that the condensation isn\'t condensation. There is a sort of film covering the entirety of the surface of the glass. Maybe you should look just once more.')
-            glassTicker -=1
-        elif glassTicker == 0:
-            print('You look even closer. Then, you realize, the glass isn\'t foggy, the museum is. You blink. when your eyes flutter open, the glass is clear again. In fact, everything is clear. You aren\'t where you were before. \nWhat did you do?')
-            glassTicker = 2
-            plypos = 5
+        glasscheck()
 
     elif ply == 'look west' and 'Crowbar' not in inventory:
         print("Big plastic dinosaur. A crowbar dangles from its mouth.")
