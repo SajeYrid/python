@@ -37,6 +37,7 @@ Area 1 (Unbroken Door)
   Trying to perform actions on the key such as 'throw key', 'punch key', 'fight key' should initiate the same command as 'take key'
   Door Fight:
     NONE
+    
 Area 1 (Broken Door)
   NONE
 
