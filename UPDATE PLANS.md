@@ -5,6 +5,7 @@ TO DO:
 
 GENERAL:
   GLOBAL COMMANDS:
+    ***HUGE CHANGE, BUT REALLY HELPFUL: Change the formating to be modules packages. This would require a lot of coding fixes, but it allows us to work on different areas without the worry of accidentally overwriteing the others code.
     Bug: Using any global commands currently displays "Your thoughts seemed incomprehensible" after running the command
     Equiping items in your inventory (such as Crowbar and Splinters)
       The Crowbar should increase your attack by 1
@@ -45,7 +46,7 @@ Area 3 (Museum)
     NONE
 
 Area 3 (Battle Against a True Dinosaur)
-  NONE
+  Equipped items should increase the amount of damage you deal / take.
 
 Area 3 (Museum WITH STOOL)
   NONE
