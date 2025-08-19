@@ -57,6 +57,15 @@ roomhints = {
     6 : 'You tried to think. You thought about using the stool to get the crowbar.'
 }
 
+selfcheckroom = {
+    1 : 'Trying to investigate this strange door they found',
+    2 : 'Certified Destroyer of Doors',
+    3 : '...',
+    4 : 'Feels broken',
+    5 : 'The meteor that killed the dinosaurs',
+    6 : 'Ready to climb their newly obtained stool'
+}
+
 # the truly neutral functions
 def glasscheck():
     global glassTicker
@@ -138,6 +147,18 @@ def globalcommands():
       CURRENT HP: {plyhealth}
       ATTACK: {plyatck}
       DEFENSE: {plydefense}""")
+        if plypos == 1 and doorbroken == False and plydead == False:
+            print(selfcheckroom[1])
+        elif plypos == 1 and doorbroken == True and plydead == False:
+            print(selfcheckroom[2])
+        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == False:
+            print(selfcheckroom[3])
+        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == True:
+            print(selfcheckroom[4])
+        elif plypos == 3 and tookstool == False and plydead == False and dinodead == True:
+            print(selfcheckroom[5])
+        elif plypos == 3 and tookstool == True and plydead == False:
+            print(selfcheckroom[6])
         return True
     elif ply.startswith("equip "):
         item_to_equip = ply[6:].strip().title()
@@ -756,6 +777,3 @@ while plypos == 3 and tookstool == True and plydead == False:
             print('You tried to think. You feel as if what you need to break the wall is somewhere in your INVENTORY.')
         else:
             print('You know already that that wouldn\'t work.')
-
-    else:
-        print("Your thoughts seem incomprehensible.")
