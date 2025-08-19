@@ -6,7 +6,6 @@ TO DO:
 GENERAL:
   GLOBAL COMMANDS:
     ***HUGE CHANGE, BUT REALLY HELPFUL: Change the formating to be modules packages. This would require a lot of coding fixes, but it allows us to work on different areas without the worry of accidentally overwriteing the others code.
-    Bug: Using any global commands currently displays "Your thoughts seemed incomprehensible" after running the command
     Equiping items in your inventory (such as Crowbar and Splinters)
       The Crowbar should increase your attack by 1
       The Splinters should increase your defense by 1
@@ -21,11 +20,6 @@ GENERAL:
       Disply what item you have next to your attack and defense stats like this
         attack = 2 (Crowbar)
         defense = 1 (Nothing)
-      DISPLAY EXTRA INFO BASED ON WHAT IS GOING ON, SUCH AS:
-        Area 1 (Unbroken Door): Trying to investigate this strange door that they found.
-        Area 1 (Broken Door): Certified Door Breaker
-        Area 2 (V O I D): Has no idea what they are getting themselves into.
-        stuff like this y'know.
 
 Area 1 (Unbroken Door)
   SUGGESTION: The key command of your hand phasing through the key should activate if 'key' is included in the command the player gives rather than needing the specific 'take key' command.
@@ -64,6 +58,8 @@ GENERAL CHANGES:
     Thinking for a hint
     Opening your inventory
     Checking Yourself to display your stats.
+      ADDED: Displays additional info unique to the position the player is in.
+    FIXED: Using any global commands currently displays "Your thoughts seemed incomprehensible" after running the command
   CHANGED: Made the minor fights use the "miscfight" input to make coding a bit easier
   ADDED: Added # Areas for convience purposes.
   CHANGED: Quitting now uses quit() to close the program rather than simply saying "GAME OVER"
