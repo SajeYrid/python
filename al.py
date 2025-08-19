@@ -42,8 +42,8 @@ items = {
     'Stool' : 'An old wooden stool. It doesn\'t look like it\'ll last very long.',
     'Splinters' : 'A collection of broken little bits of wood.',
     'Pretend Splinters' : 'A fake collection of little broken bits of wood.',
-    'Crowbar' : 'A sturdy piece of curved aluminum made for prying things open.',
-    'Tooth' : 'A fake tooth from a prehistoric exhibit in a museum.'
+    'Crowbar' : 'A sturdy piece of curved aluminium made for prying things open.',
+    'Tooth' : 'A fake tooth from a plastic prehistoric predator.'
 }
 
 # the truly neutral functions
