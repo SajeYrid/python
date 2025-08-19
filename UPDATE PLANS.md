@@ -4,7 +4,6 @@ This will be all the stored commands + ideas that we would like to program soon.
 TO DO:
 
 GENERAL:
-  start game? y/n option on title screen
   'up' commands (look up, go up, stuff like that)
   Add a function of commands you should be able to do in every room. These commands include
     Quitting the game
@@ -18,7 +17,7 @@ GENERAL:
       NOTES FOR THIS FEATURE
         Equipping an item like the crowbar should not remove it from your inventory.
         Attempting to equip an item you already have equipped should say "You already have (ITEM) equipped.)
-        If an item isn't equippable or the item isn't in their inventory/doesn't exsist, it should say "You can't equip (ITEM)" or "You don't have (ITEM) yet (even if it isn't a real item)"
+        If an item isn't equippable or the item isn't in their inventory/doesn't exist, it should say "You can't equip (ITEM)" or "You don't have (ITEM) yet (even if it isn't a real item)"
         If the item that is equipped ends up being used up (like the crowbar breaking in a room if that ever happens), that item should be replaced by nothing in the equip menu.
     Add the ability to check yourself by saying "check me" or "check myself" or "check self". It should list this.
     look around ('look' should also initiate this command)
@@ -69,6 +68,7 @@ GENERAL CHANGES:
   CHANGED: Made the minor fights use the "miscfight" input to make coding a bit easier
   ADDED: Added # Areas for convience purposes.
   CHANGED: Quitting now uses quit() to close the program rather than simply saying "GAME OVER"
+  ADDED: start game? y/n option on title screen
 
 Area 1 (Unbroken Door)
   GENERAL:
