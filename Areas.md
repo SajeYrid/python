@@ -19,7 +19,7 @@
   Area 8: outside
     fall outside the world and solve an environmental puzzle from outside
   Area 9: core
-    die and beome a ghost
+    die and become a ghost
     explode the core of the world
   Area 10: Wake up
     end. fin. game complete.
