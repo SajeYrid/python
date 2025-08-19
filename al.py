@@ -16,6 +16,11 @@ pretendLMAO = False
 plywallBroken = False
 stoolExplode = False
 
+# strings for player input
+ply = ""
+plysecondary = ""
+miscfight = ""
+
 # list. singular.
 inventory = ['Nothing']
 
@@ -30,13 +35,24 @@ dinoatck = 2
 dinoaction = 0
 glassTicker = 2
 
+# dictionary. also singular
+#   'item name' : 'item description'
+items = {
+    'Nothing' : 'Empty air. Why is this here? Perhaps you can do something with it before it\'s gone forever.',
+    'Stool' : 'An old wooden stool. It doesn\'t look like it\'ll last very long.',
+    'Splinters' : 'A collection of broken little bits of wood.',
+    'Pretend Splinters' : 'A fake collection of little broken bits of wood.',
+    'Crowbar' : 'A sturdy piece of curved aluminum made for prying things open.',
+    'Tooth' : 'A fake tooth from a prehistoric exhibit in a museum.'
+}
+
 # the truly neutral functions
 
 def glasscheck():
     global glassTicker
     global plypos
     if glassTicker == 2:
-        print('For some reason, there is an absurd amount of condensation on the glass. You try to wipe if off, but the water refuses to part from the window. Perhaps you should look again?')
+        print('For some reason, there is an absurd amount of condensation on the glass. You try to wipe it off, but the water refuses to part from the window. Perhaps you should look again?')
         glassTicker -= 1
     elif glassTicker == 1:
         print('You inspect the glass even further. when you look closer, you see that the condensation isn\'t condensation. There is a sort of film covering the entirety of the surface of the glass. Maybe you should look just once more.')
@@ -44,7 +60,7 @@ def glasscheck():
     elif glassTicker == 0:
         print('You look even closer. Then, you realize, the glass isn\'t foggy, the museum is. You blink. when your eyes flutter open, the glass is clear again. In fact, everything is clear. You aren\'t where you were before. \nWhat did you do?')
         glassTicker = 2
-        plypos = 5
+        plypos = 6
 
 def dinomove():
     import random
@@ -78,6 +94,18 @@ def dinomove():
     else:
         print("This will only print if something went horribly wrong.")
 
+def globalcommands():
+    global ply, inventory
+    if ply == 'look around' or ply == 'look':
+        print("Perhaps you should try to specify what direction you want to look in.")
+    elif ply == "kill me" or ply == "kill myself":
+        print("You punched yourself multiple times. You're too weak to deal any damage.")
+    elif ply == 'check inventory' or ply == 'inventory':
+        for x in inventory:
+            print(x)
+    elif ply == 'quit':
+        quit()
+
 # the unholy and devilish and evil while loops
 
 # Title screen
@@ -89,26 +117,31 @@ print("""           88 88
 \"\"     `Y8 88 88 a8P_____88 88P'   `"8a  
 ,adPPPPP88 88 88 8PP\"\"\"\"\"\"\" 88       88  
 88,    ,88 88 88 "8b,   ,aa 88       88  
-`\"8bbdP\"Y8 88 88  `\"Ybbd8\"\' 88       88  \n\n\n\n\n\n\n""")
+`\"8bbdP\"Y8 88 88  `\"Ybbd8\"\' 88       88  \n\n\n\n\n\n\n\nStart Game? Y/N""")
+
+while plypos == 0:
+    ply = input().lower()
+    if ply == 'y':
+        plypos = 1
+        print("There is a door here. You are facing north.")
+    elif ply == 'n':
+        quit()
+    else:
+        print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
 
 # area 1 (unbroken door)
 
-print("There is a door here. You are facing north.")
-while doorbroken == False and plydead == False:
+while plypos == 1 and doorbroken == False and plydead == False:
     
     ply = input("").lower()
+
+    globalcommands()
 
     if ply == "look north":
         print("The same thing as usual.")
 
     elif ply == "look west":
         print("Nothing. A blank void.")
-
-    elif ply == 'look around':
-        print("Perhaps you should try to specify what direction you want to look in.")
-
-    elif ply == "kill me" or ply == "kill myself":
-        print("You punched yourself multiple times. You're too weak to deal any damage.")
 
     elif ply == 'look east' and 'Stool' not in inventory:
         print("There is a small golden key lying on a stool.")
@@ -124,10 +157,6 @@ while doorbroken == False and plydead == False:
 
     elif ply == 'check key' or ply == 'inspect key':
         print("The key is the same color as the floor.")
-
-    elif ply == 'check inventory' or ply == 'inventory':
-        for x in inventory:
-            print(x)
 
     elif ply == 'take stool' and 'Stool' not in inventory:
         print('You took the stool. STOOL added into your INVENTORY.')
@@ -195,17 +224,16 @@ CHARGE""")
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You observe that there is a unbroken door in front of you.')
-    
-    elif ply == 'quit':
-        quit()
         
     else:
         print("Your thoughts seem incomprehensible.")
         
 # area 1 (broken door)
 
-while plypos == 0 and plydead == False:
+while plypos == 1 and doorbroken == True and plydead == False:
     ply = input().lower()
+
+    globalcommands()
 
     if ply == "check door":
         print("Nothing but splinters.")
@@ -239,10 +267,6 @@ while plypos == 0 and plydead == False:
 
     elif ply == 'eat wall' or ply == 'eat brick wall':
         print('You sink your teeth into the wall. Suprisingly, your teeth glide through it. Tastes like water.')
-
-    elif ply == 'check inventory' or ply == 'inventory':
-        for x in inventory:
-            print(x)
 
     elif (ply == 'break wall' or ply == 'break brick wall') and ouch != 3 and brokenhand == False:
         print('You violently punch the wall. Your hand passes right through the wall. \nOnce you took out your hand, it felt injured.')
@@ -281,12 +305,9 @@ while plypos == 0 and plydead == False:
     elif ply == 'break door':
         print("It's already broken.")
 
-    elif ply == 'quit':
-        quit()
-
     elif ply == 'go north':
         print('You pass through brick like water. You choked to death. This is the end.\nGame Over\n\n\n\n  or is it?\nThere is no here.')
-        plypos = 1
+        plypos = 2
 
     elif ply == 'go east':
         print('You trip over your own feet. When you get back up, you haven\'t moved at all.')
@@ -334,7 +355,7 @@ CHARGE""")
 
 # area 2 (void)
 
-while plypos == 1 and plydead == False:
+while plypos == 2 and plydead == False:
 
     ply = input().lower().split()
 
@@ -344,7 +365,7 @@ while plypos == 1 and plydead == False:
 
     elif ('break' in ply and brokenhand == False) or ('kill' in ply and 'myself' in ply):
         print('You broke. You lost Nothing.\n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
-        plypos = 2
+        plypos = 3
         plychoke = 5
         inventory.remove('Nothing')
 
@@ -372,7 +393,7 @@ while plypos == 1 and plydead == False:
 
     elif 'open' in ply:
         print('You opened. You felt a change. \n\n\n\n\n\n\n\nYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
-        plypos = 2
+        plypos = 3
         plychoke = 5
 
     else:
@@ -383,8 +404,10 @@ while plypos == 1 and plydead == False:
 
 # area 3 (museum without stool)
 
-while plypos == 2 and tookstool == False and plydead == False and dinodead == False:
+while plypos == 3 and tookstool == False and plydead == False and dinodead == False:
     ply = input().lower()
+
+    globalcommands()
 
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
@@ -397,10 +420,6 @@ while plypos == 2 and tookstool == False and plydead == False and dinodead == Fa
 
     elif ply == 'check glass':
         glasscheck()
-
-    elif ply == 'check inventory' or ply == 'inventory':
-        for x in inventory:
-            print(x)
 
     elif ply == "check dinosaur" and dinoseen == False:
         print("What dinosaur?")
@@ -415,7 +434,7 @@ Your actions are:
 ATTACK
 DEFEND
 CHARGE""")
-        plypos = 3
+        plypos = 4
 
     elif ply == "check dinosaur" and dinoseen == True:
         print("You go to check the dinosaur. It reacts. \nBATTLE START!")
@@ -424,7 +443,7 @@ Your actions are:
 ATTACK
 DEFEND
 CHARGE""")
-        plypos = 3
+        plypos = 4
         
     elif ply == 'look west':
         print("Big plastic dinosaur. It looks surprisingly life-like.")
@@ -456,7 +475,7 @@ Your actions are:
 ATTACK
 DEFEND
 CHARGE""")
-        plypos = 3
+        plypos = 4
 
     elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == False:
         print('You tried to think. You observe a strange feeling of being watched.')
@@ -464,15 +483,12 @@ CHARGE""")
     elif (ply == 'think' or ply == 'check' or ply == 'hint') and dinoseen == True:
         print('You tried to think. You observe a suspicious looking dinosaur')
 
-    elif ply == 'quit':
-        quit()
-
     else:
         print("Your thoughts seem incomprehensible.")
 
 # area 4 (battle against a true dino)
 
-while plypos == 3 and plydead == False:
+while plypos == 4 and plydead == False:
 
     ply = input(f"Your health is: {plyhealth}. PLASTIC DINO's health is {dinohealth}. What do you do?\n").lower()
 
@@ -526,20 +542,22 @@ while plypos == 3 and plydead == False:
         print("You died! Loser!")
         plydead = True
     
-    if dinohealth <= 0 and plyhealth > 0:
+    elif dinohealth <= 0 and plyhealth > 0:
         dinodead = True
         print("You won! \nThe dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
-        plypos = 2
+        plypos = 3
 
-    if dinohealth <= 0 and plyhealth <= 0:
+    elif dinohealth <= 0 and plyhealth <= 0:
         print('As you see the dinosaur collapse, you slowly lose conscious and fall over.\nGame over.')
         plydead = True
 
 # area 3 (haha that dino is dead)
 
-while plypos == 2 and tookstool == False and plydead == False and dinodead == True:
+while plypos == 3 and tookstool == False and plydead == False and dinodead == True:
 
     ply = input().lower()
+
+    globalcommands()
 
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
@@ -552,10 +570,6 @@ while plypos == 2 and tookstool == False and plydead == False and dinodead == Tr
 
     elif ply == 'check glass':
         print('When you look closer, you see the glass is entirely clear. However, you still cannot see anything through it.')
-
-    elif ply == 'check inventory' or ply == 'inventory':
-        for x in inventory:
-            print(x)
 
     elif ply == "check dinosaur":
         print("What dinosaur?")
@@ -587,24 +601,19 @@ while plypos == 2 and tookstool == False and plydead == False and dinodead == Tr
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You observe a sense of satisfaction from killing a dinosaur.')
 
-    elif ply == 'quit':
-        quit()
-
     else:
         print("Your thoughts seem incomprehensible.")
 
 # area 3 (museum with stool)
 
-while plypos == 2 and tookstool == True and plydead == False:
+while plypos == 3 and tookstool == True and plydead == False:
 
     ply = input().lower()
 
+    globalcommands()
+
     if ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
-
-    elif ply == 'check inventory' or ply == 'inventory':
-        for x in inventory:
-            print(x)
 
     elif ply == 'check glass':
         glasscheck()
@@ -712,9 +721,6 @@ while plypos == 2 and tookstool == True and plydead == False:
             print('You tried to think. You feel as if what you need to break the wall is somewhere in your INVENTORY.')
         else:
             print('You know already that that wouldn\'t work.')
-
-    elif ply == 'quit':
-        quit()
 
     else:
         print("Your thoughts seem incomprehensible.")
