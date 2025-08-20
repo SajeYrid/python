@@ -204,19 +204,19 @@ while plypos == 1 and doorbroken == False and plydead == False:
     if globalcommands():
         pass
 
-    elif ply == "look north":
+    elif ply == "look north" or ply == 'look forward':
         print("The same thing as usual.")
 
-    elif ply == "look west":
+    elif ply == "look west" or ply == 'look left':
         print("Nothing. A blank void.")
 
-    elif ply == 'look east' and 'Stool' not in inventory:
+    elif (ply == 'look east' or ply == 'look right') and 'Stool' not in inventory:
         print("There is a small golden key lying on a stool.")
 
     elif ply == 'look east' and "Stool" in inventory:
         print("There is a small golden key lying on the floor.")
 
-    elif ply == 'take key' or ply == "equip key" or ply == "get key" or ply == "pick up key":
+    elif ply == 'take key' or ply == 'take key on stool' or ply == "get key" or ply == 'get key on stool' or ply == "pick up key" or ply == 'pick up key on stool':
         print("Your hand passes through the key like it wasn't even there.")
 
     elif ply == 'eat key':
@@ -230,7 +230,7 @@ while plypos == 1 and doorbroken == False and plydead == False:
         inventory.append('Stool')
         tookstool = True
 
-    elif ply == 'look south':
+    elif ply == 'look south' or ply == 'look back':
         print("You aren't an owl, are you?")
 
     elif ply == 'open door':
