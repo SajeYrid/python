@@ -40,12 +40,12 @@ glassTicker = 2
 # dictionaries
 #   'item name' : 'item description'
 items = {
-    'nothing' : 'Empty air. Why is this here? Perhaps you can do something with it before it\'s gone forever.',
-    'stool' : 'An old wooden stool. It doesn\'t look like it\'ll last very long.',
-    'splinters' : 'A collection of broken little bits of wood.',
-    'pretend splinters' : 'A fake collection of little broken bits of wood.',
-    'crowbar' : 'A sturdy piece of curved aluminium made for prying things open.',
-    'tooth' : 'A fake tooth from a plastic prehistoric predator.'
+    'Nothing' : 'Empty air. Why is this here? Perhaps you can do something with it before it\'s gone forever.',
+    'Stool' : 'An old wooden stool. It doesn\'t look like it\'ll last very long.',
+    'Splinters' : 'A collection of broken little bits of wood.',
+    'Pretend Splinters' : 'A fake collection of little broken bits of wood.',
+    'Crowbar' : 'A sturdy piece of curved aluminium made for prying things open.',
+    'Tooth' : 'A fake tooth from a plastic prehistoric predator.'
 }
 
 roomhints = {
@@ -115,7 +115,7 @@ def dinomove():
 
 def globalcommands():
     # skip the void for this one, it parses commands differently
-    global ply, inventory, plyhealth, plydefense
+    global ply, inventory, plyhealth, plydefense, doorbroken, plydead, plypos, tookstool, dinodead, dinoseen, equippeditem
     if ply == 'look around' or ply == 'look':
         print("Perhaps you should try to specify what direction you want to look in.")
         return True
@@ -163,8 +163,8 @@ def globalcommands():
     elif ply.startswith("equip "):
         item_to_equip = ply[6:].strip().title()
         if item_to_equip in inventory:
-            equipped_item = item_to_equip
-            print(f"You equipped the {equipped_item}.")
+            equippeditem = item_to_equip
+            print(f"You equipped the {equippeditem}.")
         else:
             print(f"You don't have a {item_to_equip} in your inventory.")
         return True
