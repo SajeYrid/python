@@ -181,20 +181,14 @@ def globalcommands():
                     armor = 'Stool'
                     plydefense = 1
                 elif equippeditem == 'Splinters':
-                    if stoolExplode == 'False':
-                        print("You gained +1 Attack")
-                        weapon = 'Splinters'
-                        plyatck = 6
-                    elif stoolExplode == 'True' and weapon != 'Splinters':
+                    if stoolExplode == 'True':
                         print("In remembrance of the stool, you equipped the Splinters as armor.\nYou gained +1 Defense")
                         armor = 'Splinters'
                         plydefense = 1
-                    elif stoolExplode == 'True' and weapon == 'Splinters':
-                        print("In remembrance of the stool, you swap the Splinters from your weapon to your armor.\nYou gained +1 Defense, you lost 1 Attack")
-                        weapon = 'Nothing'
-                        plyatck = 5
-                        armor = 'Splinters'
-                        plydefense = 1
+                    else:
+                        print("You gained +1 Attack")
+                        weapon = 'Splinters'
+                        plyatck = 6
                 elif equippeditem == 'Pretend Splinters':
                     print("You act like you are holding splinters.\nYou gained -1 Attack")
                     weapon = "Pretend Splinters"
@@ -594,35 +588,35 @@ while plypos == 4 and plydead == False:
     if ply == 'attack' and dinodefense == False:
         print(f'You attacked PLASTIC DINO for {plyatck} damage!')
         dinohealth = dinohealth - plyatck
-        plyatck = 5
-        plycharge = False
+        if plycharge == True:
+            import math
+            plyatck = math.floor(plyatck / 2)
+            plycharge = False
         dinomove()
 
     elif ply == 'attack' and dinodefense == True:
         print('You attacked PLASTIC DINO! But it defended.')
-        plyatck = 5
-        plycharge = False
+        if plycharge == True:
+            plyatck = math.floor(plyatck / 2)
+            plycharge = False
         dinodefense = False
         dinomove()
 
     elif ply == 'defend':
         print('You defended! You won\'t take damage this turn.')
-        plyatck = 5
         dinodefense = False
         plydefending = True
         dinomove()
 
     elif ply == 'charge' and plycharge == False:
         print('You charged! You will do double damage on your next attack!')
-        plyatck = 10
+        plyatck *= 2
         plycharge = True
         dinodefense = False
         dinomove()
 
     elif ply == 'charge' and plycharge == True:
         print('You tried to charge again! But nothing happened...')
-        plyatck = 10
-        plycharge = True
         dinodefense = False
         dinomove()
 
