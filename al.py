@@ -20,7 +20,9 @@ stoolExplode = False
 ply = ""
 plysecondary = ""
 miscfight = ""
-equippeditem = None
+equippeditem = "None"
+weapon = "Nothing"
+armor = "Nothing"
 
 # lists
 inventory = ['Nothing']
@@ -143,10 +145,11 @@ def globalcommands():
             print(roomhints[6])
         return True
     elif ply == "check me" or ply == "check myself" or ply == "check self":
-        print(f"""YOU
-      CURRENT HP: {plyhealth}
-      ATTACK: {plyatck}
-      DEFENSE: {plydefense}""")
+        global plyatck
+        global weapon
+        global plydefense
+        global armor
+        print("YOU \nCURRENT HP: " + str(plyhealth) + "\nATTACK: " + str(plyatck) + " (" + weapon + ")\nDEFENSE: " + str(plydefense) + " (" + armor + ")")
         if plypos == 1 and doorbroken == False and plydead == False:
             print(selfcheckroom[1])
         elif plypos == 1 and doorbroken == True and plydead == False:
@@ -164,7 +167,46 @@ def globalcommands():
         item_to_equip = ply[6:].strip().title()
         if item_to_equip in inventory:
             equippeditem = item_to_equip
-            print(f"You equipped the {equippeditem}.")
+            if equippeditem == 'Nothing':
+                print(f"You equipped {equippeditem}.")
+                print("Your Attack and Defense went back to default")
+                weapon = "Nothing"
+                plyatck = 5
+                armor = "Nothing"
+                plydefense = 0
+            else:
+                print(f"You equipped the {equippeditem}.")
+                if equippeditem == 'Stool':
+                    print("You gained +1 Defense")
+                    armor = 'Stool'
+                    plydefense = 1
+                elif equippeditem == 'Splinters':
+                    if stoolExplode == 'False':
+                        print("You gained +1 Attack")
+                        weapon = 'Splinters'
+                        plyatck = 6
+                    elif stoolExplode == 'True' and weapon != 'Splinters':
+                        print("In remembrance of the stool, you equipped the Splinters as armor.\nYou gained +1 Defense")
+                        armor = 'Splinters'
+                        plydefense = 1
+                    elif stoolExplode == 'True' and weapon == 'Splinters':
+                        print("In remembrance of the stool, you swap the Splinters from your weapon to your armor.\nYou gained +1 Defense, you lost 1 Attack")
+                        weapon = 'Nothing'
+                        plyatck = 5
+                        armor = 'Splinters'
+                        plydefense = 1
+                elif equippeditem == 'Pretend Splinters':
+                    print("You act like you are holding splinters.\nYou gained -1 Attack")
+                    weapon = "Pretend Splinters"
+                    plyatck = 4
+                elif equippeditem == 'Crowbar':
+                    print("You gained +2 Attack")
+                    weapon = "Crowbar"
+                    plyatck = 7
+                elif equippeditem == 'Brick':
+                    print("You gained +1 Attack")
+                    weapon = "Brick"
+                    plyatck = 6
         else:
             print(f"You don't have a {item_to_equip} in your inventory.")
         return True
@@ -704,11 +746,17 @@ while plypos == 3 and tookstool == True and plydead == False:
             print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it dissovles into dust. CROWBAR added into your INVENTORY. ")
             inventory.append('Crowbar')
             inventory.remove('Stool')
+            if armor == 'Stool':
+                armor = 'Nothing'
+                plydefense = 0
         elif tookSplinter == False and 'Crowbar' not in inventory:
             print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth. When you step off the stool, it spontaneously explodes into a pile of splinters. CROWBAR added into your INVENTORY. ")
             inventory.append('Crowbar')
             inventory.remove('Stool')
             stoolExplode = True
+            if armor == 'Stool':
+                armor = 'Nothing'
+                plydefense = 0
         elif 'Crowbar' in inventory:
             print('You already have it.')
 
