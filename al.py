@@ -216,7 +216,7 @@ while plypos == 1 and doorbroken == False and plydead == False:
     elif ply == 'look east' and "Stool" in inventory:
         print("There is a small golden key lying on the floor.")
 
-    elif ply == 'take key' or ply == 'take key on stool' or ply == "get key" or ply == 'get key on stool' or ply == "pick up key" or ply == 'pick up key on stool':
+    elif ply.endswith(" key") or ply.endswith(" key on stool"):
         print("Your hand passes through the key like it wasn't even there.")
 
     elif ply == 'eat key':
@@ -431,6 +431,9 @@ while plypos == 2 and plydead == False:
         plychoke = 5
         inventory.remove('Nothing')
 
+    elif 'check' in ply:
+        print('You checked... something. It gave the impression of broken glass.')
+
     elif 'eat' in ply:
         print('As soon as you open your mouth, you feel the air rush out. Bad idea.')
         plychoke -= 2
@@ -477,6 +480,9 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Fa
 
     elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
         print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
+
+    elif ply == 'eat glass':
+        print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it. Drats.")
 
     elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == True:
         print('If you were to try, your hand would hurt even more than it already does.')
@@ -623,6 +629,9 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Tr
     elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
         print('You bash your fist against the glass. It rebounds into your own face. Now your hand AND face hurt. Good job.')
 
+    elif ply == 'eat glass':
+        print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it. Drats.")
+
     elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == True:
         print('If you were to try, your hand would hurt even more than it already does.')
 
@@ -677,6 +686,9 @@ while plypos == 3 and tookstool == True and plydead == False:
     elif ply == 'check glass':
         glasscheck()
 
+    elif ply == 'eat glass':
+        print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it. Drats.")
+
     elif ply == 'look west' and 'Crowbar' not in inventory:
         print("Big plastic dinosaur. A crowbar dangles from its mouth.")
         dinoseen = True
@@ -712,12 +724,12 @@ while plypos == 3 and tookstool == True and plydead == False:
         elif 'Crowbar' in inventory:
             print('You already have it.')
 
-    elif ply == 'take stool' and stoolExplode == True and tookSplinter == False:
+    elif (ply == 'take stool' or ply == 'take splinters') and stoolExplode == True and tookSplinter == False:
         print('The stool is sadly dead. You grab a handful of splinters to honor the late stool. SPLINTERS added into your INVENTORY')
         inventory.append('Splinters')
         tookSplinter = True
 
-    elif ply == 'take stool' and stoolExplode == True and tookSplinter == True:
+    elif (ply == 'take stool' or ply == 'take splinters') and stoolExplode == True and tookSplinter == True:
         print('You already took the splinters. You can\'t really think of anything else to do.')
         inventory.append('Splinters')
         tookSplinter = True
