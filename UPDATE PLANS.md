@@ -7,7 +7,7 @@ GENERAL:
   GLOBAL COMMANDS:
     ***HUGE CHANGE, BUT REALLY HELPFUL: Change the formating to be modules packages. This would require a lot of coding fixes, but it allows us to work on different areas without the worry of accidentally overwriting the others code.
     Equiping items:
-        Attempting to equip an item you already have equipped should say "You already have (ITEM) equipped.
+        NONE
 
 Area 1 (Unbroken Door)
   NONE
@@ -27,7 +27,7 @@ Area 3 (Museum)
     NONE
 
 Area 3 (Battle Against a True Dinosaur)
-  Equipped items should increase the amount of damage you deal / take.
+  NONE
 
 Area 3 (Museum WITH STOOL)
   Attempting to take the splinters displays nothing.
@@ -35,13 +35,15 @@ Area 3 (Museum WITH STOOL)
   Currently, going east does nothing (Proceeds to New Area)
 
 FUTURE IDEAS (Later Areas):
-
+GENERAL IDEAS:
+  There should be items later than can be used to heal.
 Area 6 (Glass Room):
   NONE
 
 IMPLEMENTED/FIXED:
 
 GENERAL CHANGES:
+  ADDED: Start game prompt at the begining of the game + instructions.
   ADDED: Global Commands, which include
     Quitting the game
     Thinking for a hint
@@ -51,11 +53,11 @@ GENERAL CHANGES:
       ADDED: The Attack and Defense now display what weapon or armor you have next to it.
     FIXED: Using any global commands currently displays "Your thoughts seemed incomprehensible" after running the command
   CHANGED: Made the minor fights use the "miscfight" input to make coding a bit easier
-  ADDED: Added # Areas for convience purposes.
+  ADDED: Areas now have # labels for convience purposes.
   CHANGED: Quitting now uses quit() to close the program rather than simply saying "GAME OVER"
   ADDED: You can now equip items. They will either be equipped as a weapon or an armor. They do effect your stats.
-  ADDED: start game? y/n option on title screen
-  ADDED: 'open inventory' should perform the same command as 'inventory'
+    ADDED: Attempting to equip an item you already have equipped will now say "You already have (ITEM) equipped.
+  ADDED: 'open inventory' will now perform the same command as 'inventory'
 
 Area 1 (Unbroken Door)
   GENERAL:
@@ -63,10 +65,9 @@ Area 1 (Unbroken Door)
     ADDED: Take door should say something like, "It's lodged in the frame." or smth idk
   Key:
     ADDED: "Equip Key", "Get Key", and "Pick Up Key" should perform the same command as "Take Key"
-    ADDED: The key command of your hand phasing through the key should activate if 'key' is included in the command the player gives rather than needing the specific 'take key' command.
   Battle against door:
     ADDED: Punch and Fight Door should perform the same command as attack door does.
-    TWEAK: The HP of the player and the door should be displayed. (Door should have like ??? HP)
+    TWEAK: The HP of the player and the door are now displayed.
 
 Area 1 (Broken Door)
   GENERAL:
@@ -113,3 +114,5 @@ Area 3 (Battle Against a True Dinosaur)
       ADDED: If you end up dying and killing the dinosaur at the same time, both the you died and you won text show up. To fix this, either:
         Make killing the dinosaur the inititave so the player can progress
         Make unique dialog that says "As you see the dinosaur collapse, you slowly lose conscience and fall over. YOU DIED"
+      CHANGED: Equipped items will now effect battle stats (Having splinters will allow you to deal 6 damage rather than 5)
+      FIXED: Charging then defending will no longer remove the charge
