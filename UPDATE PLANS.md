@@ -6,20 +6,8 @@ TO DO:
 GENERAL:
   GLOBAL COMMANDS:
     ***HUGE CHANGE, BUT REALLY HELPFUL: Change the formating to be modules packages. This would require a lot of coding fixes, but it allows us to work on different areas without the worry of accidentally overwriting the others code.
-    Equiping items in your inventory (such as Crowbar and Splinters)
-      The Crowbar should increase your attack by 1
-      The Splinters should increase your defense by 1
-      The Pretend Splinters should lower your defense by 1
-      The Nothing should increase both your attack and defense by 0 (You have Nothing as default to all of the item slots)
-      NOTES FOR THIS FEATURE
-        Equipping an item like the crowbar should not remove it from your inventory.
-        Attempting to equip an item you already have equipped should say "You already have (ITEM) equipped.)
-        If an item isn't equippable or the item isn't in their inventory/doesn't exist, it should say "You can't equip (ITEM)" or "You don't have (ITEM) yet (even if it isn't a real item)"
-        If the item that is equipped ends up being used up (like the crowbar breaking in a room if that ever happens), that item should be replaced by nothing in the equip menu.
-    Checking Yourself should also:
-      Disply what item you have next to your attack and defense stats like this
-        attack = 2 (Crowbar)
-        defense = 1 (Nothing)
+    Equiping items:
+        Attempting to equip an item you already have equipped should say "You already have (ITEM) equipped.
 
 Area 1 (Unbroken Door)
   NONE
@@ -60,10 +48,12 @@ GENERAL CHANGES:
     Opening your inventory
     Checking Yourself to display your stats.
       ADDED: Displays additional info unique to the position the player is in.
+      ADDED: The Attack and Defense now display what weapon or armor you have next to it.
     FIXED: Using any global commands currently displays "Your thoughts seemed incomprehensible" after running the command
   CHANGED: Made the minor fights use the "miscfight" input to make coding a bit easier
   ADDED: Added # Areas for convience purposes.
   CHANGED: Quitting now uses quit() to close the program rather than simply saying "GAME OVER"
+  ADDED: You can now equip items. They will either be equipped as a weapon or an armor. They do effect your stats.
   ADDED: start game? y/n option on title screen
   ADDED: 'open inventory' should perform the same command as 'inventory'
 
