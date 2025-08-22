@@ -5,12 +5,12 @@ TO DO:
 
 GENERAL:
   GLOBAL COMMANDS:
-    ***HUGE CHANGE, BUT REALLY HELPFUL: Change the formating to be modules packages. This would require a lot of coding fixes, but it allows us to work on different areas without the worry of accidentally overwriteing the others code.
-    Equipping Items:
-      Attempting to equip an item you already have equipped should say "You already have (ITEM) equipped.)
+    ***HUGE CHANGE, BUT REALLY HELPFUL: Change the formating to be modules packages. This would require a lot of coding fixes, but it allows us to work on different areas without the worry of accidentally overwriting the others code.
+    Equiping items:
+        Attempting to equip an item you already have equipped should say "You already have (ITEM) equipped.
 
 Area 1 (Unbroken Door)
-  SUGGESTION: The key command of your hand phasing through the key should activate if 'key' is included in the command the player gives rather than needing the specific 'take key' command.
+  NONE
   Door Fight:
     NONE
     
@@ -18,12 +18,11 @@ Area 1 (Broken Door)
   NONE
 
 Area 2 (Void)
-  Check void should initiate the command 'You checked the Void. You couldn't notice anything except what looked like broken glass.'
-  better hinting
+  NONE
 
 Area 3 (Museum)
   GENERAL AREA 3 STUFF:
-    eat glass
+    None
   MAIN ROUTE STUFF:
     NONE
 
@@ -64,6 +63,7 @@ Area 1 (Unbroken Door)
     ADDED: Take door should say something like, "It's lodged in the frame." or smth idk
   Key:
     ADDED: "Equip Key", "Get Key", and "Pick Up Key" should perform the same command as "Take Key"
+    ADDED: The key command of your hand phasing through the key should activate if 'key' is included in the command the player gives rather than needing the specific 'take key' command.
   Battle against door:
     ADDED: Punch and Fight Door should perform the same command as attack door does.
     TWEAK: The HP of the player and the door should be displayed. (Door should have like ??? HP)
@@ -86,10 +86,12 @@ Area 2 (Void)
       ADDED: Eat or Eat Void should result in the player losing 2 choke points rather than 1.
       ADDED: Open Void should result in the player opening the void, heading to area 3 (Museum)
       ADDED: Make Choke Points 5 (Mention every turn how much they have left with "You have ___ actions left" once they have 3 or less actions left)
+      ADDED: Check void should initiate the command 'You checked the Void. You couldn't notice anything except what looked like broken glass.'
 
 Area 3 (Museum)
     GENERAL:
       ADDED: Moving in directions should be possible in this area or at the very least have a note saying you can't.
+      ADDED: eat glass
     DINOSAUR:
       ADDED: Think, Check, and Help shouldn't mention the dinosaur if it hasn't been seen yet.
       ADDED: Fight Dinosaur should perform the same command as Check Dinosaur
