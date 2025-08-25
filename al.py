@@ -707,7 +707,7 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Tr
         inventory.append('Tooth')
 
     elif (ply == 'take tooth' or ply == 'take large tooth') and 'Tooth' in inventory:
-        print("You put the tooth back in order to feel the satisfaction of obatining it again.\nTOOTH removed from your inventory.")
+        print("You put the tooth back in order to feel the satisfaction of obtaining it again.\nTOOTH removed from your inventory.")
         inventory.remove('Tooth')
         if armor == 'Tooth':
             armor = 'Nothing'
