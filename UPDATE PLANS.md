@@ -30,8 +30,6 @@ Area 3 (Battle Against a True Dinosaur)
   NONE
 
 Area 3 (Museum WITH STOOL)
-  Attempting to take the splinters displays nothing.
-  Attempting to eat the glass displays nothing.
   Currently, going east does nothing (Proceeds to New Area)
 
 FUTURE IDEAS (Later Areas):
