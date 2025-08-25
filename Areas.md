@@ -1,3 +1,27 @@
+NOTES FOR PLYPOS
+A Route / MAIN STUFF:
+  1 - Doors
+  2 - VOID
+  3 - Museum
+  4 - Battle against Dinosaur (Rawr)
+  5 - Vents
+  6 - Security
+  7 - Gift Shop
+  8 - Bliss
+  9 - Outside
+  10 - CORE
+  11 - Doors 2: Diddy Kong's Quest
+B Route:
+  12 - Glass House
+  13 - Sewers
+  14 - Back Alley
+  15 - Bar
+  16 - Forge
+  17 - Wild
+  18 - YOUR HOUSE (COMING)
+C Route:
+  19 - YOUR HOUSE (but not really)
+
 ** = Priority
 * = Make options for, don't fully start.
 
@@ -21,7 +45,7 @@
   Area 9: core
     die and become a ghost
     explode the core of the world
-  Area 10: Wake up
+  Area 10: Doors (But the door actually opens.)
     end. fin. game complete.
 
 * B Route: Brick Route 
@@ -41,7 +65,9 @@
   area 6b: Wild
     fight everything.
   Area 7B: Your house
-    Wake up, die, repeat.
+    Encounter the door
+    It's for your house
+    Sleep (END)
 
 * C Route: Crowbar Route
   Area 1: Doors
