@@ -261,14 +261,14 @@ while plypos == 1 and doorbroken == False and plydead == False:
     elif ply == 'look east' and "Stool" in inventory:
         print("There is a small golden key lying on the floor.")
 
-    elif ply.endswith(" key") or ply.endswith(" key on stool"):
-        print("Your hand passes through the key like it wasn't even there.")
-
     elif ply == 'eat key':
         print("You heard a loud crunch sound. You didn't bite down yet.")
 
     elif ply == 'check key' or ply == 'inspect key':
         print("The key is the same color as the floor.")
+
+    elif ply.endswith(" key") or ply.endswith(" key on stool"):
+        print("Your hand passes through the key like it wasn't even there.")
 
     elif ply == 'take stool' and 'Stool' not in inventory:
         print('You took the stool. STOOL added into your INVENTORY.')
