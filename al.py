@@ -190,7 +190,7 @@ def globalcommands():
                         armor = 'Stool'
                         plydefense = 1
                     elif equippeditem == 'Splinters':
-                        if stoolExplode == 'True':
+                        if stoolExplode == True:
                             print("In remembrance of the stool, you equipped the Splinters as armor.\nYou gained +1 Defense")
                             armor = 'Splinters'
                             plydefense = 1
@@ -210,6 +210,10 @@ def globalcommands():
                         print("You gained +1 Attack")
                         weapon = "Brick"
                         plyatck = 6
+                    elif equippeditem == 'Tooth':
+                        print("You wear it as a badge of honor.\nYou gained +1 Defense")
+                        armor = 'Tooth'
+                        plydefense = 1
         else:
             print(f"You don't have a {item_to_equip} in your inventory.")
         return True
@@ -684,13 +688,31 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Tr
         print('When you look closer, you see the glass is entirely clear. However, you still cannot see anything through it.')
 
     elif ply == "check dinosaur":
-        print("What dinosaur?")
+        print("You witness a whole lot of dust.")
+        if plyhealth <= 2:
+            print("You felt as if you acted in self defense.")
+        else:
+            print("You felt like you did a better job than that meteor.")
 
     elif ply == 'fight dinosaur':
         print("You already killed it. How would you go about fighting a pile of dust?")
+
+    elif (ply == 'take tooth' or ply == 'take large tooth') and 'Tooth' not in inventory:
+        print("You take the particularly large tooth. TOOTH added to your INVENTORY")
+        inventory.append('Tooth')
+
+    elif (ply == 'take tooth' or ply == 'take large tooth') and 'Tooth' in inventory:
+        print("You put the tooth back in order to feel the satisfaction of obatining it again.\nTOOTH removed from your inventory.")
+        inventory.remove('Tooth')
+        if armor == 'Tooth':
+            armor = 'Nothing'
+            plydefense = 0
         
-    elif ply == 'look west':
-        print("There is a large pile of... dust? A particularly large tooth lays at the top.")
+    elif ply == 'look west' and 'Tooth' not in inventory:
+        print("There is a large pile of dust. A particularly large tooth lays at the top.")
+
+    elif ply == 'look west' and 'Tooth' in inventory:
+        print("Just some simple dust.")
 
     elif ply == 'look south':
         print("Fake grass. There is a metal vent embedded in the ground.")
@@ -708,10 +730,33 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Tr
         print('This room is too small to meaningfully move in any direction.')
 
     elif ply == 'go west':
-        print('There is a giant pile of presumably plastic in your way.')
+        print('There is a giant pile of presumably microplastics in your way.')
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print('You tried to think. You observe a sense of satisfaction from killing a dinosaur.')
+
+    elif ply == 'check vent' and ventopen == False:
+        print("You check the vent. You notice a slight crack that can be budged.")
+
+    elif ply == 'check vent' and ventopen == True:
+        print('You observe the opened vent.')
+
+    elif ply == 'open vent' and 'Tooth' not in inventory:
+        print('You attempt to open the vent. You cannot achieve this as your fingers are not thin and strong enough for this task.')
+
+    elif ply == 'open vent' and 'Tooth' in inventory and ventopen == False:
+        ventopen = True
+        print('You open the vent using the tooth. There looks to be a way through the vent.')
+
+    elif ply == 'open vent' and 'Tooth' in inventory and ventopen == True:
+        print('You luckily have already opened the vent.')
+
+    elif (ply == 'enter vent' or ply == 'go in vent') and ventopen == True:
+        print('You climb into the vent.\nYou are at an intersection.')
+        plypos = 5
+
+    elif (ply == 'enter vent' or ply == 'go in vent') and ventopen == False:
+        print('You attempt to climb into the vent. Unfortunatly, you lack the ability to fit through small holes.')
 
     else:
         print("Your thoughts seem incomprehensible.")
@@ -750,7 +795,10 @@ while plypos == 3 and tookstool == True and plydead == False:
     elif ply == "check dinosaur" and dinoseen == True:
         print("A large chunk of plastic in the shape of a dinosaur.")
 
-    elif ply == "check dinosaur" and dinoseen == False:
+    elif ply == 'fight dinosaur' and dinoseen == True:
+        print("You wished that the dinosaur was alive so you could be responsible for their extinction.")
+
+    elif (ply == "check dinosaur" or ply == "fight dinosaur") and dinoseen == False:
         print("What dinosaur?")
 
     elif ply == 'look west' and 'Crowbar' in inventory:
@@ -794,8 +842,12 @@ while plypos == 3 and tookstool == True and plydead == False:
     elif ply == 'go south':
         print('This room is too small to meaningfully move in any direction.')
 
-    elif ply == 'go east':
+    elif ply == 'go east' and plywallBroken == False:
         print('This room is too small to meaningfully move in any direction.')
+
+    elif ply == 'go east' and plywallBroken == True:
+        print('Behind the wall, you find a house. It\'s reminiscent of your old childhood home, but you\'ve definitely never been here before.\nThe museum fades from your peripheral as you walk in. \nYou are facing north towards the front door.')
+        plypos == 19
 
     elif ply == 'go west':
         print('It appears there is a giant plastic dinosaur in the way.')
@@ -844,3 +896,6 @@ while plypos == 3 and tookstool == True and plydead == False:
             print('You thought about breaking the wall with the crowbar. You\'d perfer to not damage it just yet.')
         else:
             print('You know already that that wouldn\'t work.')
+
+    else:
+        print("Your thoughts seem incomprehensible.")
