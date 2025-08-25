@@ -32,7 +32,9 @@ plypos = 0
 plychoke = 5
 ouch = 1
 plyhealth = 10
+plyatckDEFAULT = 5
 plyatck = 5
+plydefenseDEFAULT = 0
 plydefense = 0
 dinohealth = 30
 dinoatck = 2
@@ -177,9 +179,9 @@ def globalcommands():
                 print(f"You equipped {equippeditem}.")
                 print("Your Attack and Defense went back to default")
                 weapon = "Nothing"
-                plyatck = 5
+                plyatck = plyatckDEFAULT
                 armor = "Nothing"
-                plydefense = 0
+                plydefense = plydefenseDEFAULT
             else:
                 if equippeditem == weapon or equippeditem == armor:
                     print(f"You already have the {equippeditem} equipped.")
@@ -188,32 +190,32 @@ def globalcommands():
                     if equippeditem == 'Stool':
                         print("You gained +1 Defense")
                         armor = 'Stool'
-                        plydefense = 1
+                        plydefense = plydefenseDEFAULT + 1
                     elif equippeditem == 'Splinters':
                         if stoolExplode == True:
                             print("In remembrance of the stool, you equipped the Splinters as armor.\nYou gained +1 Defense")
                             armor = 'Splinters'
-                            plydefense = 1
+                            plydefense = plydefenseDEFAULT + 1
                         else:
                             print("You gained +1 Attack")
                             weapon = 'Splinters'
-                            plyatck = 6
+                            plyatck = plyatckDEFAULT + 1
                     elif equippeditem == 'Pretend Splinters':
                         print("You act like you are holding splinters.\nYou gained -1 Attack")
                         weapon = "Pretend Splinters"
-                        plyatck = 4
+                        plyatck = plyatckDEFAULT - 1
                     elif equippeditem == 'Crowbar':
                         print("You gained +2 Attack")
                         weapon = "Crowbar"
-                        plyatck = 7
+                        plyatck = plyatckDEFAULT + 2
                     elif equippeditem == 'Brick':
                         print("You gained +1 Attack")
                         weapon = "Brick"
-                        plyatck = 6
+                        plyatck = plyatckDEFAULT + 1
                     elif equippeditem == 'Tooth':
                         print("You wear it as a badge of honor.\nYou gained +1 Defense")
                         armor = 'Tooth'
-                        plydefense = 1
+                        plydefense = plydefenseDEFAULT + 1
         else:
             print(f"You don't have a {item_to_equip} in your inventory.")
         return True
@@ -375,6 +377,7 @@ while plypos == 1 and doorbroken == True and plydead == False:
     elif (ply == 'take wall' or ply == 'take brick wall') and ouch == 3 and brokenhand == False:
         print('You attempt to take the wall. Your hand passes right through the wall. \nOnce you took out your hand, if felt broken. You can\'t use your hand anymore.')
         brokenhand = True
+        plyatckDEFAULT -= 1
 
     elif (ply == 'take wall' or ply == 'take brick wall') and brokenhand == True:
         print("You attempt to take the wall. You have a bad reaction. You stop your attempt to take the wall.")
@@ -389,6 +392,7 @@ while plypos == 1 and doorbroken == True and plydead == False:
     elif (ply == 'break wall' or ply == 'break brick wall') and ouch == 3 and brokenhand == False:
         print('You violently punch the wall. Your hand passes right through the wall. \nOnce you took out your hand, if felt broken. You can\'t use your hand anymore.')
         brokenhand = True
+        plyatckDEFAULT -= 1
 
     elif (ply == 'break wall' or ply == 'break brick wall') and brokenhand == True:
         print("You unfortunately don't have the strength to do that.")
@@ -450,6 +454,7 @@ CHARGE""")
             elif ouch == 3:
                 print("Once you pulled out your hand, if felt broken. You cannot use it anymore.")
                 brokenhand = True
+                plyatckDEFAULT -= 1
         elif (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == True:
             print("You try to attack the wall. Your hand doesn't move. You cannot fight it in this state.")
         elif miscfight == 'defend':
