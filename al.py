@@ -980,13 +980,23 @@ while plypos == 3 and plydead == False:
             elif ventDirection == 1:
                 print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
 
+            elif ventDirection == 2:
+                print('You go left.\nTo your left, there is a path ending in another left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
+                ventpos = 9
+                ventDirection = 1
+
             elif ventDirection == 3:
                 print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
             
 
         elif ventpos == 1:
+
+            if ventDirection == 0:
+                print('You go left.\nTo your left, There is a dead end.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.')
+                ventpos = 13
+                ventDirection = 3
             
-            if ventDirection == 1:
+            elif ventDirection == 1:
                 print('You go left.\nTo your left, there is a wall.\nTo your right, there is a very long stretch with several turns.\nDirectly ahead of you is a wall.')
                 ventpos = 2
                 ventDirection = 0
@@ -1003,6 +1013,14 @@ while plypos == 3 and plydead == False:
             
             if ventDirection == 0:
                 print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            elif ventDirection == 1:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            elif ventDirection == 2:
+                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long straight path with four different exits.')
+                ventpos = 3
+                ventDirection = 1
                 
             elif ventDirection == 3:
                 print('You go left.\nTo your left, there is a long path ending in another left turn.\nTo your right, there is a path leading to an intersection.\nDirectly ahead of you is a wall.')
@@ -1011,28 +1029,129 @@ while plypos == 3 and plydead == False:
             
             
         elif ventpos == 3:
+
+            if ventDirection == 0:
+                print('You go left.\nTo your left is a pathending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
+                ventpos = 2
+                ventDirection = 3
             
-            if ventDirection == 1:
+            elif ventDirection == 1:
                 print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            elif ventDirection == 2:
+                print('You go left.\nTo your left is a path ending in an interection.\nTo your right, there is a wall. directly ahead og you is a long straight path with three different exits.')
+                ventpos = 4
+                ventDirection = 1
 
             elif ventDirection == 3:
                 print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
             
             
         elif ventpos == 4:
-            if ventDirection == 1:
+
+            if ventDirection == 0:
+                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path leading to a right turn.')
+                ventpos = 3
+                ventDirection = 3
+            
+            elif ventDirection == 1:
                 print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path leading to an intersection.')
                 ventpos = 28
+                ventDirection = 0
+                
             elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a there is a very long stretch.')
+                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long straight path with three different exits.')
+                ventpos = 5
+                ventDirection = 1
+                
+            elif ventDirection == 3:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
             
             
         elif ventpos == 5:
-            print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            if ventDirection == 0:
+                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a long path leading to an intersection.\nDirectly ahead of you is a long path leading to a right turn.')
+                ventpos = 4
+                ventDirection = 3
+            
+            elif ventDirection == 1:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            elif ventDirection == 2:
+                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with three different exits.\nSomething seems off about here.')
+                ventpos = 6
+                ventDirection = 1
+
+            elif ventDirection == 3:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
             
 
         elif ventpos == 6:
-            print('You ram your shoulder into the wall on your left. Suprinsingly, the galvanized steel sheet dissolves behind your force. As you .')
+
+            if ventDirection == 0:
+                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with two different exits.')
             
+            elif ventDirection == 1:
+                print('You ram your shoulder into the wall on your left. Suprinsingly, the galvanized steel sheet dissolves behind your force. As your momentum carries you through, the wall reforms behind you.\mTo your left, you see a light.\nTo your right, there is a wall.\nDirectly ahead of you, there is a wall.')
+                ventpos = 7
+                ventDirection = 0
+
+            elif ventDirection == 2:
+                print('You go left.\nTo your left, there is a path ending in another left turn.\nTo your right, there is a path leading to a fan that is blowing air in your face.\nDirectly ahead of you is a path ending in a left turn.')
+
+            elif ventDirection == 3:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+        
+        elif ventpos == 7:
+
+            if ventDirection == 0:
+                print('You go left, into the light.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a blinding light that singes your irises.')
+                ventpos = 8
+                ventDirection = 3
+
+            elif ventDirection == 1:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            elif ventDirection == 2:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            elif ventDirection == 3:
+                print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
+
+
+        elif ventpos == 8:
+
+            if ventDirection == 0:
+                print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of history themed gift shop. Knick-knacks line the walls. You are facing west.')
+                
+            elif ventDirection == 1:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+            elif ventDirection == 2:
+                print('You go left.\nYou are surrounded by walls.')
+
+            elif ventDirection == 3:
+                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+
+
+        elif ventpos == 9:
+
+            if ventDirection == 0:
+                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is path with three different exits.')
+
+            elif ventDirection == 1:
+                print('You go left.\nTo your left, There is a long path ending in a dead end.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
+
+            elif ventDirection == 2:
+                print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
+
+            elif ventDirection == 3:
+                print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
+
+
+        elif ventpos == 10:
+
             
-    
+                
