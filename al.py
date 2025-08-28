@@ -24,7 +24,6 @@ equippeditem = "None"
 weapon = "Nothing"
 armor = "Nothing"
 
-
 # lists
 inventory = ['Nothing']
 
