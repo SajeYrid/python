@@ -2,6 +2,7 @@ This will be all the stored commands + ideas that we would like to program soon.
 
 
 TO DO:
+  TKINTER
 
 GENERAL:
   GLOBAL COMMANDS:
