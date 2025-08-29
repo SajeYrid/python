@@ -75,8 +75,8 @@ roomhints = {
 selfcheckroom = {
     1 : 'Trying to investigate this strange door they found.',
     2 : 'Certified Destroyer of Doors.',
-    3 : '...',
-    4 : 'Feels broken.',
+    3 : 'Feels broken.',
+    4 : 'Feels a prehistoric rage overtaking them.',
     5 : 'Plastic Dinosaur exterminator.',
     6 : 'Ready to climb their newly obtained stool.',
     7 : 'Already broke their newly obtained stool.',
@@ -145,8 +145,11 @@ def globalcommands():
         print("You punched yourself multiple times. You're too weak to deal any damage.")
         return True
     elif ply == 'check inventory' or ply == 'inventory' or ply == 'open inventory':
-        for x in inventory:
-            print(x)
+        if len(inventory) == 0:
+            print('\033[1;33mYou do not have any items in your inventory currently.\033[0m')
+        else:
+            for x in inventory:
+                print('\033[1;33m' + x + '\033[0m')
         return True
     elif ply == 'quit':
         print("Ok, bye then.")
@@ -666,7 +669,8 @@ while plypos == 4 and plydead == False:
             import math
             plyatck = math.floor(plyatck / 2)
             plycharge = False
-        dinomove()
+        if dinohealth >= 1:
+            dinomove()
 
     elif ply == 'attack' and dinodefense == True:
         print('\033[1;31mYou attacked PLASTIC DINO! \033[1;35mBut it defended.\033[0m')
@@ -713,10 +717,6 @@ while plypos == 4 and plydead == False:
         dinodead = True
         print("You won! \nThe dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
         plypos = 3
-
-    elif dinohealth <= 0 and plyhealth <= 0:
-        print('As you see the dinosaur collapse, you slowly lose consciousness and fall over.\n\033[1;31mGame over.\033[0m')
-        plydead = True
 
 # area 3 (haha that dino is dead)
 
@@ -892,6 +892,9 @@ You are not where you were before.""")
         else:
             print("You counldn't comprehend what you meant. You decide to jump back down to the ground.")
 
+    elif ply == 'climb dinosaur' and dinoseen == True and 'Stool' not in inventory:
+        print('You attempt to climb the dinosaur. You unfortuantly cannot climb high enough due to your lack of stools.')
+
     elif ply == 'take dinosaur' and dinoseen == True:
         print('You attempt to take the whole dinosaur. If unfourtnatly is too big to be put in your inventory. You punch it in frustration.')
 
@@ -921,7 +924,7 @@ You are not where you were before.""")
             print('You already have it.')
 
     elif ply == 'take stool' and stoolExplode == True and tookSplinter == False:
-        print('The stool is sadly dead. You grab a handful of splinters to honor the late stool. \033[1;33mSPLINTERS added into your INVENTORY.\033[0m')
+        print('The stool is sadly dead. You grab a handful of splinters to honor the late stool.\n\033[1;33mSPLINTERS added into your INVENTORY.\033[0m')
         inventory.append('Splinters')
         tookSplinter = True
 
@@ -930,8 +933,13 @@ You are not where you were before.""")
         inventory.append('Splinters')
         tookSplinter = True
 
+    elif ply == 'take stool' and stoolExplode == False and 'Stool' not in inventory:
+        print('You salute the dust of the stool for it\'s hard work.')
+        inventory.append('Splinters')
+        tookSplinter = True
+
     elif ply == 'look south':
-        print("Fake grass. There is an air vent embedded in the ground")
+        print("Fake grass. There is an air vent embedded in the ground.")
 
     elif ply == 'go north':
         print("You smack your face into the glass.")
@@ -943,7 +951,7 @@ You are not where you were before.""")
         print('This room is too small to meaningfully move in any direction.')
 
     elif ply == 'go east' and plywallBroken == True:
-        print('Behind the wall, you find a house. It\'s reminiscent of your old childhood home, but you\'ve definitely never been here before.\nThe museum fades from your peripheral as you walk in. \nYou are facing north towards the front door.')
+        print('Behind the wall, you find a house. It\'s reminiscent of your old childhood home, but you\'ve definitely never been here before.\nThe museum fades from your peripheral as you walk in.\nYou are facing north towards the front door.')
         plypos == 19
 
     elif ply == 'go west':
@@ -956,7 +964,7 @@ You are not where you were before.""")
 
     elif ply == 'take brick' or ply == 'take red brick':
         if ventopen == True and 'Brick' not in inventory:
-            print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it\'s still solid enough to break something. \033[1;33mBRICK added into your INVENTORY.\033[0m')
+            print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it\'s still solid enough to break something.\n\033[1;33mBRICK added into your INVENTORY.\033[0m')
             inventory.append('Brick')
         elif ventopen == True and 'Brick' in inventory:
             print('You already took it.')
@@ -991,6 +999,8 @@ You are not where you were before.""")
             print('You currently don\'t have a crowbar. Perhaps you can find one nearby?')
         elif plysecondary == 'crowbar' and 'Crowbar' in inventory:
             print('You thought about breaking the wall with the crowbar. You\'d perfer to not damage it just yet.')
+        elif plysecondary == 'you' or plysecondary == 'them':
+            print('Unfortuantly, there isn\'t anyone else in the room that you can refer to.')
         else:
             print('You know already that that wouldn\'t work.')
 
@@ -1187,6 +1197,5 @@ while plypos == 5 and plydead == False:
 
             elif ventDirection == 3:
                 print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
-
 
         elif ventpos == 10:
