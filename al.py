@@ -154,6 +154,9 @@ def globalcommands():
     elif ply == 'quit':
         print("Ok, bye then.")
         quit()
+    elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know':
+        print("If you don't know, then use the think command! That's what it's for!")
+        return True
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         if plypos == 1 and doorbroken == False and plydead == False and plydeaths == 0:
             print(roomhints[1])
@@ -513,11 +516,7 @@ while plypos == 2 and plydead == False:
 
     ply = input().lower().split()
 
-    if plychoke <= 0:
-        print("You somehow managed to choke to death for a second time. There aren't third chances in this world.\n\nGame over.\033[0m")
-        plydead = True
-
-    elif ('break' in ply and brokenhand == False) or ('kill' in ply and 'myself' in ply):
+    if ('break' in ply and brokenhand == False) or ('kill' in ply and 'myself' in ply):
         print('You broke. \033[1;33mYou lost Nothing.\n\n\n\n\n\n\n\n\033[0mYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
         plypos = 3
         plychoke = 5
@@ -564,6 +563,10 @@ while plypos == 2 and plydead == False:
         print('There isn\'t a way to do that. You feel your lungs lose air.')
         if plychoke <= 3 and plychoke != 0:
             print(f'\033[1;35mYou have {plychoke} actions left.\033[1;31m')
+
+    if plychoke <= 0:
+        print("You somehow managed to choke to death for a second time. There aren't third chances in this world.\n\nGame over.\033[0m")
+        plydead = True
 
 # area 3 (museum without stool)
 
@@ -1198,4 +1201,4 @@ while plypos == 5 and plydead == False:
             elif ventDirection == 3:
                 print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
 
-        elif ventpos == 10:
+            elif ventpos == 10:
