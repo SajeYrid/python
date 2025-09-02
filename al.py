@@ -403,7 +403,7 @@ while plypos == 1 and doorbroken == False and plydead == False:
 \033[1;32mCHARGE\033[0m""")
         miscfight = input("What will you do? \n").lower()
         if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door':
-            print("\033[1;31mYou mattack the door with brute force. It instantly breaks down.\033[0m \nThere is only a brick wall beyond the frame.\nThere is no longer a door here")
+            print("\033[1;31mYou mattack the door with brute force for {plyatck} damage. It instantly breaks down.\033[0m \nThere is only a brick wall beyond the frame.\nThere is no longer a door here")
             doorbroken = True
         elif miscfight == 'defend':
             print("\033[1;34mYou defended.\033[0m The door doesn't do anything. You stop fighting it.")
@@ -742,8 +742,8 @@ while plypos == 4 and plydead == False:
     import math
 
     if ply == 'attack' and enemydefending == False:
-        print(f"\033[1;31mYou attacked {enemyname} for {plyatck} damage!\033[0m")
-        enemyhealth = enemyhealth - plyatck
+        print(f"\033[1;31mYou attacked {enemyname} for {plyatck - enemydefense} damage!\033[0m")
+        enemyhealth = enemyhealth - (plyatck - enemydefense)
         if plycharge == True:
             plyatck = math.floor(plyatck / 2)
             plycharge = False
