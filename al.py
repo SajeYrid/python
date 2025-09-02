@@ -2,16 +2,17 @@ plydeaths = 0
 def retry():
     # the holy and pure and innocent variable block
     # booleans
-    global doorbroken, plydead, brokenhand, dinodead, dinoseen, plydefending, plycharge, dinodefense, dinocharge, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken, stoolExplode
+    global doorbroken, plydead, brokenhand, dinodead, dinoseen, dinothink, plydefending, plycharge, enemydefending, enemycharge, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken, stoolExplode
     doorbroken = False
     plydead = False
     brokenhand = False
     dinodead = False
     dinoseen = False
+    dinothink = False
     plydefending = False
     plycharge = False
-    dinodefense = False
-    dinocharge = False
+    enemydefending = False
+    enemycharge = False
     ventopen = False
     tookstool = False
     tookSplinter = False
@@ -20,20 +21,22 @@ def retry():
     stoolExplode = False
 
     # strings
-    global ply, plysecondary, miscfight, equippeditem, weapon, armor
+    global ply, plysecondary, miscfight, equippeditem, weapon, armor, enemyname, enemyphrase
     ply = ""
     plysecondary = ""
     miscfight = ""
     equippeditem = "None"
     weapon = "Nothing"
     armor = "Nothing"
+    enemyname = ""
+    enemyphrase = ""
 
     # lists
     global inventory
     inventory = ['Nothing']
 
     # integers
-    global plypos, plychoke, ouch, plyhealthDEFAULT, plyhealth, plyatckDEFAULT, plyatck, plydefenseDEFAULT, plydefense, dinohealth, dinoatck, dinoaction, glassTicker, ventpos, ventDirection
+    global plypos, plychoke, ouch, plyhealthDEFAULT, plyhealth, plyatckDEFAULT, plyatck, plydefenseDEFAULT, plydefense, enemyhealth, enemyatck, enemyatckDEFAULT, enemyaction, glassTicker, ventpos, ventDirection
     plypos = 0
     plychoke = 5
     ouch = 1
@@ -43,9 +46,11 @@ def retry():
     plyatck = 5
     plydefenseDEFAULT = 0
     plydefense = 0
-    dinohealth = 30
-    dinoatck = 2
-    dinoaction = 0
+    enemyhealth = 0
+    enemyatck = 0
+    enemyatckDEFAULT = 0
+    enemydefense = 0
+    enemyaction = 0
     glassTicker = 2
     ventpos = 0
     ventDirection = 0
@@ -83,6 +88,36 @@ selfcheckroom = {
     8 : 'Still trying to investigate this unique door they found.'
 }
 
+# classes, but the cool kind
+class Enemy:
+    def __init__(self, name, health, attack, defense, atckphrase):
+        self.name = name
+        self.health = health
+        self.attack = attack
+        self.defense = defense
+        self.atckphrase = atckphrase
+
+# Enemies
+def plasticDino():
+    global plasticDino, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase
+    plasticDino = Enemy("The Plastic Dinosaur", 30, 2, 0, "bit you")
+    enemyname = plasticDino.name
+    enemyhealth = plasticDino.health
+    enemyatck = plasticDino.attack
+    enemyatckDEFAULT = plasticDino.attack
+    enemydefense = plasticDino.defense
+    enemyphrase = plasticDino.atckphrase
+
+
+# For easier enemy formatting, here's the template (Using the Plastic Dinosaur as a base.)
+    #enemyname = plasticDino.name
+    #enemyhealth = plasticDino.health
+    #enemyatck = plasticDino.attack
+    #enemyatckDEFAULT = plasticDino.attack
+    #enemydefense = plasticDino.defense
+    #enemyphrase = plasticDino.atckphrase
+
+
 # the truly neutral functions
 def glasscheck():
     global glassTicker
@@ -103,34 +138,34 @@ You aren\'t where you were before.""")
         plyhealthDEFAULT += 2
         plyhealth = plyhealthDEFAULT
 
-def dinomove():
+def enemymove():
     import random
-    global plyhealth, dinoatck, dinocharge, dinodefense, plydefending
-    dinoaction = random.randint(1, 9)
-    if dinoaction > 6 and plydefending == True:
-        print(f"\033[1;31mPLASTIC DINO bit you! \033[1;34mBut you defended!\033[0m")
-        dinoatck = 2
-        dinocharge = False
-        dinodefense = False
+    global plyhealth, enemyatck, enemycharge, enemydefense, enemydefending, plydefending
+    enemyaction = random.randint(1, 9)
+    if enemyaction > 6 and plydefending == True:
+        print(f"\033[1;31m {enemyname} {enemyphrase}. \033[1;34mBut you defended!\033[0m")
+        enemyatck = enemyatckDEFAULT
+        enemycharge = False
+        enemydefending = False
         plydefending = False
-    elif dinoaction > 6 and plydefending == False:
-        print(f"\033[1;31mPLASTIC DINO bit you for {dinoatck}\033[0m!")
-        plyhealth = plyhealth - dinoatck
-        dinoatck = 2
-        dinocharge = False
-        dinodefense = False
-    elif dinoaction < 4:
-        print("\033[1;34mPLASTIC DINO defended! It won't take damage next turn!\033[0m")
-        dinodefense = True
+    elif enemyaction > 6 and plydefending == False:
+        print(f"\033[1;31m {enemyname} {enemyphrase} for {enemyatck - plydefense}!\033[0m")
+        plyhealth = plyhealth - (enemyatck - plydefense)
+        enemyatck = enemyatckDEFAULT
+        enemycharge = False
+        enemydefending = False
+    elif enemyaction < 4:
+        print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
+        enemydefending = True
         plydefending = False
-    elif dinoaction > 3 and dinoaction < 7 and dinocharge == False:
-        print("\033[1;32mPLASTIC DINO charged! Its next attack will do double damage!\033[0m")
-        dinocharge = True
-        dinoatck = 4
-        dinodefense = False
+    elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
+        print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
+        enemycharge = True
+        enemyatck *= 2
+        enemydefending = False
         plydefending = False
-    elif dinoaction > 3 and dinoaction < 7 and dinocharge == True:
-        print("\033[1;32mPLASTIC DINO tried to charge! \033[0mBut it already did.")
+    elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
+        print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
         plydefending = False
     else:
         print("This will only print if something went horribly wrong.")
@@ -154,8 +189,11 @@ def globalcommands():
     elif ply == 'quit':
         print("Ok, bye then.")
         quit()
-    elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know':
-        print("If you don't know, then use the think command! That's what it's for!")
+    elif ply == 'alien':
+        print("You sob due to the lack of aliens in your area.")
+    
+    elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know' or ply == 'i dunno':
+        print("Then figure \033[1;31mit\033[0m out.")
         return True
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         if plypos == 1 and doorbroken == False and plydead == False and plydeaths == 0:
@@ -265,11 +303,32 @@ while plypos == 0:
     ply = input().lower()
     if ply == 'y' or ply == 'yes':
         plypos = 1
-        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint. \nGood luck. \n")
+        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
         print("There is a door here. You are facing north.")
     elif ply == 'n' or ply == 'no':
         print("Ok? Dunno why you decided to show up then. I mean, like, we spent a long while programming this game. It's got tons of routes and options for you to do. It's a pretty good game if I say so myself. But I guess if you don't want to play that's... alright. Like yeah, who cares about alien? I surely, definitly, definitivly, absoulutly do not care about this wonderful creation that I made. You, on the other hand, absoulutly do care about this game considering you are either reading this via the source code or through Python idle and are taking your time to read all of this. But yeah, sure, leave. It's not like I wanted you to be here anyway.")
         quit()
+    elif ply == 'break' or ply == 'attack' or ply == 'punch' or ply == 'fight':
+        plypos = 1
+        print("With a fiery mind, you start the game with the mindset of dealing more damage.")
+        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
+        print("There is a door here. You are facing north.")
+        plyatckDEFAULT += 1
+        plyatck = plyatckDEFAULT
+    elif ply == 'defend' or ply == 'block' or ply == 'coward':
+        plypos = 1
+        print("With a strategic mind, you decide to start the game with the mindset of taking as little damage as possible.")
+        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
+        print("There is a door here. You are facing north.")
+        plydefenseDEFAULT += 1
+        plydefense = plydefenseDEFAULT
+    elif ply == 'weak' or ply == 'hard' or ply == 'hard mode' or ply == 'challenge':
+        plypos = 1
+        print("You decide to activate hard mode. You only have 1 attack from now on.")
+        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
+        print("There is a door here. You are facing north.")
+        plyatckDEFAULT += -4
+        plyatck = plyatckDEFAULT
     else:
         print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
 
@@ -369,6 +428,12 @@ while plypos == 1 and doorbroken == False and plydead == False:
 
     elif ply == 'go south':
         print('You attempt to go backwards. You trip over your own feet. When you get back up, you haven\'t moved at all.')
+
+    elif ply == 'genoside':
+        print("user, i remember you\'re\n\n\n\n\n\n\033[1;31mBREAK DOOR\033[0m.")
+
+    elif ply == 'what':
+        print("huh?")
         
     else:
         print("Your thoughts seem incomprehensible.")
@@ -608,6 +673,7 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Fa
 
     elif (ply == 'attack dinosaur' or ply == 'fight dinosaur') and dinoseen == True:
         print("You initiate a battle with \033[1;35mthe dinosaur.\033[0m \nBATTLE START!")
+        plasticDino()
         print("""
 Your actions are:
 \033[1;31mATTACK
@@ -617,6 +683,7 @@ Your actions are:
 
     elif ply == "check dinosaur" and dinoseen == True:
         print("You go to check the dinosaur. It reacts. \nBATTLE START!")
+        plasticDino()
         print("""
 Your actions are:
 \033[1;31mATTACK
@@ -647,8 +714,15 @@ Your actions are:
         print('Without looking first, you casually walk straight into the jaws of a prehistoric predator. \n\033[1;31mGame over.\033[0m')
         plydead = True
 
+    elif ply == 'check vent':
+        print("You check the vent. You notice a slight crack that can be budged.")
+
+    elif ply == 'open vent':
+        print('You attempt to open the vent. You cannot achieve this as your fingers are not thin and strong enough for this task.')
+
     elif ply == 'go west' and dinoseen == True:
         print('Wanting to investigate the dinosaur, you walk west. The dinosaur reacts. \nBATTLE START!')
+        plasticDino()
         print("""
 Your actions are:
 \033[1;31mATTACK
@@ -663,48 +737,56 @@ Your actions are:
 
 while plypos == 4 and plydead == False:
 
-    ply = input(f"\033[1;32mYour health is: {plyhealth}. \033[1;35mPLASTIC DINO's health is {dinohealth}. \033[0mWhat do you do?\n").lower()
+    ply = input(f"\033[1;32mYour health is: {plyhealth}. \033[1;35m{enemyname}'s health is {enemyhealth}. \033[0mWhat do you do?\n").lower()
 
-    if ply == 'attack' and dinodefense == False:
-        print(f'\033[1;31mYou attacked PLASTIC DINO for {plyatck} damage!\033[0m')
-        dinohealth = dinohealth - plyatck
-        if plycharge == True:
-            import math
-            plyatck = math.floor(plyatck / 2)
-            plycharge = False
-        if dinohealth >= 1:
-            dinomove()
+    import math
 
-    elif ply == 'attack' and dinodefense == True:
-        print('\033[1;31mYou attacked PLASTIC DINO! \033[1;35mBut it defended.\033[0m')
+    if ply == 'attack' and enemydefending == False:
+        print(f"\033[1;31mYou attacked {enemyname} for {plyatck} damage!\033[0m")
+        enemyhealth = enemyhealth - plyatck
         if plycharge == True:
             plyatck = math.floor(plyatck / 2)
             plycharge = False
-        dinodefense = False
-        dinomove()
+        if enemyhealth >= 1:
+            enemymove()
+
+    elif ply == 'attack' and enemydefending == True:
+        print(f"\033[1;31mYou attacked {enemyname}! \033[1;35mBut {enemyname} defended.\033[0m")
+        if plycharge == True:
+            plyatck = math.floor(plyatck / 2)
+            plycharge = False
+        enemydefending = False
+        enemymove()
 
     elif ply == 'defend':
         print('\033[1;34mYou defended! You won\'t take damage this turn.\033[0m')
-        dinodefense = False
+        enemydefending = False
         plydefending = True
-        dinomove()
+        enemymove()
 
     elif ply == 'charge' and plycharge == False:
         print('\033[1;32mYou charged! You will do double damage on your next attack!\033[0m')
         plyatck *= 2
         plycharge = True
-        dinodefense = False
-        dinomove()
+        enemydefending = False
+        enemymove()
 
     elif ply == 'charge' and plycharge == True:
         print('\033[1;32mYou tried to charge again!\033[0m But nothing happened...')
-        dinodefense = False
-        dinomove()
+        enemydefending = False
+        enemymove()
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
-        print(f"""\033[1;31mATTACK: Deals {plyatck} Damage to the Dinosaur if it isn't defending.
-        \033[1;34mDEFEND: Allows you to take 0 Damage this turn.
-        \033[1;32mCHARGE: Powers up attack to deal double damage next attack.\033[0m""")
+        print(f"""You ended up thinking. You remembered how to fight.
+\033[1;31mATTACK: Deals {plyatck} Damage to {enemyname} if {enemyname} isn't defending.
+\033[1;34mDEFEND: Allows you to take 0 Damage this turn.
+\033[1;32mCHARGE: Powers up attack to deal double damage next attack.\033[0m""")
+        if dinothink == False:
+            dinothink = True
+        elif dinothink == True:
+            print(f"The Dinosaur notices you thinking for another time and \033[1;31mbites you for {enemyatck - plydefense} damage\033[0m as you weren't defending.")
+            plyhealth -= (enemyatck - plydefense)
+            enemyatck = enemyatckDEFAULT
 
     elif ply == 'quit':
         quit()
@@ -712,13 +794,13 @@ while plypos == 4 and plydead == False:
     else:
         print("That isn't an action you can do.")
     
-    if plyhealth <= 0 and dinohealth > 0:
-        print("The Dinosaur brutally tears you apart. \n\n\033[1;31mGame Over.\033[0m")
+    if plyhealth <= 0 and enemyhealth > 0:
+        print("The Plastic Dinosaur brutally tears you apart. \n\n\033[1;31mGame Over.\033[0m")
         plydead = True
     
-    elif dinohealth <= 0 and plyhealth > 0:
+    elif enemyhealth <= 0 and plyhealth > 0:
         dinodead = True
-        print("You won! \nThe dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
+        print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
         plypos = 3
 
 # area 3 (haha that dino is dead)
@@ -1200,5 +1282,9 @@ while plypos == 5 and plydead == False:
 
             elif ventDirection == 3:
                 print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
+                
+        elif ventpos == 10:
+            print("ayo close da game, we ain't done with it yet.")
 
-            elif ventpos == 10:
+    else:
+        print("ayo close da game, we ain't done with it yet.")
