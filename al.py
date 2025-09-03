@@ -2,13 +2,13 @@ plydeaths = 0
 def retry():
     # the holy and pure and innocent variable block
     # booleans
-    global doorbroken, plydead, brokenhand, dinodead, dinoseen, dinothink, plydefending, plycharge, enemydefending, enemycharge, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken, stoolExplode
+    global doorbroken, plydead, brokenhand, dinodead, dinoseen, enemythink, plydefending, plycharge, enemydefending, enemycharge, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken, stoolExplode, plyturn, kys
     doorbroken = False
     plydead = False
     brokenhand = False
     dinodead = False
     dinoseen = False
-    dinothink = False
+    enemythink = False
     plydefending = False
     plycharge = False
     enemydefending = False
@@ -19,6 +19,8 @@ def retry():
     pretendLMAO = False
     plywallBroken = False
     stoolExplode = False
+    plyturn = True
+    kys = False
 
     # strings
     global ply, plysecondary, miscfight, equippeditem, weapon, armor, enemyname, enemyphrase
@@ -99,7 +101,7 @@ class Enemy:
 
 # Enemies
 def plasticDino():
-    global plasticDino, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase
+    global plasticDino, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
     plasticDino = Enemy("The Plastic Dinosaur", 30, 2, 0, "bit you")
     enemyname = plasticDino.name
     enemyhealth = plasticDino.health
@@ -107,6 +109,20 @@ def plasticDino():
     enemyatckDEFAULT = plasticDino.attack
     enemydefense = plasticDino.defense
     enemyphrase = plasticDino.atckphrase
+    enemydefending = False
+    enemycharge = False
+
+def voidenemy():
+    global voidenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
+    voidenemy = Enemy("VOID", 50, 3, 1, "suffocated you")
+    enemyname = voidenemy.name
+    enemyhealth = voidenemy.health
+    enemyatck = voidenemy.attack
+    enemyatckDEFAULT = voidenemy.attack
+    enemydefense = voidenemy.defense
+    enemyphrase = voidenemy.atckphrase
+    enemydefending = False
+    enemycharge = False
 
 
 # For easier enemy formatting, here's the template (Using the Plastic Dinosaur as a base.)
@@ -137,6 +153,67 @@ You aren\'t where you were before.""")
         plypos = 11
         plyhealthDEFAULT += 2
         plyhealth = plyhealthDEFAULT
+
+def plymove():
+    global ply, plyhealth, enemydefending, enemyhealth, plyatck, enemydefense, plycharge, enemythink, enemyname, plydefending
+
+    ply = input(f"\033[1;32mYour health is: {plyhealth}. \033[1;35m{enemyname}'s health is {enemyhealth}. \033[0mWhat do you do?\n").lower()
+
+    import math
+
+    if ply == 'attack' and enemydefending == False:
+        print(f"\033[1;31mYou attacked {enemyname} for {plyatck - enemydefense} damage!\033[0m")
+        enemyhealth = enemyhealth - (plyatck - enemydefense)
+        if plycharge == True:
+            plyatck = math.floor(plyatck / 2)
+            plycharge = False
+        return True
+
+    elif ply == 'attack' and enemydefending == True:
+        print(f"\033[1;31mYou attacked {enemyname}! \033[1;35mBut {enemyname} defended.\033[0m")
+        if plycharge == True:
+            plyatck = math.floor(plyatck / 2)
+            plycharge = False
+        enemydefending = False
+        return True
+
+    elif ply == 'defend':
+        print('\033[1;34mYou defended! You won\'t take damage this turn.\033[0m')
+        enemydefending = False
+        plydefending = True
+        return True
+
+    elif ply == 'charge' and plycharge == False:
+        print('\033[1;32mYou charged! You will do double damage on your next attack!\033[0m')
+        plyatck *= 2
+        plycharge = True
+        enemydefending = False
+        return True
+
+    elif ply == 'charge' and plycharge == True:
+        print('\033[1;32mYou tried to charge again!\033[0m But nothing happened...')
+        enemydefending = False
+        return True
+
+    elif ply == 'think' or ply == 'check' or ply == 'hint':
+        print(f"""You ended up thinking. You remembered how to fight.
+\033[1;31mATTACK: Deals {plyatck} Damage to {enemyname} if {enemyname} isn't defending.
+\033[1;34mDEFEND: Allows you to take 0 Damage this turn.
+\033[1;32mCHARGE: Powers up attack to deal double damage next attack.\033[0m""")
+        if enemythink == False:
+            enemythink = True
+        elif enemythink == True:
+            print(f"{enemyname} notices you thinking for an aditional time and \033[1;31m{enemyphrase} for {enemyatck - plydefense} damage\033[0m as you weren't defending.")
+            plyhealth -= (enemyatck - plydefense)
+            enemyatck = enemyatckDEFAULT
+        return True
+
+    elif ply == 'quit':
+        quit()
+        return True
+
+    else:
+        return False
 
 def enemymove():
     import random
@@ -172,12 +249,25 @@ def enemymove():
 
 def globalcommands():
     # skip the void for this one, it parses commands differently
-    global ply, inventory, plyhealth, plydefense, doorbroken, plydead, plypos, tookstool, dinodead, dinoseen, equippeditem
+    global ply, inventory, plyhealth, plydefense, doorbroken, plydead, plypos, tookstool, dinodead, dinoseen, equippeditem, plyatck, weapon, armor, kys
     if ply == 'look around' or ply == 'look':
         print("Perhaps you should try to specify what direction you want to look in.")
         return True
     elif ply == "kill me" or ply == "kill myself":
-        print("You punched yourself multiple times. You're too weak to deal any damage.")
+        if kys == True:
+            print("You decide to not attempt self-harm again.")
+        if plyatck < 10 and kys == False:
+            print("You punched yourself multiple times. You're too weak to deal any damage.")
+            kys = True
+        elif plyatck >= 10 and plyatck < 100 and kys == False:
+            print("You punched yourself multiple times. You managed to make a dent on yourself. \033[1;31mYou take 1 Damage.\033[0m")
+            plyhealth -= 1
+            if plyhealth == 0:
+                print("Amazingly, you managed to dispatch yourself using your own fists. Moron.\n\n\n\033[1;31mGame Over, I guess?")
+            kys = True
+        elif plyatck >= 100 and kys == False:
+            print("You already have enough power, you cannot stop here.")
+            kys = True
         return True
     elif ply == 'check inventory' or ply == 'inventory' or ply == 'open inventory':
         if len(inventory) == 0:
@@ -214,10 +304,6 @@ def globalcommands():
             print(roomhints[8])
         return True
     elif ply == "check me" or ply == "check myself" or ply == "check self":
-        global plyatck
-        global weapon
-        global plydefense
-        global armor
         print("YOU \nCURRENT HP: " + str(plyhealth) + "\n\033[1;31mATTACK: " + str(plyatck) + " \033[1;33m(" + weapon + ")\n\033[1;34mDEFENSE: " + str(plydefense) + " \033[1;33m(" + armor + ")\033[0m")
         if plypos == 1 and doorbroken == False and plydead == False:
             print(selfcheckroom[1])
@@ -275,6 +361,10 @@ def globalcommands():
                         print("\033[1;31mYou gained +1 Attack\033[0m")
                         weapon = "Brick"
                         plyatck = plyatckDEFAULT + 1
+                    elif equippeditem == 'Shard':
+                        print("You feel an overwhelming sense of power\033[1;31m\nYou gained +3 Attack\033[0m")
+                        weapon = "Shard"
+                        plyatck = plyatckDEFAULT + 3
                     elif equippeditem == 'Tooth':
                         print("You wear it as a badge of honor.\n\033[1;34mYou gained +1 Defense\033[0m")
                         armor = 'Tooth'
@@ -403,8 +493,12 @@ while plypos == 1 and doorbroken == False and plydead == False:
 \033[1;32mCHARGE\033[0m""")
         miscfight = input("What will you do? \n").lower()
         if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door':
-            print("\033[1;31mYou mattack the door with brute force for {plyatck} damage. It instantly breaks down.\033[0m \nThere is only a brick wall beyond the frame.\nThere is no longer a door here")
+            print(f"\033[1;31mYou attack the door with brute force for {plyatck} damage. It instantly breaks down.\033[0m \nThere is only a brick wall beyond the frame.\nThere is no longer a door here")
             doorbroken = True
+            if plyatck >= 6:
+                plyatck += 1
+                plyatckDEFAULT += 1
+                print("You felt a tad bit stronger.")
         elif miscfight == 'defend':
             print("\033[1;34mYou defended.\033[0m The door doesn't do anything. You stop fighting it.")
         elif miscfight == 'charge':
@@ -551,8 +645,8 @@ while plypos == 1 and doorbroken == True and plydead == False:
 \033[1;34mDEFEND
 \033[1;32mCHARGE\033[0m""")
         miscfight = input("What will you do? \n").lower()
-        if (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == False:
-            print("\033[1;31mYou attempt to mattack the wall.\033[0m Your hand passes right through the wall.")
+        if (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == False and plyatck < 7:
+            print("\033[1;31mYou attempt to attack the wall.\033[0m Your hand passes right through the wall.")
             if ouch != 3:
                 print("Once you pulled out your hand, it felt injured.")
                 ouch += 1
@@ -561,8 +655,13 @@ while plypos == 1 and doorbroken == True and plydead == False:
                 brokenhand = True
                 plyatck -= 1
                 plyatckDEFAULT -= 1
+        elif (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == False and plyatck >= 7:
+            print(f"\033[1;31mWith full force, you manage to deal {plyatck * 2} damage to the wall.\033[0m\nYou end up passing straight through the wall and suffocating. \n\033[1;31mGame Over\n\n\n\n  \033[0mor is it?\n\033[1;31mThere is no here.")
+            plypos = 2
+            plyatck += 1
+            plyatckDEFAULT += 1
         elif (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == True:
-            print("\033[1;31mYou try to attack the wall.\033[0m Your hand doesn't move. You cannot fight it in this state.")
+            print("\033[1;31mYou try to attack the wall. \033[0mYour hand doesn't move. You cannot fight it in this state.")
         elif miscfight == 'defend':
             print("\033[1;34mYou defended.\033[0m The wall slightly ripples. You stop fighting it.")
         elif miscfight == 'charge':
@@ -598,6 +697,16 @@ while plypos == 2 and plydead == False:
             plychoke -= 1
         if plychoke <= 3 and plychoke != 0:
             print(f'\033[1;35mYou have {plychoke} actions left.\033[1;31m')
+
+    elif 'fight' in ply and plyatck >= 8:
+        print("You decide to use all of your power to fight the void. You encounter VOID \nBATTLE START!")
+        voidenemy()
+        print("""
+Your actions are:
+\033[1;31mATTACK
+\033[1;34mDEFEND
+\033[1;32mCHARGE\033[0m""")
+        plychoke = 8
         
     elif 'inventory' in ply:
         for x in inventory:
@@ -632,6 +741,29 @@ while plypos == 2 and plydead == False:
     if plychoke <= 0:
         print("You somehow managed to choke to death for a second time. There aren't third chances in this world.\n\nGame over.\033[0m")
         plydead = True
+
+    if plychoke == 8:
+        while plyhealth > 0 and enemyhealth > 0:
+            if plyturn == True and plyhealth > 0:
+                plymove()
+                plyturn = False
+                pass
+                if enemyhealth <= 0 and plyhealth > 0:
+                    if weapon == 'Nothing':
+                        print("You overcome the VOID and manage to destory it with your bare hands.")
+                    else:
+                        print(f"You overcome the VOID and manage to destory it with your {weapon}.")
+                    print('\033[0mYou wake up to find yourself in a massive glass case in what appears to be a museum.\n\033[1;33mYou end up finding a SHARD in your inventory.\n\033[0mWhat now?')
+                    inventory.append('Shard')
+                    plyturn = True
+                    plypos = 3
+            if plyturn == False and plyhealth > 0 and enemyhealth > 0:
+                enemymove()
+                plyturn = True
+                pass
+                if plyhealth <= 0:
+                    print("The VOID manages to choke you out as you lose all of your breath. You collapse and lose all conscience.\n\n\033[1;31mGame Over!\033[0m")
+                    plydead = True
 
 # area 3 (museum without stool)
 
@@ -737,71 +869,23 @@ Your actions are:
 
 while plypos == 4 and plydead == False:
 
-    ply = input(f"\033[1;32mYour health is: {plyhealth}. \033[1;35m{enemyname}'s health is {enemyhealth}. \033[0mWhat do you do?\n").lower()
+    if plyturn == True and plyhealth > 0:
+        plymove()
+        plyturn = False
+        pass
+        if enemyhealth <= 0 and plyhealth > 0:
+            dinodead = True
+            print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
+            plypos = 3
+            plyturn = True
 
-    import math
-
-    if ply == 'attack' and enemydefending == False:
-        print(f"\033[1;31mYou attacked {enemyname} for {plyatck - enemydefense} damage!\033[0m")
-        enemyhealth = enemyhealth - (plyatck - enemydefense)
-        if plycharge == True:
-            plyatck = math.floor(plyatck / 2)
-            plycharge = False
-        if enemyhealth >= 1:
-            enemymove()
-
-    elif ply == 'attack' and enemydefending == True:
-        print(f"\033[1;31mYou attacked {enemyname}! \033[1;35mBut {enemyname} defended.\033[0m")
-        if plycharge == True:
-            plyatck = math.floor(plyatck / 2)
-            plycharge = False
-        enemydefending = False
+    if plyturn == False and plyhealth > 0 and enemyhealth > 0:
         enemymove()
-
-    elif ply == 'defend':
-        print('\033[1;34mYou defended! You won\'t take damage this turn.\033[0m')
-        enemydefending = False
-        plydefending = True
-        enemymove()
-
-    elif ply == 'charge' and plycharge == False:
-        print('\033[1;32mYou charged! You will do double damage on your next attack!\033[0m')
-        plyatck *= 2
-        plycharge = True
-        enemydefending = False
-        enemymove()
-
-    elif ply == 'charge' and plycharge == True:
-        print('\033[1;32mYou tried to charge again!\033[0m But nothing happened...')
-        enemydefending = False
-        enemymove()
-
-    elif ply == 'think' or ply == 'check' or ply == 'hint':
-        print(f"""You ended up thinking. You remembered how to fight.
-\033[1;31mATTACK: Deals {plyatck} Damage to {enemyname} if {enemyname} isn't defending.
-\033[1;34mDEFEND: Allows you to take 0 Damage this turn.
-\033[1;32mCHARGE: Powers up attack to deal double damage next attack.\033[0m""")
-        if dinothink == False:
-            dinothink = True
-        elif dinothink == True:
-            print(f"The Dinosaur notices you thinking for another time and \033[1;31mbites you for {enemyatck - plydefense} damage\033[0m as you weren't defending.")
-            plyhealth -= (enemyatck - plydefense)
-            enemyatck = enemyatckDEFAULT
-
-    elif ply == 'quit':
-        quit()
-
-    else:
-        print("That isn't an action you can do.")
-    
-    if plyhealth <= 0 and enemyhealth > 0:
-        print("The Plastic Dinosaur brutally tears you apart. \n\n\033[1;31mGame Over.\033[0m")
-        plydead = True
-    
-    elif enemyhealth <= 0 and plyhealth > 0:
-        dinodead = True
-        print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
-        plypos = 3
+        plyturn = True
+        pass
+        if plyhealth <= 0:
+            print("The Plastic Dinosaur brutally tears you apart as you faint to the ground.\n\n\033[1;31mGame Over!\033[0m")
+            plydead = True
 
 # area 3 (haha that dino is dead)
 
