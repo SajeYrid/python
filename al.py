@@ -2,7 +2,7 @@ plydeaths = 0
 def retry():
     # the holy and pure and innocent variable block
     # booleans
-    global doorbroken, plydead, brokenhand, dinodead, dinoseen, enemythink, plydefending, plycharge, enemydefending, enemycharge, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken, stoolExplode, plyturn, kys
+    global doorbroken, plydead, brokenhand, dinodead, dinoseen, enemythink, plydefending, plycharge, enemydefending, enemycharge, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken, stoolExplode, plyturn, plyerror, kys
     doorbroken = False
     plydead = False
     brokenhand = False
@@ -20,6 +20,7 @@ def retry():
     plywallBroken = False
     stoolExplode = False
     plyturn = True
+    plyerror = False
     kys = False
 
     # strings
@@ -114,7 +115,7 @@ def plasticDino():
 
 def voidenemy():
     global voidenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
-    voidenemy = Enemy("VOID", 50, 3, 1, "suffocated you")
+    voidenemy = Enemy("The VOID", 50, 3, 1, "suffocated you")
     enemyname = voidenemy.name
     enemyhealth = voidenemy.health
     enemyatck = voidenemy.attack
@@ -150,12 +151,12 @@ You blink. when your eyes flutter open, the glass is clear again. In fact, every
 Strangely, you feel healthier than usual.
 You aren\'t where you were before.""")
         glassTicker = 2
-        plypos = 11
+        plypos = 12
         plyhealthDEFAULT += 2
         plyhealth = plyhealthDEFAULT
 
 def plymove():
-    global ply, plyhealth, enemydefending, enemyhealth, plyatck, enemydefense, plycharge, enemythink, enemyname, plydefending
+    global ply, plyhealth, enemydefending, enemyhealth, plyatck, enemydefense, plycharge, enemythink, enemyname, plydefending, plyerror, enemyatck, plydefense
 
     ply = input(f"\033[1;32mYour health is: {plyhealth}. \033[1;35m{enemyname}'s health is {enemyhealth}. \033[0mWhat do you do?\n").lower()
 
@@ -197,7 +198,7 @@ def plymove():
 
     elif ply == 'think' or ply == 'check' or ply == 'hint':
         print(f"""You ended up thinking. You remembered how to fight.
-\033[1;31mATTACK: Deals {plyatck} Damage to {enemyname} if {enemyname} isn't defending.
+\033[1;31mATTACK: Deals {plyatck - enemydefense} Damage to {enemyname} if {enemyname} isn't defending.
 \033[1;34mDEFEND: Allows you to take 0 Damage this turn.
 \033[1;32mCHARGE: Powers up attack to deal double damage next attack.\033[0m""")
         if enemythink == False:
@@ -213,7 +214,8 @@ def plymove():
         return True
 
     else:
-        return False
+        plyerror = True
+        return True
 
 def enemymove():
     import random
@@ -365,6 +367,10 @@ def globalcommands():
                         print("You feel an overwhelming sense of power\033[1;31m\nYou gained +3 Attack\033[0m")
                         weapon = "Shard"
                         plyatck = plyatckDEFAULT + 3
+                    elif equippeditem == 'Sword':
+                        print("You feel an even greater overwhelming sense of power\033[1;31m\nYou gained +5 Attack\033[0m")
+                        weapon = "Shard"
+                        plyatck = plyatckDEFAULT + 5
                     elif equippeditem == 'Tooth':
                         print("You wear it as a badge of honor.\n\033[1;34mYou gained +1 Defense\033[0m")
                         armor = 'Tooth'
@@ -748,6 +754,15 @@ Your actions are:
                 plymove()
                 plyturn = False
                 pass
+                if plyerror == True:
+                    print("That is not a move that you have access to. Try again.")
+                    plyerror = False
+                    plymove()
+                    pass
+                    if plyerror == True:
+                        print("You end up freezing in place as you forget what you can do in battle.")
+                        plyerror = False
+                        pass
                 if enemyhealth <= 0 and plyhealth > 0:
                     if weapon == 'Nothing':
                         print("You overcome the VOID and manage to destory it with your bare hands.")
@@ -873,6 +888,15 @@ while plypos == 4 and plydead == False:
         plymove()
         plyturn = False
         pass
+        if plyerror == True:
+            print("That is not a move that you have access to. Try again.")
+            plyerror = False
+            plymove()
+            pass
+            if plyerror == True:
+                print("You end up freezing in place as you forget what you can do in battle.")
+                plyerror = False
+                pass
         if enemyhealth <= 0 and plyhealth > 0:
             dinodead = True
             print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
@@ -1020,6 +1044,8 @@ while plypos == 3 and tookstool == True and plydead == False:
 
     elif ply == 'look east':
         print('A basic beige wall.')
+        if plywallBroken == True:
+            print('At least, it used to be.')
     
     elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
         print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
@@ -1052,10 +1078,13 @@ You land in a new location that is surrounded by glass.
 You feel a little bit healthier than before.
 \033[1;33mYou no longer have access to the stool.\033[0m
 You are not where you were before.""")
-            plypos = 11
+            plypos = 12
             plyhealthDEFAULT += 2
             plyhealth = plyhealthDEFAULT
             inventory.remove('Stool')
+            if armor == 'Stool':
+                armor = 'Nothing'
+                plydefense = plydefenseDEFAULT
         elif plysecondary == 'n' or plysecondary == 'no':
             print("You decide to not climb out yet.\nYou jump back down to the ground.")
         else:
@@ -1121,7 +1150,7 @@ You are not where you were before.""")
 
     elif ply == 'go east' and plywallBroken == True:
         print('Behind the wall, you find a house. It\'s reminiscent of your old childhood home, but you\'ve definitely never been here before.\nThe museum fades from your peripheral as you walk in.\nYou are facing north towards the front door.')
-        plypos == 19
+        plypos == 18
 
     elif ply == 'go west':
         print('It appears there is a giant plastic dinosaur in the way.')
@@ -1149,15 +1178,16 @@ You are not where you were before.""")
     elif ply == 'check wall':
         print('A thin plywood wall painted beige. You could probably break it with something heavy enough.')
 
-    elif ply == 'break wall':
-        plysecondary = input('With what?').lower()
+    elif ply == 'break wall' and plywallBroken == False:
+        plysecondary = input('With what?\n').lower()
+        item_to_equip = plysecondary[0:].strip().title()
         if plysecondary == 'brick' and 'Brick' in inventory:
             print('You throw the brick at the wall. After the brick impacts, the wall is seemingly completely decimated.')
             plywallBroken = True
         elif plysecondary == 'brick' and 'Brick' not in inventory:
             print('You don\'t have one of those')
-        elif plysecondary != 'brick' and plysecondary in inventory:
-            print('You take out ' + plysecondary + '. You don\'t know what to do with it. You put it away.')
+        elif (plysecondary != 'brick' or plysecondary != 'crowbar' or plysecondary != 'shard') and item_to_equip in inventory:
+            print(f'You take out the {plysecondary}. You don\'t know what to do with it. You put it away.')
         elif plysecondary == 'hand' or plysecondary == 'head' or plysecondary == 'me' or plysecondary == 'foot':
             print('You would prefer not to risk breaking any bones. Maybe try using an item instead.')
         elif plysecondary == 'think' and 'Brick' not in inventory or plysecondary == 'check' and 'Brick' not in inventory or plysecondary == 'hint' and 'Brick' not in inventory:
@@ -1170,8 +1200,22 @@ You are not where you were before.""")
             print('You thought about breaking the wall with the crowbar. You\'d perfer to not damage it just yet.')
         elif plysecondary == 'you' or plysecondary == 'them':
             print('Unfortuantly, there isn\'t anyone else in the room that you can refer to.')
+        elif plysecondary == 'shard' and 'Shard' in inventory:
+            print('You manage to tear down the wall with the Shard instantly.')
+            plywallBroken = True
         else:
             print('You know already that that wouldn\'t work.')
+
+    elif ply == 'fight wall' and weapon == 'Shard' and plywallBroken == False:
+        print(f"You decide to square up against the wall with your shard. \033[1;31mYou immediatly attack it to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly.\033[1;33mThe Shard transformed into a SWORD.\033[0m")
+        inventory.remove('Shard')
+        inventory.append('Sword')
+        weapon = 'Sword'
+        plyatck += 2
+        plywallBroken = True
+
+    elif (ply == 'break wall' or ply == 'fight wall') and plywallBroken == True:
+        print("The wall has already been broken. There is no point in trying to destroy it again.")
 
     else:
         print("Your thoughts seem incomprehensible.")
@@ -1372,3 +1416,67 @@ while plypos == 5 and plydead == False:
 
     else:
         print("ayo close da game, we ain't done with it yet.")
+
+#Area 12 (A very edible substance that makes up the room (True Story))
+while plypos == 12 and plydead == False:
+
+    ply = input().lower()
+
+    if globalcommands():
+        pass
+
+    elif ply == 'look north':
+        print("PLACEHOLDER")
+
+    elif ply == 'look east':
+        print("PLACEHOLDER")
+
+    elif ply == 'look west':
+        print("PLACEHOLDER")
+
+    elif ply == 'look south':
+        print("")
+
+    elif ply == 'go north':
+        print("PLACEHOLDER")
+
+    elif ply == 'go east':
+        print("PLACEHOLDER")
+
+    elif ply == 'go west':
+        print("PLACEHOLDER")
+
+    elif ply == 'go south':
+        print("PLACEHOLDER")
+
+#Area 18 (COMING STRAIGHT FROM YOU'RE HOUSE!!!)
+while plypos == 18 and plydead == False:
+
+    ply = input().lower()
+
+    if globalcommands():
+        pass
+
+    elif ply == 'look north':
+        print("You try to observe what you saw in front of you, but it was too dark.")
+
+    elif ply == 'look east':
+        print("PLACEHOLDER")
+
+    elif ply == 'look west':
+        print("PLACEHOLDER")
+
+    elif ply == 'look south':
+        print("")
+
+    elif ply == 'go north':
+        print("PLACEHOLDER")
+
+    elif ply == 'go east':
+        print("PLACEHOLDER")
+
+    elif ply == 'go west':
+        print("PLACEHOLDER")
+
+    elif ply == 'go south':
+        print("PLACEHOLDER")
