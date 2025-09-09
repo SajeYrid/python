@@ -2,7 +2,8 @@ plydeaths = 0
 def retry():
     # the holy and pure and innocent variable block
     # booleans
-    global doorbroken, plydead, brokenhand, dinodead, dinoseen, enemythink, plydefending, plycharge, enemydefending, enemycharge, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken, stoolExplode, plyturn, plyerror, kys
+    global doorbroken, plydead, brokenhand, dinodead, dinoseen, enemythink, plydefending, plycharge, enemydefending, enemycharge, enemyspecial, ventopen, tookstool, tookSplinter, pretendLMAO, plywallBroken
+    global stoolExplode, plyturn, plyerror, kys, insidehouse
     doorbroken = False
     plydead = False
     brokenhand = False
@@ -13,6 +14,7 @@ def retry():
     plycharge = False
     enemydefending = False
     enemycharge = False
+    enemyspecial = False
     ventopen = False
     tookstool = False
     tookSplinter = False
@@ -22,9 +24,10 @@ def retry():
     plyturn = True
     plyerror = False
     kys = False
+    insidehouse = False
 
     # strings
-    global ply, plysecondary, miscfight, equippeditem, weapon, armor, enemyname, enemyphrase
+    global ply, plysecondary, miscfight, equippeditem, weapon, armor, enemyname, enemyphrase, enemyspecialmove
     ply = ""
     plysecondary = ""
     miscfight = ""
@@ -33,13 +36,15 @@ def retry():
     armor = "Nothing"
     enemyname = ""
     enemyphrase = ""
+    enemyspecialmove = ""
 
     # lists
     global inventory
     inventory = ['Nothing']
 
     # integers
-    global plypos, plychoke, ouch, plyhealthDEFAULT, plyhealth, plyatckDEFAULT, plyatck, plydefenseDEFAULT, plydefense, enemyhealth, enemyatck, enemyatckDEFAULT, enemyaction, glassTicker, ventpos, ventDirection
+    global plypos, plychoke, ouch, plyhealthDEFAULT, plyhealth, plyatckDEFAULT, plyatck, plydefenseDEFAULT, plydefense, enemyhealth, enemyatck, enemyatckDEFAULT, enemyspecialtype, enemyspecialnumber
+    global enemyspecialcount, enemyaction, glassTicker, ventpos, ventDirection
     plypos = 0
     plychoke = 5
     ouch = 1
@@ -53,6 +58,9 @@ def retry():
     enemyatck = 0
     enemyatckDEFAULT = 0
     enemydefense = 0
+    enemyspecialtype = 0
+    enemyspecialnumber = 0
+    enemyspecialcount = 0
     enemyaction = 0
     glassTicker = 2
     ventpos = 0
@@ -64,9 +72,14 @@ items = {
     'Nothing' : 'Empty air. Why is this here? Perhaps you can do something with it before it\'s gone forever.',
     'Stool' : 'An old wooden stool. It doesn\'t look like it\'ll last very long.',
     'Splinters' : 'A collection of broken little bits of wood.',
-    'Pretend Splinters' : 'A fake collection of little broken bits of wood.',
+    'Pretend Splinters' : 'A collection of little broken bits of wood made from your imagination.',
     'Crowbar' : 'A sturdy piece of curved aluminium made for prying things open.',
-    'Tooth' : 'A fake tooth from a plastic prehistoric predator.'
+    'Tooth' : 'A fake tooth from a plastic prehistoric predator.',
+    'Brick' : 'A brick that feels like a liquid for some reason. Still acts like a solid object.',
+    'Shard' : 'A mysterious shard that you obtained from the void in some way. You feel as if you shouldn\'t have been able to obtain this.',
+    'Sword' : 'A sword shaped object that formed from the shard. Perfect for slaying anything in your way.',
+    'Key' : 'A key that you obtained from a skeleton. Looks to have the ability to unlock various locks.',
+    'Lantern' : 'An ordinary lantern with no oddities whatsoever.'  
 }
 
 roomhints = {
@@ -93,37 +106,59 @@ selfcheckroom = {
 
 # classes, but the cool kind
 class Enemy:
-    def __init__(self, name, health, attack, defense, atckphrase):
+    def __init__(self, name, health, attack, defense, atckphrase, special):
         self.name = name
         self.health = health
         self.attack = attack
         self.defense = defense
         self.atckphrase = atckphrase
+        self.special = special
+
+class Special:
+    def __init__(self, name, ability, number):
+        self.name = name
+        self.ability = ability
+        self.number = number
 
 # Enemies
 def plasticDino():
-    global plasticDino, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
-    plasticDino = Enemy("The Plastic Dinosaur", 30, 2, 0, "bit you")
+    global plasticDino, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber
+    plasticDino = Enemy("The Plastic Dinosaur", 30, 2, 0, "bit you", False)
     enemyname = plasticDino.name
     enemyhealth = plasticDino.health
     enemyatck = plasticDino.attack
     enemyatckDEFAULT = plasticDino.attack
     enemydefense = plasticDino.defense
     enemyphrase = plasticDino.atckphrase
+    enemyspecial = plasticDino.special
+
+    enemyspecialmove = ""
+    enemyspecialtype = 0
+    enemyspecialnumber = 0
+    
     enemydefending = False
     enemycharge = False
 
 def voidenemy():
-    global voidenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
-    voidenemy = Enemy("The VOID", 50, 3, 1, "suffocated you")
+    global voidenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, voidspecial
+    global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount
+    voidenemy = Enemy("The VOID", 50, 3, 1, "suffocated you", True)
     enemyname = voidenemy.name
     enemyhealth = voidenemy.health
     enemyatck = voidenemy.attack
     enemyatckDEFAULT = voidenemy.attack
     enemydefense = voidenemy.defense
     enemyphrase = voidenemy.atckphrase
+    enemyspecial = voidenemy.special
+
+    voidspecial = Special("Life Drain", 1, 4)
+    enemyspecialmove = voidspecial.name
+    enemyspecialtype = voidspecial.ability
+    enemyspecialnumber = voidspecial.number
+
     enemydefending = False
     enemycharge = False
+    enemyspecialcount = 0
 
 
 # For easier enemy formatting, here's the template (Using the Plastic Dinosaur as a base.)
@@ -133,6 +168,10 @@ def voidenemy():
     #enemyatckDEFAULT = plasticDino.attack
     #enemydefense = plasticDino.defense
     #enemyphrase = plasticDino.atckphrase
+    #enemyspecial = plasticDino.special
+
+    #enemydefending = False
+    #enemycharge = False
 
 
 # the truly neutral functions
@@ -219,35 +258,91 @@ def plymove():
 
 def enemymove():
     import random
-    global plyhealth, enemyatck, enemycharge, enemydefense, enemydefending, plydefending
+    global plydefense, plyhealth, enemyatck, enemydefense, enemyhealth, enemycharge, enemydefense, enemydefending, plydefending
+    global enemyspecial, enemyspecialcount, enemyspecialmove, enemyspecialtype, enemyspecialnumber
+
     enemyaction = random.randint(1, 9)
-    if enemyaction > 6 and plydefending == True:
-        print(f"\033[1;31m {enemyname} {enemyphrase}. \033[1;34mBut you defended!\033[0m")
-        enemyatck = enemyatckDEFAULT
-        enemycharge = False
-        enemydefending = False
-        plydefending = False
-    elif enemyaction > 6 and plydefending == False:
-        print(f"\033[1;31m {enemyname} {enemyphrase} for {enemyatck - plydefense}!\033[0m")
-        plyhealth = plyhealth - (enemyatck - plydefense)
-        enemyatck = enemyatckDEFAULT
-        enemycharge = False
-        enemydefending = False
-    elif enemyaction < 4:
-        print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
-        enemydefending = True
-        plydefending = False
-    elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
-        print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
-        enemycharge = True
-        enemyatck *= 2
-        enemydefending = False
-        plydefending = False
-    elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
-        print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
-        plydefending = False
+    if enemyspecial == True:
+        if enemyspecialcount == 5:
+            print(f"\033[1;3{enemyspecialtype}m{enemyname} used their speical move, {enemyspecialmove}!\033[0m")
+            if enemyspecialtype == 1:
+                if plydefending == True:
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} deals {enemyspecialnumber - plydefense} damage to you.")
+                    plyhealth -= (enemyspecialnumber - plydefense)
+                else:
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} deals {enemyspecialnumber} damage to you.")
+                    plyhealth -= enemyspecialnumber
+            elif enemyspecialtype == 2:
+                print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} attack for their next attack.")
+                enemyatck += enemyspecialnumber
+            elif enemyspecialtype == 3:
+                print(f"\033[1;3{enemyspecialtype}m{enemyname} heals {enemyspecialnumber} health.")
+                enemyhealth += enemyspecialnumber
+            elif enemyspecialtype == 4:
+                print("\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} defense for the rest of the fight.")
+            else:
+                print("But it didn't do anything because they don't have a valid command.")
+            enemyspecialcount = 0
+        else:
+            enemyspecialcount += 1
+            if enemyaction > 6 and plydefending == True:
+                print(f"\033[1;31m {enemyname} {enemyphrase}. \033[1;34mBut you defended!\033[0m")
+                enemyatck = enemyatckDEFAULT
+                enemycharge = False
+                enemydefending = False
+                plydefending = False
+            elif enemyaction > 6 and plydefending == False:
+                print(f"\033[1;31m {enemyname} {enemyphrase} for {enemyatck - plydefense}!\033[0m")
+                plyhealth = plyhealth - (enemyatck - plydefense)
+                enemyatck = enemyatckDEFAULT
+                enemycharge = False
+                enemydefending = False
+            elif enemyaction < 4:
+                print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
+                enemydefending = True
+                plydefending = False
+            elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
+                print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
+                enemycharge = True
+                enemyatck *= 2
+                enemydefending = False
+                plydefending = False
+            elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
+                print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
+                plydefending = False
+            else:
+                print("This will only print if something went horribly wrong.")
+            if enemyspecialcount == 4:
+                print(f"\033[1;3{enemyspecialtype}m {enemyname} looks to be readying something strong.\033[0m")
+                enemyspecialcount = 5
     else:
-        print("This will only print if something went horribly wrong.")
+        if enemyaction > 6 and plydefending == True:
+            print(f"\033[1;31m {enemyname} {enemyphrase}. \033[1;34mBut you defended!\033[0m")
+            enemyatck = enemyatckDEFAULT
+            enemycharge = False
+            enemydefending = False
+            plydefending = False
+        elif enemyaction > 6 and plydefending == False:
+            print(f"\033[1;31m {enemyname} {enemyphrase} for {enemyatck - plydefense}!\033[0m")
+            plyhealth = plyhealth - (enemyatck - plydefense)
+            enemyatck = enemyatckDEFAULT
+            enemycharge = False
+            enemydefending = False
+        elif enemyaction < 4:
+            print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
+            enemydefending = True
+            plydefending = False
+        elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
+            print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
+            enemycharge = True
+            enemyatck *= 2
+            enemydefending = False
+            plydefending = False
+        elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
+            print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
+            plydefending = False
+        else:
+            print("This will only print if something went horribly wrong.")
 
 def globalcommands():
     # skip the void for this one, it parses commands differently
@@ -369,14 +464,30 @@ def globalcommands():
                         plyatck = plyatckDEFAULT + 3
                     elif equippeditem == 'Sword':
                         print("You feel an even greater overwhelming sense of power\033[1;31m\nYou gained +5 Attack\033[0m")
-                        weapon = "Shard"
+                        weapon = "Sword"
                         plyatck = plyatckDEFAULT + 5
                     elif equippeditem == 'Tooth':
                         print("You wear it as a badge of honor.\n\033[1;34mYou gained +1 Defense\033[0m")
                         armor = 'Tooth'
                         plydefense = plydefenseDEFAULT + 1
+                    elif equippeditem == 'Key':
+                        print("\033[1;31mYou gained +1 Attack\033[0m")
+                        weapon = 'Key'
+                        plyatck = plyatckDEFAULT + 1
+                    elif equippeditem == 'Lantern':
+                        print("\033[1;31mYou gained +1 Attack\033[0m")
+                        weapon = 'Lantern'
+                        plyatck = plyatckDEFAULT + 1
         else:
-            print(f"\033[1;33mYou don't have a {item_to_equip} in your inventory.\033[0m")
+            print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
+        return True
+
+    elif ply.startswith("check "):
+        item_to_equip = ply[6:].strip().title()
+        if item_to_equip in inventory:
+            print("\033[1;33m" + items[item_to_equip] + "\033[0m")
+        else:
+            print("Your thoughts seem incomprehensible.")
         return True
     else:
         return False
@@ -791,20 +902,44 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Fa
     elif ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
 
-    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
-        print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
-        ouch += 1
-        plyhealth -= 1
-        if ouch == 3:
-            print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
-            brokenhand = True
-            plyatck -= 1
-            plyatckDEFAULT -= 1
+    elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
+        if weapon == 'Nothing':
+            if brokenhand == False:
+                print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
+                ouch += 1
+                plyhealth -= 1
+                if plyhealth == 0:
+                    print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
+                    plydead = True
+                if ouch == 3:
+                    print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
+                    brokenhand = True
+                    plyatck -= 1
+                    plyatckDEFAULT -= 1
+                else:
+                    print('Your hand hurts more than usual.')
+            else:
+                print("You attempt to break the glass with your fist. It doesn't want to move.")
+        elif weapon == 'Splinters':
+            print("You prick the splinters into the glass. It unfortunatly does not budge.")
+        elif weapon == 'Pretend Splinters':
+            print("You pretend to prick splinters into the glass. Nothing happens.")
+        elif weapon == 'Crowbar':
+            print("You attempt to break the glass with the crowbar. You only hear the sound of tapping glass.")
+        elif weapon == 'Brick':
+            print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
+        elif weapon == 'Shard':
+            print("You manage to scrape the glass. It forms a questionable symbol resembling a slashable wall.")
+        elif weapon == 'Sword':
+            print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
+After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
+Strangely, you feel healthier than usual.
+You aren\'t where you were before.""")
+            plypos = 12
+            plyhealthDEFAULT += 2
+            plyhealth = plyhealthDEFAULT
         else:
-            print('Your hand hurts more than usual.')
-
-    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == True:
-        print('If you were to try, your hand would hurt even more than it already does.')
+            print("You look at the glass. You feel as if you have broken the game somehow.")
 
     elif ply == 'eat glass':
         print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
@@ -899,7 +1034,15 @@ while plypos == 4 and plydead == False:
                 pass
         if enemyhealth <= 0 and plyhealth > 0:
             dinodead = True
-            print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.\nWhat now?")
+            print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.")
+            if weapon == 'Shard':
+                print("\033[1;33mYour shard transformed into a sword. \033[0mWhat now?\n")
+                weapon = Sword
+                plyatck += 2
+                inventory.append("Sword")
+                inventory.remove("Shard")
+            else:
+                print("What now?\n")
             plypos = 3
             plyturn = True
 
@@ -923,23 +1066,44 @@ while plypos == 3 and tookstool == False and plydead == False and dinodead == Tr
     elif ply == "look north":
         print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
 
-    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == False:
-        print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
-        ouch += 1
-        plyhealth -= 1
-        if ouch == 3:
-            print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
-            brokenhand = True
-            plyatck -= 1
-            plyatckDEFAULT -= 1
+    elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
+        if weapon == 'Nothing':
+            if brokenhand == False:
+                print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
+                ouch += 1
+                plyhealth -= 1
+                if plyhealth == 0:
+                    print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
+                    plydead = True
+                if ouch == 3:
+                    print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
+                    brokenhand = True
+                    plyatck -= 1
+                    plyatckDEFAULT -= 1
+                else:
+                    print('Your hand hurts more than usual.')
+            else:
+                print("You attempt to break the glass with your fist. It doesn't want to move.")
+        elif weapon == 'Splinters':
+            print("You prick the splinters into the glass. It unfortunatly does not budge.")
+        elif weapon == 'Pretend Splinters':
+            print("You pretend to prick splinters into the glass. Nothing happens.")
+        elif weapon == 'Crowbar':
+            print("You attempt to break the glass with the crowbar. You only hear the sound of tapping glass.")
+        elif weapon == 'Brick':
+            print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
+        elif weapon == 'Shard':
+            print("You manage to scrape the glass. It forms a questionable symbol resembling a slashable wall.")
+        elif weapon == 'Sword':
+            print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
+After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
+Strangely, you feel healthier than usual.
+You aren\'t where you were before.""")
+            plypos = 12
+            plyhealthDEFAULT += 2
+            plyhealth = plyhealthDEFAULT
         else:
-            print('Your hand hurts more than usual.')
-        if plyhealth == 0:
-            print('You hit yourself hard enough to accidentaly deal the final blow to yourself.\nYou fall to the ground with a loud thud. There is no way to get back up.\n\n\033[1;31mGame over.\033[0m')
-            plydead = True
-
-    elif (ply == 'break glass' or ply == 'break window' or ply == 'break case') and brokenhand == True:
-        print('If you were to try, your hand would hurt even more than it already does.')
+            print("You look at the glass. You feel as if you have broken the game somehow.")
 
     elif ply == 'eat glass':
         print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
@@ -1048,16 +1212,44 @@ while plypos == 3 and tookstool == True and plydead == False:
             print('At least, it used to be.')
     
     elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
-        print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
-        ouch += 1
-        plyhealth -= 1
-        if ouch == 3:
-            print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
-            brokenhand = True
-            plyatck -= 1
-            plyatckDEFAULT -= 1
+        if weapon == 'Nothing':
+            if brokenhand == False:
+                print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
+                ouch += 1
+                plyhealth -= 1
+                if plyhealth == 0:
+                    print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
+                    plydead = True
+                if ouch == 3:
+                    print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
+                    brokenhand = True
+                    plyatck -= 1
+                    plyatckDEFAULT -= 1
+                else:
+                    print('Your hand hurts more than usual.')
+            else:
+                print("You attempt to break the glass with your fist. It doesn't want to move.")
+        elif weapon == 'Splinters':
+            print("You prick the splinters into the glass. It unfortunatly does not budge.")
+        elif weapon == 'Pretend Splinters':
+            print("You pretend to prick splinters into the glass. Nothing happens.")
+        elif weapon == 'Crowbar':
+            print("You attempt to break the glass with the crowbar. You only hear the sound of tapping glass.")
+        elif weapon == 'Brick':
+            print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
+        elif weapon == 'Shard':
+            print("You manage to scrape the glass. It forms a questionable symbol resembling a slashable wall.")
+        elif weapon == 'Sword':
+            print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
+After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
+Strangely, you feel healthier than usual.
+You aren\'t where you were before.""")
+            plypos = 12
+            plyhealthDEFAULT += 2
+            plyhealth = plyhealthDEFAULT
         else:
-            print('Your hand hurts more than usual.')
+            print("You look at the glass. You feel as if you have broken the game somehow.")
+            
 
     elif ply == 'eat glass':
         print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
@@ -1150,7 +1342,7 @@ You are not where you were before.""")
 
     elif ply == 'go east' and plywallBroken == True:
         print('Behind the wall, you find a house. It\'s reminiscent of your old childhood home, but you\'ve definitely never been here before.\nThe museum fades from your peripheral as you walk in.\nYou are facing north towards the front door.')
-        plypos == 18
+        plypos = 18
 
     elif ply == 'go west':
         print('It appears there is a giant plastic dinosaur in the way.')
@@ -1435,7 +1627,7 @@ while plypos == 12 and plydead == False:
         print("PLACEHOLDER")
 
     elif ply == 'look south':
-        print("")
+        print("PLACEHOLDER")
 
     elif ply == 'go north':
         print("PLACEHOLDER")
@@ -1448,6 +1640,9 @@ while plypos == 12 and plydead == False:
 
     elif ply == 'go south':
         print("PLACEHOLDER")
+
+    else:
+        print("Your thoughts seem incomprehensible.")
 
 #Area 18 (COMING STRAIGHT FROM YOU'RE HOUSE!!!)
 while plypos == 18 and plydead == False:
@@ -1458,25 +1653,121 @@ while plypos == 18 and plydead == False:
         pass
 
     elif ply == 'look north':
-        print("You try to observe what you saw in front of you, but it was too dark.")
+        print("It is indeed a door. Unfortuantly, it does not look fragile.")
 
     elif ply == 'look east':
-        print("PLACEHOLDER")
+        print("A very climable tree.")
 
-    elif ply == 'look west':
-        print("PLACEHOLDER")
+    elif ply == 'look west' and 'Key' not in inventory:
+        print("A Skeleton of someone lying on a bench. They seem to be holding a key.")
+
+    elif ply == 'look west' and 'Key' in inventory:
+        print("A Skeleton of someone lying on a bench. They seem to now be smiling.")
 
     elif ply == 'look south':
-        print("")
+        print("Nothing but fog and dark roads.")
 
     elif ply == 'go north':
-        print("PLACEHOLDER")
+        print("You bang your head on the door.")
 
     elif ply == 'go east':
-        print("PLACEHOLDER")
+        print("You head towards the tree. Nothing seems to be around it.")
 
     elif ply == 'go west':
-        print("PLACEHOLDER")
+        print("A basic beige wall blocks your path. Doesn't look breakable.")
 
     elif ply == 'go south':
-        print("PLACEHOLDER")
+        print("You can't see well enough to be confident to go that way.")
+
+    elif ply == 'take key' or ply == 'grab key':
+        print("You take the solid key from the skeleton.\n\033[1;33mKEY was added to your inventory.\033[0m")
+        inventory.append('Key')
+
+    elif ply == 'break door' or ply == 'fight door' or ply == 'kill door' or ply == 'attack door':
+        print("You attempt to destory the door. However, it is stronger than the previous door and does not budge.")
+
+    elif ply == 'open door' and 'Key' not in inventory:
+        print("You jiggle the handle. The door is locked.")
+
+    elif ply == 'open door' and 'Key' in inventory:
+        print("You open the door with the key. You are now inside the house. The door remains open.")
+        insidehouse == True
+
+    elif ply == 'check door':
+        print("A metal door to a house.")
+
+    elif ply == 'eat door':
+        print("You put your mouth on the door. The metal gives you an icky taste.")
+
+    elif ply == 'close door':
+        print("You try to close the closed door. It does not budge.")
+
+    elif ply == 'unlock door' and 'Key' not in inventory:
+        print("You try to unlock the door. Your finger does not fit through the lock.")
+
+    elif ply == 'unlock door' and 'Key' in inventory:
+        print("You end up opening the door with the key. You are now inside the house. The door remains open.")
+        insidehouse == True
+
+    elif ply == 'take skeleton' and 'Key' not in inventory:
+        print("You try to take the entire skeleton. They seemed to be stuck to the bench. The key remains in the skeleton's hand.")
+
+    elif ply == 'take skeleton' and 'Key' in inventory:
+        print("Rather than taking the skeleton, you shake the skeleton's hand for reciving the key.")
+
+    elif ply == 'fight skeleton' or ply == 'attack skeleton':
+        print("You'd perfer not to fight a skeleton at this time.")
+
+    elif (ply == 'enter house' or ply == 'go in house') and 'Key' in inventory:
+        print("You open the door with the key to enter the house. You are now inside. The door remains open.")
+
+    elif (ply == 'enter house' or ply == 'go in house') and 'Key' not in inventory:
+        print("You attempt to go into the house. A locked metal door blocks your path.")
+
+    else:
+        print("Your thoughts seem incomprehensible.")
+
+    while plypos == 18 and plydead == False and insidehouse == True:
+
+        ply = input().lower()
+
+        if globalcommands():
+            pass
+
+        elif ply == 'look north':
+            print("A wall that contains a photo of a family. The faces look to be scratched out besides one.")
+
+        elif ply == 'look east' and 'Lantern' not in inventory:
+            print("A shelf that contains a lantern.")
+
+        elif ply == 'look east' and 'Lantern' in inventory:
+            print("A shelf that used to have a lantern.")
+
+        elif ply == 'take lantern':
+            if 'Lantern' not in inventory:
+                print("You take the lantern from the shelf.\n\033[1;33mLANTERN added to your inventory.\033[0m")
+                inventory.append("Lantern")
+            else:
+                print("You have already taken the lantern. You cannot find another item to take.")
+
+        elif ply == 'look west':
+            print("Nothing but packed boxes. They are all sealed shut.")
+
+        elif ply == 'open boxes':
+            print("You attempt to open the boxes. They are all fully sealed.")
+
+        elif ply == 'break boxes':
+            print("You attempt to break the boxes. For some reason, they don't budge.")
+
+        elif ply == 'take boxes':
+            print("You attempt to take the boxes. They feel as if they are glued to the ground.")
+
+        elif ply == 'look south':
+            print("The area you were in before. The door is still open.")
+
+        elif ply == 'go north' or ply == 'go east' or ply == 'go west':
+            print("The house doesn't seem to be big enough to move in that direction.")
+
+        elif ply == 'go south' or ply == 'exit house' or ply == 'leave house' or ply == 'close door':
+            print("You exit the house. You make sure to close and lock the door on your way out.")
+            insidehouse = False
