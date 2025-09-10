@@ -481,6 +481,67 @@ def globalcommands():
         else:
             print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
         return True
+        
+def ventdesc():
+    global vent_start, vent_1, vent_2, vent_3, vent_4, vent_5, vent_6, vent_7, vent_8, vent_9, vent_10, vent_11, vent_12, vent_13, vent_14, vent_15, vent_16, vent_17, vent_18, vent_19, vent_20, vent_21, vent_22, vent_23, vent_24, vent_25, vent_26, vent_27, vent_28, ventpos, ventDirection
+    if ventpos = 0:
+        print(vent_start[ventDirection])
+    elif ventpos = 1:
+        print(vent_1[ventDirection])
+     elif ventpos = 2:
+        print(vent_2[ventDirection])
+    elif ventpos = 3:
+        print(vent_3[ventDirection])
+    elif ventpos = 4:
+        print(vent_4[ventDirection])
+    elif ventpos = 5:
+        print(vent_5[ventDirection])
+    elif ventpos = 6:
+        print(vent_6[ventDirection])
+    elif ventpos = 7:
+        print(vent_7[ventDirection])
+    elif ventpos = 8:
+        print(vent_8[ventDirection])
+    elif ventpos = 9:
+        print(vent_9[ventDirection])
+    elif ventpos = 10:
+        print(vent_10[ventDirection])
+    elif ventpos = 11:
+        print(vent_11[ventDirection])
+    elif ventpos = 12:
+        print(vent_12[ventDirection])
+    elif ventpos = 13:
+        print(vent_13[ventDirection])
+    elif ventpos = 14:
+        print(vent_14[ventDirection])
+    elif ventpos = 15:
+        print(vent_15[ventDirection])
+    elif ventpos = 16:
+        print(vent_16[ventDirection])
+    elif ventpos = 17:
+        print(vent_17[ventDirection])
+    elif ventpos = 18:
+        print(vent_18[ventDirection])
+    elif ventpos = 19:
+        print(vent_19[ventDirection])
+    elif ventpos = 20:
+        print(vent_20[ventDirection])
+    elif ventpos = 21:
+        print(vent_21[ventDirection])
+    elif ventpos = 22:
+        print(vent_22[ventDirection])
+    elif ventpos = 23:
+        print(vent_23[ventDirection])
+    elif ventpos = 24:
+        print(vent_24[ventDirection])
+    elif ventpos = 25:
+        print(vent_25[ventDirection])
+    elif ventpos = 26:
+        print(vent_26[ventDirection])
+    elif ventpos = 27:
+        print(vent_27[ventDirection])
+    elif ventpos = 28:
+        print(vent_28[ventDirection])
 
     elif ply.startswith("check "):
         item_to_equip = ply[6:].strip().title()
@@ -1416,6 +1477,26 @@ You are not where you were before.""")
 
 while plypos == 5 and plydead == False:
 
+    # vent descriptions go like this: 'To your left, ___________.\nTo your right, ___________.\nDirectly ahead of you is _________________.'
+    vent_start = {
+        0: 'To your left, there is a path with three different exits.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.', 
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.', 
+        2: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path with three different exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with three different exits.'
+    }
+    vent_1 = {
+        0: 'To your left, there is a path leading to an intersection.\nTo your right, there is a',
+        1: 'To your left, there is a path that ends in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.', 
+        2: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path leading to an intersection.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path leading to an intersection.'
+    }
+    vent_2 = {
+        0: 'To your left, there is a path leading to an intersection.\nTo your right, there is a',
+        1: 'To your left, there is a path that ends in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.', 
+        2: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path leading to an intersection.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path leading to an intersection.'
+    }
+        
     ply = input().lower()
 
     if globalcommands():
