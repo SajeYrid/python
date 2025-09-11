@@ -483,65 +483,8 @@ def globalcommands():
         return True
         
 def ventdesc():
-    global vent_start, vent_1, vent_2, vent_3, vent_4, vent_5, vent_6, vent_7, vent_8, vent_9, vent_10, vent_11, vent_12, vent_13, vent_14, vent_15, vent_16, vent_17, vent_18, vent_19, vent_20, vent_21, vent_22, vent_23, vent_24, vent_25, vent_26, vent_27, vent_28, ventpos, ventDirection
-    if ventpos = 0:
-        print(vent_start[ventDirection])
-    elif ventpos = 1:
-        print(vent_1[ventDirection])
-     elif ventpos = 2:
-        print(vent_2[ventDirection])
-    elif ventpos = 3:
-        print(vent_3[ventDirection])
-    elif ventpos = 4:
-        print(vent_4[ventDirection])
-    elif ventpos = 5:
-        print(vent_5[ventDirection])
-    elif ventpos = 6:
-        print(vent_6[ventDirection])
-    elif ventpos = 7:
-        print(vent_7[ventDirection])
-    elif ventpos = 8:
-        print(vent_8[ventDirection])
-    elif ventpos = 9:
-        print(vent_9[ventDirection])
-    elif ventpos = 10:
-        print(vent_10[ventDirection])
-    elif ventpos = 11:
-        print(vent_11[ventDirection])
-    elif ventpos = 12:
-        print(vent_12[ventDirection])
-    elif ventpos = 13:
-        print(vent_13[ventDirection])
-    elif ventpos = 14:
-        print(vent_14[ventDirection])
-    elif ventpos = 15:
-        print(vent_15[ventDirection])
-    elif ventpos = 16:
-        print(vent_16[ventDirection])
-    elif ventpos = 17:
-        print(vent_17[ventDirection])
-    elif ventpos = 18:
-        print(vent_18[ventDirection])
-    elif ventpos = 19:
-        print(vent_19[ventDirection])
-    elif ventpos = 20:
-        print(vent_20[ventDirection])
-    elif ventpos = 21:
-        print(vent_21[ventDirection])
-    elif ventpos = 22:
-        print(vent_22[ventDirection])
-    elif ventpos = 23:
-        print(vent_23[ventDirection])
-    elif ventpos = 24:
-        print(vent_24[ventDirection])
-    elif ventpos = 25:
-        print(vent_25[ventDirection])
-    elif ventpos = 26:
-        print(vent_26[ventDirection])
-    elif ventpos = 27:
-        print(vent_27[ventDirection])
-    elif ventpos = 28:
-        print(vent_28[ventDirection])
+    global vent_descriptions, ventpos, ventDirection
+    print((vent_descriptions[ventpos])[ventDirection])
 
     elif ply.startswith("check "):
         item_to_equip = ply[6:].strip().title()
@@ -1477,7 +1420,8 @@ You are not where you were before.""")
 
 while plypos == 5 and plydead == False:
 
-    # vent descriptions go like this: 'To your left, ___________.\nTo your right, ___________.\nDirectly ahead of you is _________________.'
+    # vent descriptions go like this: 'To your left, ___________.\nTo your right, ___________.\nDirectly ahead of you is _________________.' 
+    vent_descriptions = []
     vent_start = {
         0: 'To your left, there is a path with three different exits.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.', 
         1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.', 
@@ -1485,37 +1429,214 @@ while plypos == 5 and plydead == False:
         3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with three different exits.'
     }
     vent_1 = {
-        0: 'To your left, there is a path leading to an intersection.\nTo your right, there is a',
+        0: 'To your left, there is a path ending in an intersection.\nTo your right, there is a long path ending in a left turn.\nDirectly ahead of you is a path that ends in a right turn.',
         1: 'To your left, there is a path that ends in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.', 
-        2: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path leading to an intersection.\nDirectly ahead of you is a wall.', 
-        3: 'To your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path leading to an intersection.'
+        2: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path ending in an intersection.'
     }
     vent_2 = {
-        0: 'To your left, there is a path leading to an intersection.\nTo your right, there is a',
-        1: 'To your left, there is a path that ends in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.', 
-        2: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path leading to an intersection.\nDirectly ahead of you is a wall.', 
-        3: 'To your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path leading to an intersection.'
+        0: 'To your left, there is a wall.\nTo your right, there is a very long stretch with several turns.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a very long stretch with several turns.', 
+        2: 'To your left, there is a very long stretch with several turns.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in an intersection.', 
+        3: 'To your left, there is a path ending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
     }
-        
+    vent_3 = {
+        0: 'To your left, there is a path ending in a right turn.\nTo your right, there is a long, straight path with four different exits.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with four different exits.', 
+        2: 'To your left, there is a long, straight path with four different exits.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.'
+    }
+    vent_4 = {
+        0: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a long, straight path with three different exits.\nDirectly ahead of you is a path ending in an intersection.', 
+        1: 'To your left is a path ending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with three different exits.', 
+        2: 'To your left, there is a long, straight path with three different exits.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a long path leading to an intersection.\nDirectly ahead of you is a long path ending in a right turn.'
+    }
+    vent_5 = {
+        0: 'To your left, there is a long straight path with three different exits.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a wall.', 
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long straight path with three different exits.', 
+        2: 'To your left, there is a long path with two different exits.\nTo your right, there is a long straight path with three different exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with two different exits.'
+    }
+    vent_6 = {
+        0: 'To your left, there is a long, straight path with two different exits.\nTo your right, there is a path with three different exits.\nDirectly ahead of you is a wall.\nSomething seems off about here.', 
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with three different exits.\nSomething seems off about here.', 
+        2: 'To your left, there is a path with three different exits.\nTo your right, there is a long, straight path with two different exits.\nDirectly ahead of you is a wall.\nSomething seems off about here.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with two different exits.\nSomething seems off about here.'
+    }
+    vent_7 = {
+        0: 'To your left, you see a light.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        1: 'You are surrounded by walls. There is a bright light shining behind you.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a light.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a light.'
+    }
+    vent_8 = {
+        0: 'To your left, there is a blinding light that singes your retinas.\nTo your right, there is a dead end.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a dead end.', 
+        2: 'To your left, there is a dead end.\nTo your right, there is a blinding light that singes your retinas.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a blinding light that singes your retinas.'
+    }
+    vent_9 = {
+        0: 'To your left, there is a long path with three exits.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.',
+        1: 'To your left, there is a path ending in a left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path with three exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a long path with three exits.'
+    }
+    vent_10 = {
+        0: 'To your left, there is a long path ending in a dead end.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path ending in a dead end.\nDirectly ahead of you is a path ending in a right turn.', 
+        3: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a dead end.'
+    }
+    vent_11 = {
+        0: 'To your left, there is a path ending in a dead end.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        2: 'To your left, there is a a path ending in a right turn.\nTo your right, there is a path ending in a dead end.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a dead end.'
+    }
+    vent_12 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a right turn.', 
+        2: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        3: 'You are surrounded by walls.'
+    }
+    vent_13 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a long path ending in a right turn.',
+        1: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a dead end.\nDirectly ahead of you is a long path with two different exits.', 
+        2: 'To your left, there is a long path with two different exits.\nTo your right, there is a wall.\nDirectly ahead of you is a dead end.', 
+        3: 'To your left, there is a dead end.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.'
+    }
+    vent_14 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.',
+        1: 'To your left, there is a path ending in a right turn.\nTo your right, there is a path with a left turn.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with a left turn.', 
+        3: 'To your left, there is a path with a left turn.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.'
+    }
+    vent_15 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a long path with a left turn.\nDirectly ahead of you is a long path with two different exits.', 
+        2: 'To your left, there is a long path with two different exits.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with a left turn.', 
+        3: 'To your left, there is a long path with a left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
+    }
+    vent_16 = {
+        0: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path with two different exits.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with two different exits.', 
+        2: 'To your left, there is a path with two different exits.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.'
+    }
+    vent_17 = {
+        0: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a long path ending in an intersection.\nDirectly ahead of you is a path ending in a left turn.', 
+        2: 'To your left, there is a path ending in a left turn.\nTo your right, there is a long path ending in a left turn.\nDirectly ahead of you is a long path ending in an intersection.', 
+        3: 'To your left, there is a long path ending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.'
+    }
+    vent_18 = {
+        0: 'To your left, there is a long path with two different exits.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.',
+        1: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a long path with two different exits.'
+    }
+    vent_19 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a long path ending in a right turn.', 
+        2: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        3: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
+    }
+    vent_20 = {
+        0: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        2: 'To your left, there is a path ending in a right turn.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.'
+    }
+    vent_21 = {
+        0: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a long path with two exits. You can see a fan spinning at the end.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path ending in a left turn.\nDirectly ahead of you is a long path with two exits. You can see a fan spinning at the end.', 
+        3: 'To your left, there is a long path with two exits. You can see a fan spinning at the end.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.'
+    }
+    vent_22 = {
+        0: 'To your left, there is a long, straight path with two exits.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a path ending in a left turn.',
+        1: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path leading to a fan that is blowing air in your face.\nDirectly ahead of you is a path ending in a left turn.', 
+        2: 'To your left, there is a path ending in a left turn.\nTo your right, there is a long, straight path with two exits.\nDirectly ahead of you is a path leading to a fan that is blowing air in your face.', 
+        3: 'To your left, there is a path leading to a fan that is blowing air in your face.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a long, straight path with two exits.'
+    }
+    vent_23 = {
+        0: 'To your left, there is a long, straight path with four exits.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a dead end.',
+        1: 'To your left, there is a path ending in a dead end.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long, straight path with four exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path ending in a dead end.\nDirectly ahead of you is a long, straight path with four exits.'
+    }
+    vent_24 = {
+        0: 'You are surrounded by walls.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        3: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
+    }
+    vent_25 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with two exits.',
+        1: 'To your left, there is a long path with two exits.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'You are surrounded by walls.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a long path with two exits.\nDirectly ahead of you is a wall.'
+    }
+    vent_26 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with three exits.',
+        1: 'To your left, there is a long path with three exits.\nTo your right, there is a path ending at a fan spinning at an alarming speed.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending at a fan spinning at an alarming speed.', 
+        3: 'To your left, there is a path ending at a fan spinning at an alarming speed.\nTo your right, there is a long path with three exits.\nDirectly ahead of you is a wall.'
+    }
+    vent_27 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with three exits.',
+        1: 'To your left, there is a long, straight path with three exits.\nTo your right, there is a fan that seems to have stopped spinning.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a fan that seems to have stopped spinning.', 
+        3: 'To your left, there is a fan that seems to have stopped spinning.\nTo your right, there is a long, straight path with three exits.\nDirectly ahead of you is a wall.'
+    }
+    vent_28 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in an intersection.',
+        1: 'To your left, there is a path ending in an intersection.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in an intersection.', 
+        3: 'To your left, there is a path ending in an intersection.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a wall.'
+    }
+    vent_descriptions.append(vent_start)
+    vent_descriptions.append(vent_1)
+    vent_descriptions.append(vent_2)
+    vent_descriptions.append(vent_3)
+    vent_descriptions.append(vent_4)
+    vent_descriptions.append(vent_5)
+    vent_descriptions.append(vent_6)
+    vent_descriptions.append(vent_7)
+    vent_descriptions.append(vent_8)
+    vent_descriptions.append(vent_9)
+    vent_descriptions.append(vent_10)
+    vent_descriptions.append(vent_11)
+    vent_descriptions.append(vent_12)
+    vent_descriptions.append(vent_13)
+    vent_descriptions.append(vent_14)
+    vent_descriptions.append(vent_15)
+    vent_descriptions.append(vent_16)
+    vent_descriptions.append(vent_17)
+    vent_descriptions.append(vent_18)
+    vent_descriptions.append(vent_19)
+    vent_descriptions.append(vent_20)
+    vent_descriptions.append(vent_21)
+    vent_descriptions.append(vent_22)
+    vent_descriptions.append(vent_23)
+    vent_descriptions.append(vent_24)
+    vent_descriptions.append(vent_25)
+    vent_descriptions.append(vent_26)
+    vent_descriptions.append(vent_27)
+    vent_descriptions.append(vent_28)
+    
     ply = input().lower()
 
     if globalcommands():
         pass
 
     elif ply == 'left' or ply == 'go left':
-        
-        if ventpos == 0:
-            
-            if ventDirection == 0:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path leading to an intersection.\nWhere do you go?')
-                ventpos = 1
-                ventDirection = 3
-                
-            elif ventDirection == 1:
+
                 print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
 
             elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a path ending in another left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
+                print('You go left.\nTo your left, there is a path ending in a left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
                 ventpos = 9
                 ventDirection = 1
 
@@ -1565,7 +1686,7 @@ while plypos == 5 and plydead == False:
         elif ventpos == 3:
 
             if ventDirection == 0:
-                print('You go left.\nTo your left is a pathending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
+                print('You go left.\nTo your left is a path ending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
                 ventpos = 2
                 ventDirection = 3
             
@@ -1627,7 +1748,7 @@ while plypos == 5 and plydead == False:
                 print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with two different exits.')
             
             elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. Suprinsingly, the galvanized steel sheet dissolves behind your force. As your momentum carries you through, the wall reforms behind you.\mTo your left, you see a light.\nTo your right, there is a wall.\nDirectly ahead of you, there is a wall.')
+                print('You ram your shoulder into the wall on your left. Suprisingly, the galvanized steel sheet dissolves behind your force. As your momentum carries you through, the wall reforms behind you.\mTo your left, you see a light.\nTo your right, there is a wall.\nDirectly ahead of you there is a wall.')
                 ventpos = 7
                 ventDirection = 0
 
@@ -1652,7 +1773,7 @@ while plypos == 5 and plydead == False:
                 print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
 
             elif ventDirection == 3:
-                print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
+                print('You try to ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
 
 
         elif ventpos == 8:
