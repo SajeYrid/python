@@ -486,7 +486,7 @@ def ventdesc():
     global vent_descriptions, ventpos, ventDirection
     print((vent_descriptions[ventpos])[ventDirection])
 
-    elif ply.startswith("check "):
+    if ply.startswith("check "):
         item_to_equip = ply[6:].strip().title()
         if item_to_equip in inventory:
             print("\033[1;33m" + items[item_to_equip] + "\033[0m")
