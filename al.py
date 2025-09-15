@@ -643,8 +643,7 @@ def globalcommands():
         else:
             print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
         return True
-
-    elif ply.startswith("check "):
+    if ply.startswith("check "):
         item_to_equip = ply[6:].strip().title()
         if item_to_equip in inventory:
             print("\033[1;33m" + items[item_to_equip] + "\033[0m")
@@ -653,7 +652,788 @@ def globalcommands():
         return True
     else:
         return False
+        
+def ventdesc():
+    global vent_descriptions, ventpos, ventDirection
+    print((vent_descriptions[ventpos])[ventDirection])
 
+def ventmove_left():
+    global vent_walls, ventdesc, ventpos, ventDirection
+    if (vent_walls[ventpos])[(ventDirection -1) % 4] == True:
+        print('You slam your shoulder into the galvanized steel sheet on your left. It doesn\'t budge.')
+    elif (vent_walls[ventpos])[(ventDirection - 1) % 4] == False:
+        if ventpos == 6 and ventDirection == 1:
+            print('You slam your shoulder into the galvanized steel sheet on your left. Suprisingly, you pass right through it.')
+            ventdesc()
+            ventDirection = int((ventDirection - 1) % 4)
+        elif ventpos == 27 and ventDirection == 3:
+            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected in two. \nGame Over.')
+            plydead = True
+        elif ventpos == 8 and ventDirection == 0:
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            plypos = 6
+        else:
+            print("You go left.")
+            if ventDirection == 0:
+                ventDirection = 3
+                if ventpos == 0:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 7:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 12
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 22
+                    ventdesc()
+            elif ventDirection == 1:
+                ventDirection = 0
+                if ventpos == 1:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 24
+                    ventdesc()
+                elif ventpos == 25:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 27:
+                    ventpos = 26
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 17
+                    ventdesc()
+            elif ventDirection == 2:
+                ventDirection = 1
+                if ventpos == 0:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 2:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 8:
+                    ventpos = 7
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 12:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 23
+                    ventdesc()
+            elif ventDirection == 3:
+                ventDirection = 2
+                if ventpos == 2:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 25
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 24:
+                    ventpos = 23
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 27
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 4
+                    ventdesc()
+
+def ventmove_forward():
+    global vent_walls, ventdesc, ventpos, ventDirection
+    if (vent_walls[ventpos])[ventDirection % 4] == True:
+        print('You slam your face into the galvanized steel sheet in front of you. It doesn\'t budge.')
+    elif (vent_walls[ventpos])[ventDirection % 4] == False:
+        if ventpos == 6 and ventDirection == 0:
+            print('You slam your face into the galvanized steel sheet in front of you. Suprisingly, you pass right through it.')
+            ventdesc()
+        elif ventpos == 27 and ventDirection == 2:
+            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
+            plydead = True
+        elif ventpos == 8 and ventDirection == 3:
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            plypos = 6
+        else:
+            print('You crawl forward.')
+            if ventDirection == 0:
+                if ventpos == 1:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 24
+                    ventdesc()
+                elif ventpos == 25:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 27:
+                    ventpos = 26
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 17
+                    ventdesc()
+            elif ventDirection == 1:
+                if ventpos == 0:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 2:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 8:
+                    ventpos = 7
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 12:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 23
+                    ventdesc()
+            elif ventDirection == 2:
+                if ventpos == 2:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 25
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 24:
+                    ventpos = 23
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 27
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 4
+                    ventdesc()
+            elif ventDirection == 3:
+                if ventpos == 0:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 7:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 12
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 22
+                    ventdesc()
+
+def ventmove_right():
+    global vent_walls, ventdesc, ventpos, ventDirection
+    if (vent_walls[ventpos])[(ventDirection + 1) % 4] == True:
+        print('You slam your shoulder into the galvanized steel sheet in front of you. It doesn\'t budge.')
+    elif (vent_walls[ventpos])[(ventDirection + 1) % 4] == False:
+        if ventpos == 6 and ventDirection == 3:
+            print('You slam your face into the galvanized steel sheet in front of you. Suprisingly, you pass right through it.')
+            ventdesc()
+        elif ventpos == 27 and ventDirection == 1:
+            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
+            plydead = True
+        elif ventpos == 8 and ventDirection == 2:
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            plypos = 6
+        else:
+            print('You go right.')
+            if ventDirection == 0:
+                ventDirection = 1
+                if ventpos == 0:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 2:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 8:
+                    ventpos = 7
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 12:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 23
+                    ventdesc()
+            elif ventDirection == 1:
+                ventDirection = 2
+                if ventpos == 2:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 25
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 24:
+                    ventpos = 23
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 27
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 4
+                    ventdesc()
+            elif ventDirection == 2:
+                ventDirection = 3
+                if ventpos == 0:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 7:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 12
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 22
+                    ventdesc()
+            elif ventDirection == 3:
+                ventDirection = 0
+                if ventpos == 1:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 24
+                    ventdesc()
+                elif ventpos == 25:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 27:
+                    ventpos = 26
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 17
+                    ventdesc()
+
+def ventmove_back():
+    global vent_walls, ventdesc, ventpos, ventDirection
+    if (vent_walls[ventpos])[(ventDirection - 2) % 4] == True:
+        print('You crawl backwards into the galvanized steel sheet behind you. It doesn\'t budge.')
+    elif (vent_walls[ventpos])[(ventDirection - 2) % 4] == False:
+        if ventpos == 6 and ventDirection == 0:
+            print('You crawl backwards into the galvanized steel sheet behind you. Suprisingly, you pass right through it.')
+            ventdesc()
+        elif ventpos == 27 and ventDirection == 2:
+            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
+            plydead = True
+        elif ventpos == 8 and ventDirection == 3:
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            plypos = 6
+        else:
+            print('You crawl backward.')
+            if ventDirection == 0:
+                if ventpos == 2:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 25
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 24:
+                    ventpos = 23
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 27
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 4
+                    ventdesc()
+            elif ventDirection == 1:
+                if ventpos == 0:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 7:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 10:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 12
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 21:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 22
+                    ventdesc()
+            elif ventDirection == 2:
+                if ventpos == 1:
+                    ventpos = 2
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 28
+                    ventdesc()
+                elif ventpos == 9:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 14
+                    ventdesc()
+                elif ventpos == 14:
+                    ventpos = 15
+                    ventdesc()
+                elif ventpos == 18:
+                    ventpos = 19
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 23:
+                    ventpos = 24
+                    ventdesc()
+                elif ventpos == 25:
+                    ventpos = 13
+                    ventdesc()
+                elif ventpos == 26:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 27:
+                    ventpos = 26
+                    ventdesc()
+                elif ventpos == 28:
+                    ventpos = 17
+                    ventdesc()
+            elif ventDirection == 3:
+                if ventpos == 0:
+                    ventpos = 9
+                    ventdesc()
+                elif ventpos == 1:
+                    ventpos = 0
+                    ventdesc()
+                elif ventpos == 2:
+                    ventpos = 3
+                    ventdesc()
+                elif ventpos == 3:
+                    ventpos = 4
+                    ventdesc()
+                elif ventpos == 4:
+                    ventpos = 5
+                    ventdesc()
+                elif ventpos == 5:
+                    ventpos = 6
+                    ventdesc()
+                elif ventpos == 6:
+                    ventpos = 22
+                    ventdesc()
+                elif ventpos == 8:
+                    ventpos = 7
+                    ventdesc()
+                elif ventpos == 11:
+                    ventpos = 10
+                    ventdesc()
+                elif ventpos == 12:
+                    ventpos = 11
+                    ventdesc()
+                elif ventpos == 13:
+                    ventpos = 1
+                    ventdesc()
+                elif ventpos == 15:
+                    ventpos = 16
+                    ventdesc()
+                elif ventpos == 16:
+                    ventpos = 17
+                    ventdesc()
+                elif ventpos == 17:
+                    ventpos = 18
+                    ventdesc()
+                elif ventpos == 19:
+                    ventpos = 20
+                    ventdesc()
+                elif ventpos == 20:
+                    ventpos = 21
+                    ventdesc()
+                elif ventpos == 22:
+                    ventpos = 23
+                    ventdesc()
+                
 # the unholy and devilish and evil while loops
 # Title screen
 
@@ -1575,198 +2355,492 @@ You are not where you were before.""")
 
 while plypos == 5 and plydead == False:
 
+    # vent descriptions go like this: 'To your left, ___________.\nTo your right, ___________.\nDirectly ahead of you is _________________.' 
+    vent_descriptions = []
+    vent_walls = []
+    
+    vent_start = {
+        0: 'To your left, there is a path with three different exits.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.', 
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.', 
+        2: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path with three different exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with three different exits.'
+    }
+    
+    vent_1 = {
+        0: 'To your left, there is a path ending in an intersection.\nTo your right, there is a long path ending in a left turn.\nDirectly ahead of you is a path that ends in a right turn.',
+        1: 'To your left, there is a path that ends in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.', 
+        2: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path ending in an intersection.'
+    }
+    
+    vent_2 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a very long stretch with several turns.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a very long stretch with several turns.', 
+        2: 'To your left, there is a very long stretch with several turns.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in an intersection.', 
+        3: 'To your left, there is a path ending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_3 = {
+        0: 'To your left, there is a path ending in a right turn.\nTo your right, there is a long, straight path with four different exits.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with four different exits.', 
+        2: 'To your left, there is a long, straight path with four different exits.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.'
+    }
+    
+    vent_4 = {
+        0: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a long, straight path with three different exits.\nDirectly ahead of you is a path ending in an intersection.', 
+        1: 'To your left, there is a path ending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with three different exits.', 
+        2: 'To your left, there is a long, straight path with three different exits.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a long path leading to an intersection.\nDirectly ahead of you is a long path ending in a right turn.'
+    }
+    
+    vent_5 = {
+        0: 'To your left, there is a long straight path with three different exits.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a wall.', 
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long straight path with three different exits.', 
+        2: 'To your left, there is a long path with two different exits.\nTo your right, there is a long straight path with three different exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with two different exits.'
+    }
+    
+    vent_6 = {
+        0: 'To your left, there is a long, straight path with two different exits.\nTo your right, there is a path with three different exits.\nDirectly ahead of you is a wall.\nSomething seems off about here.', 
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with three different exits.\nSomething seems off about here.', 
+        2: 'To your left, there is a path with three different exits.\nTo your right, there is a long, straight path with two different exits.\nDirectly ahead of you is a wall.\nSomething seems off about here.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with two different exits.\nSomething seems off about here.'
+    }
+    
+    vent_7 = {
+        0: 'To your left, you see a light.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        1: 'You are surrounded by walls. There is a bright light shining behind you.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a light.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a light.'
+    }
+    
+    vent_8 = {
+        0: 'To your left, there is a blinding light that singes your retinas.\nTo your right, there is a dead end.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a dead end.', 
+        2: 'To your left, there is a dead end.\nTo your right, there is a blinding light that singes your retinas.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a blinding light that singes your retinas.'
+    }
+    
+    vent_9 = {
+        0: 'To your left, there is a long path with three exits.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.',
+        1: 'To your left, there is a path ending in a left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path with three exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a long path with three exits.'
+    }
+    
+    vent_10 = {
+        0: 'To your left, there is a long path ending in a dead end.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path ending in a dead end.\nDirectly ahead of you is a path ending in a right turn.', 
+        3: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a dead end.'
+    }
+    
+    vent_11 = {
+        0: 'To your left, there is a path ending in a dead end.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        2: 'To your left, there is a a path ending in a right turn.\nTo your right, there is a path ending in a dead end.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a dead end.'
+    }
+    
+    vent_12 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a right turn.', 
+        2: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        3: 'You are surrounded by walls.'
+    }
+    
+    vent_13 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a long path ending in a right turn.',
+        1: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a dead end.\nDirectly ahead of you is a long path with two different exits.', 
+        2: 'To your left, there is a long path with two different exits.\nTo your right, there is a wall.\nDirectly ahead of you is a dead end.', 
+        3: 'To your left, there is a dead end.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_14 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.',
+        1: 'To your left, there is a path ending in a right turn.\nTo your right, there is a path with a left turn.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with a left turn.', 
+        3: 'To your left, there is a path with a left turn.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_15 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a long path with a left turn.\nDirectly ahead of you is a long path with two different exits.', 
+        2: 'To your left, there is a long path with two different exits.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with a left turn.', 
+        3: 'To your left, there is a long path with a left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_16 = {
+        0: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path with two different exits.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path with two different exits.', 
+        2: 'To your left, there is a path with two different exits.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.'
+    }
+    
+    vent_17 = {
+        0: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a long path ending in an intersection.\nDirectly ahead of you is a path ending in a left turn.', 
+        2: 'To your left, there is a path ending in a left turn.\nTo your right, there is a long path ending in a left turn.\nDirectly ahead of you is a long path ending in an intersection.', 
+        3: 'To your left, there is a long path ending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.'
+    }
+    
+    vent_18 = {
+        0: 'To your left, there is a long path with two different exits.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.',
+        1: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path with two different exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a long path with two different exits.'
+    }
+    
+    vent_19 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a long path ending in a right turn.', 
+        2: 'To your left, there is a long path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        3: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_20 = {
+        0: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        2: 'To your left, there is a path ending in a right turn.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a left turn.'
+    }
+    
+    vent_21 = {
+        0: 'To your left, there is a long path ending in a left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.',
+        1: 'To your left, there is a wall.\nTo your right, there is a long path with two exits. You can see a fan spinning at the end.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long path ending in a left turn.\nDirectly ahead of you is a long path with two exits. You can see a fan spinning at the end.', 
+        3: 'To your left, there is a long path with two exits. You can see a fan spinning at the end.\nTo your right, there is a wall.\nDirectly ahead of you is a long path ending in a left turn.'
+    }
+    
+    vent_22 = {
+        0: 'To your left, there is a long, straight path with two exits.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a path ending in a left turn.',
+        1: 'To your left, there is a path ending in a left turn.\nTo your right, there is a path leading to a fan that is blowing air in your face.\nDirectly ahead of you is a path ending in a left turn.', 
+        2: 'To your left, there is a path ending in a left turn.\nTo your right, there is a long, straight path with two exits.\nDirectly ahead of you is a path leading to a fan that is blowing air in your face.', 
+        3: 'To your left, there is a path leading to a fan that is blowing air in your face.\nTo your right, there is a path ending in a left turn.\nDirectly ahead of you is a long, straight path with two exits.'
+    }
+    
+    vent_23 = {
+        0: 'To your left, there is a long, straight path with four exits.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a dead end.',
+        1: 'To your left, there is a path ending in a dead end.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a long, straight path with four exits.\nDirectly ahead of you is a wall.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a path ending in a dead end.\nDirectly ahead of you is a long, straight path with four exits.'
+    }
+    
+    vent_24 = {
+        0: 'You are surrounded by walls.',
+        1: 'To your left, there is a wall.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in a right turn.', 
+        3: 'To your left, there is a path ending in a right turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_25 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with two exits.',
+        1: 'To your left, there is a long path with two exits.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.', 
+        2: 'You are surrounded by walls.', 
+        3: 'To your left, there is a wall.\nTo your right, there is a long path with two exits.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_26 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with three exits.',
+        1: 'To your left, there is a long path with three exits.\nTo your right, there is a path ending at a fan spinning at an alarming speed.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending at a fan spinning at an alarming speed.', 
+        3: 'To your left, there is a path ending at a fan spinning at an alarming speed.\nTo your right, there is a long path with three exits.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_27 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long, straight path with three exits.',
+        1: 'To your left, there is a long, straight path with three exits.\nTo your right, there is a fan that seems to have stopped spinning.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a fan that seems to have stopped spinning.', 
+        3: 'To your left, there is a fan that seems to have stopped spinning.\nTo your right, there is a long, straight path with three exits.\nDirectly ahead of you is a wall.'
+    }
+    
+    vent_28 = {
+        0: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in an intersection.',
+        1: 'To your left, there is a path ending in an intersection.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a wall.', 
+        2: 'To your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in an intersection.', 
+        3: 'To your left, there is a path ending in an intersection.\nTo your right, there is a path ending in an intersection.\nDirectly ahead of you is a wall.'
+    }
+
+    vent_walls_start = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+    
+    vent_walls_1 = { 
+        0: True, 
+        1: True, 
+        2: False, 
+        3: True
+    }
+
+    vent_walls_2 = { 
+        0: True, 
+        1: False, 
+        2: False, 
+        3: True
+    }
+
+    vent_walls_3 = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_4 = { 
+        0: False, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_5 = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_6 = { 
+        0: False, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_7 = { 
+        0: True, 
+        1: True, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_8 = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_9 = { 
+        0: False, 
+        1: True, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_10 = { 
+        0: True, 
+        1: True, 
+        2: False, 
+        3: False
+    }
+
+    vent_walls_11 = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_12 = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: True
+    }
+
+    vent_walls_13 = { 
+        0: False, 
+        1: False, 
+        2: False, 
+        3: True
+    }
+
+    vent_walls_14 = { 
+        0: False, 
+        1: True, 
+        2: False, 
+        3: True
+    }
+
+    vent_walls_15 = { 
+        0: True, 
+        1: False, 
+        2: False, 
+        3: True
+    }
+
+    vent_walls_16 = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_17 = { 
+        0: True, 
+        1: False, 
+        2: False, 
+        3: False
+    }
+
+    vent_walls_18 = { 
+        0: False, 
+        1: True, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_19 = { 
+        0: False, 
+        1: True, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_20 = { 
+        0: True, 
+        1: False, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_21 = { 
+        0: False, 
+        1: False, 
+        2: True, 
+        3: True
+    }
+
+    vent_walls_22 = { 
+        0: False, 
+        1: False, 
+        2: False, 
+        3: False
+    }
+
+    vent_walls_23 = { 
+        0: False, 
+        1: True, 
+        2: True, 
+        3: False
+    }
+
+    vent_walls_24 = { 
+        0: True, 
+        1: True, 
+        2: False, 
+        3: True
+    }
+
+    vent_walls_25 = {
+        0: False, 
+        1: True, 
+        2: True, 
+        3: True
+    }
+
+    vent_walls_26 = {
+        0: False,
+        1: True,
+        2: False,
+        3: True
+    }
+    
+    vent_walls_27 = {
+        0: False,
+        1: True,
+        2: False,
+        3: True
+    }
+    
+    vent_walls_28 = {
+        0: False,
+        1: True,
+        2: False,
+        3: True
+    }
+    
+    vent_descriptions.append(vent_start)
+    vent_descriptions.append(vent_1)
+    vent_descriptions.append(vent_2)
+    vent_descriptions.append(vent_3)
+    vent_descriptions.append(vent_4)
+    vent_descriptions.append(vent_5)
+    vent_descriptions.append(vent_6)
+    vent_descriptions.append(vent_7)
+    vent_descriptions.append(vent_8)
+    vent_descriptions.append(vent_9)
+    vent_descriptions.append(vent_10)
+    vent_descriptions.append(vent_11)
+    vent_descriptions.append(vent_12)
+    vent_descriptions.append(vent_13)
+    vent_descriptions.append(vent_14)
+    vent_descriptions.append(vent_15)
+    vent_descriptions.append(vent_16)
+    vent_descriptions.append(vent_17)
+    vent_descriptions.append(vent_18)
+    vent_descriptions.append(vent_19)
+    vent_descriptions.append(vent_20)
+    vent_descriptions.append(vent_21)
+    vent_descriptions.append(vent_22)
+    vent_descriptions.append(vent_23)
+    vent_descriptions.append(vent_24)
+    vent_descriptions.append(vent_25)
+    vent_descriptions.append(vent_26)
+    vent_descriptions.append(vent_27)
+    vent_descriptions.append(vent_28)
+
+    vent_walls.append(vent_walls_start)
+    vent_walls.append(vent_walls_1)
+    vent_walls.append(vent_walls_2)
+    vent_walls.append(vent_walls_3)
+    vent_walls.append(vent_walls_4)
+    vent_walls.append(vent_walls_5)
+    vent_walls.append(vent_walls_6)
+    vent_walls.append(vent_walls_7)
+    vent_walls.append(vent_walls_8)
+    vent_walls.append(vent_walls_9)
+    vent_walls.append(vent_walls_10)
+    vent_walls.append(vent_walls_11)
+    vent_walls.append(vent_walls_12)
+    vent_walls.append(vent_walls_13)
+    vent_walls.append(vent_walls_14)
+    vent_walls.append(vent_walls_15)
+    vent_walls.append(vent_walls_16)
+    vent_walls.append(vent_walls_17)
+    vent_walls.append(vent_walls_18)
+    vent_walls.append(vent_walls_19)
+    vent_walls.append(vent_walls_20)
+    vent_walls.append(vent_walls_21)
+    vent_walls.append(vent_walls_22)
+    vent_walls.append(vent_walls_23)
+    vent_walls.append(vent_walls_24)
+    vent_walls.append(vent_walls_25)
+    vent_walls.append(vent_walls_26)
+    vent_walls.append(vent_walls_27)
+    vent_walls.append(vent_walls_28)
+    
     ply = input().lower()
 
     if globalcommands():
         pass
 
     elif ply == 'left' or ply == 'go left':
-        
-        if ventpos == 0:
-            
-            if ventDirection == 0:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a path that ends in a right turn.\nDirectly ahead of you is a path leading to an intersection.\nWhere do you go?')
-                ventpos = 1
-                ventDirection = 3
-                
-            elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
+        ventmove_left()
 
-            elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a path ending in another left turn.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
-                ventpos = 9
-                ventDirection = 1
+    elif ply == 'forward' or ply == 'go forward':
+        ventmove_forward()
 
-            elif ventDirection == 3:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-            
+    elif ply == 'right' or ply == 'go right':
+        ventmove_right()
 
-        elif ventpos == 1:
-
-            if ventDirection == 0:
-                print('You go left.\nTo your left, There is a dead end.\nTo your right, there is a long path ending in a right turn.\nDirectly ahead of you is a wall.')
-                ventpos = 13
-                ventDirection = 3
-            
-            elif ventDirection == 1:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a very long stretch with several turns.\nDirectly ahead of you is a wall.')
-                ventpos = 2
-                ventDirection = 0
-
-            elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path ending in another left turn.')
-                ventpos = 0
-                ventDirection = 1
-
-            elif ventDirection == 3:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-            
-        elif ventpos == 2:
-            
-            if ventDirection == 0:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-            elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-            elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long straight path with four different exits.')
-                ventpos = 3
-                ventDirection = 1
-                
-            elif ventDirection == 3:
-                print('You go left.\nTo your left, there is a long path ending in another left turn.\nTo your right, there is a path leading to an intersection.\nDirectly ahead of you is a wall.')
-                ventpos = 1
-                ventDirection = 2
-            
-            
-        elif ventpos == 3:
-
-            if ventDirection == 0:
-                print('You go left.\nTo your left is a pathending in an intersection.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
-                ventpos = 2
-                ventDirection = 3
-            
-            elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-            elif ventDirection == 2:
-                print('You go left.\nTo your left is a path ending in an interection.\nTo your right, there is a wall. directly ahead og you is a long straight path with three different exits.')
-                ventpos = 4
-                ventDirection = 1
-
-            elif ventDirection == 3:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-            
-            
-        elif ventpos == 4:
-
-            if ventDirection == 0:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path leading to a right turn.')
-                ventpos = 3
-                ventDirection = 3
-            
-            elif ventDirection == 1:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a path leading to an intersection.')
-                ventpos = 28
-                ventDirection = 0
-                
-            elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long straight path with three different exits.')
-                ventpos = 5
-                ventDirection = 1
-                
-            elif ventDirection == 3:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-            
-            
-        elif ventpos == 5:
-
-            if ventDirection == 0:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a long path leading to an intersection.\nDirectly ahead of you is a long path leading to a right turn.')
-                ventpos = 4
-                ventDirection = 3
-            
-            elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-            elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with three different exits.\nSomething seems off about here.')
-                ventpos = 6
-                ventDirection = 1
-
-            elif ventDirection == 3:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-            
-
-        elif ventpos == 6:
-
-            if ventDirection == 0:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a long path with two different exits.')
-            
-            elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. Suprinsingly, the galvanized steel sheet dissolves behind your force. As your momentum carries you through, the wall reforms behind you.\mTo your left, you see a light.\nTo your right, there is a wall.\nDirectly ahead of you, there is a wall.')
-                ventpos = 7
-                ventDirection = 0
-
-            elif ventDirection == 2:
-                print('You go left.\nTo your left, there is a path ending in another left turn.\nTo your right, there is a path leading to a fan that is blowing air in your face.\nDirectly ahead of you is a path ending in a left turn.')
-
-            elif ventDirection == 3:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-        
-        elif ventpos == 7:
-
-            if ventDirection == 0:
-                print('You go left, into the light.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is a blinding light that singes your irises.')
-                ventpos = 8
-                ventDirection = 3
-
-            elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-            elif ventDirection == 2:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-            elif ventDirection == 3:
-                print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
-
-
-        elif ventpos == 8:
-
-            if ventDirection == 0:
-                print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of history themed gift shop. Knick-knacks line the walls. You are facing west.')
-                
-            elif ventDirection == 1:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-            elif ventDirection == 2:
-                print('You go left.\nYou are surrounded by walls.')
-
-            elif ventDirection == 3:
-                print('You ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge.')
-
-
-        elif ventpos == 9:
-
-            if ventDirection == 0:
-                print('You go left.\nTo your left, there is a wall.\nTo your right, there is a wall.\nDirectly ahead of you is path with three different exits.')
-
-            elif ventDirection == 1:
-                print('You go left.\nTo your left, There is a long path ending in a dead end.\nTo your right, there is a wall.\nDirectly ahead of you is a wall.')
-
-            elif ventDirection == 2:
-                print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
-
-            elif ventDirection == 3:
-                print('You try ram your shoulder into the wall on your left. The galvanized steel sheet doesn\'t budge like it did last time.')
-                
-        elif ventpos == 10:
-            print("ayo close da game, we ain't done with it yet.")
-
-    else:
-        print("ayo close da game, we ain't done with it yet.")
+    elif ply == 'back' or ply == 'go back':
+        ventmove_back()
 
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
