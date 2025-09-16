@@ -2842,6 +2842,20 @@ while plypos == 5 and plydead == False:
     elif ply == 'back' or ply == 'go back':
         ventmove_back()
 
+    elif ply == 'turn left':
+        print('You turn left.')
+        ventDirection = (ventDirection - 1) % 4
+        ventdesc()
+
+    elif ply == 'turn right':
+        print('You turn left')
+        ventDirection = (ventDirection + 1) % 4
+        ventdesc()
+
+    else:
+        print('Your thoughts seem incomprehensible.')
+
+
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
 
