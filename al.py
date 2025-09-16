@@ -2570,10 +2570,10 @@ while plypos == 5 and plydead == False:
     }
     
     vent_walls_1 = { 
-        0: True, 
-        1: True, 
-        2: False, 
-        3: True
+        0: False, 
+        1: False, 
+        2: True, 
+        3: False
     }
 
     vent_walls_2 = { 
