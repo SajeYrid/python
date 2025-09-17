@@ -2831,24 +2831,28 @@ while plypos == 5 and plydead == False:
         pass
 
     elif ply == 'left' or ply == 'go left':
+        print("")
         ventmove_left()
 
     elif ply == 'forward' or ply == 'go forward':
+        print("")
         ventmove_forward()
 
     elif ply == 'right' or ply == 'go right':
+        print("")
         ventmove_right()
 
     elif ply == 'back' or ply == 'go back':
+        print("")
         ventmove_back()
 
     elif ply == 'turn left':
-        print('You turn left.')
+        print('\nYou turn left.')
         ventDirection = (ventDirection - 1) % 4
         ventdesc()
 
     elif ply == 'turn right':
-        print('You turn left')
+        print('\nYou turn left')
         ventDirection = (ventDirection + 1) % 4
         ventdesc()
 
