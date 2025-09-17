@@ -2855,6 +2855,9 @@ while plypos == 6 and plydead == False:
 
     ply = input().lower()
 
+    if globalcommands():
+        pass
+
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
 
@@ -2966,7 +2969,8 @@ while plypos == 18 and plydead == False and insidehouse == False:
         print("You try to unlock the door. Your finger does not fit through the lock.")
 
     elif ply == 'take skeleton' and 'Key' not in inventory:
-        print("You try to take the entire skeleton. They seemed to be stuck to the bench. The key remains in the skeleton's hand.")
+        print("You try to take the entire skeleton. It seems to be stuck to the bench. The key remains in the skeleton's hand.")
+        #  ,̶'̶ ̶ ̶,̶ ̶|̶ ̶,̶'̶ ̶_̶'̶ 
 
     elif ply == 'take skeleton' and 'Key' in inventory:
         print("Rather than taking the skeleton, you shake the skeleton's hand for reciving the key.")
