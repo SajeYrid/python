@@ -2876,33 +2876,24 @@ while plypos == 6 and plydead == False:
 
     ply = input().lower()
 
-    if computer == False:
-    
-        if globalcommands():
-            pass
+    if globalcommands():
+        pass
 
-        elif ply == 'look north':
-            print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
+    elif ply == 'look north':
+        print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
 
-        elif ply == 'look south':
-            print('There is a sturdy metal door embedded into the wall.')
+    elif ply == 'look south':
+        print('There is a sturdy metal door embedded into the wall.')
 
-        elif ply == 'look east':
-            print('A wall made of concrete bricks. There is unintelligible writing across its surface. It says: WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.')
+    elif ply == 'look east':
+        print('A wall made of concrete bricks. There is unintelligible writing across its surface. It says: WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.')
 
-        elif ply == 'look west':
-            print('A concrete wall marred by cracks.')
+    elif ply == 'look west':
+        print('A concrete wall marred by cracks.')
 
-        elif ply == 'open door':
-            print('There isn\'t even a handle.')
+    elif ply == 'open door':
+        print('There isn\'t even a handle.')
 
-        elif ply == 'go north':
-            if officepos == 0 and computer == False:
-                print('You walk to the desk. Do you want to sit down at the chair? Y/N')
-                plysecondary = input().lower()
-                if plysecondary == 'y':
-                    computer = True
-                    print('As you sit down in the plush chair, a monitor switches on to the lock screen of the computer')
 
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
@@ -3016,6 +3007,7 @@ while plypos == 18 and plydead == False and insidehouse == False:
 
     elif ply == 'take skeleton' and 'Key' not in inventory:
         print("You try to take the entire skeleton. It seems to be stuck to the bench. The key remains in the skeleton's hand.")
+        #  ,̶'̶ ̶ ̶,̶ ̶|̶ ̶,̶'̶ ̶_̶'̶ 
 
     elif ply == 'take skeleton' and 'Key' in inventory:
         print("Rather than taking the skeleton, you shake the skeleton's hand for reciving the key.")
