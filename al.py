@@ -866,7 +866,7 @@ def ventmove_forward():
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 3:
-            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing east.')
             plypos = 6
         else:
             print('You crawl forward.')
@@ -1058,7 +1058,7 @@ def ventmove_right():
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 2:
-            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing east.')
             plypos = 6
         else:
             print('You go right.')
@@ -1254,7 +1254,7 @@ def ventmove_back():
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 3:
-            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing east.')
             plypos = 6
         else:
             print('You crawl backward.')
@@ -2857,6 +2857,23 @@ while plypos == 6 and plydead == False:
 
     if globalcommands():
         pass
+
+    elif ply == 'look north':
+        print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
+
+    elif ply == 'look south':
+        print('There is a sturdy metal door embedded into the wall.')
+
+    elif ply == 'look east':
+        print('A wall made of concrete bricks. There is unintelligible writing across its surface. It says: WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.')
+
+    elif ply == 'look west':
+        print('A concrete wall marred by cracks.')
+
+    elif ply == 'open door':
+        print('There isn\'t even a handle.')
+
+
 
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
