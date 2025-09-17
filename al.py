@@ -643,7 +643,7 @@ def globalcommands():
         else:
             print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
         return True
-    if ply.startswith("check "):
+    elif ply.startswith("check "):
         item_to_equip = ply[6:].strip().title()
         if item_to_equip in inventory:
             print("\033[1;33m" + items[item_to_equip] + "\033[0m")
@@ -670,7 +670,7 @@ def ventmove_left():
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected in two. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 0:
-            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
+            print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing east.')
             plypos = 6
         else:
             print("You go left.")
@@ -1436,7 +1436,6 @@ def ventmove_back():
                 
 # the unholy and devilish and evil while loops
 # Title screen
-
 retry()
 print("""\033[1;32m
            88 88                         
@@ -1482,7 +1481,6 @@ while plypos == 0:
         print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
 
 # area 1 (unbroken door)
-
 while plypos == 1 and doorbroken == False and plydead == False:
     
     ply = input("").lower()
@@ -1591,7 +1589,6 @@ while plypos == 1 and doorbroken == False and plydead == False:
         print("Your thoughts seem incomprehensible.")
         
 # area 1 (broken door)
-
 while plypos == 1 and doorbroken == True and plydead == False:
     ply = input().lower()
 
@@ -1741,7 +1738,6 @@ while plypos == 1 and doorbroken == True and plydead == False:
         print("Your thoughts seem incomprehensible.")
 
 # area 2 (void)
-
 while plypos == 2 and plydead == False:
 
     ply = input().lower().split()
@@ -1839,7 +1835,6 @@ while plypos == 2 and plydead == False:
                     plydead = True
 
 # area 3 (museum without stool)
-
 while plypos == 3 and tookstool == False and plydead == False and dinodead == False:
     ply = input().lower()
 
@@ -1954,7 +1949,6 @@ You aren\'t where you were before.""")
         print("Your thoughts seem incomprehensible.")
 
 # area 4 (battle against a true dino)
-
 while plypos == 4 and plydead == False:
 
     if plyturn == True and plyhealth > 0:
@@ -1991,7 +1985,6 @@ while plypos == 4 and plydead == False:
             plydead = True
 
 # area 3 (haha that dino is dead)
-
 while plypos == 3 and tookstool == False and plydead == False and dinodead == True:
 
     ply = input().lower()
@@ -2127,7 +2120,6 @@ You aren\'t where you were before.""")
         print("Your thoughts seem incomprehensible.")
 
 # area 3 (museum with stool)
-
 while plypos == 3 and tookstool == True and plydead == False:
 
     ply = input().lower()
@@ -2352,7 +2344,6 @@ You are not where you were before.""")
         print("Your thoughts seem incomprehensible.")
 
 # Area 5 (gregory, have you heard of a)
-
 while plypos == 5 and plydead == False:
 
     # vent descriptions go like this: 'To your left, ___________.\nTo your right, ___________.\nDirectly ahead of you is _________________.' 
@@ -2859,6 +2850,10 @@ while plypos == 5 and plydead == False:
     else:
         print('Your thoughts seem incomprehensible.')
 
+# Area 6 (Sir, curity camera.)
+while plypos == 6 and plydead == False:
+
+    ply = input().lower()
 
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
@@ -2895,7 +2890,7 @@ while plypos == 12 and plydead == False:
     else:
         print("Your thoughts seem incomprehensible.")
 
-#Area 18 (NEW PATCH: 19 now comes before 18 numerically.)
+# Area 18 (NEW PATCH: 19 now comes before 18 numerically.)
 while plypos == 18 and plydead == False and insidehouse == False:
 
     ply = input().lower()
@@ -2983,7 +2978,7 @@ while plypos == 18 and plydead == False and insidehouse == False:
 
     elif ply == 'fight skeleton' or ply == 'attack skeleton' or ply == 'kill skeleton':
         if weapon == 'Sword' and 'Key' in inventory:
-            print(f"You slash the skeleton for {plyatck * 3} damage. The skeleton immediatly breaks with the head falling to the floor. \033[1;33mThe sword grew stronger.\033[0m")
+            print(f"You slash the skeleton for {plyatck * 3} damage. The skeleton immediatly breaks and the skull falls to the floor. \033[1;33mThe sword grew stronger.\033[0m")
             plyatck += 1
             swordstrength += 1
         else:
@@ -3072,7 +3067,7 @@ while plypos == 18 and plydead == False and insidehouse == False:
             else:
                 print("Your thoughts seem incomprehensible.")
 
-#Area 20 (I bet these foggy roads would look really cool, but this is a text only game.)
+# Area 20 (I bet these foggy roads would look really cool, but this is a text only game.)
 while plypos == 20 and plydead == False:
 
     ply = input().lower()
