@@ -1497,6 +1497,10 @@ while plypos == 0:
         print("There is a door here. You are facing north.")
         plyatckDEFAULT += -4
         plyatck = plyatckDEFAULT
+    elif ply == 'jxu kbjycqju qdimuh je byvu jxu kdyluhiu qdt uluhojxydw':
+        plysecondary = int(input('where to, boss?\n'))
+        print('On it, boss')
+        plypos = plysecondary
     else:
         print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
 
@@ -1565,7 +1569,7 @@ while plypos == 1 and doorbroken == False and plydead == False:
         print("\033[1;31mYou broke down the door.\033[0m There is nothing beyond the frame but a brick wall. \nThere is no longer a door here")
         doorbroken = True
 
-    elif ply == 'fight door':
+    elif ply == 'fight door' or ply == 'attack door':
         print("You prepare for battle against a \033[1;35mtrue door.")
         plyspecial()
         battlestart()
@@ -1723,7 +1727,7 @@ while plypos == 1 and doorbroken == True and plydead == False:
     elif ply == "close door":
         print("You try to figure out how to inact this outrageous thought. You come up with nothing.")
 
-    elif ply == 'fight wall':
+    elif ply == 'fight wall' or ply == 'attack wall':
         print(f"You prepare for battle against a \033[1;35mbrick wall.")
         plyspecial()
         battlestart()
@@ -1772,7 +1776,7 @@ while plypos == 2 and plydead == False:
     elif 'check' in ply:
         print('You checked... something. It gave the impression of broken glass.')
 
-    elif 'eat' in ply or 'breath' in ply:
+    elif 'eat' in ply or 'breathe' in ply:
         print('As soon as you open your mouth, you feel the air rush out. Bad idea.')
         if plychoke > 1:
             plychoke -= 2
@@ -1781,7 +1785,7 @@ while plypos == 2 and plydead == False:
         if plychoke <= 3 and plychoke != 0:
             print(f'\033[1;35mYou have {plychoke} actions left.\033[1;31m')
 
-    elif 'fight' in ply and plyatck >= 8:
+    elif 'fight' in ply and plyatck >= 8 or 'attack' in ply and plyatck >= 8:
         print("You decide to use all of your power to fight the void. You encounter VOID \nBATTLE START!")
         voidenemy()
         plyspecial()
@@ -2897,6 +2901,16 @@ while plypos == 6 and plydead == False:
             if plysecondary == 'y':
                 computer = True
                 print('You sit down in front of the desk. As you sit, one of the computer monitors displays a lock screen with an input for a password.')
+            elif plysecondary == 'n':
+                print('OK. You are standing by the desk.')
+
+        elif ply == 'go south':
+            officepos = 3
+            print('You approach the steel door. It has no handle.')
+
+        elif ply == 'go east':
+            officepos = 2
+            print('You approach the brick wall. You feel a slight draft coming from its direction.')
                 
 
     if globalcommands():
