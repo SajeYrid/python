@@ -268,7 +268,7 @@ def plymove():
             if weaponspecial != "Nothing":
                 specialcharge -= 1
 
-    ply = input(f"\033[1;32mYour health is: {plyhealth}. \033[1;35m{enemyname}'s health is {enemyhealth}. \033[0mWhat do you do?\n").lower()
+    ply = input(f"\033[1;32mYour health is: {plyhealth}. \033[1;35m{enemyname}'s health is {enemyhealth}. \033[0mWhat do you do?\n> ").lower()
 
     import math
 
@@ -1468,7 +1468,7 @@ print("""\033[1;32m
 `\"8bbdP\"Y8 88 88  `\"Ybbd8\"\' 88       88  \033[0m\n\n\n\n\n\n\n\nStart Game? Y/N""")
 
 while plypos == 0:
-    ply = input().lower()
+    ply = input('> ').lower()
     if ply == 'y' or ply == 'yes':
         plypos = 1
         print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
@@ -1503,7 +1503,7 @@ while plypos == 0:
 # area 1 (unbroken door)
 while plypos == 1 and doorbroken == False and plydead == False:
     
-    ply = input("").lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -1570,7 +1570,7 @@ while plypos == 1 and doorbroken == False and plydead == False:
         plyspecial()
         battlestart()
         print(f"\033[1;32mYour health is: {plyhealth}. \033[1;35mDOOR's health is ???")
-        miscfight = input("\033[0mWhat will you do? \n").lower()
+        miscfight = input("\033[0mWhat will you do? \n> ").lower()
         if miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight door':
             print(f"\033[1;31mYou attack the door with brute force for {plyatck} damage. It instantly breaks down.\033[0m \nThere is only a brick wall beyond the frame.\nThere is no longer a door here")
             doorbroken = True
@@ -1610,7 +1610,7 @@ while plypos == 1 and doorbroken == False and plydead == False:
         
 # area 1 (broken door)
 while plypos == 1 and doorbroken == True and plydead == False:
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -1728,7 +1728,7 @@ while plypos == 1 and doorbroken == True and plydead == False:
         plyspecial()
         battlestart()
         print(f"\033[1;32mYour health is: {plyhealth}. \033[1;35mWALL's health is 0")
-        miscfight = input("\033[0mWhat will you do? \n").lower()
+        miscfight = input("\033[0mWhat will you do? \n> ").lower()
         if (miscfight == 'attack' or miscfight == 'kill' or miscfight == 'punch' or miscfight == 'fight wall' or miscfight == 'fight brick wall') and brokenhand == False and plyatck < 7:
             print("\033[1;31mYou attempt to attack the wall.\033[0m Your hand passes right through the wall.")
             if ouch != 3:
@@ -1761,7 +1761,7 @@ while plypos == 1 and doorbroken == True and plydead == False:
 # area 2 (void)
 while plypos == 2 and plydead == False:
 
-    ply = input().lower().split()
+    ply = input('> ').lower().split()
 
     if ('break' in ply and brokenhand == False) or ('kill' in ply and 'myself' in ply):
         print('You broke. \033[1;33mYou lost Nothing.\n\n\n\n\n\n\n\n\033[0mYou wake up to find yourself in a massive glass case in what appears to be a museum.\nWhat now?')
@@ -1857,7 +1857,7 @@ while plypos == 2 and plydead == False:
 
 # area 3 (museum without stool)
 while plypos == 3 and tookstool == False and plydead == False and dinodead == False:
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -2008,7 +2008,7 @@ while plypos == 4 and plydead == False:
 # area 3 (haha that dino is dead)
 while plypos == 3 and tookstool == False and plydead == False and dinodead == True:
 
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -2143,7 +2143,7 @@ You aren\'t where you were before.""")
 # area 3 (museum with stool)
 while plypos == 3 and tookstool == True and plydead == False:
 
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -2213,8 +2213,8 @@ You aren\'t where you were before.""")
         print("You wished that the dinosaur was alive so you could be responsible for their extinction.")
 
     elif ply == 'climb dinosaur' and dinoseen == True and 'Stool' in inventory:
-        print("You used the stool the climb up onto the plastic dinosaur. You notice a hatch to exit to glass case.")
-        plysecondary = input("Exit out? Y/N\n").lower()
+        print("You used the stool the climb up onto the plastic dinosaur. You notice a hatch to exit the glass case.")
+        plysecondary = input("Exit out? Y/N\n> ").lower()
         if plysecondary == 'y' or plysecondary == 'yes':
             print("""You climb out of the glass case. You find yourself on top of the glass case you were in.
 Suddenly, the glass case dissapears from under your feet as you fall to the ground.
@@ -2323,7 +2323,7 @@ You are not where you were before.""")
         print('A thin plywood wall painted beige. You could probably break it with something heavy enough.')
 
     elif ply == 'break wall' and plywallBroken == False:
-        plysecondary = input('With what?\n').lower()
+        plysecondary = input('With what?\n> ').lower()
         item_to_equip = plysecondary[0:].strip().title()
         if plysecondary == 'brick' and 'Brick' in inventory:
             print('You throw the brick at the wall. After the brick impacts, the wall is seemingly completely decimated.')
@@ -2837,7 +2837,7 @@ while plypos == 5 and plydead == False:
     vent_walls.append(vent_walls_27)
     vent_walls.append(vent_walls_28)
     
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -2874,31 +2874,39 @@ while plypos == 5 and plydead == False:
 # Area 6 (Sir, curity camera.)
 while plypos == 6 and plydead == False:
 
-    ply = input().lower()
+    ply = input('> ').lower()
+
+    while officepos == 0:
+
+        if ply == 'look north':
+            print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
+
+        elif ply == 'look south':
+            print('There is a sturdy metal door embedded into the wall.')
+
+        elif ply == 'look east':
+            print('A wall made of concrete bricks. There is unintelligible writing across its surface. It says: WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.')
+
+        elif ply == 'look west':
+            print('A concrete wall marred by cracks.')
+
+        elif ply == 'go north':
+            print('You approach the desk. Would you like to sit down? Y/N')
+            officepos = 1
+            plysecondary = input('> ').lower()
+            if plysecondary == 'y':
+                computer = True
+                print('You sit down in front of the desk. As you sit, one of the computer monitors displays a lock screen with an input for a password.')
+                
 
     if globalcommands():
         pass
-
-    elif ply == 'look north':
-        print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
-
-    elif ply == 'look south':
-        print('There is a sturdy metal door embedded into the wall.')
-
-    elif ply == 'look east':
-        print('A wall made of concrete bricks. There is unintelligible writing across its surface. It says: WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.')
-
-    elif ply == 'look west':
-        print('A concrete wall marred by cracks.')
-
-    elif ply == 'open door':
-        print('There isn\'t even a handle.')
 
 
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
 
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -2933,7 +2941,7 @@ while plypos == 12 and plydead == False:
 # Area 18 (NEW PATCH: 19 now comes before 18 numerically.)
 while plypos == 18 and plydead == False and insidehouse == False:
 
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if globalcommands():
         pass
@@ -3063,7 +3071,7 @@ while plypos == 18 and plydead == False and insidehouse == False:
 
         while insidehouse == True and plydead == False:
 
-            ply = input().lower()
+            ply = input('> ').lower()
 
             if globalcommands():
                 pass
@@ -3111,7 +3119,7 @@ while plypos == 18 and plydead == False and insidehouse == False:
 # Area 20 (I bet these foggy roads would look really cool, but this is a text only game.)
 while plypos == 20 and plydead == False:
 
-    ply = input().lower()
+    ply = input('> ').lower()
 
     if ply == 'equip nothing' or ply == 'equip splinters' or ply == 'equip pretend splinters' or ply == 'equip crowbar' or ply == 'equip brick' or ply == 'equip shard' or ply == 'equip sword' or ply == 'equip key':
         print("If you were to equip that, you would lose your vision with the lantern.")
