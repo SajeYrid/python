@@ -972,6 +972,7 @@ def ventmove_left():
             print('You slam your shoulder into the galvanized steel sheet on your left. Suprisingly, you pass right through it.')
             ventdesc()
             ventDirection = int((ventDirection - 1) % 4)
+            ventpos = 7
         elif ventpos == 27 and ventDirection == 3:
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected in two. \nGame Over.')
             plydead = True
@@ -1171,6 +1172,7 @@ def ventmove_forward():
         if ventpos == 6 and ventDirection == 0:
             print('You slam your face into the galvanized steel sheet in front of you. Suprisingly, you pass right through it.')
             ventdesc()
+            ventpos = 7
         elif ventpos == 27 and ventDirection == 2:
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
@@ -1366,6 +1368,8 @@ def ventmove_right():
         if ventpos == 6 and ventDirection == 3:
             print('You slam your face into the galvanized steel sheet in front of you. Suprisingly, you pass right through it.')
             ventdesc()
+            ventDirection = int((ventDirection + 1) % 4)
+            ventpos = 7
         elif ventpos == 27 and ventDirection == 1:
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
@@ -1565,6 +1569,7 @@ def ventmove_back():
         if ventpos == 6 and ventDirection == 0:
             print('You crawl backwards into the galvanized steel sheet behind you. Suprisingly, you pass right through it.')
             ventdesc()
+            ventpos = 7
         elif ventpos == 27 and ventDirection == 2:
             print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
