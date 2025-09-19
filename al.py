@@ -1001,6 +1001,9 @@ def ventmove_left():
                 elif ventpos == 6:
                     ventpos = 5
                     ventdesc()
+                elif ventpos == 7:
+                    ventpos = 8
+                    ventdesc()
                 elif ventpos == 9:
                     ventpos = 0
                     ventdesc()
@@ -1323,6 +1326,9 @@ def ventmove_forward():
                 elif ventpos == 6:
                     ventpos = 5
                     ventdesc()
+                elif ventpos == 7:
+                    ventpos = 8
+                    ventdesc()
                 elif ventpos == 9:
                     ventpos = 0
                     ventdesc()
@@ -1483,6 +1489,9 @@ def ventmove_right():
                 elif ventpos == 6:
                     ventpos = 5
                     ventdesc()
+                elif ventpos == 7:
+                    ventpos = 8
+                    ventdesc()
                 elif ventpos == 9:
                     ventpos = 0
                     ventdesc()
@@ -1624,6 +1633,9 @@ def ventmove_back():
                     ventdesc()
                 elif ventpos == 6:
                     ventpos = 5
+                    ventdesc()
+                elif ventpos == 7:
+                    ventpos = 8
                     ventdesc()
                 elif ventpos == 9:
                     ventpos = 0
