@@ -100,10 +100,12 @@ items = {
     'Tooth' : 'TOOTH - A fake tooth from a plastic prehistoric predator.',
     'Brick' : 'BRICK - A brick that feels like a liquid for some reason. Still acts like a solid object.',
     'Shard' : 'SHARD - A mysterious shard that you obtained from the void in some way. You feel as if you shouldn\'t have been able to obtain this.',
+    'Shield' : 'SHIELD - A shield that is meant for blocking incoming danger. The way you obtained it felt odd.',
     'Sword' : 'SWORD - A sword shaped object that formed from the shard. Perfect for slaying anything in your way.',
     'Key' : 'KEY - A key that you obtained from a skeleton. Looks to have the ability to unlock various locks.',
     'Lantern' : 'LANTERN - An ordinary lantern with no oddities whatsoever.',
-    'Branch' : 'BRANCH - A part of the tree that was left to die.'  
+    'Branch' : 'BRANCH - A part of the tree that was left to die.',
+    'Map' : 'MAP - Found on a basic beige wall. Every vent seems to be labeled with a number.'
 }
 
 roomhints = {
@@ -150,7 +152,7 @@ class Special:
 # Enemies
 def plasticDino():
     global plasticDino, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemytarget
-    plasticDino = Enemy("The Plastic Dinosaur", 30, 2, 0, "bit you", False)
+    plasticDino = Enemy("The Plastic Dinosaur", 30, 2, 0, "bit", False)
     enemyname = plasticDino.name
     enemyhealth = plasticDino.health
     enemyatck = plasticDino.attack
@@ -170,7 +172,7 @@ def plasticDino():
 def voidenemy():
     global voidenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, voidspecial
     global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
-    voidenemy = Enemy("The VOID", 50, 3, 1, "suffocated you", True)
+    voidenemy = Enemy("The VOID", 50, 3, 1, "suffocated", True)
     enemyname = voidenemy.name
     enemyhealth = voidenemy.health
     enemyatck = voidenemy.attack
@@ -193,7 +195,7 @@ def voidenemy():
 def beastenemy():
     global beastenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, beastspecial
     global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
-    beastenemy = Enemy("The Beast", 45, 3, 0, "swipes at you", True)
+    beastenemy = Enemy("The Beast", 45, 3, 1, "swipes at", True)
     enemyname = beastenemy.name
     enemyhealth = beastenemy.health
     enemyatck = beastenemy.attack
@@ -202,7 +204,7 @@ def beastenemy():
     enemyphrase = beastenemy.atckphrase
     enemyspecial = beastenemy.special
 
-    beastspecial = Special("Enrage", 2, 5, 8)
+    beastspecial = Special("Enrage", 2, 5, 6)
     enemyspecialmove = beastspecial.name
     enemyspecialtype = beastspecial.ability
     enemyspecialnumber = beastspecial.number
@@ -254,7 +256,7 @@ def mysteriouscompanion():
 
 def plyspecial():
     global specialweapon, weapon, weaponspecial, weaponability, weaponnumber, specialcharge, specialchargeDEFAULT
-    if weapon == 'Nothing' or weapon == 'Pretend Splinters' or weapon == 'Key':
+    if weapon == 'Nothing' or weapon == 'Pretend Splinters' or weapon == 'Key' or weapon == 'Map':
         specialweapon = Special("Nothing", 0, 0, 0)
     elif weapon == 'Splinters':
         specialweapon = Special("Splinter Knuckles", 2, 2, 3)
@@ -915,11 +917,15 @@ def globalcommands():
                         weapon = "Brick"
                         plyatck = plyatckDEFAULT + 1
                     elif equippeditem == 'Shard':
-                        print("You feel an overwhelming sense of power\033[1;31m\nYou gained +3 Attack\033[0m")
+                        print("You feel an overwhelming sense of power.\033[1;31m\nYou gained +3 Attack\033[0m")
                         weapon = "Shard"
                         plyatck = plyatckDEFAULT + 3
+                    elif equippeditem == 'Shield':
+                        print("You feel an overwhelming sense of courage.\033[1;34m\nYou gained +3 Defense\033[0m")
+                        armor = "Shield"
+                        plydefense = plydefenseDEFAULT + 3
                     elif equippeditem == 'Sword':
-                        print(f"You feel an even greater overwhelming sense of power\033[1;31m\nYou gained +{swordstrength} Attack\033[0m")
+                        print(f"You feel an even greater overwhelming sense of power.\033[1;31m\nYou gained +{swordstrength} Attack\033[0m")
                         weapon = "Sword"
                         plyatck = plyatckDEFAULT + swordstrength
                     elif equippeditem == 'Tooth':
@@ -935,7 +941,11 @@ def globalcommands():
                         weapon = 'Lantern'
                         plyatck = plyatckDEFAULT + 1
                     elif equippeditem == 'Branch':
-                        print("\033[1;31mThere is no need. It would only hinder your abilities.\033[0m")
+                        print("\033[1;30mExcept there was no need. It would only hinder your abilities.\033[0m")
+                    elif equippeditem == 'Map':
+                        print("\033[1;30mIt doesn't seem to increse your power, but you now can see where you're going in vents.\033[0m")
+                        weapon = 'Map'
+                        plyatck = plyatckDEFAULT
         else:
             print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
         return True
@@ -2076,8 +2086,14 @@ while plypos == 2 and plydead == False:
         print("You decide to use all of your power to fight the void. You encounter VOID \nBATTLE START!")
         voidenemy()
         plyspecial()
-        battlestart()
-        
+        battlestart() 
+        plychoke = 8
+
+    elif 'defend' in ply and plydefense >= 2:
+        print("You feel as if something was coming at you and block. You end up blocking the VOID's attack. You encounter VOID.\nBATTLE START!")
+        voidenemy()
+        plyspecial()
+        battlestart() 
         plychoke = 8
         
     elif 'inventory' in ply:
@@ -2134,8 +2150,12 @@ while plypos == 2 and plydead == False:
                         print("You overcome the VOID and manage to destory it with your bare hands.")
                     else:
                         print(f"You overcome the VOID and manage to destory it with your {weapon}.")
-                    print('\033[0mYou wake up to find yourself in a massive glass case in what appears to be a museum. You feel slightly healthier.\n\033[1;33mYou end up finding a SHARD in your inventory.\n\033[0mWhat now?')
-                    inventory.append('Shard')
+                    if plyatck >= 8:
+                        print('\033[0mYou wake up to find yourself in a massive glass case in what appears to be a museum. You feel slightly healthier.\n\033[1;33mYou end up finding a SHARD in your inventory.\n\033[0mWhat now?')
+                        inventory.append('Shard')
+                    else:
+                        print('\033[0mYou wake up to find yourself in a massive glass case in what appears to be a museum. You feel slightly healthier.\n\033[1;33mYou end up finding a SHIELD in your inventory.\n\033[0mWhat now?')
+                        inventory.append('Shield')
                     plyturn = True
                     plyhealthDEFAULT += 1
                     plyhealth = plyhealthDEFAULT
@@ -2228,7 +2248,20 @@ You aren\'t where you were before.""")
         print("Fake grass. There is a metal vent embedded in the ground.")
 
     elif ply == 'look east':
-        print('A basic beige wall.')
+        if 'Map' not in inventory:
+            print('A basic beige wall. There seems to be a map of some kind attached to it.')
+        else:
+            print('A basic beige wall.')
+
+    elif ply == 'check map' and 'Map' not in inventory:
+        print("You check the map on the wall. Looks to be directions for a vent system.")
+
+    elif ply == 'take map':
+        if 'Map' not in inventory:
+            print("You pull the map off the wall. Looks to be a layout for some vents.\n\033[1;33mMAP added to your inventory.\033[0m")
+            inventory.append('Map')
+        else:
+            print("You have already taken the map.")
 
     elif ply == 'go north':
         print("You smack your face into the glass.")
@@ -2284,13 +2317,13 @@ while plypos == 4 and plydead == False:
             dinodead = True
             print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.")
             if weapon == 'Shard':
-                print("\033[1;33mYour shard transformed into a sword. \033[0mWhat now?\n")
+                print("\033[1;33mYour shard transformed into a sword. \033[0mWhat now?")
                 weapon = "Sword"
                 plyatck += 2
                 inventory.append("Sword")
                 inventory.remove("Shard")
             else:
-                print("What now?\n")
+                print("What now?")
             plypos = 3
             plyturn = True
 
@@ -2391,7 +2424,20 @@ You aren\'t where you were before.""")
         print("Fake grass. There is a metal vent embedded in the ground.")
 
     elif ply == 'look east':
-        print('A basic beige wall.')
+        if 'Map' not in inventory:
+            print('A basic beige wall. There seems to be a map of some kind attached to it.')
+        else:
+            print('A basic beige wall.')
+
+    elif ply == 'check map' and 'Map' not in inventory:
+        print("You check the map on the wall. Looks to be directions for a vent system.")
+
+    elif ply == 'take map':
+        if 'Map' not in inventory:
+            print("You pull the map off the wall. Looks to be a layout for some vents.\n\033[1;33mMAP added to your inventory.\033[0m")
+            inventory.append('Map')
+        else:
+            print("You have already taken the map.")
 
     elif ply == 'go north':
         print("You smack your face into the glass.")
@@ -3133,6 +3179,9 @@ while plypos == 5 and plydead == False:
     vent_walls.append(vent_walls_26)
     vent_walls.append(vent_walls_27)
     vent_walls.append(vent_walls_28)
+
+    if weapon == 'Map':
+        print(f"Looking at the map, you seem to be at vent {ventpos}.")
     
     ply = input('>').lower()
 
@@ -3140,7 +3189,7 @@ while plypos == 5 and plydead == False:
         print("")
         ventmove_left()
 
-    elif ply == 'forward' or ply == 'go forward':
+    elif ply == 'forward' or ply == 'go forward' or ply == 'ahead' or ply == 'go ahead':
         print("")
         ventmove_forward()
 
@@ -3148,7 +3197,7 @@ while plypos == 5 and plydead == False:
         print("")
         ventmove_right()
 
-    elif ply == 'back' or ply == 'go back':
+    elif ply == 'back' or ply == 'go back' or ply == 'backward' or ply == 'go backward':
         print("")
         ventmove_back()
 
@@ -3413,7 +3462,7 @@ while plypos == 18 and plydead == False and insidehouse == False:
             elif ply == 'go north' or ply == 'go east' or ply == 'go west':
                 print("The house doesn't seem to be big enough to move in that direction.")
 
-            elif ply == 'go south' or ply == 'exit house' or ply == 'leave house' or ply == 'close door':
+            elif ply == 'go south' or ply == 'exit house' or ply == 'leave house' or ply == 'close door' or ply == 'leave':
                 print("You exit the house. You make sure to close and lock the door on your way out.")
                 insidehouse = False
 
@@ -3513,9 +3562,16 @@ while plypos == 21 and plydead == False and companion == 'Mysterious Person':
                 print("You just keep running as you can't think of what to do.")
                 pass
         if enemyhealth <= 0 and plyhealth > 0:
-            print("You won!\nThe beast decided to lay off you and the mysterious person and ran away.\033[0m")
-            plypos = 22
-            plyturn = True
+            if ply == 'special' and weapon == 'Sword':
+                print("You won!\nThe beast was slained by the sword and falls to the ground.\n\033[1;33mThe Sword grew stronger.\033[0m")
+                swordstrength += 2
+                plyatck = plyatckDEFAULT + swordstrength
+                plypos = 22
+                plyturn = True
+            else:
+                print("You won!\nThe beast decided to lay off you and the mysterious person and ran away.\033[0m")
+                plypos = 22
+                plyturn = True
 
     if plyturn == False and plyhealth > 0 and enemyhealth > 0:
         enemymove()
