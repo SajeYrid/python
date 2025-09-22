@@ -816,11 +816,18 @@ def globalcommands():
             kys = True
         return True
     elif ply == 'check inventory' or ply == 'inventory' or ply == 'open inventory':
+        currentitem = ''
         if len(inventory) == 0:
             print('\033[1;33mYou do not have any items in your inventory currently.\033[0m')
         else:
             for x in inventory:
-                print('\033[1;33m' + x + '\033[0m')
+                currentitem = x
+                if currentitem == weapon and currentitem != 'Nothing':
+                    print('\033[1;31m' + x + '\033[0m')
+                elif currentitem == armor and currentitem != 'Nothing':
+                    print('\033[1;34m' + x + '\033[0m')
+                else:
+                    print('\033[1;33m' + x + '\033[0m')
         return True
     elif ply == 'quit':
         print("Ok, bye then.")
@@ -3499,7 +3506,7 @@ while plypos == 20 and plydead == False:
                 mysteriousPerson()
                 plyspecial()
                 battlestart()
-                plypos = 21                
+                plypos = 21
             else:
                 print("Not knowing what you're going up against, you decide against your intrusive thoughts.")
 
