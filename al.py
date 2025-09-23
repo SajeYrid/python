@@ -234,6 +234,42 @@ def mysteriousPerson():
     enemycharge = False
     enemytarget = 0
 
+def customenemy():
+    global customchoice, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, customspecial
+    global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
+    customchoice = str(input('What is the name of the enemy?\n>'))
+    enemyname = customchoice
+    customchoice = int(input('What is the health of the enemy?\n>'))
+    enemyhealth = customchoice
+    customchoice = int(input('What is the attack of the enemy?\n>'))
+    enemyatck = customchoice
+    enemyatckDEFAULT = customchoice
+    customchoice = int(input('What is the defense of the enemy?\n>'))
+    enemydefense = customchoice
+    customchoice = str(input('What is the phrase when the enemy attacks?\n>'))
+    enemyphrase = customchoice
+    customchoice = str(input('Does the enemy have a special?\n>')).lower()
+    if customchoice == 'true' or customchoice == 'yes':
+        enemyspecial = True
+        customchoice = str(input('What is the name of the special?\n>'))
+        enemyspecialmove = customchoice
+        customchoice = int(input('What is the type of ability the enemy has?\n>'))
+        enemyspecialtype = customchoice
+        customchoice = int(input('What number will the special use?\n>'))
+        enemyspecialnumber = customchoice
+        customchoice = int(input('How long until the enemy can use it?\n>'))
+        enemyspecialcount = customchoice
+        enemyspecialcountDEFAULT = customchoice
+    else:
+        enemyspecial = False
+        enemyspecialmove = ""
+        enemyspecialtype = 0
+        enemyspecialnumber = 0
+
+    enemydefending = False
+    enemycharge = False
+    enemytarget = 0
+
 # Companions
 
 def mysteriouscompanion():
@@ -586,7 +622,7 @@ def enemymove():
                     enemydefending = False
                     companiondefending = False
                 elif enemyspecialtype == 4:
-                    print("\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} defense for the rest of the fight.")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} defense for the rest of the fight.")
                     enemydefense += enemyspecialnumber
                     plydefending = False
                     enemydefending = False
@@ -792,6 +828,154 @@ def enemymove():
 
     if companion != '':
         enemytarget = random.randint(0, 1)
+
+def battletrainer():
+    global ply, weapon, armor, plyturn, plyerror, enemyhealth, plyhealth, enemymove, companionhealth, enemyname, plydead, plydefense, swordstrength, plyatck
+    global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companiondefending, enemytarget
+
+    ply = input('What weapon would you like?\n>').lower()
+    if ply == 'splinters':
+        print("Granting you access to the SPLINTERS (+1 Attack)")
+        weapon = 'Splinters'
+        plyatck = 6
+    elif ply == 'pretend splinters':
+        print("Granting you access to the PRETEND SPLINTERS (-1 Attack)")
+        weapon = 'Pretend Splinters'
+        plyatck = 4
+    elif ply == 'crowbar':
+        print("Granting you access to the CROWBAR (+2 Attack)")
+        weapon = 'Crowbar'
+        plyatck = 7
+    elif ply == 'brick':
+        print("Granting you access to the BRICK (+1 Attack)")
+        weapon = 'Brick'
+        plyatck = 6
+    elif ply == 'shard':
+        print("Granting you access to the SHARD (+3 Attack)")
+        weapon = 'Shard'
+        plyatck = 8
+    elif ply == 'sword':
+        weapon = 'Sword'
+        ply = int(input('What strength is the sword?\n>'))
+        swordstrength = ply
+        print(f"Granting you access to the SWORD (+{swordstrength} Attack)")
+        plyatck = 5 + swordstrength
+    elif ply == 'key':
+        print("Granting you access to the KEY (+1 Attack)")
+        weapon = 'Key'
+        plyatck = 6
+    elif ply == 'lantern':
+        print("Granting you access to the LANTERN (+1 Attack)")
+        weapon = 'Lantern'
+        plyatck = 6
+    else:
+        print("You will start with no weapon.")
+        weapon = 'Nothing'
+        plyatck = 5
+
+    ply = input('What armor would you like?\n>').lower()
+    if ply == 'stool':
+        print("Granting you access to the STOOL (+1 Defense)")
+        armor = 'Stool'
+        plydefense = 1
+    elif ply == 'tooth':
+        print("Granting you access to the TOOTH (+1 Defense)")
+        armor = 'Tooth'
+        plydefense = 1
+    elif ply == 'shield':
+        print("Granting you access to the SHIELD (+3 Defense)")
+        armor = 'Shield'
+        plydefense = 3
+    else:
+        print("You will start with no armor.")
+        armor = 'Nothing'
+        plydefense = 0
+
+    ply = input('What companion would you like?\n>').lower()
+    if ply == 'mysterious person':
+        print("MYSTERIOUS PERSON is now your companion.")
+        mysteriouscompanion()
+    else:
+        companion = ''
+
+    ply = input('What enemy would you like to fight?\n>').lower()
+    if ply == 'dinosaur' or ply == 'plastic dinosaur':
+        print("You will fight the PLASTIC DINOSAUR")
+        plasticDino()
+    elif ply == 'void':
+        print("You will fight the VOID")
+        voidenemy()
+    elif ply == 'beast':
+        print("You will fight the BEAST")
+        beastenemy()
+    elif ply == 'mysterious person':
+        print("You will fight the MYSTERIOUS PERSON")
+        mysteriousPerson()
+    elif ply == 'custom':
+        print("You will fight a CUSTOM ENEMY")
+        customenemy()
+    else:
+        print("You will fight the PLASTIC DINOSAUR")
+        plasticDino()
+
+    plyspecial()
+    battlestart()
+    plypos = -1
+
+    while plypos == -1:
+
+        if plyturn == True and plyhealth > 0:
+            plymove()
+            plyturn = False
+            pass
+            if plyerror == True:
+                print("That is not a move that you have access to. Try again.")
+                plymove()
+                pass
+                if plyerror == True:
+                    print("You end up forgeting what viable moves you have while training.")
+                    pass
+            if enemyhealth <= 0 and plyhealth > 0:
+                print("You won!\nReturning to Start Screen.\033[0m")
+                plyturn = True
+                plypos = 0
+                retry()
+                print("""\033[1;32m
+           88 88                         
+           88 \"\"                         
+           88                            
+,adPPYYba, 88 88  ,adPPYba, 8b,dPPYba,   
+\"\"     `Y8 88 88 a8P_____88 88P'   `"8a  
+,adPPPPP88 88 88 8PP\"\"\"\"\"\"\" 88       88  
+88,    ,88 88 88 "8b,   ,aa 88       88  
+`\"8bbdP\"Y8 88 88  `\"Ybbd8\"\' 88       88  \033[0m\n\n\n\n\n\n\n\nStart Game? Y/N""")
+
+        if plyturn == False and plyhealth > 0 and enemyhealth > 0:
+            enemymove()
+            plyturn = True
+            pass
+            if plyhealth <= 0:
+                print("You lose.\n\nReturning to Start Screen.")
+                plypos = 0
+                retry()
+                print("""\033[1;32m
+           88 88                         
+           88 \"\"                         
+           88                            
+,adPPYYba, 88 88  ,adPPYba, 8b,dPPYba,   
+\"\"     `Y8 88 88 a8P_____88 88P'   `"8a  
+,adPPPPP88 88 88 8PP\"\"\"\"\"\"\" 88       88  
+88,    ,88 88 88 "8b,   ,aa 88       88  
+`\"8bbdP\"Y8 88 88  `\"Ybbd8\"\' 88       88  \033[0m\n\n\n\n\n\n\n\nStart Game? Y/N""")
+            if companionhealth <= 0 and companion != '':
+                print("The enemy manages to defeat your companion.")
+                companion = ''
+                companionhealth = 0
+                companionatck = 0
+                companionatckDEFAULT = 0
+                companiondefense = 0
+                companiondefending = False
+                enemytarget = 0
 
 def globalcommands():
     # skip the void for this one, it parses commands differently
@@ -1811,6 +1995,9 @@ while plypos == 0:
         plysecondary = int(input('Where to, boss?\n'))
         print('On it, boss')
         plypos = plysecondary
+    elif ply == 'battle':
+        print('Loading battle simulator.')
+        battletrainer()
     else:
         print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
 
