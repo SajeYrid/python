@@ -150,8 +150,9 @@ class Special:
         self.charge = charge
 
 # Enemies
+
 def plasticDino():
-    global plasticDino, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemytarget
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemytarget
     plasticDino = Enemy("The Plastic Dinosaur", 30, 2, 0, "bit", False)
     enemyname = plasticDino.name
     enemyhealth = plasticDino.health
@@ -170,7 +171,7 @@ def plasticDino():
     enemytarget = 0
 
 def voidenemy():
-    global voidenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, voidspecial
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
     global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
     voidenemy = Enemy("The VOID", 50, 3, 1, "suffocated", True)
     enemyname = voidenemy.name
@@ -193,7 +194,7 @@ def voidenemy():
     enemytarget = 0
 
 def beastenemy():
-    global beastenemy, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, beastspecial
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
     global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
     beastenemy = Enemy("The Beast", 45, 3, 1, "swipes at", True)
     enemyname = beastenemy.name
@@ -216,8 +217,8 @@ def beastenemy():
     enemytarget = 0
 
 def mysteriousPerson():
-    global mysteriousperson, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemytarget
-    mysteriousperson = Enemy("The Mysterious Person", 20, 1, 0, "throws a rock at you", False)
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemytarget
+    mysteriousperson = Enemy("The Mysterious Person", 20, 1, 0, "throws a rock at", False)
     enemyname = mysteriousperson.name
     enemyhealth = mysteriousperson.health
     enemyatck = mysteriousperson.attack
@@ -235,7 +236,7 @@ def mysteriousPerson():
     enemytarget = 0
 
 def customenemy():
-    global customchoice, enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, customspecial
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
     global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
     customchoice = str(input('What is the name of the enemy?\n>'))
     enemyname = customchoice
@@ -272,8 +273,24 @@ def customenemy():
 
 # Companions
 
+def customcompanion():
+    global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companionphrase, companiondefending
+    customchoice = str(input('What is the name of the companion?\n>'))
+    companion = customchoice
+    customchoice = int(input('What is the health of the companion?\n>'))
+    companionhealth = customchoice
+    customchoice = int(input('What is the attack of the companion?\n>'))
+    companionatck = customchoice
+    companionatckDEFAULT = customchoice
+    customchoice = int(input('What is the defense of the companion?\n>'))
+    companiondefense = customchoice
+    customchoice = str(input('What is the phrase when the companion attacks?\n>'))
+    companionphrase = customchoice
+
+    companiondefending = False
+
 def mysteriouscompanion():
-    global mysteriousperson, companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companionphrase, companiondefending
+    global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companionphrase, companiondefending
     mysteriousperson = Enemy("Mysterious Person", 20, 1, 0, "throws a rock at", False)
     companion = mysteriousperson.name
     companionhealth = mysteriousperson.health
@@ -830,8 +847,11 @@ def enemymove():
         enemytarget = random.randint(0, 1)
 
 def battletrainer():
-    global ply, weapon, armor, plyturn, plyerror, enemyhealth, plyhealth, enemymove, companionhealth, enemyname, plydead, plydefense, swordstrength, plyatck
+    global ply, weapon, armor, plyturn, plyerror, enemyhealth, plyhealth, enemymove, companionhealth, enemyname, plydead, plydefense, swordstrength, plyatck, plyhealth
     global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companiondefending, enemytarget
+
+    ply = int(input('What health do you want to start at?\n>'))
+    plyhealth = ply
 
     ply = input('What weapon would you like?\n>').lower()
     if ply == 'splinters':
@@ -895,7 +915,11 @@ def battletrainer():
     if ply == 'mysterious person':
         print("MYSTERIOUS PERSON is now your companion.")
         mysteriouscompanion()
+    elif ply == 'custom':
+        print("You will have a CUSTOM COMPANION.")
+        customcompanion()
     else:
+        print("You will have no companion.")
         companion = ''
 
     ply = input('What enemy would you like to fight?\n>').lower()
