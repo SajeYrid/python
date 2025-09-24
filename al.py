@@ -105,7 +105,8 @@ items = {
     'Key' : 'KEY - A key that you obtained from a skeleton. Looks to have the ability to unlock various locks.',
     'Lantern' : 'LANTERN - An ordinary lantern with no oddities whatsoever.',
     'Branch' : 'BRANCH - A part of the tree that was left to die.',
-    'Map' : 'MAP - Found on a basic beige wall. Every vent seems to be labeled with a number.'
+    'Map' : 'MAP - Found on a basic beige wall. Every vent seems to be labeled with a number.',
+    'Bandana' : 'BANDANA - The bandana of a fallen warrior. Will make you more vulnerable, but also will make you stronger.'
 }
 
 roomhints = {
@@ -910,6 +911,11 @@ def battletrainer():
         print("Granting you access to the SHIELD (+3 Defense)")
         armor = 'Shield'
         plydefense = 3
+    elif ply == 'bandana':
+        print("Granting you access to the BANDANA (+2 Attack, -1 Defense)")
+        armor = 'Shield'
+        plyatck += 2
+        plydefense = -1
     else:
         print("You will start with no armor.")
         armor = 'Nothing'
@@ -1051,6 +1057,41 @@ def globalcommands():
     elif ply == 'equip item':
         print("Please make sure to specify what item to equip. (EXAMPLE: Equip Hammer)")
         return True
+
+    elif weapon == 'Sword' and ply == 'toss branch' and 'Branch' in inventory:
+        print("You end up tossing away the branch.\n\033[1;33mBRANCH removed from your inventory.\033[0m")
+        inventory.remove('Branch')
+        return True
+
+    elif weapon == 'Sword' and ply == 'toss splinters' and stoolExplode == False and 'Splinters' in inventory:
+        print("You end up tossing away the splinters.\n\033[1;33mSPLINTERS removed from your inventory.\033[0m")
+        inventory.remove('Splinters')
+        return True
+
+    elif weapon == 'Sword' and ply == 'toss brick' and 'Brick' in inventory:
+        print("You end up tossing away the brick.\n\033[1;33mBRICK removed from your inventory.\033[0m")
+        inventory.remove('Brick')
+        return True
+
+    elif weapon == 'Sword' and ply == 'toss map' and 'Map' in inventory:
+        print("You end up tossing away the map.\n\033[1;33mMAP removed from your inventory.\033[0m")
+        inventory.remove('Map')
+        return True
+
+    elif weapon == 'Sword' and ply == 'toss nothing' and 'Nothing' in inventory:
+        print("You end up tossing away nothing.\n\033[1;33mNOTHING removed from your inventory.\033[0m")
+        inventory.remove('Nothing')
+        return True
+
+    elif weapon == 'Sword' and ply == 'toss crowbar' and 'Crowbar' in inventory:
+        print("You end up tossing away the crowbar.\n\033[1;33mCROWBAR removed from your inventory.\033[0m")
+        inventory.remove('Crowbar')
+        return True
+
+    elif weapon == 'Sword' and ply == 'toss key' and 'Key' in inventory and plypos != 18:
+        print("You end up tossing away the key.\n\033[1;33mKEY removed from your inventory.\033[0m")
+        inventory.remove('Key')
+        return True
     
     elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know' or ply == 'i dunno':
         print("Then figure \033[1;31mit\033[0m out.")
@@ -1165,6 +1206,12 @@ def globalcommands():
                         print("\033[1;30mIt doesn't seem to increse your power, but you now can see where you're going in vents.\033[0m")
                         weapon = 'Map'
                         plyatck = plyatckDEFAULT
+                    elif equippeditem == 'Bandana':
+                        print("You feel the power of a warrior.\n\033[1;31mYou gained +2 Attack.\033[1;34m\nYou gained -1 Defense.\033[0m")
+                        armor = "Bandana"
+                        plydefense = plydefenseDEFAULT - 1
+                if armor == 'Bandana':
+                    plyatck += 2
         else:
             print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
         return True
@@ -2384,7 +2431,10 @@ while plypos == 2 and plydead == False:
                         print('\033[0mYou wake up to find yourself in a massive glass case in what appears to be a museum. You feel slightly healthier.\n\033[1;33mYou end up finding a SHIELD in your inventory.\n\033[0mWhat now?')
                         inventory.append('Shield')
                     plyturn = True
-                    plyhealthDEFAULT += 1
+                    if plyhealth == 10:
+                        plyhealthDEFAULT += 5
+                    else:
+                        plyhealthDEFAULT += 1
                     plyhealth = plyhealthDEFAULT
                     plypos = 3
             if plyturn == False and plyhealth > 0 and enemyhealth > 0:
@@ -3674,11 +3724,23 @@ while plypos == 18 and plydead == False and insidehouse == False:
             elif ply == 'look west':
                 print("Nothing but packed boxes. They are all sealed shut.")
 
+            elif ply == 'take photos':
+                print("You attempt to take the photos. They seem to be part of the wall.")
+
             elif ply == 'open boxes':
                 print("You attempt to open the boxes. They are all fully sealed.")
 
             elif ply == 'break boxes':
                 print("You attempt to break the boxes. For some reason, they don't budge.")
+
+            elif ply == 'fight boxes':
+                if weapon == 'Sword' and 'Bandana' not in inventory:
+                    print("You slash all of the boxes. You manage to find a bandana. It looks a bit cursed, but that doesn't bother you.\n\033[1;33mBANDANA added to your INVENTORY.\033[0m")
+                    inventory.append('Bandana')
+                elif 'Bandana' in inventory:
+                    print("There are no boxes to break.")
+                else:
+                    print("Boxes? You want to fight boxes? Like, unless you had a sword, there'd be no reason.")
 
             elif ply == 'take boxes':
                 print("You attempt to take the boxes. They feel as if they are glued to the ground.")
@@ -3726,13 +3788,15 @@ while plypos == 20 and plydead == False:
                 print("Not knowing what you're going up against, you decide against your intrusive thoughts.")
 
     if ply == 'equip nothing' or ply == 'equip splinters' or ply == 'equip pretend splinters' or ply == 'equip crowbar' or ply == 'equip brick' or ply == 'equip shard' or ply == 'equip key':
-        print("If you were to equip that, you would lose your vision with the lantern.")
+        print("If you were to equip that, you would lose your vision as there would be no more light.")
 
     elif ply == 'equip sword' and 'Sword' in inventory:
         print(f"When you reached for your sword, it emmited a bright glow. You don't need the lantern anymore.\n\033[1;33mYou tossed away the lantern.\nYou equipped the Sword. \033[1;31mYou gained +{swordstrength} attack.\033[0m")
         inventory.remove('Lantern')
         weapon = 'Sword'
         plyatck = plyatckDEFAULT + swordstrength
+        if armor == 'Bandana':
+            plyatck += 2
 
     elif ply == 'look north':
         print("Just more road upahead from what you can see.")
@@ -3793,6 +3857,8 @@ while plypos == 21 and plydead == False and companion == 'Mysterious Person':
                 print("You won!\nThe beast was slained by the sword and falls to the ground.\n\033[1;33mThe Sword grew stronger.\033[0m")
                 swordstrength += 2
                 plyatck = plyatckDEFAULT + swordstrength
+                if armor == 'Badana':
+                    plyatck += 2
                 plypos = 22
                 plyturn = True
             else:
@@ -3832,9 +3898,15 @@ while plypos == 21 and plydead == False and companion != 'Mysterious Person':
                 print("You end up freezing in place as you forget what you can do in battle.")
                 pass
         if enemyhealth <= 0 and plyhealth > 0:
-            print("You won! \nThe person has been obliterated to dust. \033[1;33mThe sword got quite stronger.\033[0m")
-            swordstrength += 3
+            if ply == 'special':
+                print("You won! \nThe person has been obliterated to dust. \033[1;33mThe sword got quite stronger.\033[0m")
+                swordstrength += 5
+            else:
+                print("You won!\nThe person ended up running away.\033[1;33mThe sword grew stronger.\033[0m")
+                swordstrength += 1
             plyatck = plyatckDEFAULT + swordstrength
+            if armor == 'Badana':
+                plyatck += 2
             plypos = 22
             plyturn = True
 
