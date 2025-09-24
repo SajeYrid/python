@@ -775,7 +775,7 @@ def enemymove():
                 elif enemyaction > 6 and companiondefending == False:
                     if enemyatck - companiondefense > 0:
                         print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for {enemyatck - companiondefense} damage!\033[0m")
-                        companionhealth = companionhealth - (enemyatck - companiondefense)
+                        companionhealth -= (enemyatck - companiondefense)
                     else:
                         print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for 1 damage!\033[0m")
                         companionhealth -= 1
@@ -818,10 +818,10 @@ def enemymove():
             elif enemyaction > 6 and companiondefending == False:
                 if enemyatck - companiondefense > 0:
                     print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for {enemyatck - companiondefense} damage!\033[0m")
-                    plyhealth = plyhealth - (enemyatck - companiondefense)
+                    companionhealth = companionhealth - (enemyatck - companiondefense)
                 else:
                     print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for 1 damage!\033[0m")
-                    plyhealth -= 1
+                    companionhealth -= 1
                 enemyatck = enemyatckDEFAULT
                 enemycharge = False
                 enemydefending = False
@@ -901,6 +901,10 @@ def battletrainer():
     elif ply == 'tooth':
         print("Granting you access to the TOOTH (+1 Defense)")
         armor = 'Tooth'
+        plydefense = 1
+    elif ply == 'splinters':
+        print("Granting you access to the SPLINTERS (+1 Defense)")
+        armor = 'Splinters'
         plydefense = 1
     elif ply == 'shield':
         print("Granting you access to the SHIELD (+3 Defense)")
