@@ -851,8 +851,12 @@ def battletrainer():
     global ply, weapon, armor, plyturn, plyerror, enemyhealth, plyhealth, enemymove, companionhealth, enemyname, plydead, plydefense, swordstrength, plyatck, plyhealth
     global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companiondefending, enemytarget
 
-    ply = int(input('What health do you want to start at?\n>'))
-    plyhealth = ply
+    ply = input('What health do you want to start at?\n>')
+    try:
+        plyhealth = int(ply)
+    except:
+        print("That is not a number. You will start off at 10 HP")
+        plyhealth = 10
 
     ply = input('What weapon would you like?\n>').lower()
     if ply == 'splinters':
@@ -1092,6 +1096,11 @@ def globalcommands():
         print("You end up tossing away the key.\n\033[1;33mKEY removed from your inventory.\033[0m")
         inventory.remove('Key')
         return True
+
+    elif weapon == 'Sword' and ply == 'toss pretend splinters' and 'Pretend Splinters' in inventory:
+        print("You pretend to toss away the pretend splinters.\n\033[1;33mPRETEND SPLINTERS removed from your inventory.\033[0m")
+        inventory.remove('Key')
+        return True
     
     elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know' or ply == 'i dunno':
         print("Then figure \033[1;31mit\033[0m out.")
@@ -1226,7 +1235,7 @@ def globalcommands():
         return False
         
 def ventdesc():
-    global vent_descriptions, ventpos, ventDirection
+    global vent_descriptions, ventpos, ventDirection, plypos
     print((vent_descriptions[ventpos])[ventDirection])
 
 def ventmove_left():
@@ -1431,7 +1440,7 @@ def ventmove_left():
                     ventdesc()
 
 def ventmove_forward():
-    global vent_walls, ventdesc, ventpos, ventDirection
+    global vent_walls, ventdesc, ventpos, ventDirection, plypos
     if (vent_walls[ventpos])[ventDirection % 4] == True:
         print('You slam your face into the galvanized steel sheet in front of you. It doesn\'t budge.')
     elif (vent_walls[ventpos])[ventDirection % 4] == False:
@@ -1627,7 +1636,7 @@ def ventmove_forward():
                     ventdesc()
 
 def ventmove_right():
-    global vent_walls, ventdesc, ventpos, ventDirection
+    global vent_walls, ventdesc, ventpos, ventDirection, plypos
     if (vent_walls[ventpos])[(ventDirection + 1) % 4] == True:
         print('You slam your shoulder into the galvanized steel sheet in front of you. It doesn\'t budge.')
     elif (vent_walls[ventpos])[(ventDirection + 1) % 4] == False:
@@ -1828,7 +1837,7 @@ def ventmove_right():
                     ventdesc()
 
 def ventmove_back():
-    global vent_walls, ventdesc, ventpos, ventDirection
+    global vent_walls, ventdesc, ventpos, ventDirection, plypos
     if (vent_walls[ventpos])[(ventDirection - 2) % 4] == True:
         print('You crawl backwards into the galvanized steel sheet behind you. It doesn\'t budge.')
     elif (vent_walls[ventpos])[(ventDirection - 2) % 4] == False:
@@ -3458,7 +3467,10 @@ while plypos == 5 and plydead == False:
     vent_walls.append(vent_walls_28)
 
     if weapon == 'Map':
-        print(f"Looking at the map, you seem to be at vent {ventpos}.")
+        if ventpos == 7 or ventpos == 8:
+            print("This area doesn't appear to be on your map.")
+        else:
+            print(f"Looking at the map, you seem to be at vent {ventpos}.")
     
     ply = input('>').lower()
 
@@ -3497,9 +3509,9 @@ while plypos == 5 and plydead == False:
 # Area 6 (Sir, curity camera.)
 while plypos == 6 and plydead == False:
 
-    ply = input('> ').lower()
-
     while officepos == 0:
+
+        ply = input('>').lower()
 
         if ply == 'look north':
             print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
@@ -3531,9 +3543,8 @@ while plypos == 6 and plydead == False:
             officepos = 2
             print('You approach the brick wall. You feel a slight draft coming from its direction.')
                 
-
-    if globalcommands():
-        pass
+        if globalcommands():
+            pass
 
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
