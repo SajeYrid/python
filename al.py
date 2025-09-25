@@ -1099,7 +1099,7 @@ def globalcommands():
 
     elif weapon == 'Sword' and ply == 'toss pretend splinters' and 'Pretend Splinters' in inventory:
         print("You pretend to toss away the pretend splinters.\n\033[1;33mPRETEND SPLINTERS removed from your inventory.\033[0m")
-        inventory.remove('Key')
+        inventory.remove('Pretend Splinters')
         return True
     
     elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know' or ply == 'i dunno':
