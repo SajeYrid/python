@@ -241,13 +241,26 @@ def customenemy():
     global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
     customchoice = str(input('What is the name of the enemy?\n>'))
     enemyname = customchoice
-    customchoice = int(input('What is the health of the enemy?\n>'))
-    enemyhealth = customchoice
-    customchoice = int(input('What is the attack of the enemy?\n>'))
-    enemyatck = customchoice
-    enemyatckDEFAULT = customchoice
-    customchoice = int(input('What is the defense of the enemy?\n>'))
-    enemydefense = customchoice
+    customchoice = input('What is the health of the enemy?\n>')
+    try:
+        enemyhealth = int(customchoice)
+    except:
+        print("That is not a number. Enemy will start off at 30 HP")
+        enemyhealth = 30
+    customchoice = input('What is the attack of the enemy?\n>')
+    try:
+        enemyatck = int(customchoice)
+        enemyatckDEFAULT = int(customchoice)
+    except:
+        print("That is not a number. Enemy will start off at 2 Attack")
+        enemyatck = 2
+        enemyatckDEFAULT = 2
+    customchoice = input('What is the defense of the enemy?\n>')
+    try:
+        enemydefense = int(customchoice)
+    except:
+        print("That is not a number. Enemy will start off at 0 Defense")
+        enemydefense = 0
     customchoice = str(input('What is the phrase when the enemy attacks?\n>'))
     enemyphrase = customchoice
     customchoice = str(input('Does the enemy have a special?\n>')).lower()
@@ -255,13 +268,30 @@ def customenemy():
         enemyspecial = True
         customchoice = str(input('What is the name of the special?\n>'))
         enemyspecialmove = customchoice
-        customchoice = int(input('What is the type of ability the enemy has?\n>'))
-        enemyspecialtype = customchoice
-        customchoice = int(input('What number will the special use?\n>'))
-        enemyspecialnumber = customchoice
-        customchoice = int(input('How long until the enemy can use it?\n>'))
-        enemyspecialcount = customchoice
-        enemyspecialcountDEFAULT = customchoice
+        customchoice = input('What is the type of ability the enemy has?\n>')
+        try:
+            if customchoice == '1' or customchoice == '2' or customchoice == '3' or customchoice == '4':
+                enemyspecialtype = int(customchoice)
+            else:
+                print("That is not a valid special type. Enemy will have an attack special (1).")
+                enemyspecialtype = 1
+        except:
+            print("That is not a valid special type. Enemy will have an attack special (1).")
+            enemyspecialtype = 1
+        customchoice = input('What number will the special use?\n>')
+        try:
+            enemyspecialnumber = int(customchoice)
+        except:
+            print("That is not a number. Setting special number to 5.")
+            enemyspecialnumber = 5
+        customchoice = input('How long until the enemy can use it?\n>')
+        try:
+            enemyspecialcount = int(customchoice)
+            enemyspecialcountDEFAULT = int(customchoice)
+        except:
+            print("That is not a number. Setting special cooldown to 5 turns.")
+            enemyspecialcount = 5
+            enemyspecialcountDEFAULT = 5
     else:
         enemyspecial = False
         enemyspecialmove = ""
@@ -278,13 +308,26 @@ def customcompanion():
     global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companionphrase, companiondefending
     customchoice = str(input('What is the name of the companion?\n>'))
     companion = customchoice
-    customchoice = int(input('What is the health of the companion?\n>'))
-    companionhealth = customchoice
-    customchoice = int(input('What is the attack of the companion?\n>'))
-    companionatck = customchoice
-    companionatckDEFAULT = customchoice
-    customchoice = int(input('What is the defense of the companion?\n>'))
-    companiondefense = customchoice
+    customchoice = input('What is the health of the companion?\n>')
+    try:
+        companionhealth = int(customchoice)
+    except:
+        print("That is not a number. Setting Companion health to 10.")
+        companionhealth = 10
+    customchoice = input('What is the attack of the companion?\n>')
+    try:
+        companionatck = int(customchoice)
+        companionatckDEFAULT = int(customchoice)
+    except:
+        print("That is not a number. Setting Companion Attack to 1.")
+        companionatck = 1
+        companionatckDEFAULT = 1
+    customchoice = input('What is the defense of the companion?\n>')
+    try:
+        companiondefense = int(customchoice)
+    except:
+        print("That is not a number. Setting Companion Defense to 0.")
+        companiondefense = 0
     customchoice = str(input('What is the phrase when the companion attacks?\n>'))
     companionphrase = customchoice
 
@@ -292,7 +335,7 @@ def customcompanion():
 
 def mysteriouscompanion():
     global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companionphrase, companiondefending
-    mysteriousperson = Enemy("Mysterious Person", 20, 1, 0, "throws a rock at", False)
+    mysteriousperson = Enemy("Mysterious Person", 10, 1, 0, "throws a rock at", False)
     companion = mysteriousperson.name
     companionhealth = mysteriousperson.health
     companionatck = mysteriousperson.attack
