@@ -106,7 +106,7 @@ items = {
     'Lantern' : 'LANTERN - An ordinary lantern with no oddities whatsoever.',
     'Branch' : 'BRANCH - A part of the tree that was left to die.',
     'Map' : 'MAP - Found on a basic beige wall. Every vent seems to be labeled with a number.',
-    'Bandana' : 'BANDANA - The bandana of a fallen warrior. Will make you more vulnerable, but also will make you stronger.'
+    'Bandana' : 'BANDANA - The bandana of a fallen warrior. Sacrifices defense for even more strength.'
 }
 
 roomhints = {
@@ -130,7 +130,9 @@ selfcheckroom = {
     5 : 'Plastic Dinosaur exterminator.',
     6 : 'Ready to climb their newly obtained stool.',
     7 : 'Already broke their newly obtained stool.',
-    8 : 'Still trying to investigate this unique door they found.'
+    8 : 'Still trying to investigate this unique door they found.',
+    9 : 'Crawling through the vents.',
+    10 : 'idk what to write here, but it is for the security room.'
 }
 
 # classes, but the cool kind
@@ -151,6 +153,25 @@ class Special:
         self.charge = charge
 
 # Enemies
+
+def truedoor():
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemytarget
+    doorenemy = Enemy("TRUE DOOR", 100, 1, -5, "attacked", False)
+    enemyname = doorenemy.name
+    enemyhealth = doorenemy.health
+    enemyatck = doorenemy.attack
+    enemyatckDEFAULT = doorenemy.attack
+    enemydefense = doorenemy.defense
+    enemyphrase = doorenemy.atckphrase
+    enemyspecial = doorenemy.special
+
+    enemyspecialmove = ""
+    enemyspecialtype = 0
+    enemyspecialnumber = 0
+    
+    enemydefending = False
+    enemycharge = False
+    enemytarget = 0
 
 def plasticDino():
     global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge, enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemytarget
@@ -358,7 +379,7 @@ def plyspecial():
     elif weapon == 'Splinters':
         specialweapon = Special("Splinter Knuckles", 2, 2, 3)
     elif weapon == 'Crowbar':
-        specialweapon = Special("Spinning Crowbar", 1, 10, 3)
+        specialweapon = Special("Spinning Crowbar", 1, 10, 4)
     elif weapon == 'Brick':
         specialweapon = Special("Solid Drink", 3, 5, 5)
     elif weapon == 'Shard':
@@ -366,7 +387,7 @@ def plyspecial():
     elif weapon == 'Sword':
         specialweapon = Special("Eliminate", 1, 40, 10)
     elif weapon == 'Lantern':
-        specialweapon = Special("Light it up", 2, 4, 3)
+        specialweapon = Special("Light it up", 2, 4, 5)
 
     weaponspecial = specialweapon.name
     weaponability = specialweapon.ability
@@ -664,26 +685,26 @@ def enemymove():
                     if plydefending == True:
                         print("\033[1;34m But you defended.")
                     else:
-                        print(f"\033[1;3{enemyspecialtype}m{enemyname} deals {enemyspecialnumber} damage to you.")
+                        print(f"\033[1;3{enemyspecialtype}m{enemyname} deals {enemyspecialnumber} damage to you.\033[0m")
                         plyhealth -= enemyspecialnumber
                     plydefending = False
                     enemydefending = False
                     companiondefending = False
                 elif enemyspecialtype == 2:
-                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} attack for their next attack.")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} attack for their next attack.\033[0m")
                     enemyatck += enemyspecialnumber
                     enemyatckplus += enemyspecialnumber
                     plydefending = False
                     enemydefending = False
                     companiondefending = False
                 elif enemyspecialtype == 3:
-                    print(f"\033[1;3{enemyspecialtype}m{enemyname} heals {enemyspecialnumber} health.")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} heals {enemyspecialnumber} health.\033[0m")
                     enemyhealth += enemyspecialnumber
                     plydefending = False
                     enemydefending = False
                     companiondefending = False
                 elif enemyspecialtype == 4:
-                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} defense for the rest of the fight.")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} defense for the rest of the fight.\033[0m")
                     enemydefense += enemyspecialnumber
                     plydefending = False
                     enemydefending = False
@@ -780,32 +801,32 @@ def enemymove():
                     if companiondefending == True:
                         print(f"\033[1;34m But {companion} defended.")
                     else:
-                        print(f"\033[1;3{enemyspecialtype}m{enemyname} deals {enemyspecialnumber} damage to {companion}.")
+                        print(f"\033[1;3{enemyspecialtype}m{enemyname} deals {enemyspecialnumber} damage to {companion}.\033[0m")
                         companionhealth -= enemyspecialnumber
                     plydefending = False
                     companiondefending = False
                     enemydefending = False
                 elif enemyspecialtype == 2:
-                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} attack for their next attack.")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} attack for their next attack.\033[0m")
                     enemyatck += enemyspecialnumber
                     enemyatckplus += enemyspecialnumber
                     plydefending = False
                     companiondefending = False
                     enemydefending = False
                 elif enemyspecialtype == 3:
-                    print(f"\033[1;3{enemyspecialtype}m{enemyname} heals {enemyspecialnumber} health.")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} heals {enemyspecialnumber} health.\033[0m")
                     enemyhealth += enemyspecialnumber
                     plydefending = False
                     companiondefending = False
                     enemydefending = False
                 elif enemyspecialtype == 4:
-                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} defense for the rest of the fight.")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} gains +{enemyspecialnumber} defense for the rest of the fight.\033[0m")
                     enemydefense += enemyspecialnumber
                     plydefending = False
                     companiondefending = False
                     enemydefending = False
                 else:
-                    print("But it didn't do anything because they don't have a valid command.")
+                    print("But it didn't do anything because they don't have a valid command.\033[0m")
                 enemyspecialcount = enemyspecialcountDEFAULT
             else:
                 enemyspecialcount -= 1
@@ -983,6 +1004,9 @@ def battletrainer():
     if ply == 'dinosaur' or ply == 'plastic dinosaur':
         print("You will fight the PLASTIC DINOSAUR")
         plasticDino()
+    elif ply == 'door' or ply == 'true door':
+        print("You will fight the TRUE DOOR")
+        truedoor()
     elif ply == 'void':
         print("You will fight the VOID")
         voidenemy()
@@ -1186,6 +1210,12 @@ def globalcommands():
             print(selfcheckroom[6])
         elif plypos == 3 and tookstool == True and plydead == False and 'Stool' not in inventory:
             print(selfcheckroom[7])
+        elif plypos == 1 and doorbroken == False and plydead == False and plydeaths != 0:
+            print(selfcheckroom[8])
+        elif plypos == 5 and plydead == False:
+            print(selfcheckroom[9])
+        elif plypos == 6 and plydead == False:
+            print(selfcheckroom[10])
         return True
     elif ply.startswith("equip "):
         item_to_equip = ply[6:].strip().title()
@@ -2090,11 +2120,11 @@ print("""\033[1;32m
 
 while plypos == 0:
     ply = input('>').lower()
-    if ply == 'y' or ply == 'yes':
+    if ply == 'y' or ply == 'yes' or ply == 'start':
         plypos = 1
         print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
         print("There is a door here. You are facing north.")
-    elif ply == 'n' or ply == 'no':
+    elif ply == 'n' or ply == 'no' or ply == 'quit':
         print("Ok? Dunno why you decided to show up then. I mean, like, we spent a long while programming this game. It's got tons of routes and options for you to do. It's a pretty good game if I say so myself. But I guess if you don't want to play that's... alright. Like yeah, who cares about alien? I surely, definitly, definitivly, absoulutly do not care about this wonderful creation that I made. You, on the other hand, absoulutly do care about this game considering you are either reading this via the source code or through Python idle and are taking your time to read all of this. But yeah, sure, leave. It's not like I wanted you to be here anyway.")
         quit()
     elif ply == 'break' or ply == 'attack' or ply == 'punch' or ply == 'fight':
@@ -3644,8 +3674,12 @@ while plypos == 18 and plydead == False and insidehouse == False:
     elif ply == 'look south':
         print("Nothing but fog and dark roads.")
 
-    elif ply == 'go north':
+    elif ply == 'go north' and 'Key' not in inventory:
         print("You bang your head on the door.")
+
+    elif ply == 'go north' and 'Key' in inventory:
+        print("You end up going north and opening the door using the key. You are now inside the house. The door remains open.")
+        insidehouse = True
 
     elif ply == 'go east':
         print("You head towards the tree. Nothing seems to be around it.")
