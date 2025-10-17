@@ -570,7 +570,7 @@ def plymove():
                 specialcharge = specialchargeDEFAULT
         elif specialcharge == 0 and weaponability == 4:
             print(f"\033[1;34mYou use {weaponspecial}! You gain +{weaponnumber} defense for the rest of the fight.\033[0m")
-            plydefense += weaponnumberAlien
+            plydefense += weaponnumber
             specialcharge = specialchargeDEFAULT
         elif specialcharge != 0 and weaponspecial != 'Nothing':
             print(f"\033[1;30mYou cannot use {weaponspecial} yet. You still have to wait {specialcharge} turns.\033[0m")
@@ -1337,7 +1337,7 @@ def globalcommands():
                         armor = "Bandana"
                         plydefense = plydefenseDEFAULT - 1
                     elif equippeditem == 'Alien Blaster':
-                        print("\033[1;31m\nYou gained +10 Attack\033[0m")
+                        print("\033[1;31mYou gained +10 Attack\033[0m")
                         weapon = "Alien Blaster"
                         plyatck = plyatckDEFAULT + 10
                 if armor == 'Bandana':
@@ -2205,7 +2205,8 @@ while plypos == 0 and plydead == False:
         battletrainer()
     elif ply in wiseguy:
         if len(wiseguycount) < 5:
-            wiseguycount.remove(ply)
+            if ply in wiseguycount:
+                wiseguycount.remove(ply)
             if len(wiseguycount) == 0:
                 print("You think you're so funny? Typing every letter EXCEPT the letters I SPECIFIED you should press? Know what? Congrats, here's your secret! Go fight this alien.")
                 alienenemy()
@@ -2226,10 +2227,9 @@ while plypos == 0 and plydead == False:
                                     print("You end up freezing in place as you forget what you can do in battle.")
                                 pass
                         if enemyhealth <= 0 and plyhealth > 0:
-                            print("You SOMEHOW manage to defeat the alien despite the odds being stacked against you.")
-                            if plyatck >= 8:
-                                print('\033[0mYou are now facing towards a door. However, \033[1;33myou now have the ALIEN BLASTER in your inventory.\033[0m You also feel quite healthy.\nYou already know what to do.')
-                                inventory.append('Alien Blaster')
+                            print("You SOMEHOW manage to defeat the alien despite the odds being stacked against you.\n\n")
+                            print('\033[0mYou are now facing towards a door. However, \033[1;33myou now have the ALIEN BLASTER in your inventory.\033[0m You also feel quite healthy.\nYou already know what to do.')
+                            inventory.append('Alien Blaster')
                             plyturn = True
                             if plyhealth == 10:
                                 plyhealthDEFAULT += 10
