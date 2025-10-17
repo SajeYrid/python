@@ -46,8 +46,10 @@ def retry():
     companionphrase = ""
 
     # lists
-    global inventory
+    global inventory, wiseguy, wiseguycount
     inventory = ['Nothing']
+    wiseguy = ['q', 'w', 'e', 'r', 't', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'm']
+    wiseguycount = ['q', 'w', 'e', 'r', 't', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'm']
 
     # integers
     global plypos, plychoke, ouch, plyhealthDEFAULT, plyhealth, plyatckDEFAULT, plyatck, plyatckplus, plydefenseDEFAULT, plydefense, weaponability, weaponnumber, specialcharge, specialchargeDEFAULT
@@ -106,7 +108,8 @@ items = {
     'Lantern' : 'LANTERN - An ordinary lantern with no oddities whatsoever.',
     'Branch' : 'BRANCH - A part of the tree that was left to die.',
     'Map' : 'MAP - Found on a basic beige wall. Every vent seems to be labeled with a number.',
-    'Bandana' : 'BANDANA - The bandana of a fallen warrior. Sacrifices defense for even more strength.'
+    'Bandana' : 'BANDANA - The bandana of a fallen warrior. Sacrifices defense for even more strength.',
+    'Alien Blaster': 'ALIEN BLASTER - You have no info on this item.'
 }
 
 roomhints = {
@@ -233,6 +236,29 @@ def beastenemy():
     enemyspecialnumber = beastspecial.number
     enemyspecialcount = beastspecial.charge
     enemyspecialcountDEFAULT = beastspecial.charge
+
+    enemydefending = False
+    enemycharge = False
+    enemytarget = 0
+
+def alienenemy():
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
+    global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
+    alienenemy = Enemy("The 🅐🅛🅘🅔🅝", 75, 5, -5, "ᎴᏋፈᎥᎷᏗᏖᏋᏕ", True)
+    enemyname = alienenemy.name
+    enemyhealth = alienenemy.health
+    enemyatck = alienenemy.attack
+    enemyatckDEFAULT = alienenemy.attack
+    enemydefense = alienenemy.defense
+    enemyphrase = alienenemy.atckphrase
+    enemyspecial = alienenemy.special
+
+    alienenemy = Special("\033[1;30m𝕯𝕰𝕬𝕿𝕳\033[0m", 4, 1, 10)
+    enemyspecialmove = alienenemy.name
+    enemyspecialtype = alienenemy.ability
+    enemyspecialnumber = alienenemy.number
+    enemyspecialcount = alienenemy.charge
+    enemyspecialcountDEFAULT = alienenemy.charge
 
     enemydefending = False
     enemycharge = False
@@ -388,6 +414,8 @@ def plyspecial():
         specialweapon = Special("Eliminate", 1, 40, 10)
     elif weapon == 'Lantern':
         specialweapon = Special("Light it up", 2, 4, 5)
+    elif weapon == 'Alien Blaster':
+        specialweapon = Special("Defense Crediblity", 4, 1, 10)
 
     weaponspecial = specialweapon.name
     weaponability = specialweapon.ability
@@ -542,7 +570,7 @@ def plymove():
                 specialcharge = specialchargeDEFAULT
         elif specialcharge == 0 and weaponability == 4:
             print(f"\033[1;34mYou use {weaponspecial}! You gain +{weaponnumber} defense for the rest of the fight.\033[0m")
-            plydefense += weaponnumber
+            plydefense += weaponnumberAlien
             specialcharge = specialchargeDEFAULT
         elif specialcharge != 0 and weaponspecial != 'Nothing':
             print(f"\033[1;30mYou cannot use {weaponspecial} yet. You still have to wait {specialcharge} turns.\033[0m")
@@ -744,6 +772,8 @@ def enemymove():
                         enemyatck -= enemyatckplus
                         enemyatck *= 2
                         enemyatck += enemyatckplus
+                    else:
+                        enemyatck *= 2
                     enemydefending = False
                     plydefending = False
                     companiondefending = False
@@ -860,6 +890,8 @@ def enemymove():
                         enemyatck -= enemyatckplus
                         enemyatck *= 2
                         enemyatck += enemyatckplus
+                    else:
+                        enemyatck *= 2
                     enemydefending = False
                     plydefending = False
                     companiondefending = False
@@ -957,6 +989,10 @@ def battletrainer():
         print("Granting you access to the LANTERN (+1 Attack)")
         weapon = 'Lantern'
         plyatck = 6
+    elif ply == 'alien blaster':
+        print("Granting you access to the ALIEN BLASTER (+10 Attack)")
+        weapon = 'Alien Blaster'
+        plyatck = 15
     else:
         print("You will start with no weapon.")
         weapon = 'Nothing'
@@ -1016,6 +1052,9 @@ def battletrainer():
     elif ply == 'mysterious person':
         print("You will fight the MYSTERIOUS PERSON")
         mysteriousPerson()
+    elif ply == 'alien':
+        print("You will fight the \033[1;36m🅐🅛🅘🅔🅝\033[0m")
+        alienenemy()
     elif ply == 'custom':
         print("You will fight a CUSTOM ENEMY")
         customenemy()
@@ -1168,6 +1207,11 @@ def globalcommands():
         print("You pretend to toss away the pretend splinters.\n\033[1;33mPRETEND SPLINTERS removed from your inventory.\033[0m")
         inventory.remove('Pretend Splinters')
         return True
+
+    elif weapon == 'Sword' and ply == 'toss alien blaster' and 'Alien Blaster' in inventory:
+        print("Don't get why you would throw away a really good item, but ok?\n\033[1;33mALIEN BLASTER removed from your inventory.\033[0m")
+        inventory.remove('Alien Blaster')
+        return True
     
     elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know' or ply == 'i dunno':
         print("Then figure \033[1;31mit\033[0m out.")
@@ -1292,6 +1336,10 @@ def globalcommands():
                         print("You feel the power of a warrior.\n\033[1;31mYou gained +2 Attack.\033[1;34m\nYou gained -1 Defense.\033[0m")
                         armor = "Bandana"
                         plydefense = plydefenseDEFAULT - 1
+                    elif equippeditem == 'Alien Blaster':
+                        print("\033[1;31m\nYou gained +10 Attack\033[0m")
+                        weapon = "Alien Blaster"
+                        plyatck = plyatckDEFAULT + 10
                 if armor == 'Bandana':
                     plyatck += 2
         else:
@@ -2118,7 +2166,7 @@ print("""\033[1;32m
 88,    ,88 88 88 "8b,   ,aa 88       88  
 `\"8bbdP\"Y8 88 88  `\"Ybbd8\"\' 88       88  \033[0m\n\n\n\n\n\n\n\nStart Game? Y/N""")
 
-while plypos == 0:
+while plypos == 0 and plydead == False:
     ply = input('>').lower()
     if ply == 'y' or ply == 'yes' or ply == 'start':
         plypos = 1
@@ -2155,6 +2203,57 @@ while plypos == 0:
     elif ply == 'battle':
         print('Loading battle simulator.')
         battletrainer()
+    elif ply in wiseguy:
+        if len(wiseguycount) < 5:
+            wiseguycount.remove(ply)
+            if len(wiseguycount) == 0:
+                print("You think you're so funny? Typing every letter EXCEPT the letters I SPECIFIED you should press? Know what? Congrats, here's your secret! Go fight this alien.")
+                alienenemy()
+                plyspecial()
+                battlestart()
+                while plyhealth > 0 and enemyhealth > 0:
+                    if plyturn == True and plyhealth > 0:
+                        plymove()
+                        plyturn = False
+                        pass
+                        if plyerror == True:
+                            if ply != 'special':
+                                print("That is not a move that you have access to. Try again.")
+                            plymove()
+                            pass
+                            if plyerror == True:
+                                if ply != 'special':
+                                    print("You end up freezing in place as you forget what you can do in battle.")
+                                pass
+                        if enemyhealth <= 0 and plyhealth > 0:
+                            print("You SOMEHOW manage to defeat the alien despite the odds being stacked against you.")
+                            if plyatck >= 8:
+                                print('\033[0mYou are now facing towards a door. However, \033[1;33myou now have the ALIEN BLASTER in your inventory.\033[0m You also feel quite healthy.\nYou already know what to do.')
+                                inventory.append('Alien Blaster')
+                            plyturn = True
+                            if plyhealth == 10:
+                                plyhealthDEFAULT += 10
+                            else:
+                                plyhealthDEFAULT += 5
+                            plyhealth = plyhealthDEFAULT
+                            plypos = 1
+                    if plyturn == False and plyhealth > 0 and enemyhealth > 0:
+                        enemymove()
+                        plyturn = True
+                        pass
+                        if plyhealth <= 0:
+                            print("Before even setting foot in this world, you managed to meet your end. You should probably learn when to stop trying to look for something you're not meant to find.\n\n\033[1;31mGame Over!\033[0m")
+                            plydead = True
+            else:
+                print("I said stop. Just type Y or N.")
+        elif len(wiseguycount) < 13:
+            if ply in wiseguycount:
+                wiseguycount.remove(ply)
+            print("Ok, haha, you're typing every single letter except for Y and N. Here's your secret, you can stop now.")
+        else:
+            if ply in wiseguycount:
+                wiseguycount.remove(ply)
+            print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
     else:
         print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
 
@@ -3945,7 +4044,7 @@ while plypos == 21 and plydead == False and companion == 'Mysterious Person':
                 print("You won!\nThe beast was slained by the sword and falls to the ground.\n\033[1;33mThe Sword grew stronger.\033[0m")
                 swordstrength += 2
                 plyatck = plyatckDEFAULT + swordstrength
-                if armor == 'Badana':
+                if armor == 'Bandana':
                     plyatck += 2
                 plypos = 22
                 plyturn = True
@@ -3970,6 +4069,21 @@ while plypos == 21 and plydead == False and companion == 'Mysterious Person':
             companiondefense = 0
             companiondefending = False
             enemytarget = 0
+            #    ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            #⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
+            #⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿
+            #⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀
+            #⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+            #⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            #⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
 
 # Area 21:Sword (There's a lot of effort being put in to a route that litteraly no one is going to find unless looking through the code.)
 while plypos == 21 and plydead == False and companion != 'Mysterious Person':
@@ -3993,7 +4107,7 @@ while plypos == 21 and plydead == False and companion != 'Mysterious Person':
                 print("You won!\nThe person ended up running away.\033[1;33mThe sword grew stronger.\033[0m")
                 swordstrength += 1
             plyatck = plyatckDEFAULT + swordstrength
-            if armor == 'Badana':
+            if armor == 'Bandana':
                 plyatck += 2
             plypos = 22
             plyturn = True
