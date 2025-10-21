@@ -46,8 +46,9 @@ def retry():
     companionphrase = ""
 
     # lists
-    global inventory, wiseguy, wiseguycount
+    global inventory, locations, wiseguy, wiseguycount
     inventory = ['Nothing']
+    locations = [1, 2, 3, 4, 5, 6, 12, 18, 20, 21, 22]
     wiseguy = ['q', 'w', 'e', 'r', 't', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'm']
     wiseguycount = ['q', 'w', 'e', 'r', 't', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'm']
 
@@ -244,7 +245,7 @@ def beastenemy():
 def alienenemy():
     global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
     global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
-    alienenemy = Enemy("The 🅐🅛🅘🅔🅝", 75, 5, -5, "ᎴᏋፈᎥᎷᏗᏖᏋᏕ", True)
+    alienenemy = Enemy("The 🅐🅛🅘🅔🅝", 75, 4, -5, "ᎴᏋፈᎥᎷᏗᏖᏋᏕ", True)
     enemyname = alienenemy.name
     enemyhealth = alienenemy.health
     enemyatck = alienenemy.attack
@@ -259,6 +260,29 @@ def alienenemy():
     enemyspecialnumber = alienenemy.number
     enemyspecialcount = alienenemy.charge
     enemyspecialcountDEFAULT = alienenemy.charge
+
+    enemydefending = False
+    enemycharge = False
+    enemytarget = 0
+
+def shreksecretenemy():
+    global enemyname, enemyhealth, enemyatck, enemyatckDEFAULT, enemydefense, enemyphrase, enemydefending, enemycharge
+    global enemyspecial, enemyspecialmove, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemytarget
+    shrekenemy = Enemy("Shrek?", 100, 10, 3, "ogers", True)
+    enemyname = shrekenemy.name
+    enemyhealth = shrekenemy.health
+    enemyatck = shrekenemy.attack
+    enemyatckDEFAULT = shrekenemy.attack
+    enemydefense = shrekenemy.defense
+    enemyphrase = shrekenemy.atckphrase
+    enemyspecial = shrekenemy.special
+
+    shrekenemy = Special("Onions", 3, 10, 10)
+    enemyspecialmove = shrekenemy.name
+    enemyspecialtype = shrekenemy.ability
+    enemyspecialnumber = shrekenemy.number
+    enemyspecialcount = shrekenemy.charge
+    enemyspecialcountDEFAULT = shrekenemy.charge
 
     enemydefending = False
     enemycharge = False
@@ -425,6 +449,57 @@ def plyspecial():
 
 
 # the truly neutral functions
+def roomdebug():
+    global plypos, ply, inventory, weapon, tookstool
+    match plypos:
+        case 3:
+            print("Which version of the room do you want? (Default, Stool)")
+            ply = input('>').lower()
+            match ply:
+                case 'default':
+                    print("You're the boss.")
+                case 'stool':
+                    print("Granting you the STOOL.")
+                    inventory.append('Stool')
+                    tookstool = True
+                case _:
+                    print("I'll assume that means the default room, boss.")
+        case 4:
+            print('Boss, get ready for a rough battle against the PLASTIC DINOSAUR!')
+            plasticDino()
+            plyspecial()
+            battlestart()
+        case 5 | 6:
+            print('Granting you the TOOTH.')
+            inventory.append('Tooth')
+        case 18:
+            print("Granting you the CROWBAR, and BRICK.")
+            inventory.append('Crowbar')
+            inventory.append('Brick')
+        case 20:
+            print("Granting you the LANTERN")
+            inventory.append('Lantern')
+            weapon = 'Lantern'
+        case 21:
+            print('Boss, get ready for a rough battle against the BEAST!')
+        case 22:
+            print('Granting you the CROWBAR, BRICK, and LANTERN.')
+            inventory.append('Crowbar')
+            inventory.append('Brick')
+            inventory.append('Lantern')
+            print("Which version of the room do you want? (Default, Alone")
+            ply = input('>').lower()
+            match ply:
+                case 'default':
+                    print("The MYSTERIOUS PERSON is now your companion.")
+                    companion = 'Mysterious Person'
+                case 'alone':
+                    print("You're the boss.")
+                case _:
+                    print("I'll assume that means the default room, boss.")
+                    print("The MYSTERIOUS PERSON is now your companion.")
+                    companion = 'Mysterious Person'
+        
 def glasscheck():
     global glassTicker
     global plypos
@@ -1058,6 +1133,23 @@ def battletrainer():
     elif ply == 'custom':
         print("You will fight a CUSTOM ENEMY")
         customenemy()
+    elif ply == 'shrek':
+        print("""\033[1;32m⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+   ⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
+     ⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀
+    ⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
+  ⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿
+  ⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀
+  ⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+       ⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+        ⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+         ⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+       ⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
+       ⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠉⠛⠻⠿⠿⠿⠿⠛⠉\033[0m""")
+        shreksecretenemy()
     else:
         print("You will fight the PLASTIC DINOSAUR")
         plasticDino()
@@ -2168,42 +2260,7 @@ print("""\033[1;32m
 
 while plypos == 0 and plydead == False:
     ply = input('>').lower()
-    if ply == 'y' or ply == 'yes' or ply == 'start':
-        plypos = 1
-        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
-        print("There is a door here. You are facing north.")
-    elif ply == 'n' or ply == 'no' or ply == 'quit':
-        print("Ok? Dunno why you decided to show up then. I mean, like, we spent a long while programming this game. It's got tons of routes and options for you to do. It's a pretty good game if I say so myself. But I guess if you don't want to play that's... alright. Like yeah, who cares about alien? I surely, definitly, definitivly, absoulutly do not care about this wonderful creation that I made. You, on the other hand, absoulutly do care about this game considering you are either reading this via the source code or through Python idle and are taking your time to read all of this. But yeah, sure, leave. It's not like I wanted you to be here anyway.")
-        quit()
-    elif ply == 'break' or ply == 'attack' or ply == 'punch' or ply == 'fight':
-        plypos = 1
-        print("With a fiery mind, you start the game with the mindset of dealing more damage.")
-        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
-        print("There is a door here. You are facing north.")
-        plyatckDEFAULT += 1
-        plyatck = plyatckDEFAULT
-    elif ply == 'defend' or ply == 'block' or ply == 'coward':
-        plypos = 1
-        print("With a strategic mind, you decide to start the game with the mindset of taking as little damage as possible.")
-        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
-        print("There is a door here. You are facing north.")
-        plydefenseDEFAULT += 1
-        plydefense = plydefenseDEFAULT
-    elif ply == 'weak' or ply == 'hard' or ply == 'hard mode' or ply == 'challenge':
-        plypos = 1
-        print("You decide to activate hard mode. You only have 1 attack from now on.")
-        print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
-        print("There is a door here. You are facing north.")
-        plyatckDEFAULT += -4
-        plyatck = plyatckDEFAULT
-    elif ply == 'jxu kbjycqju qdimuh je byvu jxu kdyluhiu qdt uluhojxydw':
-        plysecondary = int(input('Where to, boss?\n'))
-        print('On it, boss')
-        plypos = plysecondary
-    elif ply == 'battle':
-        print('Loading battle simulator.')
-        battletrainer()
-    elif ply in wiseguy:
+    if ply in wiseguy:
         if len(wiseguycount) < 5:
             if ply in wiseguycount:
                 wiseguycount.remove(ply)
@@ -2255,7 +2312,48 @@ while plypos == 0 and plydead == False:
                 wiseguycount.remove(ply)
             print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
     else:
-        print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
+        match ply:
+            case 'y' | 'yes' | 'start':
+                plypos = 1
+                print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
+                print("There is a door here. You are facing north.")
+            case 'n' | 'no' | 'quit':
+                print("Ok? Dunno why you decided to show up then. I mean, like, we spent a long while programming this game. It's got tons of routes and options for you to do. It's a pretty good game if I say so myself. But I guess if you don't want to play that's... alright. Like yeah, who cares about alien? I surely, definitly, definitivly, absoulutly do not care about this wonderful creation that I made. You, on the other hand, absoulutly do care about this game considering you are either reading this via the source code or through Python idle and are taking your time to read all of this. But yeah, sure, leave. It's not like I wanted you to be here anyway.")
+                quit()
+            case 'break' | 'attack' | 'punch' | 'fight':
+                plypos = 1
+                print("With a fiery mind, you start the game with the mindset of dealing more damage.")
+                print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
+                print("There is a door here. You are facing north.")
+                plyatckDEFAULT += 1
+                plyatck = plyatckDEFAULT
+            case 'defend' | 'block' | 'coward':
+                plypos = 1
+                print("With a strategic mind, you decide to start the game with the mindset of taking as little damage as possible.")
+                print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
+                print("There is a door here. You are facing north.")
+                plydefenseDEFAULT += 1
+                plydefense = plydefenseDEFAULT
+            case 'weak' | 'hard' | 'hard mode' | 'challenge':
+                plypos = 1
+                print("You decide to activate hard mode. You only have 1 attack from now on.")
+                print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
+                print("There is a door here. You are facing north.")
+                plyatckDEFAULT += -4
+                plyatck = plyatckDEFAULT
+            case 'jxu kbjycqju qdimuh je byvu jxu kdyluhiu qdt uluhojxydw':
+                plysecondary = int(input('Where to, boss?\n'))
+                if plysecondary in locations:
+                    print('On it, boss')
+                    plypos = plysecondary
+                    roomdebug()
+                else:
+                    print('Boss, that ain\'t possible.')
+            case 'battle':
+                print('Loading battle simulator.')
+                battletrainer()
+            case _:
+                print('That isn\'t an option. type \'Y\' for Yes and \'N\' for No')
 
 # area 1 (unbroken door)
 while plypos == 1 and doorbroken == False and plydead == False:
@@ -4069,21 +4167,6 @@ while plypos == 21 and plydead == False and companion == 'Mysterious Person':
             companiondefense = 0
             companiondefending = False
             enemytarget = 0
-            #    ⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-            #⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
-            #⠀⠀⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿⢂⠔⢚⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿
-            #⠀⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿⣌⢤⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀
-            #⠀⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
-            #⠀⠉⠈⠉⠀⠀⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⠀⠀⠀⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⠀⠀⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⠀⠀⠀⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
-            #⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠛⠻⠿⠿⠿⠿⠛⠉
 
 # Area 21:Sword (There's a lot of effort being put in to a route that litteraly no one is going to find unless looking through the code.)
 while plypos == 21 and plydead == False and companion != 'Mysterious Person':
