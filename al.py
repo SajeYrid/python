@@ -818,7 +818,7 @@ def enemymove():
             else:
                 enemyspecialcount -= 1
                 if enemyaction > 6 and plydefending == True:
-                    print(f"\033[1;31m {enemyname} {enemyphrase} you. \033[1;34mBut you defended!\033[0m")
+                    print(f"\033[1;31m{enemyname} {enemyphrase} you. \033[1;34mBut you defended!\033[0m")
                     enemyatck = enemyatckDEFAULT
                     enemycharge = False
                     enemydefending = False
@@ -826,22 +826,22 @@ def enemymove():
                     companiondefending = False
                 elif enemyaction > 6 and plydefending == False:
                     if enemyatck - plydefense > 0:
-                        print(f"\033[1;31m {enemyname} {enemyphrase} you for {enemyatck - plydefense} damage!\033[0m")
+                        print(f"\033[1;31m{enemyname} {enemyphrase} you for {enemyatck - plydefense} damage!\033[0m")
                         plyhealth = plyhealth - (enemyatck - plydefense)
                     else:
-                        print(f"\033[1;31m {enemyname} {enemyphrase} you for 1 damage!\033[0m")
+                        print(f"\033[1;31m{enemyname} {enemyphrase} you for 1 damage!\033[0m")
                         plyhealth -= 1
                     enemyatck = enemyatckDEFAULT
                     enemycharge = False
                     enemydefending = False
                     companiondefending = False
                 elif enemyaction < 4:
-                    print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
+                    print(f"\033[1;34m{enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
                     enemydefending = True
                     plydefending = False
                     companiondefending = False
                 elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
-                    print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
+                    print(f"\033[1;32m{enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
                     enemycharge = True
                     if enemyatckplus != 0:
                         enemyatck -= enemyatckplus
@@ -853,17 +853,17 @@ def enemymove():
                     plydefending = False
                     companiondefending = False
                 elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
-                    print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
+                    print(f"\033[1;32m{enemyname} tried to charge! \033[0mBut {enemyname} already did.")
                     plydefending = False
                     companiondefending = False
                 else:
                     print("This will only print if something went horribly wrong.")
                 if enemyspecialcount == 1:
-                    print(f"\033[1;3{enemyspecialtype}m {enemyname} looks to be readying something strong.\033[0m")
+                    print(f"\033[1;3{enemyspecialtype}m{enemyname} looks to be readying something strong.\033[0m")
                     enemyspecialcount = 0
         else:
             if enemyaction > 6 and plydefending == True:
-                print(f"\033[1;31m {enemyname} {enemyphrase} you. \033[1;34mBut you defended!\033[0m")
+                print(f"\033[1;31m{enemyname} {enemyphrase} you. \033[1;34mBut you defended!\033[0m")
                 enemyatck = enemyatckDEFAULT
                 enemycharge = False
                 enemydefending = False
@@ -871,29 +871,29 @@ def enemymove():
                 companiondefending = False
             elif enemyaction > 6 and plydefending == False:
                 if enemyatck - plydefense > 0:
-                    print(f"\033[1;31m {enemyname} {enemyphrase} you for {enemyatck - plydefense} damage!\033[0m")
+                    print(f"\033[1;31m{enemyname} {enemyphrase} you for {enemyatck - plydefense} damage!\033[0m")
                     plyhealth = plyhealth - (enemyatck - plydefense)
                 else:
-                    print(f"\033[1;31m {enemyname} {enemyphrase} you for 1 damage!\033[0m")
+                    print(f"\033[1;31m{enemyname} {enemyphrase} you for 1 damage!\033[0m")
                     plyhealth -= 1
                 enemyatck = enemyatckDEFAULT
                 enemycharge = False
                 enemydefending = False
                 companiondefending = False
             elif enemyaction < 4:
-                print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
+                print(f"\033[1;34m{enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
                 enemydefending = True
                 plydefending = False
                 companiondefending = False
             elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
-                print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
+                print(f"\033[1;32m{enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
                 enemycharge = True
                 enemyatck *= 2
                 enemydefending = False
                 plydefending = False
                 companiondefending = False
             elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
-                print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
+                print(f"\033[1;32m{enemyname} tried to charge! \033[0mBut {enemyname} already did.")
                 plydefending = False
                 companiondefending = False
             else:
@@ -904,7 +904,7 @@ def enemymove():
                 print(f"\033[1;3{enemyspecialtype}m{enemyname} used their speical move, {enemyspecialmove}!\033[0m")
                 if enemyspecialtype == 1:
                     if companiondefending == True:
-                        print(f"\033[1;34m But {companion} defended.")
+                        print(f"\033[1;34mBut {companion} defended.")
                     else:
                         print(f"\033[1;3{enemyspecialtype}m{enemyname} deals {enemyspecialnumber} damage to {companion}.\033[0m")
                         companionhealth -= enemyspecialnumber
@@ -936,7 +936,7 @@ def enemymove():
             else:
                 enemyspecialcount -= 1
                 if enemyaction > 6 and companiondefending == True:
-                    print(f"\033[1;31m {enemyname} {enemyphrase} {companion}. \033[1;34mBut {companion} defended!\033[0m")
+                    print(f"\033[1;31m{enemyname} {enemyphrase} {companion}. \033[1;34mBut {companion} defended!\033[0m")
                     enemyatck = enemyatckDEFAULT
                     enemycharge = False
                     enemydefending = False
@@ -944,22 +944,22 @@ def enemymove():
                     companiondefending = False
                 elif enemyaction > 6 and companiondefending == False:
                     if enemyatck - companiondefense > 0:
-                        print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for {enemyatck - companiondefense} damage!\033[0m")
+                        print(f"\033[1;31m{enemyname} {enemyphrase} {companion} for {enemyatck - companiondefense} damage!\033[0m")
                         companionhealth -= (enemyatck - companiondefense)
                     else:
-                        print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for 1 damage!\033[0m")
+                        print(f"\033[1;31m{enemyname} {enemyphrase} {companion} for 1 damage!\033[0m")
                         companionhealth -= 1
                     enemyatck = enemyatckDEFAULT
                     enemycharge = False
                     enemydefending = False
                     plydefending = False
                 elif enemyaction < 4:
-                    print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
+                    print(f"\033[1;34m{enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
                     enemydefending = True
                     plydefending = False
                     companiondefending = False
                 elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
-                    print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
+                    print(f"\033[1;32m{enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
                     enemycharge = True
                     if enemyatckplus != 0:
                         enemyatck -= enemyatckplus
@@ -971,7 +971,7 @@ def enemymove():
                     plydefending = False
                     companiondefending = False
                 elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
-                    print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
+                    print(f"\033[1;32m{enemyname} tried to charge! \033[0mBut {enemyname} already did.")
                     plydefending = False
                     companiondefending = False
                 else:
@@ -981,7 +981,7 @@ def enemymove():
                     enemyspecialcount = 0
         else:
             if enemyaction > 6 and companiondefending == True:
-                print(f"\033[1;31m {enemyname} {enemyphrase} {companion}. \033[1;34mBut {companion} defended!\033[0m")
+                print(f"\033[1;31m{enemyname} {enemyphrase} {companion}. \033[1;34mBut {companion} defended!\033[0m")
                 enemyatck = enemyatckDEFAULT
                 enemycharge = False
                 enemydefending = False
@@ -989,28 +989,28 @@ def enemymove():
                 companiondefending = False
             elif enemyaction > 6 and companiondefending == False:
                 if enemyatck - companiondefense > 0:
-                    print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for {enemyatck - companiondefense} damage!\033[0m")
+                    print(f"\033[1;31m{enemyname} {enemyphrase} {companion} for {enemyatck - companiondefense} damage!\033[0m")
                     companionhealth = companionhealth - (enemyatck - companiondefense)
                 else:
-                    print(f"\033[1;31m {enemyname} {enemyphrase} {companion} for 1 damage!\033[0m")
+                    print(f"\033[1;31m{enemyname} {enemyphrase} {companion} for 1 damage!\033[0m")
                     companionhealth -= 1
                 enemyatck = enemyatckDEFAULT
                 enemycharge = False
                 enemydefending = False
             elif enemyaction < 4:
-                print(f"\033[1;34m {enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
+                print(f"\033[1;34m{enemyname} defended! {enemyname} won't take damage next turn!\033[0m")
                 enemydefending = True
                 plydefending = False
                 companiondefending = False
             elif enemyaction > 3 and enemyaction < 7 and enemycharge == False:
-                print(f"\033[1;32m {enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
+                print(f"\033[1;32m{enemyname} charged! {enemyname}'s next attack will do double damage!\033[0m")
                 enemycharge = True
                 enemyatck *= 2
                 enemydefending = False
                 plydefending = False
                 companiondefending = False
             elif enemyaction > 3 and enemyaction < 7 and enemycharge == True:
-                print(f"\033[1;32m {enemyname} tried to charge! \033[0mBut {enemyname} already did.")
+                print(f"\033[1;32m{enemyname} tried to charge! \033[0mBut {enemyname} already did.")
                 plydefending = False
             else:
                 print("This will only print if something went horribly wrong.")
@@ -1252,9 +1252,15 @@ def globalcommands():
     elif ply == 'quit':
         print("Ok, bye then.")
         quit()
-    elif ply == 'alien':
-        print("You sob due to the lack of aliens in your area.")
+    elif 'alien' in ply:
+        if 'Alien Blaster' not in inventory:
+            print("You sob due to the lack of aliens in your area.")
+        else:
+            print("You relish in the defeat of the secret alien.")
         return True
+
+    elif 'blast' in ply and 'Alien Blaster' in inventory:
+        print('You fire the alien blaster multiple times. You miss everything you were aiming at. You believe that the blaster only locks on to enemies.')
 
     elif ply == 'equip item':
         print("Please make sure to specify what item to equip. (EXAMPLE: Equip Hammer)")
@@ -2789,6 +2795,13 @@ You aren\'t where you were before.""")
         battlestart()
         plypos = 4
 
+    elif ply == 'blast dinosaur' and 'Alien Blaster' in inventory:
+        print("You end up blasting the Plastic Dinosaur, \033[1;31mdealing 15 damage to it.\033[0m The Plastic Dinosaur immediatly reacts to your attack.\nBATTLE START!")
+        plasticDino()
+        plyspecial()
+        battlestart()
+        plypos = 4
+
     elif ply == "check dinosaur" and dinoseen == True:
         print("You go to check the dinosaur. It reacts. \nBATTLE START!")
         plasticDino()
@@ -3086,7 +3099,9 @@ while plypos == 3 and tookstool == True and plydead == False:
         elif weapon == 'Brick':
             print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
         elif weapon == 'Shard':
-            print("You manage to scrape the glass. It forms a questionable symbol resembling a slashable wall.")
+            print("You manage to scrape the glass. It forms a questionable symbol resembling a sword slashing a wall.")
+        elif weapon == 'Alien Blaster':
+            print("You shoot the glass wall with the Alien Blaster. For some strange reason, the glass nullifies the shot.")
         elif weapon == 'Sword':
             print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
 After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
@@ -3097,7 +3112,6 @@ You aren\'t where you were before.""")
             plyhealth = plyhealthDEFAULT
         else:
             print("You look at the glass. You feel as if you have broken the game somehow.")
-            
 
     elif ply == 'eat glass':
         print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
