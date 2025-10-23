@@ -111,31 +111,38 @@ items = {
     'Bandana' : 'BANDANA - The bandana of a fallen warrior. Sacrifices defense for even more strength.',
     'Alien Blaster': 'ALIEN BLASTER - You have no info on this item.'
 }
-
+#For the roomhints and self checkroom, format it like this - ROOM NUMBER THEY ARE IN - (OPTIONAL: IF IT IS A DIFFERENT VERSION OF THE ROOM) - VARIATION OF THE HINT
+    #EXAMPLE - 3BB would be mean plypos = 3 (museum), this is the B varient of the room (stool varient), and this is the 2nd hint (After crowbar is obtained)
 roomhints = {
-    1 : 'You tried to think. You observe that there is a unbroken door in front of you.',
-    2 : 'You tried to think. You observe that the brick wall in the doorframe looks unnatural.',
-    3 : 'You tried to think. You observe a strange feeling of being watched.',
-    4 : 'You tried to think. You observe a suspicious looking dinosaur.',
-    5 : 'You tried to think. You observe a sense of satisfaction from killing a dinosaur.',
-    6 : 'You tried to think. You observe a dangling crowbar from the Plastic Dinosaur that is too high to reach.',
-    7 : 'You tried to think. You thought about the destruction of buildings.',
-    8 : 'You tried to think. You observe a puzzle you have already completed before.',
-    9 : 'You tried to think. You thought about the minotaur in the labyrinth.',
-    10 : 'You tried to think. You observe a strange message.'
+    '1A' : 'You tried to think. You observe that there is a unbroken door in front of you.',
+    '1B' : 'You tried to think. You observe that the brick wall in the doorframe looks unnatural.',
+    '3A' : 'You tried to think. You observe a strange feeling of being watched.',
+    '3B' : 'You tried to think. You observe a suspicious looking dinosaur.',
+    '3C' : 'You tried to think. You observe a sense of satisfaction from killing a dinosaur.',
+    '3BA' : 'You tried to think. You observe a dangling crowbar from the Plastic Dinosaur that is too high to reach.',
+    '3BB' : 'You tried to think. You thought about the destruction of buildings.',
+    '1XA' : 'You tried to think. You observe a puzzle you have already completed before.',
+    '5A' : 'You tried to think. You thought about the minotaur in the labyrinth.',
+    '6A' : 'You tried to think. You observe a strange message.',
+    '12A' : 'PLACEHOLDER',
+    '18A' : 'PLACEHOLDER',
+    '18B' : 'PLACEHOLDER',
+    '20A' : 'PLACEHOLDER',
+    '22A' : 'PLACEHOLDER',
+    '22B' : 'PLACEHOLDER'
 }
 
 selfcheckroom = {
-    1 : 'Trying to investigate this strange door they found.',
-    2 : 'Certified Destroyer of Doors.',
-    3 : 'Feels broken.',
-    4 : 'Feels a prehistoric rage overtaking them.',
-    5 : 'Plastic Dinosaur exterminator.',
-    6 : 'Ready to climb their newly obtained stool.',
-    7 : 'Already broke their newly obtained stool.',
-    8 : 'Still trying to investigate this unique door they found.',
-    9 : 'Crawling through the vents.',
-    10 : 'idk what to write here, but it is for the security room.'
+    '1A' : 'Trying to investigate this strange door they found.',
+    '1B' : 'Certified Destroyer of Doors.',
+    '3A' : 'Feels broken.',
+    '3B' : 'Feels a prehistoric rage overtaking them.',
+    '3C' : 'Plastic Dinosaur exterminator.',
+    '3BA' : 'Ready to climb their newly obtained stool.',
+    '3BB' : 'Already broke their newly obtained stool.',
+    '1XA' : 'Still trying to investigate this unique door they found.',
+    '5A' : 'Crawling through the vents.',
+    '6A' : 'idk what to write here, but it is for the security room.'
 }
 
 # classes, but the cool kind
@@ -412,6 +419,18 @@ def mysteriouscompanion():
     companionatckDEFAULT = mysteriousperson.attack
     companiondefense = mysteriousperson.defense
     companionphrase = mysteriousperson.atckphrase
+
+    companiondefending = False
+
+def shrekcompanion():
+    global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companionphrase, companiondefending
+    shrek = Enemy("Shrek", 100, 10, 3, "ogers", False)
+    companion = shrek.name
+    companionhealth = shrek.health
+    companionatck = shrek.attack
+    companionatckDEFAULT = shrek.attack
+    companiondefense = shrek.defense
+    companionphrase = shrek.atckphrase
 
     companiondefending = False
 
@@ -1030,112 +1049,86 @@ def battletrainer():
         plyhealth = 10
 
     ply = input('What weapon would you like?\n>').lower()
-    if ply == 'splinters':
-        print("Granting you access to the SPLINTERS (+1 Attack)")
-        weapon = 'Splinters'
-        plyatck = 6
-    elif ply == 'pretend splinters':
-        print("Granting you access to the PRETEND SPLINTERS (-1 Attack)")
-        weapon = 'Pretend Splinters'
-        plyatck = 4
-    elif ply == 'crowbar':
-        print("Granting you access to the CROWBAR (+2 Attack)")
-        weapon = 'Crowbar'
-        plyatck = 7
-    elif ply == 'brick':
-        print("Granting you access to the BRICK (+1 Attack)")
-        weapon = 'Brick'
-        plyatck = 6
-    elif ply == 'shard':
-        print("Granting you access to the SHARD (+3 Attack)")
-        weapon = 'Shard'
-        plyatck = 8
-    elif ply == 'sword':
-        weapon = 'Sword'
-        ply = int(input('What strength is the sword?\n>'))
-        swordstrength = ply
-        print(f"Granting you access to the SWORD (+{swordstrength} Attack)")
-        plyatck = 5 + swordstrength
-    elif ply == 'key':
-        print("Granting you access to the KEY (+1 Attack)")
-        weapon = 'Key'
-        plyatck = 6
-    elif ply == 'lantern':
-        print("Granting you access to the LANTERN (+1 Attack)")
-        weapon = 'Lantern'
-        plyatck = 6
-    elif ply == 'alien blaster':
-        print("Granting you access to the ALIEN BLASTER (+10 Attack)")
-        weapon = 'Alien Blaster'
-        plyatck = 15
-    else:
-        print("You will start with no weapon.")
-        weapon = 'Nothing'
-        plyatck = 5
+    match ply:
+        case 'splinters':
+            print("Granting you access to the SPLINTERS (+1 Attack)")
+            weapon = 'Splinters'
+            plyatck = 6
+        case 'pretend splinters':
+            print("Granting you access to the PRETEND SPLINTERS (-1 Attack)")
+            weapon = 'Pretend Splinters'
+            plyatck = 4
+        case 'crowbar':
+            print("Granting you access to the CROWBAR (+2 Attack)")
+            weapon = 'Crowbar'
+            plyatck = 7
+        case 'brick':
+            print("Granting you access to the BRICK (+1 Attack)")
+            weapon = 'Brick'
+            plyatck = 6
+        case 'shard':
+            print("Granting you access to the SHARD (+3 Attack)")
+            weapon = 'Shard'
+            plyatck = 8
+        case 'sword':
+            weapon = 'Sword'
+            ply = int(input('What strength is the sword?\n>'))
+            swordstrength = ply
+            print(f"Granting you access to the SWORD (+{swordstrength} Attack)")
+            plyatck = 5 + swordstrength
+        case 'key':
+            print("Granting you access to the KEY (+1 Attack)")
+            weapon = 'Key'
+            plyatck = 6
+        case 'lantern':
+            print("Granting you access to the LANTERN (+1 Attack)")
+            weapon = 'Lantern'
+            plyatck = 6
+        case 'alien blaster':
+            print("Granting you access to the ALIEN BLASTER (+10 Attack)")
+            weapon = 'Alien Blaster'
+            plyatck = 15
+        case _:
+            print("You will start with no weapon.")
+            weapon = 'Nothing'
+            plyatck = 5
 
     ply = input('What armor would you like?\n>').lower()
-    if ply == 'stool':
-        print("Granting you access to the STOOL (+1 Defense)")
-        armor = 'Stool'
-        plydefense = 1
-    elif ply == 'tooth':
-        print("Granting you access to the TOOTH (+1 Defense)")
-        armor = 'Tooth'
-        plydefense = 1
-    elif ply == 'splinters':
-        print("Granting you access to the SPLINTERS (+1 Defense)")
-        armor = 'Splinters'
-        plydefense = 1
-    elif ply == 'shield':
-        print("Granting you access to the SHIELD (+3 Defense)")
-        armor = 'Shield'
-        plydefense = 3
-    elif ply == 'bandana':
-        print("Granting you access to the BANDANA (+2 Attack, -1 Defense)")
-        armor = 'Shield'
-        plyatck += 2
-        plydefense = -1
-    else:
-        print("You will start with no armor.")
-        armor = 'Nothing'
-        plydefense = 0
+    match ply:
+        case 'stool':
+            print("Granting you access to the STOOL (+1 Defense)")
+            armor = 'Stool'
+            plydefense = 1
+        case 'tooth':
+            print("Granting you access to the TOOTH (+1 Defense)")
+            armor = 'Tooth'
+            plydefense = 1
+        case 'splinters':
+            print("Granting you access to the SPLINTERS (+1 Defense)")
+            armor = 'Splinters'
+            plydefense = 1
+        case 'shield':
+            print("Granting you access to the SHIELD (+3 Defense)")
+            armor = 'Shield'
+            plydefense = 3
+        case 'bandana':
+            print("Granting you access to the BANDANA (+2 Attack, -1 Defense)")
+            armor = 'Shield'
+            plyatck += 2
+            plydefense = -1
+        case _:
+            print("You will start with no armor.")
+            armor = 'Nothing'
+            plydefense = 0
 
     ply = input('What companion would you like?\n>').lower()
-    if ply == 'mysterious person':
-        print("MYSTERIOUS PERSON is now your companion.")
-        mysteriouscompanion()
-    elif ply == 'custom':
-        print("You will have a CUSTOM COMPANION.")
-        customcompanion()
-    else:
-        print("You will have no companion.")
-        companion = ''
-
-    ply = input('What enemy would you like to fight?\n>').lower()
-    if ply == 'dinosaur' or ply == 'plastic dinosaur':
-        print("You will fight the PLASTIC DINOSAUR")
-        plasticDino()
-    elif ply == 'door' or ply == 'true door':
-        print("You will fight the TRUE DOOR")
-        truedoor()
-    elif ply == 'void':
-        print("You will fight the VOID")
-        voidenemy()
-    elif ply == 'beast':
-        print("You will fight the BEAST")
-        beastenemy()
-    elif ply == 'mysterious person':
-        print("You will fight the MYSTERIOUS PERSON")
-        mysteriousPerson()
-    elif ply == 'alien':
-        print("You will fight the \033[1;36m🅐🅛🅘🅔🅝\033[0m")
-        alienenemy()
-    elif ply == 'custom':
-        print("You will fight a CUSTOM ENEMY")
-        customenemy()
-    elif ply == 'shrek':
-        print("""\033[1;32m⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
-⠸⡇⠀⠿⡀⠀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+    match ply:
+        case 'mysterious person':
+            print("MYSTERIOUS PERSON is now your companion.")
+            mysteriouscompanion()
+        case 'shrek':
+            print("""\033[1;32m⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠸⡇⠀⠿⡀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
    ⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
      ⢀⡀⠁⠀⠀⠈⠙⠛⠂⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀
     ⢀⡾⣁⣀⠀⠴⠂⠙⣗⡀⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
@@ -1149,10 +1142,54 @@ def battletrainer():
        ⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
         ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
           ⠉⠛⠻⠿⠿⠿⠿⠛⠉\033[0m""")
-        shreksecretenemy()
-    else:
-        print("You will fight the PLASTIC DINOSAUR")
-        plasticDino()
+            shrekcompanion()
+        case 'custom':
+            print("You will have a CUSTOM COMPANION.")
+            customcompanion()
+        case _:
+            print("You will have no companion.")
+            companion = ''
+
+    ply = input('What enemy would you like to fight?\n>').lower()
+    match ply:
+        case 'door' | 'true door':
+            print("You will fight the TRUE DOOR")
+            truedoor()
+        case 'void':
+            print("You will fight the VOID")
+            voidenemy()
+        case 'beast':
+            print("You will fight the BEAST")
+            beastenemy()
+        case 'mysterious person':
+            print("You will fight the MYSTERIOUS PERSON")
+            mysteriousPerson()
+        case 'alien':
+            print("You will fight the \033[1;36m🅐🅛🅘🅔🅝\033[0m")
+            alienenemy()
+        case 'custom':
+            print("You will fight a CUSTOM ENEMY")
+            customenemy()
+        case 'shrek':
+            print("""\033[1;31m⢀⡴⠑⡄⠀⠀⠀⠀⠀⠀⣀⣀⣤⣤⣤⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+⠸⡇⠀⠿⡀⠀⠀⣀⡴⢿⣿⣿⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+   ⠑⢄⣠⠾⠁⣀⣄⡈⠙⣿⣿⣿⣿⣿⣿⣿⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀
+     ⢀⡀⠁⠀⠀    ⠈⣿⣿⣿⣿⣿⠿⡿⢿⣆⠀⠀⠀⠀⠀⠀⠀
+    ⢀⡾⣁⣀⠀     ⠀⢻⣿⣿⠭⢤⣴⣦⣤⣹⠀⠀⠀⢀⢴⣶⣆
+  ⢀⣾⣿⣿⣿⣷⣮⣽⣾⣿⣥⣴⣿⣿⡿   ⡿⢿⣿⣦⣴⣾⠁⠸⣼⡿
+  ⢀⡞⠁⠙⠻⠿⠟⠉⠀⠛⢹⣿⣿⣿⣿⣿  ⣼⣿⣾⣿⡟⠉⠀⠀⠀⠀⠀
+  ⣾⣷⣶⠇⠀⠀⣤⣄⣀⡀⠈⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+       ⢦⡈⢻⣿⣿⣿⣶⣶⣶⣶⣤⣽⡹⣿⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+        ⠉⠲⣽⡻⢿⣿⣿⣿⣿⣿⣿⣷⣜⣿⣿⣿⡇⠀⠀⠀⠀⠀⠀
+         ⢸⣿⣿⣷⣶⣮⣭⣽⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀
+       ⣀⣀⣈⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠇⠀⠀⠀⠀⠀⠀⠀
+       ⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀
+        ⠹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀
+          ⠉⠛⠻⠿⠿⠿⠿⠛⠉\033[0m""")
+            shreksecretenemy()
+        case _:
+            print("You will fight the PLASTIC DINOSAUR")
+            plasticDino()
 
     plyspecial()
     battlestart()
@@ -1216,242 +1253,261 @@ def battletrainer():
 def globalcommands():
     # skip the void for this one, it parses commands differently
     global ply, inventory, plyhealth, plydefense, doorbroken, plydead, plypos, tookstool, dinodead, dinoseen, equippeditem, plyatck, weapon, armor, kys, swordstrength
-    if ply == 'look around' or ply == 'look':
-        print("Perhaps you should try to specify what direction you want to look in.")
-        return True
-    elif ply == "kill me" or ply == "kill myself":
-        if kys == True:
-            print("You decide to not attempt self-harm again.")
-        if plyatck < 10 and kys == False:
-            print("You punched yourself multiple times. You're too weak to deal any damage.")
-            kys = True
-        elif plyatck >= 10 and plyatck < 100 and kys == False:
-            print("You punched yourself multiple times. You managed to make a dent on yourself. \033[1;31mYou take 1 Damage.\033[0m")
-            plyhealth -= 1
-            if plyhealth == 0:
-                print("Amazingly, you managed to dispatch yourself using your own fists. Moron.\n\n\n\033[1;31mGame Over, I guess?")
-            kys = True
-        elif plyatck >= 100 and kys == False:
-            print("You already have enough power, you cannot stop here.")
-            kys = True
-        return True
-    elif ply == 'check inventory' or ply == 'inventory' or ply == 'open inventory':
-        currentitem = ''
-        if len(inventory) == 0:
-            print('\033[1;33mYou do not have any items in your inventory currently.\033[0m')
-        else:
-            for x in inventory:
-                currentitem = x
-                if currentitem == weapon and currentitem != 'Nothing':
-                    print('\033[1;31m' + x + '\033[0m')
-                elif currentitem == armor and currentitem != 'Nothing':
-                    print('\033[1;34m' + x + '\033[0m')
-                else:
-                    print('\033[1;33m' + x + '\033[0m')
-        return True
-    elif ply == 'quit':
-        print("Ok, bye then.")
-        quit()
-    elif 'alien' in ply:
-        if 'Alien Blaster' not in inventory:
-            print("You sob due to the lack of aliens in your area.")
-        else:
-            print("You relish in the defeat of the secret alien.")
-        return True
-
-    elif 'blast' in ply and 'Alien Blaster' in inventory:
-        print('You fire the alien blaster multiple times. You miss everything you were aiming at. You believe that the blaster only locks on to enemies.')
-
-    elif ply == 'equip item':
-        print("Please make sure to specify what item to equip. (EXAMPLE: Equip Hammer)")
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss branch' and 'Branch' in inventory:
-        print("You end up tossing away the branch.\n\033[1;33mBRANCH removed from your inventory.\033[0m")
-        inventory.remove('Branch')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss splinters' and stoolExplode == False and 'Splinters' in inventory:
-        print("You end up tossing away the splinters.\n\033[1;33mSPLINTERS removed from your inventory.\033[0m")
-        inventory.remove('Splinters')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss brick' and 'Brick' in inventory:
-        print("You end up tossing away the brick.\n\033[1;33mBRICK removed from your inventory.\033[0m")
-        inventory.remove('Brick')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss map' and 'Map' in inventory:
-        print("You end up tossing away the map.\n\033[1;33mMAP removed from your inventory.\033[0m")
-        inventory.remove('Map')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss nothing' and 'Nothing' in inventory:
-        print("You end up tossing away nothing.\n\033[1;33mNOTHING removed from your inventory.\033[0m")
-        inventory.remove('Nothing')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss crowbar' and 'Crowbar' in inventory:
-        print("You end up tossing away the crowbar.\n\033[1;33mCROWBAR removed from your inventory.\033[0m")
-        inventory.remove('Crowbar')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss key' and 'Key' in inventory and plypos != 18:
-        print("You end up tossing away the key.\n\033[1;33mKEY removed from your inventory.\033[0m")
-        inventory.remove('Key')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss pretend splinters' and 'Pretend Splinters' in inventory:
-        print("You pretend to toss away the pretend splinters.\n\033[1;33mPRETEND SPLINTERS removed from your inventory.\033[0m")
-        inventory.remove('Pretend Splinters')
-        return True
-
-    elif weapon == 'Sword' and ply == 'toss alien blaster' and 'Alien Blaster' in inventory:
-        print("Don't get why you would throw away a really good item, but ok?\n\033[1;33mALIEN BLASTER removed from your inventory.\033[0m")
-        inventory.remove('Alien Blaster')
-        return True
-    
-    elif ply == 'idk' or ply == 'i dont know' or ply == 'i don\'t know' or ply == 'i dunno':
-        print("Then figure \033[1;31mit\033[0m out.")
-        return True
-    elif ply == 'think' or ply == 'check' or ply == 'hint':
-        if plypos == 1 and doorbroken == False and plydead == False and plydeaths == 0:
-            print(roomhints[1])
-        elif plypos == 1 and doorbroken == True and plydead == False:
-            print(roomhints[2])
-        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == False:
-            print(roomhints[3])
-        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == True:
-            print(roomhints[4])
-        elif plypos == 3 and tookstool == False and plydead == False and dinodead == True:
-            print(roomhints[5])
-        elif plypos == 3 and tookstool == True and plydead == False and 'Stool' in inventory:
-            print(roomhints[6])
-        elif plypos == 3 and tookstool == True and plydead == False and 'Stool' not in inventory:
-            print(roomhints[7])
-        elif plypos == 1 and doorbroken == False and plydead == False and plydeaths != 0:
-            print(roomhints[8])
-        elif plypos == 5 and plydead == False:
-            print(roomhints[9])
-        elif plypos == 6 and plydead == False:
-            print(roomhints[10])
-        return True
-    elif ply == "check me" or ply == "check myself" or ply == "check self":
-        print("YOU \nCURRENT HP: " + str(plyhealth) + "\n\033[1;31mATTACK: " + str(plyatck) + " \033[1;33m(" + weapon + ")\n\033[1;34mDEFENSE: " + str(plydefense) + " \033[1;33m(" + armor + ")\033[0m")
-        if plypos == 1 and doorbroken == False and plydead == False:
-            print(selfcheckroom[1])
-        elif plypos == 1 and doorbroken == True and plydead == False:
-            print(selfcheckroom[2])
-        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == False:
-            print(selfcheckroom[3])
-        elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == True:
-            print(selfcheckroom[4])
-        elif plypos == 3 and tookstool == False and plydead == False and dinodead == True:
-            print(selfcheckroom[5])
-        elif plypos == 3 and tookstool == True and plydead == False and 'Stool' in inventory:
-            print(selfcheckroom[6])
-        elif plypos == 3 and tookstool == True and plydead == False and 'Stool' not in inventory:
-            print(selfcheckroom[7])
-        elif plypos == 1 and doorbroken == False and plydead == False and plydeaths != 0:
-            print(selfcheckroom[8])
-        elif plypos == 5 and plydead == False:
-            print(selfcheckroom[9])
-        elif plypos == 6 and plydead == False:
-            print(selfcheckroom[10])
-        return True
-    elif ply.startswith("equip "):
-        item_to_equip = ply[6:].strip().title()
-        if item_to_equip in inventory:
-            equippeditem = item_to_equip
-            if equippeditem == 'Nothing':
-                print(f"\033[1;33mYou equipped {equippeditem}.")
-                print("\033[1;35mYour Attack and Defense went back to default\033[0m")
-                weapon = "Nothing"
-                plyatck = plyatckDEFAULT
-                armor = "Nothing"
-                plydefense = plydefenseDEFAULT
+    match ply:
+        case 'look around' | 'look':
+            print("Perhaps you should try to specify what direction you want to look in.")
+            return True
+        case "kill me" | "kill myself":
+            if kys == True:
+                print("You decide to not attempt self-harm again.")
+            elif plyatck < 10:
+                print("You punched yourself multiple times. You're too weak to deal any damage.")
+                kys = True
+            elif plyatck >= 10 and plyatck < 100:
+                print("You punched yourself multiple times. You managed to make a dent on yourself. \033[1;31mYou take 1 Damage.\033[0m")
+                plyhealth -= 1
+                if plyhealth == 0:
+                    print("Amazingly, you managed to dispatch yourself using your own fists. Moron.\n\n\n\033[1;31mGame Over, I guess?")
+                    plydead = True
+                kys = True
+            elif plyatck >= 100:
+                print("You already have enough power, you cannot stop here.")
+                kys = True
+            return True
+        case 'check inventory' | 'inventory' | 'open inventory':
+            currentitem = ''
+            if len(inventory) == 0:
+                print('\033[1;33mYou do not have any items in your inventory currently.\033[0m')
             else:
-                if equippeditem == weapon or equippeditem == armor:
-                    print(f"\033[1;33mYou already have the {equippeditem} equipped.\033[0m")
+                for x in inventory:
+                    currentitem = x
+                    if currentitem == weapon and currentitem != 'Nothing':
+                        print('\033[1;31m' + x + '\033[0m')
+                    elif currentitem == armor and currentitem != 'Nothing':
+                        print('\033[1;34m' + x + '\033[0m')
+                    else:
+                        print('\033[1;33m' + x + '\033[0m')
+            return True
+        case 'quit':
+            print("Ok, bye then.")
+            quit()
+        case 'equip item':
+            print("Please make sure to specify what item to equip. (EXAMPLE: Equip Hammer)")
+            return True
+        case 'toss branch':
+            if weapon == 'Sword' and 'Branch' in inventory:
+                print("You end up tossing away the branch.\n\033[1;33mBRANCH removed from your inventory.\033[0m")
+                inventory.remove('Branch')
+                return True
+            else:
+                return False
+        case 'toss splinters':
+            if weapon == 'Sword' and stoolExplode == False and 'Splinters' in inventory:
+                print("You end up tossing away the splinters.\n\033[1;33mSPLINTERS removed from your inventory.\033[0m")
+                inventory.remove('Splinters')
+                return True
+            else:
+                return False
+        case 'toss brick':
+            if weapon == 'Sword' and 'Brick' in inventory:
+                print("You end up tossing away the brick.\n\033[1;33mBRICK removed from your inventory.\033[0m")
+                inventory.remove('Brick')
+                return True
+            else:
+                return False
+        case 'toss map':
+            if weapon == 'Sword' and 'Map' in inventory:
+                print("You end up tossing away the map.\n\033[1;33mMAP removed from your inventory.\033[0m")
+                inventory.remove('Map')
+                return True
+            else:
+                return False
+        case 'toss nothing':
+            if weapon == 'Sword' and 'Nothing' in inventory:
+                print("You end up tossing away nothing.\n\033[1;33mNOTHING removed from your inventory.\033[0m")
+                inventory.remove('Nothing')
+                return True
+            else:
+                return False
+        case 'toss crowbar':
+            if weapon == 'Sword' and 'Crowbar' in inventory:                    
+                print("You end up tossing away the crowbar.\n\033[1;33mCROWBAR removed from your inventory.\033[0m")
+                inventory.remove('Crowbar')
+                return True
+            else:
+                return False
+        case 'toss key':
+            if weapon == 'Sword' and 'Key' in inventory and plypos != 18:
+                print("You end up tossing away the key.\n\033[1;33mKEY removed from your inventory.\033[0m")
+                inventory.remove('Key')
+                return True
+            else:
+                return False
+        case 'toss pretend splinters':
+            if weapon == 'Sword' and 'Pretend Splinters' in inventory:
+                print("You pretend to toss away the pretend splinters.\n\033[1;33mPRETEND SPLINTERS removed from your inventory.\033[0m")
+                inventory.remove('Pretend Splinters')
+                return True
+            else:
+                return False
+        case 'toss alien blaster':
+            if weapon == 'Sword' and 'Alien Blaster' in inventory:
+                print("Don't get why you would throw away a really good item, but ok?\n\033[1;33mALIEN BLASTER removed from your inventory.\033[0m")
+                inventory.remove('Alien Blaster')
+                return True
+            else:
+                return False
+        case 'idk' | 'i dont know' | 'i don\'t know' | 'i dunno':
+            print("Then figure \033[1;31mit\033[0m out.")
+            return True
+        case 'think' | 'check' | 'hint':
+            if plypos == 1 and doorbroken == False and plydead == False and plydeaths == 0:
+                print(roomhints['1A'])
+            elif plypos == 1 and doorbroken == True and plydead == False:
+                print(roomhints['1B'])
+            elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == False:
+                print(roomhints['3A'])
+            elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == True:
+                print(roomhints['3B'])
+            elif plypos == 3 and tookstool == False and plydead == False and dinodead == True:
+                print(roomhints['3C'])
+            elif plypos == 3 and tookstool == True and plydead == False and 'Stool' in inventory:
+                print(roomhints['3BA'])
+            elif plypos == 3 and tookstool == True and plydead == False and 'Stool' not in inventory:
+                print(roomhints['3BB'])
+            elif plypos == 1 and doorbroken == False and plydead == False and plydeaths != 0:
+                print(roomhints['1XA'])
+            elif plypos == 5 and plydead == False:
+                print(roomhints['5A'])
+            elif plypos == 6 and plydead == False:
+                print(roomhints['6A'])
+            return True
+        case "check me" | "check myself" | "check self":
+            print("YOU \nCURRENT HP: " + str(plyhealth) + "\n\033[1;31mATTACK: " + str(plyatck) + " \033[1;33m(" + weapon + ")\n\033[1;34mDEFENSE: " + str(plydefense) + " \033[1;33m(" + armor + ")\033[0m")
+            if plypos == 1 and doorbroken == False and plydead == False:
+                print(selfcheckroom['1A'])
+            elif plypos == 1 and doorbroken == True and plydead == False:
+                print(selfcheckroom['1B'])
+            elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == False:
+                print(selfcheckroom['3A'])
+            elif plypos == 3 and tookstool == False and plydead == False and dinodead == False and dinoseen == True:
+                print(selfcheckroom['3B'])
+            elif plypos == 3 and tookstool == False and plydead == False and dinodead == True:
+                print(selfcheckroom['3C'])
+            elif plypos == 3 and tookstool == True and plydead == False and 'Stool' in inventory:
+                print(selfcheckroom['3BA'])
+            elif plypos == 3 and tookstool == True and plydead == False and 'Stool' not in inventory:
+                print(selfcheckroom['3BB'])
+            elif plypos == 1 and doorbroken == False and plydead == False and plydeaths != 0:
+                print(selfcheckroom['1XA'])
+            elif plypos == 5 and plydead == False:
+                print(selfcheckroom['5A'])
+            elif plypos == 6 and plydead == False:
+                print(selfcheckroom['6A'])
+            return True
+        case _:
+            if ply.startswith("equip "):
+                item_to_equip = ply[6:].strip().title()
+                if item_to_equip in inventory:
+                    equippeditem = item_to_equip
                 else:
-                    print(f"\033[1;33mYou equipped the {equippeditem}.")
-                    if equippeditem == 'Stool':
-                        print("\033[1;34mYou gained +1 Defense\033[0m")
-                        armor = 'Stool'
-                        plydefense = plydefenseDEFAULT + 1
-                    elif equippeditem == 'Splinters':
-                        if stoolExplode == True:
-                            print("In remembrance of the stool, you equipped the Splinters as armor.\n\033[1;34mYou gained +1 Defense\033[0m")
-                            armor = 'Splinters'
+                    return False
+                if equippeditem == 'Nothing':
+                    print(f"\033[1;33mYou equipped {equippeditem}.")
+                    print("\033[1;35mYour Attack and Defense went back to default\033[0m")
+                    weapon = "Nothing"
+                    plyatck = plyatckDEFAULT
+                    armor = "Nothing"
+                    plydefense = plydefenseDEFAULT
+                else:
+                    if equippeditem == weapon or equippeditem == armor:
+                        print(f"\033[1;33mYou already have the {equippeditem} equipped.\033[0m")
+                    else:
+                        print(f"\033[1;33mYou equipped the {equippeditem}.")
+                        if equippeditem == 'Stool':
+                            print("\033[1;34mYou gained +1 Defense\033[0m")
+                            armor = 'Stool'
                             plydefense = plydefenseDEFAULT + 1
-                        else:
+                        elif equippeditem == 'Splinters':
+                            if stoolExplode == True:
+                                print("In remembrance of the stool, you equipped the Splinters as armor.\n\033[1;34mYou gained +1 Defense\033[0m")
+                                armor = 'Splinters'
+                                plydefense = plydefenseDEFAULT + 1
+                            else:
+                                print("\033[1;31mYou gained +1 Attack\033[0m")
+                                weapon = 'Splinters'
+                                plyatck = plyatckDEFAULT + 1
+                        elif equippeditem == 'Pretend Splinters':
+                            print("You act like you are holding splinters.\n\033[1;31mYou gained -1 Attack\033[0m")
+                            weapon = "Pretend Splinters"
+                            plyatck = plyatckDEFAULT - 1
+                        elif equippeditem == 'Crowbar':
+                            print("\033[1;31mYou gained +2 Attack\033[0m")
+                            weapon = "Crowbar"
+                            plyatck = plyatckDEFAULT + 2
+                        elif equippeditem == 'Brick':
                             print("\033[1;31mYou gained +1 Attack\033[0m")
-                            weapon = 'Splinters'
+                            weapon = "Brick"
                             plyatck = plyatckDEFAULT + 1
-                    elif equippeditem == 'Pretend Splinters':
-                        print("You act like you are holding splinters.\n\033[1;31mYou gained -1 Attack\033[0m")
-                        weapon = "Pretend Splinters"
-                        plyatck = plyatckDEFAULT - 1
-                    elif equippeditem == 'Crowbar':
-                        print("\033[1;31mYou gained +2 Attack\033[0m")
-                        weapon = "Crowbar"
-                        plyatck = plyatckDEFAULT + 2
-                    elif equippeditem == 'Brick':
-                        print("\033[1;31mYou gained +1 Attack\033[0m")
-                        weapon = "Brick"
-                        plyatck = plyatckDEFAULT + 1
-                    elif equippeditem == 'Shard':
-                        print("You feel an overwhelming sense of power.\033[1;31m\nYou gained +3 Attack\033[0m")
-                        weapon = "Shard"
-                        plyatck = plyatckDEFAULT + 3
-                    elif equippeditem == 'Shield':
-                        print("You feel an overwhelming sense of courage.\033[1;34m\nYou gained +3 Defense\033[0m")
-                        armor = "Shield"
-                        plydefense = plydefenseDEFAULT + 3
-                    elif equippeditem == 'Sword':
-                        print(f"You feel an even greater overwhelming sense of power.\033[1;31m\nYou gained +{swordstrength} Attack\033[0m")
-                        weapon = "Sword"
-                        plyatck = plyatckDEFAULT + swordstrength
-                    elif equippeditem == 'Tooth':
-                        print("You wear it as a badge of honor.\n\033[1;34mYou gained +1 Defense\033[0m")
-                        armor = 'Tooth'
-                        plydefense = plydefenseDEFAULT + 1
-                    elif equippeditem == 'Key':
-                        print("\033[1;31mYou gained +1 Attack\033[0m")
-                        weapon = 'Key'
-                        plyatck = plyatckDEFAULT + 1
-                    elif equippeditem == 'Lantern':
-                        print("\033[1;31mYou gained +1 Attack\033[0m")
-                        weapon = 'Lantern'
-                        plyatck = plyatckDEFAULT + 1
-                    elif equippeditem == 'Branch':
-                        print("\033[1;30mExcept there was no need. It would only hinder your abilities.\033[0m")
-                    elif equippeditem == 'Map':
-                        print("\033[1;30mIt doesn't seem to increse your power, but you now can see where you're going in vents.\033[0m")
-                        weapon = 'Map'
-                        plyatck = plyatckDEFAULT
-                    elif equippeditem == 'Bandana':
-                        print("You feel the power of a warrior.\n\033[1;31mYou gained +2 Attack.\033[1;34m\nYou gained -1 Defense.\033[0m")
-                        armor = "Bandana"
-                        plydefense = plydefenseDEFAULT - 1
-                    elif equippeditem == 'Alien Blaster':
-                        print("\033[1;31mYou gained +10 Attack\033[0m")
-                        weapon = "Alien Blaster"
-                        plyatck = plyatckDEFAULT + 10
-                if armor == 'Bandana':
-                    plyatck += 2
-        else:
-            print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
-        return True
-    elif ply.startswith("check "):
-        item_to_equip = ply[6:].strip().title()
-        if item_to_equip in inventory:
-            print("\033[1;33m" + items[item_to_equip] + "\033[0m")
-        else:
-            print("Your thoughts seem incomprehensible.")
-        return True
-    else:
-        return False
+                        elif equippeditem == 'Shard':
+                            print("You feel an overwhelming sense of power.\033[1;31m\nYou gained +3 Attack\033[0m")
+                            weapon = "Shard"
+                            plyatck = plyatckDEFAULT + 3
+                        elif equippeditem == 'Shield':
+                            print("You feel an overwhelming sense of courage.\033[1;34m\nYou gained +3 Defense\033[0m")
+                            armor = "Shield"
+                            plydefense = plydefenseDEFAULT + 3
+                        elif equippeditem == 'Sword':
+                            print(f"You feel an even greater overwhelming sense of power.\033[1;31m\nYou gained +{swordstrength} Attack\033[0m")
+                            weapon = "Sword"
+                            plyatck = plyatckDEFAULT + swordstrength
+                        elif equippeditem == 'Tooth':
+                            print("You wear it as a badge of honor.\n\033[1;34mYou gained +1 Defense\033[0m")
+                            armor = 'Tooth'
+                            plydefense = plydefenseDEFAULT + 1
+                        elif equippeditem == 'Key':
+                            print("\033[1;31mYou gained +1 Attack\033[0m")
+                            weapon = 'Key'
+                            plyatck = plyatckDEFAULT + 1
+                        elif equippeditem == 'Lantern':
+                            print("\033[1;31mYou gained +1 Attack\033[0m")
+                            weapon = 'Lantern'
+                            plyatck = plyatckDEFAULT + 1
+                        elif equippeditem == 'Branch':
+                            print("\033[1;30mExcept there was no need. It would only hinder your abilities.\033[0m")
+                        elif equippeditem == 'Map':
+                            print("\033[1;30mIt doesn't seem to increse your power, but you now can see where you're going in vents.\033[0m")
+                            weapon = 'Map'
+                            plyatck = plyatckDEFAULT
+                        elif equippeditem == 'Bandana':
+                            print("You feel the power of a warrior.\n\033[1;31mYou gained +2 Attack.\033[1;34m\nYou gained -1 Defense.\033[0m")
+                            armor = "Bandana"
+                            plydefense = plydefenseDEFAULT - 1
+                        elif equippeditem == 'Alien Blaster':
+                            print("\033[1;31mYou gained +10 Attack\033[0m")
+                            weapon = "Alien Blaster"
+                            plyatck = plyatckDEFAULT + 10
+                        else:
+                            print(f"\033[1;33mYou don't have a \"{item_to_equip}\" in your inventory.\033[0m")
+                        if armor == 'Bandana':
+                            plyatck += 2
+                return True
+            elif ply.startswith("check "):
+                item_to_equip = ply[6:].strip().title()
+                if item_to_equip in inventory:
+                    print("\033[1;33m" + items[item_to_equip] + "\033[0m")
+                    return True
+            elif 'alien' in ply:
+                if 'Alien Blaster' not in inventory:
+                    print("You sob due to the lack of aliens in your area.")
+                else:
+                    print("You relish in the defeat of the secret alien.")
+                return True
+            elif 'blast' in ply and 'Alien Blaster' in inventory:
+                print('You fire the alien blaster multiple times. You miss everything you were aiming at. You believe that the blaster only locks on to enemies.')
+                return True
+            else:
+                return False
         
 def ventdesc():
     global vent_descriptions, ventpos, ventDirection, plypos
@@ -1477,95 +1533,97 @@ def ventmove_left():
             print("You go left.")
             if ventDirection == 0:
                 ventDirection = 3
-                if ventpos == 0:
-                    ventpos = 1
-                    ventdesc()
-                elif ventpos == 1:
-                    ventpos = 13
-                    ventdesc()
-                elif ventpos == 3:
-                    ventpos = 2
-                    ventdesc()
-                elif ventpos == 4:
-                    ventpos = 3
-                    ventdesc()
-                elif ventpos == 5:
-                    ventpos = 4
-                    ventdesc()
-                elif ventpos == 6:
-                    ventpos = 5
-                    ventdesc()
-                elif ventpos == 7:
-                    ventpos = 8
-                    ventdesc()
-                elif ventpos == 9:
-                    ventpos = 0
-                    ventdesc()
-                elif ventpos == 10:
-                    ventpos = 11
-                    ventdesc()
-                elif ventpos == 11:
-                    ventpos = 12
-                    ventdesc()
-                elif ventpos == 16:
-                    ventpos = 15
-                    ventdesc()
-                elif ventpos == 17:
-                    ventpos = 16
-                    ventdesc()
-                elif ventpos == 18:
-                    ventpos = 17
-                    ventdesc()
-                elif ventpos == 20:
-                    ventpos = 19
-                    ventdesc()
-                elif ventpos == 21:
-                    ventpos = 20
-                    ventdesc()
-                elif ventpos == 22:
-                    ventpos = 6
-                    ventdesc()
-                elif ventpos == 23:
-                    ventpos = 22
-                    ventdesc()
+                match ventpos:
+                    case 0:
+                        ventpos = 1
+                        ventdesc()
+                    case 1:
+                        ventpos = 13
+                        ventdesc()
+                    case 3:
+                        ventpos = 2
+                        ventdesc()
+                    case 4:
+                        ventpos = 3
+                        ventdesc()
+                    case 5:
+                        ventpos = 4
+                        ventdesc()
+                    case 6:
+                        ventpos = 5
+                        ventdesc()
+                    case 7:
+                        ventpos = 8
+                        ventdesc()
+                    case 9:
+                        ventpos = 0
+                        ventdesc()
+                    case 10:
+                        ventpos = 11
+                        ventdesc()
+                    case 11:
+                        ventpos = 12
+                        ventdesc()
+                    case 16:
+                        ventpos = 15
+                        ventdesc()
+                    case 17:
+                        ventpos = 16
+                        ventdesc()
+                    case 18:
+                        ventpos = 17
+                        ventdesc()
+                    case 20:
+                        ventpos = 19
+                        ventdesc()
+                    case 21:
+                        ventpos = 20
+                        ventdesc()
+                    case 22:
+                        ventpos = 6
+                        ventdesc()
+                    case 23:
+                        ventpos = 22
+                        ventdesc()
             elif ventDirection == 1:
                 ventDirection = 0
-                if ventpos == 1:
-                    ventpos = 2
-                    ventdesc()
-                elif ventpos == 4:
-                    ventpos = 28
-                    ventdesc()
-                elif ventpos == 9:
-                    ventpos = 10
-                    ventdesc()
-                elif ventpos == 13:
-                    ventpos = 14
-                    ventdesc()
-                elif ventpos == 14:
-                    ventpos = 15
-                    ventdesc()
-                elif ventpos == 18:
-                    ventpos = 19
-                    ventdesc()
-                elif ventpos == 22:
-                    ventpos = 21
-                    ventdesc()
-                elif ventpos == 23:
-                    ventpos = 24
-                    ventdesc()
-                elif ventpos == 25:
-                    ventpos = 13
-                    ventdesc()
-                elif ventpos == 26:
-                    ventpos = 22
-                    ventdesc()
-                elif ventpos == 27:
-                    ventpos = 26
-                    ventdesc()
-                elif ventpos == 28:
-                    ventpos = 17
-                    ventdesc()
+                match ventpos:
+                    case 1:
+                        ventpos = 2
+                        ventdesc()
+                    case 4:
+                        ventpos = 28
+                        ventdesc()
+                    case 9:
+                        ventpos = 10
+                        ventdesc()
+                    case 13:
+                        ventpos = 14
+                        ventdesc()
+                    case 14:
+                        ventpos = 15
+                        ventdesc()
+                    case 18:
+                        ventpos = 19
+                        ventdesc()
+                    case 22:
+                        ventpos = 21
+                        ventdesc()
+                    case 23:
+                        ventpos = 24
+                        ventdesc()
+                    case 25:
+                        ventpos = 13
+                        ventdesc()
+                    case 26:
+                        ventpos = 22
+                        ventdesc()
+                    case 27:
+                        ventpos = 26
+                        ventdesc()
+                    case 28:
+                        ventpos = 17
+                        ventdesc()
             elif ventDirection == 2:
                 ventDirection = 1
                 if ventpos == 0:
@@ -2495,7 +2553,7 @@ while plypos == 1 and doorbroken == True and plydead == False:
                 print("There was a stool here.")
         case 'look south':
             print("You aren't an owl, are you?")
-        case 'go north':
+        case 'go north' | 'enter wall' | 'enter brick wall':
             print('You pass through brick like water. You choked to death. This is the end.\n\033[1;31mGame Over\n\n\n\n  \033[0mor is it?\n\033[1;31mThere is no here.')
             plypos = 2
         case 'go east' | 'go west' | 'go south':
