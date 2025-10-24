@@ -2405,7 +2405,7 @@ while plypos == 0 and plydead == False:
                 print("There is a door here. You are facing north.")
                 plyatckDEFAULT += -4
                 plyatck = plyatckDEFAULT
-            case 'jxu kbjycqju qdimuh je byvu jxu kdyluhiu qdt uluhojxydw':
+            case 'PZI$}VP|`HPI$H JUIO$PA$V|LI$PZI$} |>IOJI$H K$I>IO{PZ| :':
                 plysecondary = int(input('Where to, boss?\n'))
                 if plysecondary in locations:
                     print('On it, boss')
