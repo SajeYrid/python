@@ -1531,190 +1531,193 @@ def ventmove_left():
             plypos = 6
         else:
             print("You go left.")
-            if ventDirection == 0:
-                ventDirection = 3
-                match ventpos:
-                    case 0:
-                        ventpos = 1
-                        ventdesc()
-                    case 1:
-                        ventpos = 13
-                        ventdesc()
-                    case 3:
-                        ventpos = 2
-                        ventdesc()
-                    case 4:
-                        ventpos = 3
-                        ventdesc()
-                    case 5:
-                        ventpos = 4
-                        ventdesc()
-                    case 6:
-                        ventpos = 5
-                        ventdesc()
-                    case 7:
-                        ventpos = 8
-                        ventdesc()
-                    case 9:
-                        ventpos = 0
-                        ventdesc()
-                    case 10:
-                        ventpos = 11
-                        ventdesc()
-                    case 11:
-                        ventpos = 12
-                        ventdesc()
-                    case 16:
-                        ventpos = 15
-                        ventdesc()
-                    case 17:
-                        ventpos = 16
-                        ventdesc()
-                    case 18:
-                        ventpos = 17
-                        ventdesc()
-                    case 20:
-                        ventpos = 19
-                        ventdesc()
-                    case 21:
-                        ventpos = 20
-                        ventdesc()
-                    case 22:
-                        ventpos = 6
-                        ventdesc()
-                    case 23:
-                        ventpos = 22
-                        ventdesc()
-            elif ventDirection == 1:
-                ventDirection = 0
-                match ventpos:
-                    case 1:
-                        ventpos = 2
-                        ventdesc()
-                    case 4:
-                        ventpos = 28
-                        ventdesc()
-                    case 9:
-                        ventpos = 10
-                        ventdesc()
-                    case 13:
-                        ventpos = 14
-                        ventdesc()
-                    case 14:
-                        ventpos = 15
-                        ventdesc()
-                    case 18:
-                        ventpos = 19
-                        ventdesc()
-                    case 22:
-                        ventpos = 21
-                        ventdesc()
-                    case 23:
-                        ventpos = 24
-                        ventdesc()
-                    case 25:
-                        ventpos = 13
-                        ventdesc()
-                    case 26:
-                        ventpos = 22
-                        ventdesc()
-                    case 27:
-                        ventpos = 26
-                        ventdesc()
-                    case 28:
-                        ventpos = 17
-                        ventdesc()
-            elif ventDirection == 2:
-                ventDirection = 1
-                if ventpos == 0:
-                    ventpos = 9
-                    ventdesc()
-                elif ventpos == 1:
-                    ventpos = 0
-                    ventdesc()
-                elif ventpos == 2:
-                    ventpos = 3
-                    ventdesc()
-                elif ventpos == 3:
-                    ventpos = 4
-                    ventdesc()
-                elif ventpos == 4:
-                    ventpos = 5
-                    ventdesc()
-                elif ventpos == 5:
-                    ventpos = 6
-                    ventdesc()
-                elif ventpos == 6:
-                    ventpos = 22
-                    ventdesc()
-                elif ventpos == 8:
-                    ventpos = 7
-                    ventdesc()
-                elif ventpos == 11:
-                    ventpos = 10
-                    ventdesc()
-                elif ventpos == 12:
-                    ventpos = 11
-                    ventdesc()
-                elif ventpos == 13:
-                    ventpos = 1
-                    ventdesc()
-                elif ventpos == 15:
-                    ventpos = 16
-                    ventdesc()
-                elif ventpos == 16:
-                    ventpos = 17
-                    ventdesc()
-                elif ventpos == 17:
-                    ventpos = 18
-                    ventdesc()
-                elif ventpos == 19:
-                    ventpos = 20
-                    ventdesc()
-                elif ventpos == 20:
-                    ventpos = 21
-                    ventdesc()
-                elif ventpos == 22:
-                    ventpos = 23
-                    ventdesc()
-            elif ventDirection == 3:
-                ventDirection = 2
-                if ventpos == 2:
-                    ventpos = 1
-                    ventdesc()
-                elif ventpos == 10:
-                    ventpos = 9
-                    ventdesc()
-                elif ventpos == 13:
-                    ventpos = 25
-                    ventdesc()
-                elif ventpos == 14:
-                    ventpos = 13
-                    ventdesc()
-                elif ventpos == 15:
-                    ventpos = 14
-                    ventdesc()
-                elif ventpos == 17:
-                    ventpos = 28
-                    ventdesc()
-                elif ventpos == 19:
-                    ventpos = 18
-                    ventdesc()
-                elif ventpos == 21:
-                    ventpos = 22
-                    ventdesc()
-                elif ventpos == 22:
-                    ventpos = 26
-                    ventdesc()
-                elif ventpos == 24:
-                    ventpos = 23
-                    ventdesc()
-                elif ventpos == 26:
-                    ventpos = 27
-                    ventdesc()
-                elif ventpos == 28:
-                    ventpos = 4
-                    ventdesc()
+            match ventDirection:
+                case 0:
+                    ventDirection = 3
+                    match ventpos:
+                        case 0:
+                            ventpos = 1
+                            ventdesc()
+                        case 1:
+                            ventpos = 13
+                            ventdesc()
+                        case 3:
+                            ventpos = 2
+                            ventdesc()
+                        case 4:
+                            ventpos = 3
+                            ventdesc()
+                        case 5:
+                            ventpos = 4
+                            ventdesc()
+                        case 6:
+                            ventpos = 5
+                            ventdesc()
+                        case 7:
+                            ventpos = 8
+                            ventdesc()
+                        case 9:
+                            ventpos = 0
+                            ventdesc()
+                        case 10:
+                            ventpos = 11
+                            ventdesc()
+                        case 11:
+                            ventpos = 12
+                            ventdesc()
+                        case 16:
+                            ventpos = 15
+                            ventdesc()
+                        case 17:
+                            ventpos = 16
+                            ventdesc()
+                        case 18:
+                            ventpos = 17
+                            ventdesc()
+                        case 20:
+                            ventpos = 19
+                            ventdesc()
+                        case 21:
+                            ventpos = 20
+                            ventdesc()
+                        case 22:
+                            ventpos = 6
+                            ventdesc()
+                        case 23:
+                            ventpos = 22
+                            ventdesc()
+                case 1:
+                    ventDirection = 0
+                    match ventpos:
+                        case 1:
+                            ventpos = 2
+                            ventdesc()
+                        case 4:
+                            ventpos = 28
+                            ventdesc()
+                        case 9:
+                            ventpos = 10
+                            ventdesc()
+                        case 13:
+                            ventpos = 14
+                            ventdesc()
+                        case 14:
+                            ventpos = 15
+                            ventdesc()
+                        case 18:
+                            ventpos = 19
+                            ventdesc()
+                        case 22:
+                            ventpos = 21
+                            ventdesc()
+                        case 23:
+                            ventpos = 24
+                            ventdesc()
+                        case 25:
+                            ventpos = 13
+                            ventdesc()
+                        case 26:
+                            ventpos = 22
+                            ventdesc()
+                        case 27:
+                            ventpos = 26
+                            ventdesc()
+                        case 28:
+                            ventpos = 17
+                            ventdesc()
+                case 2:
+                    ventDirection = 1
+                    match ventpos:
+                        case 0:
+                            ventpos = 9
+                            ventdesc()
+                        case 1:
+                            ventpos = 0
+                            ventdesc()
+                        case 2:
+                            ventpos = 3
+                            ventdesc()
+                        case 3:
+                            ventpos = 4
+                            ventdesc()
+                        case 4:
+                            ventpos = 5
+                            ventdesc()
+                        case 5:
+                            ventpos = 6
+                            ventdesc()
+                        case 6:
+                            ventpos = 22
+                            ventdesc()
+                        case 8:
+                            ventpos = 7
+                            ventdesc()
+                        case 11:
+                            ventpos = 10
+                            ventdesc()
+                        case 12:
+                            ventpos = 11
+                            ventdesc()
+                        case 13:
+                            ventpos = 1
+                            ventdesc()
+                        case 15:
+                            ventpos = 16
+                            ventdesc()
+                        case 16:
+                            ventpos = 17
+                            ventdesc()
+                        case 17:
+                            ventpos = 18
+                            ventdesc()
+                        case 19:
+                            ventpos = 20
+                            ventdesc()
+                        case 20:
+                            ventpos = 21
+                            ventdesc()
+                        case 22:
+                            ventpos = 23
+                            ventdesc()
+                case 3:
+                    ventDirection = 2
+                    match ventpos:
+                        case 2:
+                            ventpos = 1
+                            ventdesc()
+                        case 10:
+                            ventpos = 9
+                            ventdesc()
+                        case 13:
+                            ventpos = 25
+                            ventdesc()
+                        case 14:
+                            ventpos = 13
+                            ventdesc()
+                        case 15:
+                            ventpos = 14
+                            ventdesc()
+                        case 17:
+                            ventpos = 28
+                            ventdesc()
+                        case 19:
+                            ventpos = 18
+                            ventdesc()
+                        case 21:
+                            ventpos = 22
+                            ventdesc()
+                        case 22:
+                            ventpos = 26
+                            ventdesc()
+                        case 24:
+                            ventpos = 23
+                            ventdesc()
+                        case 26:
+                            ventpos = 27
+                            ventdesc()
+                        case 28:
+                            ventpos = 4
+                            ventdesc()
 
 def ventmove_forward():
     global vent_walls, ventdesc, ventpos, ventDirection, plypos
@@ -2405,7 +2408,7 @@ while plypos == 0 and plydead == False:
                 print("There is a door here. You are facing north.")
                 plyatckDEFAULT += -4
                 plyatck = plyatckDEFAULT
-            case 'PZI$}VP|`HPI$H JUIO$PA$V|LI$PZI$} |>IOJI$H K$I>IO{PZ| :':
+            case 'PZI$}VP|`HPI$H JUIO$PA$V|LI$PZI$} |>IOJI$H K$I>IO{PZ|':
                 plysecondary = int(input('Where to, boss?\n'))
                 if plysecondary in locations:
                     print('On it, boss')
@@ -2754,551 +2757,392 @@ while plypos == 2 and plydead == False:
                     plydead = True
 
 # area 3 (museum without stool)
-while plypos == 3 and tookstool == False and plydead == False and dinodead == False:
-    ply = input('>').lower()
-
-    if ply == 'check glass':
-        glasscheck()
-
-    elif ply == "check dinosaur" and dinoseen == False:
-        print("What dinosaur?")
-
-    elif ply == "look north":
-        print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
-
-    elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
-        if weapon == 'Nothing':
-            if brokenhand == False:
-                print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
-                ouch += 1
-                plyhealth -= 1
-                if plyhealth == 0:
-                    print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
-                    plydead = True
-                if ouch == 3:
-                    print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
-                    brokenhand = True
-                    plyatck -= 1
-                    plyatckDEFAULT -= 1
-                else:
-                    print('Your hand hurts more than usual.')
-            else:
-                print("You attempt to break the glass with your fist. It doesn't want to move.")
-        elif weapon == 'Splinters':
-            print("You prick the splinters into the glass. It unfortunatly does not budge.")
-        elif weapon == 'Pretend Splinters':
-            print("You pretend to prick splinters into the glass. Nothing happens.")
-        elif weapon == 'Crowbar':
-            print("You attempt to break the glass with the crowbar. You only hear the sound of tapping glass.")
-        elif weapon == 'Brick':
-            print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
-        elif weapon == 'Shard':
-            print("You manage to scrape the glass. It forms a questionable symbol resembling a slashable wall.")
-        elif weapon == 'Sword':
-            print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
-After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
-Strangely, you feel healthier than usual.
-You aren\'t where you were before.""")
-            plypos = 12
-            plyhealthDEFAULT += 2
-            plyhealth = plyhealthDEFAULT
-        else:
-            print("You look at the glass. You feel as if you have broken the game somehow.")
-
-    elif ply == 'eat glass':
-        print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
-
-    elif (ply == 'attack dinosaur' or ply == 'fight dinosaur') and dinoseen == False:
-        print("Your prehistoric rage goes unquenched, as you haven't seen any dinosaurs so far.")
-
-    elif (ply == 'attack dinosaur' or ply == 'fight dinosaur') and dinoseen == True:
-        print("You initiate a battle with \033[1;35mthe dinosaur.\033[0m \nBATTLE START!")
-        plasticDino()
-        plyspecial()
-        battlestart()
-        plypos = 4
-
-    elif ply == 'blast dinosaur' and 'Alien Blaster' in inventory:
-        print("You end up blasting the Plastic Dinosaur, \033[1;31mdealing 15 damage to it.\033[0m The Plastic Dinosaur immediatly reacts to your attack.\nBATTLE START!")
-        plasticDino()
-        plyspecial()
-        battlestart()
-        plypos = 4
-
-    elif ply == "check dinosaur" and dinoseen == True:
-        print("You go to check the dinosaur. It reacts. \nBATTLE START!")
-        plasticDino()
-        plyspecial()
-        battlestart()
-        plypos = 4
-        
-    elif ply == 'look west':
-        print("Big plastic dinosaur. It looks surprisingly life-like.")
-        dinoseen = True
-
-    elif ply == 'look south':
-        print("Fake grass. There is a metal vent embedded in the ground.")
-
-    elif ply == 'look east':
-        if 'Map' not in inventory:
-            print('A basic beige wall. There seems to be a map of some kind attached to it.')
-        else:
-            print('A basic beige wall.')
-
-    elif ply == 'check map' and 'Map' not in inventory:
-        print("You check the map on the wall. Looks to be directions for a vent system.")
-
-    elif ply == 'take map':
-        if 'Map' not in inventory:
-            print("You pull the map off the wall. Looks to be a layout for some vents.\n\033[1;33mMAP added to your inventory.\033[0m")
-            inventory.append('Map')
-        else:
-            print("You have already taken the map.")
-
-    elif ply == 'go north':
-        print("You smack your face into the glass.")
-
-    elif ply == 'go south':
-        print('This room is too small to meaningfully move in any direction.')
-
-    elif ply == 'go east':
-        print('This room is too small to meaningfully move in any direction.')
-
-    elif ply == 'go west' and dinoseen == False:
-        print('Without looking first, you casually walk straight into the jaws of a prehistoric predator and \033[1;31mget bitten for 3 damage.\n\033[0mBATTLE START!')
-        plyhealth -= 3
-        plasticDino()
-        plyspecial()
-        battlestart()
-        plypos = 4
-
-    elif ply == 'check vent':
-        print("You check the vent. You notice a slight crack that can be budged.")
-
-    elif ply == 'open vent':
-        print('You attempt to open the vent. You cannot achieve this as your fingers are not thin and strong enough for this task.')
-
-    elif ply == 'go west' and dinoseen == True:
-        print('Wanting to investigate the dinosaur, you walk west. The dinosaur reacts. \nBATTLE START!')
-        plasticDino()
-        plyspecial()
-        battlestart()
-        plypos = 4
-
-    elif globalcommands():
-        pass
-
-    else:
-        print("Your thoughts seem incomprehensible.")
-
-# area 4 (battle against a true dino)
-while plypos == 4 and plydead == False:
-
-    if plyturn == True and plyhealth > 0:
-        plymove()
-        plyturn = False
-        pass
-        if plyerror == True:
-            print("That is not a move that you have access to. Try again.")
-            plymove()
-            pass
-            if plyerror == True:
-                print("You end up freezing in place as you forget what you can do in battle.")
-                pass
-        if enemyhealth <= 0 and plyhealth > 0:
-            dinodead = True
-            print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.")
-            if weapon == 'Shard':
-                print("\033[1;33mYour shard transformed into a sword. \033[0mWhat now?")
-                weapon = "Sword"
-                plyatck += 2
-                inventory.append("Sword")
-                inventory.remove("Shard")
-            else:
-                print("What now?")
-            plypos = 3
-            plyturn = True
-
-    if plyturn == False and plyhealth > 0 and enemyhealth > 0:
-        enemymove()
-        plyturn = True
-        pass
-        if plyhealth <= 0:
-            print("The Plastic Dinosaur brutally tears you apart as you faint to the ground.\n\n\033[1;31mGame Over!\033[0m")
-            plydead = True
-
-# area 3 (haha that dino is dead)
-while plypos == 3 and tookstool == False and plydead == False and dinodead == True:
+while plypos == 3 and plydead == False:
 
     ply = input('>').lower()
+    mutualcheck = False
 
-    if ply == "look north":
-        print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
-
-    elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
-        if weapon == 'Nothing':
-            if brokenhand == False:
-                print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
-                ouch += 1
-                plyhealth -= 1
-                if plyhealth == 0:
-                    print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
-                    plydead = True
-                if ouch == 3:
-                    print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
-                    brokenhand = True
-                    plyatck -= 1
-                    plyatckDEFAULT -= 1
+    if tookstool == True:
+        match ply:
+            case 'check glass':
+                glasscheck()
+            case 'look west':
+                if 'Crowbar' not in inventory:
+                    print("Big plastic dinosaur. A crowbar dangles from its mouth.")
+                    dinoseen = True
                 else:
-                    print('Your hand hurts more than usual.')
-            else:
-                print("You attempt to break the glass with your fist. It doesn't want to move.")
-        elif weapon == 'Splinters':
-            print("You prick the splinters into the glass. It unfortunatly does not budge.")
-        elif weapon == 'Pretend Splinters':
-            print("You pretend to prick splinters into the glass. Nothing happens.")
-        elif weapon == 'Crowbar':
-            print("You attempt to break the glass with the crowbar. You only hear the sound of tapping glass.")
-        elif weapon == 'Brick':
-            print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
-        elif weapon == 'Shard':
-            print("You manage to scrape the glass. It forms a questionable symbol resembling a slashable wall.")
-        elif weapon == 'Sword':
-            print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
-After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
-Strangely, you feel healthier than usual.
-You aren\'t where you were before.""")
-            plypos = 12
-            plyhealthDEFAULT += 2
-            plyhealth = plyhealthDEFAULT
-        else:
-            print("You look at the glass. You feel as if you have broken the game somehow.")
-
-    elif ply == 'eat glass':
-        print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
-
-    elif ply == 'check glass':
-        print('When you look closer, you see the glass is entirely clear. However, you still cannot see anything through it.')
-
-    elif ply == "check dinosaur":
-        print("You witness a whole lot of dust.")
-        if plyhealth <= 2:
-            print("You felt as if you acted in self defense.")
-        else:
-            print("You felt like you did a better job than that meteor.")
-        if 'Tooth' not in inventory:
-            print("A particularly large tooth lays on the dust.")
-
-    elif ply == 'attack dinosaur' or ply == 'fight dinosaur':
-        print("\033[1;31mYou square up against the dinosaur's ashes.\033[0m\nUnfortuantly, it doesn't engage in combat with you.\nYou stop fighting.")
-
-    elif (ply == 'take tooth' or ply == 'take large tooth') and 'Tooth' not in inventory:
-        print("You take the particularly large tooth.\n\033[1;33mTOOTH added to your INVENTORY\033[0m")
-        inventory.append('Tooth')
-        if firstitem == False:
-            print("You can equip items by typing EQUIP ITEM")
-            firstitem = True
-
-    elif (ply == 'take tooth' or ply == 'take large tooth') and 'Tooth' in inventory:
-        print("You put the tooth back in order to feel the satisfaction of obtaining it again.\n\033[1;33mTOOTH removed from your inventory.\033[0m")
-        inventory.remove('Tooth')
-        if armor == 'Tooth':
-            armor = 'Nothing'
-            plydefense = 0
-        
-    elif ply == 'look west' and 'Tooth' not in inventory:
-        print("There is a large pile of dust. A particularly large tooth lays at the top.")
-
-    elif ply == 'look west' and 'Tooth' in inventory:
-        print("Just some simple dust.")
-
-    elif ply == 'look south':
-        print("Fake grass. There is a metal vent embedded in the ground.")
-
-    elif ply == 'look east':
-        if 'Map' not in inventory:
-            print('A basic beige wall. There seems to be a map of some kind attached to it.')
-        else:
-            print('A basic beige wall.')
-
-    elif ply == 'check map' and 'Map' not in inventory:
-        print("You check the map on the wall. Looks to be directions for a vent system.")
-
-    elif ply == 'take map':
-        if 'Map' not in inventory:
-            print("You pull the map off the wall. Looks to be a layout for some vents.\n\033[1;33mMAP added to your inventory.\033[0m")
-            inventory.append('Map')
-        else:
-            print("You have already taken the map.")
-
-    elif ply == 'go north':
-        print("You smack your face into the glass.")
-
-    elif ply == 'go south':
-        print('This room is too small to meaningfully move in any direction.')
-
-    elif ply == 'go east':
-        print('This room is too small to meaningfully move in any direction.')
-
-    elif ply == 'go west' and 'Tooth' in inventory:
-        print('There is a giant pile of presumably microplastics in your way.')
-
-    elif ply == 'go west' and 'Tooth' not in inventory:
-        print('There is a giant pile of presumably microplastics in your way. There is a particularly large tooth on top of it.')
-
-    elif ply == 'check vent' and ventopen == False:
-        print("You check the vent. You notice a slight crack that can be budged.")
-
-    elif ply == 'check vent' and ventopen == True:
-        print('You observe the opened vent.')
-
-    elif ply == 'open vent' and 'Tooth' not in inventory:
-        print('You attempt to open the vent. You cannot achieve this as your fingers are not thin and strong enough for this task.')
-
-    elif ply == 'open vent' and 'Tooth' in inventory and ventopen == False:
-        ventopen = True
-        print('You open the vent using the tooth. There looks to be a way through the vent.')
-
-    elif ply == 'open vent' and 'Tooth' in inventory and ventopen == True:
-        print('You luckily have already opened the vent.')
-
-    elif (ply == 'enter vent' or ply == 'go in vent') and ventopen == True:
-        print('You climb into the vent.\nYou are at an intersection.\nTo your left, there is a path ending in several turns.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.\nWhere do you go?')
-        plypos = 5
-
-    elif (ply == 'enter vent' or ply == 'go in vent') and ventopen == False:
-        print('You attempt to climb into the vent. Unfortunatly, you lack the ability to fit through small holes.')
-
-    elif globalcommands():
-        pass
-
-    else:
-        print("Your thoughts seem incomprehensible.")
-
-# area 3 (museum with stool)
-while plypos == 3 and tookstool == True and plydead == False:
-
-    ply = input('>').lower()
-
-    if ply == "look north":
-        print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
-
-    elif ply == 'check glass':
-        glasscheck()
-
-    elif ply == 'look west' and 'Crowbar' not in inventory:
-        print("Big plastic dinosaur. A crowbar dangles from its mouth.")
-        dinoseen = True
-
-    elif ply == 'look east':
-        print('A basic beige wall.')
-        if plywallBroken == True:
-            print('At least, it used to be.')
-    
-    elif ply == 'break glass' or ply == 'break window' or ply == 'break case':
-        if weapon == 'Nothing':
-            if brokenhand == False:
-                print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
-                ouch += 1
-                plyhealth -= 1
-                if plyhealth == 0:
-                    print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
-                    plydead = True
-                if ouch == 3:
-                    print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
-                    brokenhand = True
-                    plyatck -= 1
-                    plyatckDEFAULT -= 1
+                    print("Big plastic dinosaur. It looks fake.")
+            case 'look east':
+                if plywallBroken == True:
+                    print('What used to be a basic beige wall. Now just rubble.')
                 else:
-                    print('Your hand hurts more than usual.')
-            else:
-                print("You attempt to break the glass with your fist. It doesn't want to move.")
-        elif weapon == 'Splinters':
-            print("You prick the splinters into the glass. It unfortunatly does not budge.")
-        elif weapon == 'Pretend Splinters':
-            print("You pretend to prick splinters into the glass. Nothing happens.")
-        elif weapon == 'Crowbar':
-            print("You attempt to break the glass with the crowbar. You only hear the sound of tapping glass.")
-        elif weapon == 'Brick':
-            print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
-        elif weapon == 'Shard':
-            print("You manage to scrape the glass. It forms a questionable symbol resembling a sword slashing a wall.")
-        elif weapon == 'Alien Blaster':
-            print("You shoot the glass wall with the Alien Blaster. For some strange reason, the glass nullifies the shot.")
-        elif weapon == 'Sword':
-            print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
-After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
-Strangely, you feel healthier than usual.
-You aren\'t where you were before.""")
-            plypos = 12
-            plyhealthDEFAULT += 2
-            plyhealth = plyhealthDEFAULT
-        else:
-            print("You look at the glass. You feel as if you have broken the game somehow.")
-
-    elif ply == 'eat glass':
-        print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
-
-    elif ply == "check dinosaur" and dinoseen == True:
-        print("A large chunk of plastic in the shape of a dinosaur.")
-
-    elif (ply == 'attack dinosaur' or ply == 'fight dinosaur') and dinoseen == True:
-        print("You wished that the dinosaur was alive so you could be responsible for their extinction.")
-
-    elif ply == 'climb dinosaur' and dinoseen == True and 'Stool' in inventory:
-        print("You used the stool the climb up onto the plastic dinosaur. You notice a hatch to exit to glass case.")
-        plysecondary = input("Exit out? Y/N\n>").lower()
-        if plysecondary == 'y' or plysecondary == 'yes':
-            print("""You climb out of the glass case. You find yourself on top of the glass case you were in.
+                    print('A basic beige wall.')
+            case 'check dinosaur':
+                if dinoseen:
+                    print("A large chunk of plastic in the shape of a dinosaur.")
+                else:
+                    print("What dinosaur?")
+            case 'attack dinosaur' | 'fight dinosaur':
+                if dinoseen:
+                    print("You wished that the dinosaur was alive so you could be responsible for their extinction.")
+                else:
+                    print("What dinosaur?")
+            case 'climb dinosaur':
+                if dinoseen and 'Stool' in inventory:
+                    print("You used the stool the climb up onto the plastic dinosaur. You notice a hatch to exit to glass case.")
+                    plysecondary = input("Exit out? Y/N\n>").lower()
+                    if plysecondary == 'y' or plysecondary == 'yes':
+                        print("""You climb out of the glass case. You find yourself on top of the glass case you were in.
 Suddenly, the glass case dissapears from under your feet as you fall to the ground.
 You land in a new location that is surrounded by glass.
 You feel a little bit healthier than before.
 \033[1;33mYou no longer have access to the stool.\033[0m
 You are not where you were before.""")
-            plypos = 12
-            plyhealthDEFAULT += 2
-            plyhealth = plyhealthDEFAULT
-            inventory.remove('Stool')
-            if armor == 'Stool':
-                armor = 'Nothing'
-                plydefense = plydefenseDEFAULT
-        elif plysecondary == 'n' or plysecondary == 'no':
-            print("You decide to not climb out yet.\nYou jump back down to the ground.")
-        else:
-            print("You counldn't comprehend what you meant. You decide to jump back down to the ground.")
-
-    elif ply == 'climb dinosaur' and dinoseen == True and 'Stool' not in inventory:
-        print('You attempt to climb the dinosaur. You unfortuantly cannot climb high enough due to your lack of stools.')
-
-    elif ply == 'take dinosaur' and dinoseen == True:
-        print('You attempt to take the whole dinosaur. If unfourtnatly is too big to be put in your inventory. You punch it in frustration.')
-
-    elif (ply == "check dinosaur" or ply == "fight dinosaur" or ply == 'attack dinosaur' or ply == "climb dinosaur" or ply == "take dinosaur") and dinoseen == False:
-        print("What dinosaur?")
-
-    elif ply == 'look west' and 'Crowbar' in inventory:
-        print("Big plastic dinosaur. It looks fake.")
-
-    elif ply == 'take crowbar':
-        if tookSplinter == True and 'Crowbar' not in inventory:
-            print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth.\n\033[1;33mWhen you step off the stool, it dissovles into dust.\nCROWBAR added into your INVENTORY.\033[0m")
-            inventory.append('Crowbar')
-            inventory.remove('Stool')
-            if armor == 'Stool':
-                armor = 'Nothing'
-                plydefense = 0
-        elif tookSplinter == False and 'Crowbar' not in inventory:
-            print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth.\n\033[1;33mWhen you step off the stool, it spontaneously explodes into a pile of splinters.\nCROWBAR added into your INVENTORY.\033[0m")
-            inventory.append('Crowbar')
-            inventory.remove('Stool')
-            stoolExplode = True
-            if armor == 'Stool':
-                armor = 'Nothing'
-                plydefense = 0
-        elif 'Crowbar' in inventory:
-            print('You already have it.')
-
-    elif ply == 'take stool' and stoolExplode == True and tookSplinter == False:
-        print('The stool is sadly dead. You grab a handful of splinters to honor the late stool.\n\033[1;33mSPLINTERS added into your INVENTORY.\033[0m')
-        inventory.append('Splinters')
-        tookSplinter = True
-
-    elif ply == 'take stool' and stoolExplode == True and tookSplinter == True:
-        print('You already took the splinters. You can\'t really think of anything else to do.')
-        inventory.append('Splinters')
-        tookSplinter = True
-
-    elif ply == 'take stool' and stoolExplode == False and 'Stool' not in inventory:
-        print('You salute the dust of the stool for it\'s hard work.')
-        inventory.append('Splinters')
-        tookSplinter = True
-
-    elif ply == 'look south':
-        print("Fake grass. There is an air vent embedded in the ground.")
-
-    elif ply == 'go north':
-        print("You smack your face into the glass.")
-
-    elif ply == 'go south':
-        print('This room is too small to meaningfully move in any direction.')
-
-    elif ply == 'go east' and plywallBroken == False:
-        print('This room is too small to meaningfully move in any direction.')
-
-    elif ply == 'go east' and plywallBroken == True:
-        print('Behind the wall, you find a house. It\'s reminiscent of your old childhood home, but you\'ve definitely never been here before.\nThe museum fades from your peripheral as you walk in.\nYou are facing north towards the front door.')
-        plypos = 18
-
-    elif ply == 'go west':
-        print('It appears there is a giant plastic dinosaur in the way.')
-        dinoseen = True
-
-    elif ply == 'open vent' and 'Crowbar' in inventory and ventopen == False:
-        print("You pry open the vent with the crowbar. It's too small to climb inside, but there is a red brick inside.")
-        ventopen = True
-
-    elif ply == 'take brick' or ply == 'take red brick':
-        if ventopen == True and 'Brick' not in inventory:
-            print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it\'s still solid enough to break something.\n\033[1;33mBRICK added into your INVENTORY.\033[0m')
-            inventory.append('Brick')
-        elif ventopen == True and 'Brick' in inventory:
-            print('You already took it.')
-        else:
-            print('What brick?')
-
-    elif ply == 'open vent' and 'Crowbar' in inventory and ventopen == True:
-        print("You close the vent only to immediatly open it again.")
-
-    elif ply == 'open vent' and 'Crowbar' not in inventory:
-        print('You try to pull open the vent with your bare hands. It dosen\'t work.')
-
-    elif ply == 'check wall':
-        print('A thin plywood wall painted beige. You could probably break it with something heavy enough.')
-
-    elif ply == 'break wall' and plywallBroken == False:
-        plysecondary = input('With what?\n>').lower()
-        item_to_equip = plysecondary[0:].strip().title()
-        if plysecondary == 'brick' and 'Brick' in inventory:
-            print('You throw the brick at the wall. After the brick impacts, the wall is seemingly completely decimated.')
-            plywallBroken = True
-        elif plysecondary == 'brick' and 'Brick' not in inventory:
-            print('You don\'t have one of those')
-        elif (plysecondary != 'brick' or plysecondary != 'crowbar' or plysecondary != 'shard') and item_to_equip in inventory:
-            print(f'You take out the {plysecondary}. You don\'t know what to do with it. You put it away.')
-        elif plysecondary == 'hand' or plysecondary == 'head' or plysecondary == 'me' or plysecondary == 'foot':
-            print('You would prefer not to risk breaking any bones. Maybe try using an item instead.')
-        elif plysecondary == 'think' and 'Brick' not in inventory or plysecondary == 'check' and 'Brick' not in inventory or plysecondary == 'hint' and 'Brick' not in inventory:
-            print('You tried to think. You feel as if what you need to break the wall is somewhere around here.')
-        elif plysecondary == 'think' and 'Brick' in inventory or plysecondary == 'check' and 'Brick' in inventory or plysecondary == 'hint' and 'Brick' in inventory:
-            print('You tried to think. You feel as if what you need to break the wall is somewhere in your \033[1;33mINVENTORY.\033[0m')
-        elif plysecondary == 'crowbar' and 'Crowbar' not in inventory:
-            print('You currently don\'t have a crowbar. Perhaps you can find one nearby?')
-        elif plysecondary == 'crowbar' and 'Crowbar' in inventory:
-            print('You thought about breaking the wall with the crowbar. You\'d perfer to not damage it just yet.')
-        elif plysecondary == 'you' or plysecondary == 'them':
-            print('Unfortuantly, there isn\'t anyone else in the room that you can refer to.')
-        elif plysecondary == 'shard' and 'Shard' in inventory:
-            print('You manage to tear down the wall with the Shard instantly.')
-            plywallBroken = True
-        else:
-            print('You know already that that wouldn\'t work.')
-
-    elif ply == 'fight wall' and weapon == 'Shard' and plywallBroken == False:
-        print(f"You decide to square up against the wall with your shard. \033[1;31mYou immediatly attack it to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly.\033[1;33mThe Shard transformed into a SWORD.\033[0m")
-        inventory.remove('Shard')
-        inventory.append('Sword')
-        weapon = 'Sword'
-        plyatck += 2
-        plywallBroken = True
-
-    elif (ply == 'break wall' or ply == 'fight wall') and plywallBroken == True:
-        print("The wall has already been broken. There is no point in trying to destroy it again.")
-
-    elif globalcommands():
-        pass
-
+                        plypos = 12
+                        plyhealthDEFAULT += 2
+                        plyhealth = plyhealthDEFAULT
+                        inventory.remove('Stool')
+                        if armor == 'Stool':
+                            armor = 'Nothing'
+                            plydefense = plydefenseDEFAULT
+                    elif plysecondary == 'n' or plysecondary == 'no':
+                        print("You decide to not climb out yet.\nYou jump back down to the ground.")
+                    else:
+                        print("You counldn't comprehend what you meant. You decide to jump back down to the ground.")
+                else:
+                    print('You attempt to climb the dinosaur. You unfortuantly cannot climb high enough due to your lack of stools.')
+            case 'take dinosaur':
+                if dinoseen:
+                    print('You attempt to take the whole dinosaur. If unfortunately is too big to be put in your inventory. You punch it in frustration.')
+                else:
+                    print("What dinosaur?")
+            case 'take crowbar':
+                print("You placed the stool down in front of the dinosaur and took the crowbar from its mouth.")
+                if 'Crowbar' not in inventory:
+                    if tookSplinter == True:
+                        print('\033[1;33mWhen you step off the stool, it dissovles into dust.')
+                    else:
+                        print('\033[1;33mWhen you step off the stool, it spontaneously explodes into a pile of splinters.')
+                        stoolExplode = True
+                    print('CROWBAR added to your inventory.\033[0m')
+                    inventory.append('Crowbar')
+                    inventory.remove('Stool')
+                    if armor == 'Stool':
+                        armor = 'Nothing'
+                        plydefense = 0
+                else:
+                    print('You already have it.')
+            case 'take stool':
+                if stoolExplode and tookSplinter == False:
+                    print('The stool is sadly dead. You grab a handful of splinters to honor the late stool.\n\033[1;33mSPLINTERS added into your INVENTORY.\033[0m')
+                    inventory.append('Splinters')
+                    tookSplinter = True
+                elif stoolExplode and tookSplinter:
+                    print('You already took the splinters. You can\'t really think of anything else to do.')
+                elif stoolExplode == False and 'Stool' not in inventory:
+                    print('You salute the dust of the stool for it\'s hard work.')
+                else:
+                    pass
+            case 'go east':
+                if plywallBroken:
+                    print('Behind the wall, you find a house. It\'s reminiscent of your old childhood home, but you\'ve definitely never been here before.\nThe museum fades from your peripheral as you walk in.\nYou are facing north towards the front door.')
+                    plypos = 18
+            case 'go west':
+                print('It appears there is a giant plastic dinosaur in the way.')
+                dinoseen = True
+            case 'open vent':
+                if 'Crowbar' in inventory and ventopen == False:
+                    print("You pry open the vent with the crowbar. It's too small to climb inside, but there is a red brick inside.")
+                    ventopen = True
+                elif 'Crowbar' in inventory and ventopen:
+                    print("You close the vent only to immediatly open it again.")
+                else:
+                    print('You try to pull open the vent with your bare hands. It dosen\'t work.')
+            case 'take brick' | 'take red brick':
+                if ventopen and 'Brick' not in inventory:
+                    print('You took the brick. As you hold it in your hand, it feels more liquid than solid. Yet, it\'s still solid enough to break something.\n\033[1;33mBRICK added into your INVENTORY.\033[0m')
+                    inventory.append('Brick')
+                elif ventopen and 'Brick' in inventory:
+                    print('You already took it.')
+                else:
+                    print('What brick?')
+            case 'break wall':
+                plysecondary = input('With what?\n>').lower()
+                item_to_equip = plysecondary[0:].strip().title()
+                match plysecondary:
+                    case 'brick':
+                        if 'Brick' in inventory:
+                            print('You throw the brick at the wall. After the brick impacts, the wall is seemingly completely decimated.')
+                            plywallBroken = True
+                        else:
+                            print('You don\'t have one of those')
+                    case 'hand' | 'head' | 'me' | 'foot':
+                        print('You would prefer not to risk breaking any bones. Maybe try using an item instead.')
+                    case 'think' | 'check' | 'hint':
+                        if 'Brick' in inventory:
+                            print('You tried to think. You feel as if what you need to break the wall is somewhere in your \033[1;33mINVENTORY.\033[0m')
+                        elif 'Brick' not in inventory and ventopen:
+                            print('You tried to think. You feel as if you have already seen what you need to break the wall.')
+                        elif 'Brick' not in inventory and ventopen == False:
+                            print('You tried to think. You feel as if what you need to break the wall is somewhere around here.')
+                    case 'crowbar':
+                        if 'Crowbar' in inventory:
+                            print('You thought about breaking the wall with the crowbar. However, you would perfer to not damage it at this time.')
+                        else:
+                            print('You currently don\'t have a crowbar. Perhaps you can find one nearby?')
+                    case 'you' | 'them':
+                        print('Unfortuantly, there isn\'t anyone else in the room that you can refer to.')
+                    case 'shard':
+                        if 'Shard' in inventory:
+                            print(f"\033[1;31mYou immediatly attack the wall to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly.\033[1;33mThe Shard transformed into a SWORD.\033[0m")
+                            inventory.remove('Shard')
+                            inventory.append('Sword')
+                            weapon = 'Sword'
+                            plyatck += 2
+                            plywallBroken = True
+                    case _:
+                        if item_to_equip in inventory:
+                            print(f'You take out the {item_to_equip}. You don\'t know what to do with it, so you instantly put it back.')
+                        else:
+                            print('You already know that won\'t work.')
+            case 'fight wall':
+                if weapon == 'Shard' and plywallBroken == False:
+                    print(f"You decide to square up against the wall with your shard. \033[1;31mYou immediatly attack it to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly.\033[1;33mThe Shard transformed into a SWORD.\033[0m")
+                    inventory.remove('Shard')
+                    inventory.append('Sword')
+                    weapon = 'Sword'
+                    plyatck += 2
+                    plywallBroken = True
+                elif weapon == 'Shard' and plywallBroken:
+                    print("The wall has already been broken. There is no point in trying to destroy it again.")
+            case _:
+                mutualcheck = True
+    elif dinodead == True:
+        match ply:
+            case 'check glass':
+                print('When you look closer, you see the glass is entirely clear. However, you still cannot see anything through it.')
+            case 'check dinosaur':
+                print("You witness a whole lot of dust.")
+                if plyhealth <= 2:
+                    print("You felt as if you acted in self defense.")
+                else:
+                    print("You felt like you did a better job than that stupid meteor.")
+                if 'Tooth' not in inventory:
+                    print("A particularly large tooth lays on the dust.")
+            case 'attack dinosaur' | 'fight dinosaur':
+                print("\033[1;31mYou square up against the dinosaur's ashes.\033[0m\nUnfortunately, it doesn't engage in combat with you.\nYou stop fighting.")
+            case 'take tooth' | 'take large tooth':
+                if 'Tooth' not in inventory:
+                    print("You take the particularly large tooth.\n\033[1;33mTOOTH added to your INVENTORY\033[0m")
+                    inventory.append('Tooth')
+                    if firstitem == False:
+                        print("You can equip items by typing EQUIP ITEM")
+                        firstitem = True
+                    else:
+                        print("You put the tooth back in order to feel the satisfaction of obtaining it again.\n\033[1;33mTOOTH removed from your inventory.\033[0m")
+                        inventory.remove('Tooth')
+                        if armor == 'Tooth':
+                            armor = 'Nothing'
+                            plydefense = 0
+            case 'look west':
+                if 'Tooth' not in inventory:
+                    print("There is a large pile of dust. A particularly large tooth lays at the top.")
+                else:
+                    print("Just some simple dust.")
+            case 'look east':
+                if 'Map' not in inventory:
+                    print('A basic beige wall. There seems to be a map of some kind attached to it.')
+                else:
+                    print('A basic beige wall.')
+            case 'check map':
+                if 'Map' not in inventory:
+                    print("You check the map on the wall. Looks to be directions for a vent system.")
+            case 'take map':
+                if 'Map' not in inventory:
+                    print("You pull the map off the wall. Looks to be a layout for some vents.\n\033[1;33mMAP added to your inventory.\033[0m")
+                    inventory.append('Map')
+                else:
+                    print("You have already taken the map.")
+            case 'go west':
+                print('There is a giant pile of presumably microplastics in your way.')
+                if 'Tooth' not in inventory:
+                   print('There is a particularly large tooth on top of it.')
+            case 'check vent':
+                if ventopen:
+                    print('You observe the opened vent.')
+                else:
+                    print("You check the vent. You notice a slight crack that can be budged.")
+            case 'open vent':
+                if 'Tooth' in inventory and ventopen == False:
+                    ventopen = True
+                    print('You open the vent using the tooth. There looks to be a way through the vent.')
+                elif ventopen:
+                    print('You luckily have already opened the vent.')
+                else:
+                    print('You attempt to open the vent. You cannot achieve this as your fingers are not thin and strong enough for this task.')
+            case 'enter vent' | 'go in vent':
+                if ventopen:
+                    print('You climb into the vent.\nYou are at an intersection.\nTo your left, there is a path ending in several turns.\nTo your right, there is a path ending in a right turn.\nDirectly ahead of you is a wall.\nWhere do you go?')
+                    plypos = 5
+                else:
+                    print('You attempt to climb into the vent. Unfortunatly, you lack the ability to fit through small holes.')
+            case _:
+                mutualcheck = True
     else:
-        print("Your thoughts seem incomprehensible.")
+        match ply:
+            case 'check glass':
+                glasscheck()
+            case 'check dinosaur':
+                if dinoseen:
+                    print("You go to check the dinosaur. It reacts. \nBATTLE START!")
+                    plasticDino()
+                    plyspecial()
+                    battlestart()
+                    plypos = 4
+                else:
+                    print("What dinosaur?")
+            case 'attack dinosaur' | 'fight dinosaur':
+                if dinoseen:
+                    print("You initiate a battle with \033[1;35mthe dinosaur.\033[0m \nBATTLE START!")
+                    plasticDino()
+                    plyspecial()
+                    battlestart()
+                    plypos = 4
+                else:
+                    print("Your prehistoric rage goes unquenched, as you haven't seen any dinosaurs so far.")
+            case 'blast dinosaur':
+                if 'Alien Blaster' in inventory:
+                    print("You end up blasting the Plastic Dinosaur, \033[1;31mdealing 15 damage to it.\033[0m The Plastic Dinosaur immediatly reacts to your attack.\nBATTLE START!")
+                    plasticDino()
+                    plyspecial()
+                    battlestart()
+                    plypos = 4
+            case 'look west':
+                print("Big plastic dinosaur. It looks surprisingly life-like.")
+                dinoseen = True
+            case 'look east':
+                if 'Map' not in inventory:
+                    print('A basic beige wall. There seems to be a map of some kind attached to it.')
+                else:
+                    print('A basic beige wall.')
+            case 'check map':
+                if 'Map' not in inventory:
+                    print("You check the map on the wall. Looks to be directions for a vent system.")
+            case 'take map':
+                if 'Map' not in inventory:
+                    print("You pull the map off the wall. Looks to be a layout for some vents.\n\033[1;33mMAP added to your inventory.\033[0m")
+                    inventory.append('Map')
+                else:
+                    print("You have already taken the map.")
+            case 'go west':
+                if dinoseen:
+                    print('Wanting to investigate the dinosaur, you walk west. The dinosaur reacts. \nBATTLE START!')
+                else:
+                    print('Without looking first, you casually walk straight into the jaws of a prehistoric predator and \033[1;31mget bitten for 3 damage.\n\033[0mBATTLE START!')
+                    plyhealth -= 3
+                plasticDino()
+                plyspecial()
+                battlestart()
+                plypos = 4
+            case 'check vent':
+                print("You check the vent. You notice a slight crack that can be budged.")
+            case 'open vent':
+                print('You attempt to open the vent. You cannot achieve this as your fingers are not thin and strong enough for this task.')
+            case _:
+                mutualcheck = True
+
+    if mutualcheck == True:
+        match ply:
+            case 'look north':
+                print("Through the glass case, you see a museum. The glass is too foggy to make out any details.")
+            case 'break glass' | 'break window' | 'break case':
+                if weapon == 'Nothing':
+                    if brokenhand == False:
+                        print('You bash your fist against the glass. It rebounds into your own face. \033[1;31mYou take 1 Damage.\033[0m')
+                        ouch += 1
+                        plyhealth -= 1
+                        if plyhealth == 0:
+                            print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
+                            plydead = True
+                        if ouch == 3:
+                            print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
+                            brokenhand = True
+                            plyatck -= 1
+                            plyatckDEFAULT -= 1
+                        else:
+                            print('Your hand hurts more than usual.')
+                    else:
+                        print("You attempt to break the glass with your fist. It doesn't want to move.")
+                elif weapon == 'Splinters':
+                    ("You prick the splinters into the glass. It unfortunatly does not budge.")
+                elif weapon == 'Pretend Splinters':
+                    print("You pretend to prick splinters into the glass. Nothing happens.")
+                elif weapon == 'Crowbar':
+                    print("You attempt to break the glass with the crowbar. You only hear the sound of tapping glass.")
+                elif weapon == 'Brick':
+                    print("You throw the brick at the glass. It splats onto the glass wall, not leaving any dents.")
+                elif weapon == 'Shard':
+                    print("You manage to scrape the glass. It forms a questionable symbol resembling a slashable wall.")
+                elif weapon == 'Sword':
+                    print("""You decimate the glass wall with the sword. As a matter of fact, you decimated the entire glass case.
+After the glass collapsed, you notice your surroundings have completly changed. You are surrounded entirely by glass.
+Strangely, you feel healthier than usual.
+You aren\'t where you were before.""")
+                    plypos = 12
+                    plyhealthDEFAULT += 2
+                    plyhealth = plyhealthDEFAULT
+                else:
+                    print("You look at the glass. You feel as if you have broken the game somehow.")
+            case 'eat glass':
+                print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
+            case 'look south':
+                print("Fake grass. There is a metal vent embedded in the ground.")
+            case 'go north':
+                print("You smack your face into the glass.")
+            case 'go south' | 'go east':
+                print('This room is too small to meaningfully move in any direction.')
+            case _:
+                if globalcommands():
+                    pass
+                else:
+                    print("Your thoughts seem incomprehensible.")
+
+    if plypos == 4:
+        # HELL YEAH, DINOSAUR FIGHT!!!
+        while plypos == 4 and plydead == False:
+
+            if plyturn == True and plyhealth > 0:
+                plymove()
+                plyturn = False
+                pass
+                if plyerror == True:
+                    print("That is not a move that you have access to. Try again.")
+                    plymove()
+                    pass
+                    if plyerror == True:
+                        print("You end up freezing in place as you forget what you can do in battle.")
+                        pass
+                if enemyhealth <= 0 and plyhealth > 0:
+                    dinodead = True
+                    print("You won! \nThe plastic dinosaur disappears into dust. It leaves a very large tooth behind.")
+                    if weapon == 'Shard':
+                        print("\033[1;33mYour shard transformed into a sword. \033[0mWhat now?")
+                        weapon = "Sword"
+                        plyatck += 2
+                        inventory.append("Sword")
+                        inventory.remove("Shard")
+                    else:
+                        print("What now?")
+                    plypos = 3
+                    plyturn = True
+
+            if plyturn == False and plyhealth > 0 and enemyhealth > 0:
+                enemymove()
+                plyturn = True
+                pass
+                if plyhealth <= 0:
+                    print("The Plastic Dinosaur brutally tears you apart as you faint to the ground.\n\n\033[1;31mGame Over!\033[0m")
+                    plydead = True
 
 # Area 5 (gregory, have you heard of a)
 while plypos == 5 and plydead == False:
@@ -3780,78 +3624,67 @@ while plypos == 5 and plydead == False:
             print(f"Looking at the map, you seem to be at vent {ventpos}.")
     
     ply = input('>').lower()
-
-    if ply == 'left' or ply == 'go left':
-        print("")
-        ventmove_left()
-
-    elif ply == 'forward' or ply == 'go forward' or ply == 'ahead' or ply == 'go ahead':
-        print("")
-        ventmove_forward()
-
-    elif ply == 'right' or ply == 'go right':
-        print("")
-        ventmove_right()
-
-    elif ply == 'back' or ply == 'go back' or ply == 'backward' or ply == 'go backward':
-        print("")
-        ventmove_back()
-
-    elif ply == 'turn left':
-        print('\nYou turn left.')
-        ventDirection = (ventDirection - 1) % 4
-        ventdesc()
-
-    elif ply == 'turn right':
-        print('\nYou turn left')
-        ventDirection = (ventDirection + 1) % 4
-        ventdesc()
-
-    elif globalcommands():
-        pass
-
-    else:
-        print('Your thoughts seem incomprehensible.')
+    match ply:
+        case 'left' | 'go left':
+            print("")
+            ventmove_left()
+        case 'forward' | 'go forward' | 'ahead' | 'go ahead':
+            print("")
+            ventmove_forward()
+        case 'right' | 'go right':
+            print("")
+            ventmove_right()
+        case 'back' | 'go back' | 'backward' | 'go backward':
+            print("")
+            ventmove_back()
+        case 'turn left':
+            print('\nYou turn left.')
+            ventDirection = (ventDirection - 1) % 4
+            ventdesc()
+        case 'turn right':
+            print('\nYou turn left')
+            ventDirection = (ventDirection + 1) % 4
+            ventdesc()
+        case _:
+            if globalcommands():
+                pass
+            else:
+                print('Your thoughts seem incomprehensible.')
 
 # Area 6 (Sir, curity camera.)
 while plypos == 6 and plydead == False:
 
     while officepos == 0:
-
         ply = input('>').lower()
-
-        if ply == 'look north':
-            print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
-
-        elif ply == 'look south':
-            print('There is a sturdy metal door embedded into the wall.')
-
-        elif ply == 'look east':
-            print('A wall made of concrete bricks. There is unintelligible writing across its surface. It says: WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.')
-
-        elif ply == 'look west':
-            print('A concrete wall marred by cracks.')
-
-        elif ply == 'go north':
-            print('You approach the desk. Would you like to sit down? Y/N')
-            officepos = 1
-            plysecondary = input('> ').lower()
-            if plysecondary == 'y':
-                computer = True
-                print('You sit down in front of the desk. As you sit, one of the computer monitors displays a lock screen with an input for a password.')
-            elif plysecondary == 'n':
-                print('OK. You are standing by the desk.')
-
-        elif ply == 'go south':
-            officepos = 3
-            print('You approach the steel door. It has no handle.')
-
-        elif ply == 'go east':
-            officepos = 2
-            print('You approach the brick wall. You feel a slight draft coming from its direction.')
-                
-        if globalcommands():
-            pass
+        match ply:
+            case 'look north':
+                print('A large wooden desk. Underneath it is a bulky computer tower. Mounted on top of the desk and wall are about a dozen computer monitors, each buzzing with static.')
+            case 'look south':
+                print('There is a sturdy metal door embedded into the wall.')
+            case 'look east':
+                print('A wall made of concrete bricks. There is unintelligible writing across its surface. It says: WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.')
+            case 'look west':
+                print('A concrete wall marred by cracks.')
+            case 'go north':
+                print('You approach the desk. Would you like to sit down? Y/N')
+                officepos = 1
+                plysecondary = input('> ').lower()
+                if plysecondary == 'y':
+                    computer = True
+                    print('You sit down in front of the desk. As you sit, one of the computer monitors displays a lock screen with an input for a password.')
+                else:
+                    print('You decide not to sit down. You are standing by the desk.')
+            case 'go south':
+                officepos = 3
+                print('You approach the steel door. It has no handle.')
+            case 'go east':
+                officepos = 2
+                print('You approach the brick wall. You feel a slight draft coming from its direction.')
+            case _:       
+                if globalcommands():
+                    pass
+                else:
+                    print('Your thoughts seem incomprehensible.')
 
 #Area 12 (A very edible substance that makes up the room (True Story))
 while plypos == 12 and plydead == False:
