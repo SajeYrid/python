@@ -663,7 +663,6 @@ def plymove():
                 companionhealth += weaponnumber
                 specialcharge = specialchargeDEFAULT
         elif specialcharge == 0 and weaponability == 4:
-            # evil line 
             print(f"\033[1;34mYou use {weaponspecial}! You gain +{weaponnumber} defense for the rest of the fight.\033[0m")
             plydefense += weaponnumber
             specialcharge = specialchargeDEFAULT
@@ -1292,6 +1291,10 @@ def globalcommands():
         case 'quit':
             print("Ok, bye then.")
             quit()
+        case ':(':
+            print('Why are you mad?')
+        case ':)':
+            print('What are you smirking about?')
         case 'equip item':
             print("Please make sure to specify what item to equip. (EXAMPLE: Equip Hammer)")
             return True
@@ -3727,133 +3730,119 @@ while plypos == 18 and plydead == False and insidehouse == False:
 
     ply = input('>').lower()
 
-    if ply == 'look north':
-        print("It is indeed a door. Unfortunately, it does not look fragile.")
-
-    elif ply == 'look east':
-        print("A very climable tree.")
-
-    elif ply == 'look west' and 'Key' not in inventory:
-        print("A Skeleton of someone lying on a bench. They seem to be holding a key.")
-
-    elif ply == 'look west' and 'Key' in inventory:
-        print("A Skeleton of someone lying on a bench. They seem to now be smiling.")
-
-    elif ply == 'look south':
-        print("Nothing but fog and dark roads.")
-
-    elif ply == 'go north' and 'Key' not in inventory:
-        print("You bang your head on the door.")
-
-    elif ply == 'go north' and 'Key' in inventory:
-        print("You end up going north and opening the door using the key. You are now inside the house. The door remains open.")
-        insidehouse = True
-
-    elif ply == 'go east':
-        print("You head towards the tree. Nothing seems to be around it.")
-
-    elif ply == 'go west':
-        print("A basic beige wall blocks your path. Doesn't look breakable.")
-
-    elif ply == 'go south':
-        if 'Lantern' not in inventory:
-            print("You can't see well enough to be confident to go that way.")
-        else:
-            if weapon == 'Lantern':
-                print("You head into the fog with your lantern lit. It is very foggy, but visible enough to see close around you.\nWhat now?")
-                plypos = 20
+    match ply:
+        case 'look north':
+            print("It is indeed a door. Unfortunately, it does not look fragile.")
+        case 'look east':
+            print("A very climable tree.")
+        case 'look west':
+            if 'Key' in inventory:
+                print("A Skeleton of someone lying on a bench. They seem to now be smiling.")
             else:
-                print("You unfortuantly cannot see well enough as you do not have your lantern equipped.")
-
-    elif ply == 'take key' or ply == 'grab key':
-        print("You take the solid key from the skeleton.\n\033[1;33mKEY was added to your inventory.\033[0m")
-        inventory.append('Key')
-
-    elif ply == 'break door' or ply == 'fight door' or ply == 'kill door' or ply == 'attack door':
-        if weapon == 'Sword':
-            print(f"\033[1;31mYou manage to deal {plyatck * 5} damage to the metal door. \033[0mUnfortunatly, this door doesn't want to budge.")
-        else:
-            print("You attempt to destory the door. However, it is stronger than the previous door and does not budge.")
-
-    elif ply == 'open door' and 'Key' not in inventory:
-        print("You jiggle the handle. The door is locked.")
-
-    elif (ply == 'open door' or ply == 'unlock door') and 'Key' in inventory:
-        print("You open the door with the key. You are now inside the house. The door remains open.")
-        insidehouse = True
-        # It took me 5 hours to realize I accidentaly put a == instead of a =.
-
-    elif ply == 'check door':
-        print("The house's front door. It looks to be made of metal.")
-
-    elif ply == 'take door':
-        print("You try to take the door. It is lodged into the house and doesn't look to be coming out.")
-
-    elif ply == 'eat door':
-        print("You put your mouth on the door. The metal gives you an icky taste.")
-
-    elif ply == 'close door':
-        print("You try to close the closed door. It does not budge.")
-
-    elif ply == 'unlock door' and 'Key' not in inventory:
-        print("You try to unlock the door. Your finger does not fit through the lock.")
-
-    elif ply == 'take skeleton' and 'Key' not in inventory:
-        print("You try to take the entire skeleton. It seems to be stuck to the bench. The key remains in the skeleton's hand.")
-        #  ,̶'̶ ̶ ̶,̶ ̶|̶ ̶,̶'̶ ̶_̶'̶ 
-
-    elif ply == 'take skeleton' and 'Key' in inventory:
-        print("Rather than taking the skeleton, you shake the skeleton's hand for reciving the key.")
-
-    elif ply == 'check skeleton':
-        print("A very old skeleton. Looks to have scars scratched all around it.")
-        if 'Key' not in inventory:
-            print("The skeleton seems to be holding a key.")
-
-    elif ply == 'fight skeleton' or ply == 'attack skeleton' or ply == 'kill skeleton':
-        if weapon == 'Sword' and 'Key' in inventory:
-            print(f"You slash the skeleton for {plyatck * 3} damage. The skeleton immediatly breaks and the skull falls to the floor. \033[1;33mThe sword grew stronger.\033[0m")
-            plyatck += 1
-            swordstrength += 1
-        else:
-            print("You'd perfer not to fight a skeleton at this time.")
-
-    elif (ply == 'enter house' or ply == 'go in house') and 'Key' in inventory:
-        print("You open the door with the key to enter the house. You are now inside. The door remains open.")
-        insidehouse = True
-
-    elif (ply == 'enter house' or ply == 'go in house') and 'Key' not in inventory:
-        print("You attempt to go into the house. A locked metal door blocks your path.")
-
-    elif (ply == 'climb tree' or ply == 'check tree' or ply == 'eat tree' or ply == 'take tree') and 'Branch' in inventory:
-        print("There is no tree.")
-
-    elif ply == 'climb tree':
-        print("You climb the tree. While up there, you get a good glimpse of the path covered in fog to the south.\nThere seems to be an outline of a person wondering around aimlessly.\nYou jump down from the tree.")
-
-    elif ply == 'check tree':
-        print("A tree that has tons of climable branches.")
-
-    elif ply == 'eat tree':
-        print("You take a bite of the tree. Tastes odd.")
-
-    elif ply == 'take tree':
-        print("You try to take the tree. It is unfortunatly apart of the ground.")
-
-    elif ply == 'attack tree' or ply == 'fight tree' or ply == 'chop tree' or ply == 'chop the tree down' or ply == 'chop tree':
-        if weapon == 'Sword':
-            print("You manage to chop the tree with your sword. The tree immediatly collapses and fades to nothing. \033[1;33mThe sword grew stronger.\nBRANCH added to your inventory.\033[0m")
-            plyatck += 1
-            swordstrength += 1
-            inventory.append('Branch')
-        else:
-            print("You attempt to chop the tree down. Unfortuantly, you do not have the right tools for this task.")
-
-    elif globalcommands():
-        pass
-
-    else:
-        print("Your thoughts seem incomprehensible.")
+                print("A Skeleton of someone lying on a bench. They seem to be holding a key.")
+        case 'look south':
+            print("Nothing but fog and dark roads.")
+        case 'go north':
+            if 'Key' in inventory:
+                print("You end up going north and opening the door using the key. You are now inside the house. The door remains open.")
+                insidehouse = True
+            else:
+                print("You bang your head on the door.")
+        case 'go east':
+            print("You head towards the tree. Nothing seems to be around it.")
+        case 'go west':
+            print("A basic beige wall blocks your path. Doesn't look breakable.")
+        case 'go south':
+            if 'Lantern' not in inventory:
+                print("You can't see well enough to be confident to go that way.")
+            else:
+                if weapon == 'Lantern':
+                    print("You head into the fog with your lantern lit. It is very foggy, but visible enough to see close around you.\nWhat now?")
+                    plypos = 20
+                else:
+                    print("You unfortuantly cannot see well enough as you do not have your lantern equipped.")
+        case 'take key' | 'grab key':
+            print("You take the solid key from the skeleton.\n\033[1;33mKEY was added to your inventory.\033[0m")
+            inventory.append('Key')
+        case 'break door' | 'fight door' | 'kill door' | 'attack door':
+            if weapon == 'Sword':
+                print(f"\033[1;31mYou manage to deal {plyatck * 5} damage to the metal door. \033[0mUnfortunatly, this door doesn't want to budge.")
+            else:
+                print("You attempt to destory the door. However, it is stronger than the previous door and does not budge.")
+        case 'open door' | 'unlock door':
+            if 'Key' in inventory:
+                print("You open the door with the key. You are now inside the house. The door remains open.")
+                insidehouse = True
+                # It took me 5 hours to realize I accidentaly put a == instead of a =.
+            else:
+                if ply == 'open door':
+                    print("You jiggle the handle. The door is locked.")
+                else:
+                    print("You try to unlock the door. Your finger does not fit through the lock.")
+        case 'check door':
+            print("The house's front door. It looks to be made of metal.")
+        case 'take door':
+            print("You try to take the door. It is lodged into the house and doesn't look to be coming out.")
+        case 'eat door':
+            print("You put your mouth on the door. The metal gives you an icky taste.")
+        case 'close door':
+            print("You try to close the closed door. It does not budge.")
+        case 'take skeleton':
+            if 'Key' not in inventory:
+                print("You try to take the entire skeleton. It seems to be stuck to the bench. The key remains in the skeleton's hand.")
+                #  ,̶'̶ ̶ ̶,̶ ̶|̶ ̶,̶'̶ ̶_̶'̶
+            else:
+                print("Rather than taking the skeleton, you shake the skeleton's hand for reciving the key.")
+        case 'check skeleton':
+            print("A very old skeleton. Looks to have scars scratched all around it.")
+            if 'Key' not in inventory:
+                print("The skeleton seems to be holding a key.")
+        case 'fight skeleton' | 'attack skeleton' | 'kill skeleton':
+            if weapon == 'Sword' and 'Key' in inventory:
+                print(f"You slash the skeleton for {plyatck * 3} damage. The skeleton immediatly breaks and the skull falls to the floor. \033[1;33mThe sword grew stronger.\033[0m")
+                plyatck += 1
+                swordstrength += 1
+            else:
+                print("You'd perfer not to fight a skeleton at this time.")
+        case 'enter house' | 'go in house' | 'go inside' | 'go into house' | 'go inside house':
+            if 'Key' in inventory:
+                print("You open the door with the key to enter the house. You are now inside. The door remains open.")
+                insidehouse = True
+            else:
+                print("You attempt to go into the house. A locked metal door blocks your path.")
+        case 'climb tree':
+            if 'Branch' in inventory:
+                print("There is no tree.")
+            else:
+                print("You climb the tree. While up there, you get a good glimpse of the path covered in fog to the south.\nThere seems to be an outline of a person wondering around aimlessly.\nYou jump down from the tree.")
+        case 'check tree':
+            if 'Branch' in inventory:
+                print("There is no tree.")
+            else:
+                print("A tree that has tons of climable branches.")
+        case 'eat tree':
+            if 'Branch' in inventory:
+                print('There is no tree.')
+            else:
+                print("You take a bite of the tree. Tastes odd.")
+        case 'take tree':
+            if 'Branch' in inventory:
+                print("There is no tree.")
+            else:
+                print("You try to take the tree. It is unfortunatly apart of the ground.")
+        case 'attack tree' | 'fight tree' | 'chop tree' | 'chop the tree down' | 'kill tree':
+            if weapon == 'Sword':
+                print("You manage to chop the tree with your sword. The tree immediatly collapses and fades to nothing. \033[1;33mThe sword grew stronger.\nBRANCH added to your inventory.\033[0m")
+                plyatck += 1
+                swordstrength += 1
+                inventory.append('Branch')
+            else:
+                print("You attempt to chop the tree down. Unfortuantly, you do not have the right tools for this task.")
+        case _:
+            if globalcommands():
+                pass
+            else:
+                print("Your thoughts seem incomprehensible.")
 
     if insidehouse == True:
 
