@@ -663,7 +663,7 @@ def plymove():
                 companionhealth += weaponnumber
                 specialcharge = specialchargeDEFAULT
         elif specialcharge == 0 and weaponability == 4:
-            print(f"\033[1;34mYou use {weaponspecial}! You gain +{weaponnumber} defense for the rest of the fight.\033[0m")
+            print(f"\033[1;34mYou use {weaponspecial}! You gain +{weaponnumber} defense for the rest of the fight.\033[0m") # evil line
             plydefense += weaponnumber
             specialcharge = specialchargeDEFAULT
         elif specialcharge != 0 and weaponspecial != 'Nothing':
