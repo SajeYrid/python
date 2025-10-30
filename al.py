@@ -66,7 +66,7 @@ def retry():
     weaponability = 0
     weaponnumber = 0
     specialcharge = 0
-    specialchargeDEFAULT = 0
+    specialchargeDEFAULT = 0 # peak comedy
     global enemyhealth, enemyatck, enemyatckplus, enemyatckDEFAULT, enemydefense, enemyspecialtype, enemyspecialnumber, enemyspecialcount, enemyspecialcountDEFAULT, enemyaction, enemytarget
     enemyhealth = 0
     enemyatck = 0
@@ -417,7 +417,7 @@ def mysteriouscompanion():
     companionhealth = mysteriousperson.health
     companionatck = mysteriousperson.attack
     companionatckDEFAULT = mysteriousperson.attack
-    companiondefense = mysteriousperson.defense
+    companiondefense = mysteriousperson.defense # weed line
     companionphrase = mysteriousperson.atckphrase
 
     companiondefending = False
