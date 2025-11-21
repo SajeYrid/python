@@ -53,7 +53,7 @@ def retry():
     wiseguycount = ['q', 'w', 'e', 'r', 't', 'u', 'i', 'o', 'p', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'm']
 
     # integers
-    global plypos, plychoke, ouch, plyhealthDEFAULT, plyhealth, plyatckDEFAULT, plyatck, plyatckplus, plydefenseDEFAULT, plydefense, weaponability, weaponnumber, specialcharge, specialchargeDEFAULT
+    global plypos, plychoke, ouch, plyhealthDEFAULT, plyhealth, plyatckDEFAULT, plyatck, plyatckplus, plydefenseDEFAULT, plydefense, plydefenseMAX, weaponability, weaponnumber, specialcharge, specialchargeDEFAULT
     plypos = 0
     plychoke = 5
     ouch = 1
@@ -64,6 +64,7 @@ def retry():
     plyatckplus = 0
     plydefenseDEFAULT = 0
     plydefense = 0
+    plydefenseMAX = 0
     weaponability = 0
     weaponnumber = 0
     specialcharge = 0
@@ -579,7 +580,8 @@ You aren\'t where you were before.""")
         plyhealth = plyhealthDEFAULT
 
 def battlestart():
-    global weaponspecial, specialchargeDEFAULT
+    global weaponspecial, specialchargeDEFAULT, plydefenseMAX
+    plydefenseMAX = plydefense
     if weaponspecial != 'Nothing':
         print(f"""
 Your actions are:
@@ -670,8 +672,12 @@ def plymove():
 
     elif ply == 'special':
         if specialcharge == 0 and weaponability == 1:
-            print(f"\033[1;31mYou use {weaponspecial}! You deal {weaponnumber + plyatck} damage to {enemyname}!\033[0m")
-            enemyhealth -= (plyatck + weaponnumber)
+            if enemydefending:
+                print(f"\033[1;31mYou use {weaponspecial}! You deal {(weaponnumber + plyatck) // 4} damage to {enemyname}!\033[0m")
+                enemyhealth -= ((plyatck + weaponnumber) // 4)
+            else:
+                print(f"\033[1;31mYou use {weaponspecial}! You deal {weaponnumber + plyatck} damage to {enemyname}!\033[0m")
+                enemyhealth -= (plyatck + weaponnumber)
             if plycharge == True:
                 plyatck = math.floor(plyatck / 2)
                 plycharge = False
@@ -764,7 +770,7 @@ def plymove():
 \033[1;32mCHARGE: Powers up attack to deal double damage next attack.\033[0m""")
         if weaponspecial != 'Nothing':
             if weaponability == 1:
-                print(f"\033[1;31mSPECIAL: {weaponspecial} - Deals {weaponnumber + plyatck} damage to {enemyname}, ignoring defense.\033[0m")
+                print(f"\033[1;31mSPECIAL: {weaponspecial} - Deals {weaponnumber + plyatck} damage to {enemyname}. Deals only a fourth of the damage if {enemyname} is defending.\033[0m")
             elif weaponability == 2:
                 print(f"\033[1;32mSPECIAL: {weaponspecial} - Adds +{weaponnumber} damage to your next attack.\033[0m")
             elif weaponability == 3:
@@ -1153,9 +1159,10 @@ def battletrainer():
             armor = 'Splinters'
             plydefense = 1
         case 'shield':
-            print("Granting you access to the SHIELD (+3 Defense)")
+            ply = int(input('What strength is the shield?\n>'))
+            print(f"Granting you access to the SHIELD (+{ply} Defense)")
             armor = 'Shield'
-            plydefense = 3
+            plydefense = ply
         case 'bandana':
             print("Granting you access to the BANDANA (+2 Attack, -1 Defense)")
             armor = 'Shield'
@@ -1663,7 +1670,7 @@ def globalcommands():
                 else:
                     print("You relish in the defeat of the secret alien.")
                 return True
-            elif 'blast' in ply and 'Alien Blaster' in inventory:
+            elif 'blast' in ply and weapon == 'Alien Blaster':
                 print('You fire the alien blaster multiple times. You miss everything you were aiming at. You believe that the blaster only locks on to enemies.')
                 return True
             else:
@@ -2908,6 +2915,7 @@ while plypos == 2 and plydead == False:
                         plyhealthDEFAULT += 1
                     plyhealth = plyhealthDEFAULT
                     plypos = 3
+                    plydefense = plydefenseMAX
             if plyturn == False and plyhealth > 0 and enemyhealth > 0:
                 enemymove()
                 plyturn = True
@@ -3299,6 +3307,7 @@ You aren\'t where you were before.""")
                         print("What now?")
                     plypos = 3
                     plyturn = True
+                    plydefense = plydefenseMAX
 
             if plyturn == False and plyhealth > 0 and enemyhealth > 0:
                 enemymove()
@@ -4161,16 +4170,16 @@ while plypos == 21 and plydead == False and enemyname == 'The Beast':
                     plyatck += 2
                 plypos = 22
                 plyturn = True
+                plydefense = plydefenseMAX
             else:
                 if companion != '':
                     print(f"You won!\nThe beast decided to lay off you and {companion}.")
-                    plypos = 22
-                    plyturn = True
                     talkcounter = 3
                 else:
                     print(f"You won!\nThe beast decided to lay off you and ran away.")
-                    plypos = 22
-                    plyturn = True
+                plypos = 22
+                plyturn = True
+                plydefense = plydefenseMAX
 
     if plyturn == False and plyhealth > 0 and enemyhealth > 0:
         enemymove()
@@ -4215,6 +4224,7 @@ while plypos == 21 and plydead == False and (enemyname == 'The Mysterious Person
                 plyatck += 2
             plypos = 22
             plyturn = True
+            plydefense = plydefenseMAX
 
     if plyturn == False and plyhealth > 0 and enemyhealth > 0:
         enemymove()
