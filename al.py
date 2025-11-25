@@ -1089,14 +1089,15 @@ def battletrainer():
     global companion, companionhealth, companionatck, companionatckDEFAULT, companiondefense, companiondefending, enemytarget, photocheck
 
     ply = input('What health do you want to start at?\n>')
-    try:
+    if ply.isdigit():
         plyhealth = int(ply)
         if plyhealth <= 0:
             print('You will start at 1 HP.')
+            plyhealth = 1
         else:
             print(f'You will start at {plyhealth} HP.')
-    except:
-        print("That is not a number. You will start at 10 HP")
+    else:
+        print("Invalid Input. You will start at 10 HP")
         plyhealth = 10
 
     ply = input('What weapon would you like?\n>').lower()
@@ -1123,8 +1124,12 @@ def battletrainer():
             plyatck = 8
         case 'sword':
             weapon = 'Sword'
-            ply = int(input('What strength is the sword?\n>'))
-            swordstrength = ply
+            ply = input('What strength is the sword?\n>')
+            if ply.isdigit():
+                swordstrength = int(ply)
+            else:
+                print("That is not a number.")
+                swordstrength = 5
             print(f"Granting you access to the SWORD (+{swordstrength} Attack)")
             plyatck = 5 + swordstrength
         case 'key':
@@ -1159,7 +1164,12 @@ def battletrainer():
             armor = 'Splinters'
             plydefense = 1
         case 'shield':
-            ply = int(input('What strength is the shield?\n>'))
+            ply = input('What strength is the shield?\n>')
+            if ply.isdigit():
+                ply = int(ply)
+            else:
+                ply = 3
+                print("That is not a number.")
             print(f"Granting you access to the SHIELD (+{ply} Defense)")
             armor = 'Shield'
             plydefense = ply
@@ -4071,7 +4081,6 @@ while plypos == 20 and plydead == False:
     ply = input('>').lower()
 
     match ply:
-
         case 'look north':
             if forwardcheck:
                 print('A very long stretch of road. There seems to be a person nearby.')
@@ -4080,7 +4089,7 @@ while plypos == 20 and plydead == False:
         case 'look east':
             print('An endless supply of dead trees.')
         case 'look west':
-            print('PLACEHOLDER')
+            print('A nice looking horizon. A cliff seems to be present throughout the entirity of the path.')
         case 'look south':
             print('The road that you already treched.')
         case 'go north':
@@ -4101,7 +4110,7 @@ while plypos == 20 and plydead == False:
         case 'go east':
             print('You attempt to climb inbetween the dead trees. You can\'t seem to fit inside.')
         case 'go west':
-            print('PLACEHOLDER')
+            print('You head towards the cliff. Something holds you back from jumping off. You head back to the path.')
         case 'go south':
             if forwardcheck:
                 print('You decided to go back towards where you were previously.')
