@@ -1653,11 +1653,11 @@ def globalcommands():
                         elif equippeditem == 'Branch':
                             print("\033[1;30mExcept there was no need. It would only hinder your abilities.\033[0m")
                         elif equippeditem == 'Map':
-                            print("\033[1;30mIt doesn't seem to increse your power, but you now can see where you're going in vents.\033[0m")
+                            print("\033[1;30mIt doesn't seem to increse your power, but you now can see where you're going in the vents.\033[0m")
                             weapon = 'Map'
                             plyatck = plyatckDEFAULT
                         elif equippeditem == 'Bandana':
-                            print("You feel the power of a warrior.\n\033[1;31mYou gained +2 Attack.\033[1;34m\nYou gained -1 Defense.\033[0m")
+                            print("You feel the power of a warrior.\n\033[1;31mYou gained +2 Attack.\033[1;34m\nYou lost 1 Defense.\033[0m")
                             armor = "Bandana"
                             plydefense = plydefenseDEFAULT - 1
                         elif equippeditem == 'Alien Blaster':
@@ -1676,7 +1676,7 @@ def globalcommands():
                     return True
             elif 'alien' in ply:
                 if 'Alien Blaster' not in inventory:
-                    print("You sob due to the lack of aliens in your area.")
+                    print("You sob due to the lack of hot single aliens in your area.")
                 else:
                     print("You relish in the defeat of the secret alien.")
                 return True
@@ -1701,7 +1701,7 @@ def ventmove_left():
             ventpos = 7
             ventdesc()
         elif ventpos == 27 and ventDirection == 3:
-            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected in two. \nGame Over.')
+            print('You attempt to crawl through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected in two. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 0:
             print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing east.')
@@ -1906,7 +1906,7 @@ def ventmove_forward():
             ventpos = 7
             ventdesc()
         elif ventpos == 27 and ventDirection == 2:
-            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
+            print('You attempt to crawl through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 3:
             print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing west.')
@@ -2103,7 +2103,7 @@ def ventmove_right():
             ventpos = 7
             ventdesc()
         elif ventpos == 27 and ventDirection == 1:
-            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
+            print('You attempt to crawl through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 2:
             print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing east.')
@@ -2303,7 +2303,7 @@ def ventmove_back():
             ventpos = 7
             ventdesc()
         elif ventpos == 27 and ventDirection == 2:
-            print('You attempt to pass through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
+            print('You attempt to crawl through the stopped fan. While you are halfway through, the fan starts up again. You are cleanly bisected across the waist. \nGame Over.')
             plydead = True
         elif ventpos == 8 and ventDirection == 3:
             print('You walk into the light. You... walk? Weren\'t you just crawling?\nYou appear to be in some sort of security office. Computer monitors line one wall just above a desk. You are facing east.')
@@ -2972,10 +2972,8 @@ while plypos == 3 and plydead == False:
                     if plysecondary == 'y' or plysecondary == 'yes':
                         print("""You climb out of the glass case. You find yourself on top of the glass case you were in.
 Suddenly, the glass case dissapears from under your feet as you fall to the ground.
-You land in a new location that is surrounded by glass.
-You feel a little bit healthier than before.
-\033[1;33mYou no longer have access to the stool.\033[0m
-You are not where you were before.""")
+You land in a new location, surrounded by glass.
+\033[1;33mYou no longer have access to the stool.\033[0m""")
                         plypos = 12
                         plyhealthDEFAULT += 2
                         plyhealth = plyhealthDEFAULT
@@ -3075,7 +3073,7 @@ You are not where you were before.""")
                             print('Unfortuantly, there isn\'t anyone else in the room that you can refer to.')
                         case 'shard':
                             if 'Shard' in inventory:
-                                print(f"\033[1;31mYou immediatly attack the wall to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly.\033[1;33mThe Shard transformed into a SWORD.\033[0m")
+                                print(f"\033[1;31mYou attack the wall to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly.\033[1;33mThe Shard transformed into a SWORD.\033[0m")
                                 inventory.remove('Shard')
                                 inventory.append('Sword')
                                 weapon = 'Sword'
@@ -3083,12 +3081,12 @@ You are not where you were before.""")
                                 plywallBroken = True
                         case _:
                             if item_to_equip in inventory:
-                                print(f'You take out the {item_to_equip}. You don\'t know what to do with it, so you instantly put it back.')
+                                print(f'You take out the {item_to_equip}. You don\'t know what to do with it, so you put it back.')
                             else:
                                 print('You already know that won\'t work.')
             case 'fight wall':
                 if weapon == 'Shard' and plywallBroken == False:
-                    print(f"You decide to square up against the wall with your shard. \033[1;31mYou immediatly attack it to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly. \033[1;33mThe Shard transformed into a SWORD.\033[0m")
+                    print(f"You decide to square up against the wall with your shard. \033[1;31mYou attack it to deal {plyatck * 3} damage.\033[0m\nThe wall breaks down instantly. \033[1;33mThe Shard transformed into a SWORD.\033[0m")
                     inventory.remove('Shard')
                     inventory.append('Sword')
                     weapon = 'Sword'
@@ -3145,7 +3143,7 @@ You are not where you were before.""")
                 else:
                     print("You have already taken the map.")
             case 'go west':
-                print('There is a giant pile of presumably microplastics in your way.')
+                print('There is a giant pile of what are presumably microplastics in your way.')
                 if 'Tooth' not in inventory:
                    print('There is a particularly large tooth on top of it.')
             case 'check vent':
@@ -3193,7 +3191,7 @@ You are not where you were before.""")
                     print("Your prehistoric rage goes unquenched, as you haven't seen any dinosaurs so far.")
             case 'blast dinosaur':
                 if 'Alien Blaster' in inventory:
-                    print("You end up blasting the Plastic Dinosaur, \033[1;31mdealing 15 damage to it.\033[0m The Plastic Dinosaur immediatly reacts to your attack.\nBATTLE START!")
+                    print("You end up blasting the Plastic Dinosaur, \033[1;31mdealing 15 damage to it.\033[0m The Plastic Dinosaur reacts.\nBATTLE START!")
                     plasticDino()
                     plyspecial()
                     battlestart()
@@ -3244,7 +3242,7 @@ You are not where you were before.""")
                             ouch += 1
                             plyhealth -= 1
                             if plyhealth == 0:
-                                print("You somehow manage to deal the final blow to yourself as you faint to the floor, unconscience.\n\n\n\n\033[1;31mGAME OVER\033[0m")
+                                print("You somehow manage to deal the final blow to yourself as you fall to the floor, unconscious.\n\n\n\n\033[1;31mGAME OVER\033[0m")
                                 plydead = True
                             if ouch == 3:
                                 print('Your hand has given up on you.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
@@ -3274,7 +3272,7 @@ You aren\'t where you were before.""")
                         plyhealthDEFAULT += 2
                         plyhealth = plyhealthDEFAULT
                     case _:
-                        print("You look at the glass. You feel as if you have broken the game somehow.")
+                        print("You look at the glass. You feel as if you have broken the world even more than it already was.")
             case 'eat glass':
                 print("You press your mouth against the glass and attempt to take a bite. Unfortunately, the surface is too smooth and your teeth harmlessly slide against it.")
             case 'look south':
