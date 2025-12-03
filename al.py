@@ -1676,7 +1676,7 @@ def globalcommands():
                     return True
             elif 'alien' in ply:
                 if 'Alien Blaster' not in inventory:
-                    print("You sob due to the lack of hot single aliens in your area.")
+                    print("You sob due to the lack of hot, single aliens in your area.")
                 else:
                     print("You relish in the defeat of the secret alien.")
                 return True
