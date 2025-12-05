@@ -1289,8 +1289,8 @@ def battletrainer():
                 if computerhealth <= 0:
                     computerhealth = 1
             else:
-                print("Invalid Input. The Virunner will have 70 HP.")
-                computerhealth = 70
+                print("Invalid Input. The Virunner will have 100 HP.")
+                computerhealth = 100
             print("You will fight the VIRUNNER")
             virunner(computerhealth)
         case 'custom':
@@ -2531,7 +2531,7 @@ def ventmove_back():
                     ventdesc()
                 
 # the unholy and devilish and evil while loops
-# Title screen
+# Area 0 (Title Screen: Or as I like to call it, the QAZWSXEDCRFVTGBHUJMIKOLP lane due to the alien secret.)
 retry()
 print("""\033[1;32m
            88 88                         
@@ -2569,7 +2569,7 @@ while plypos == 0 and plydead == False:
                                     print("You end up freezing in place as you forget what you can do in battle.")
                                 pass
                         if enemyhealth <= 0 and plyhealth > 0:
-                            print("You SOMEHOW manage to defeat the alien despite the odds being stacked against you.\n\n")
+                            print("You SOMEHOW manage to defeat the alien despite the odds being stacked against you.\n")
                             print('\033[0mYou are now facing towards a door. However, \033[1;33myou now have the ALIEN BLASTER in your inventory.\033[0m You also feel quite healthy.\nYou already know what to do.')
                             inventory.append('Alien Blaster')
                             plyturn = True
@@ -2634,6 +2634,8 @@ while plypos == 0 and plydead == False:
                     roomdebug()
                 else:
                     print('Boss, that ain\'t possible.')
+            case 'alien':
+                print('That is indeed the name of the game.')
             case 'battle':
                 print('Loading battle simulator.')
                 battletrainer()
@@ -3239,6 +3241,7 @@ You land in a new location, surrounded by glass.
                     plasticDino()
                     plyspecial()
                     battlestart()
+                    enemyhealth -= 15
                     plypos = 4
             case 'look west':
                 print("Big plastic dinosaur. It looks surprisingly life-like.")
@@ -3869,6 +3872,11 @@ while plypos == 5 and plydead == False:
             print('\nYou turn left')
             ventDirection = (ventDirection + 1) % 4
             ventdesc()
+        case 'exit' | 'exit vent':
+            if ventpos == 0:
+                print('You attempt to exit the vent back into the museum. For some reason, the vent won\'t budge, even when using the TOOTH.')
+            else:
+                print('You are not near an exit to the vents.')
         case _:
             if globalcommands():
                 pass
@@ -3996,7 +4004,7 @@ while plypos == 6 and plydead == False:
         # AREA 6.5 (The Computer: I know a super secret code that only I know that helps me to unlock the parental lock.)
         if computer:
             while computer:
-                ply = input('What would you like to type? (Press leave to exit).\n>')
+                ply = input('What would you like to type? (Press leave to exit).\n>').lower()
                 match ply:
                     case 'leave':
                         print('You get up decide to leave the computer alone.')
@@ -4047,7 +4055,7 @@ while plypos == 6 and plydead == False:
                                         plydead = True
                         else:
                             print(f'You type \'{ply}\'. The computer made a weird sound, but nothing happened after that.')
-                    case 'WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH.' | 'WKLV LV D SODFHKROGHU. ZDLW IRU FRRO SXCCOH' | 'WKLV LV D SODFHKROGHU ZDLW IRU FRRO SXCCOH':
+                    case 'wklv lv d sodfhkroghu. zdlw iru frro sxccoh.' | 'wklv lv d sodfhkroghu. zdlw iru frro sxccoh' | 'wklv lv d sodfhkroghu zdlw iru frro sxccoh':
                         print(f'You type \'{ply}\'. You are amazed by the flashing PLACEHOLDER on the screen.')
                     case _:
                         if globalcommands():
