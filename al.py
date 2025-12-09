@@ -596,7 +596,6 @@ def glasscheck():
     elif glassTicker == 0:
         print("""You look even closer. Then, you realize, the glass isn\'t foggy, the museum is.
 You blink. when your eyes flutter open, the glass is clear again. In fact, everything is clear.
-Strangely, you feel healthier than usual.
 You aren\'t where you were before.""")
         glassTicker = 2
         plypos = 12
@@ -1370,7 +1369,7 @@ def battletrainer():
                 plymove()
                 pass
                 if plyerror == True:
-                    print("You end up forgeting what viable moves you have while training.")
+                    print("You end up forgetting what viable moves you have while training.")
                     pass
             if enemyhealth <= 0 and plyhealth > 0:
                 print("You won!\nReturning to Start Screen.\033[0m")
@@ -1506,49 +1505,49 @@ def globalcommands():
             return True
         case 'toss branch':
             if weapon == 'Sword' and 'Branch' in inventory:
-                print("You end up tossing away the branch.\n\033[1;33mBRANCH removed from your inventory.\033[0m")
+                print("You toss away the branch.\n\033[1;33mBRANCH removed from your inventory.\033[0m")
                 inventory.remove('Branch')
                 return True
             else:
                 return False
         case 'toss splinters':
             if weapon == 'Sword' and stoolexplode == False and 'Splinters' in inventory:
-                print("You end up tossing away the splinters.\n\033[1;33mSPLINTERS removed from your inventory.\033[0m")
+                print("You toss away the splinters.\n\033[1;33mSPLINTERS removed from your inventory.\033[0m")
                 inventory.remove('Splinters')
                 return True
             else:
                 return False
         case 'toss brick':
             if weapon == 'Sword' and 'Brick' in inventory:
-                print("You end up tossing away the brick.\n\033[1;33mBRICK removed from your inventory.\033[0m")
+                print("You toss away the brick.\n\033[1;33mBRICK removed from your inventory.\033[0m")
                 inventory.remove('Brick')
                 return True
             else:
                 return False
         case 'toss map':
             if weapon == 'Sword' and 'Map' in inventory:
-                print("You end up tossing away the map.\n\033[1;33mMAP removed from your inventory.\033[0m")
+                print("You toss away the map.\n\033[1;33mMAP removed from your inventory.\033[0m")
                 inventory.remove('Map')
                 return True
             else:
                 return False
         case 'toss nothing':
             if weapon == 'Sword' and 'Nothing' in inventory:
-                print("You end up tossing away nothing.\n\033[1;33mNOTHING removed from your inventory.\033[0m")
+                print("You toss away nothing.\n\033[1;33mNOTHING removed from your inventory.\033[0m")
                 inventory.remove('Nothing')
                 return True
             else:
                 return False
         case 'toss crowbar':
             if weapon == 'Sword' and 'Crowbar' in inventory:                    
-                print("You end up tossing away the crowbar.\n\033[1;33mCROWBAR removed from your inventory.\033[0m")
+                print("You toss away the crowbar.\n\033[1;33mCROWBAR removed from your inventory.\033[0m")
                 inventory.remove('Crowbar')
                 return True
             else:
                 return False
         case 'toss key':
             if weapon == 'Sword' and 'Key' in inventory and plypos != 18:
-                print("You end up tossing away the key.\n\033[1;33mKEY removed from your inventory.\033[0m")
+                print("You toss away the key.\n\033[1;33mKEY removed from your inventory.\033[0m")
                 inventory.remove('Key')
                 return True
             else:
@@ -1692,7 +1691,7 @@ def globalcommands():
                             weapon = 'Lantern'
                             plyatck = plyatckDEFAULT + 1
                         elif equippeditem == 'Branch':
-                            print("\033[1;30mExcept there was no need. It would only hinder your abilities.\033[0m")
+                            print("\033[1;30mIt would only hinder your abilities.\033[0m")
                         elif equippeditem == 'Map':
                             print("\033[1;30mIt doesn't seem to increse your power, but you now can see where you're going in the vents.\033[0m")
                             weapon = 'Map'
@@ -2603,7 +2602,7 @@ while plypos == 0 and plydead == False:
                 print("Instructions:\nComplete the game using any method necessary. Use cardinal directions. type 'Think' or 'Hint' for a hint.\nGood luck.\n")
                 print("There is a door here. You are facing north.")
             case 'n' | 'no' | 'quit':
-                print("Ok? Dunno why you decided to show up then. I mean, like, we spent a long while programming this game. It's got tons of routes and options for you to do. It's a pretty good game if I say so myself. But I guess if you don't want to play that's... alright. Like yeah, who cares about alien? I surely, definitly, definitivly, absoulutly do not care about this wonderful creation that I made. You, on the other hand, absoulutly do care about this game considering you are either reading this via the source code or through Python idle and are taking your time to read all of this. But yeah, sure, leave. It's not like I wanted you to be here anyway.")
+                print("Ok? Dunno why you decided to show up then. I mean, like, we spent a long while programming this game. It's got tons of routes and options for you to do. It's a pretty good game if I say so myself. But I guess if you don't want to play that's... alright. Like yeah, who cares about alien? I surely, definitely, definitively, absoulutely do not care about this wonderful creation that I made. You, on the other hand, unquestionably care about this game, considering you are either reading this via the source code or through Python idle and are taking your time to read all of this. But yeah, sure, leave. It's not like I wanted you to be here anyway.")
                 quit()
             case 'break' | 'attack' | 'punch' | 'fight':
                 plypos = 1
@@ -2758,7 +2757,7 @@ while plypos == 1 and doorbroken == True and plydead == False:
             if brokenhand == True:
                 print("You unfortunately don't have the strength to do that.")
             elif ouch == 3:
-                print('You violently punch the wall. Your hand passes right through the wall.\nOnce you took out your hand, if felt broken.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
+                print('You violently punch the wall. Your hand passes right through the wall.\nOnce you took out your hand, it felt broken.\n\033[1;31mYou can\'t use your hand anymore.\033[0m')
                 brokenhand = True
                 plyatck -= 1
                 plyatckDEFAULT -= 1
@@ -2900,7 +2899,7 @@ while plypos == 2 and plydead == False:
         plyspecial()
         battlestart() 
         plychoke = 8
-        
+
     elif 'inventory' in ply:
         for x in inventory:
             print(x)
@@ -2974,7 +2973,7 @@ while plypos == 2 and plydead == False:
                 plyturn = True
                 pass
                 if plyhealth <= 0:
-                    print("The VOID manages to choke you out as you lose all of your breath. You collapse and lose all conscience.\n\n\033[1;31mGame Over!\033[0m")
+                    print("The VOID manages to choke you out as you lose all of your breath. You collapse and lose consciousness.\n\n\033[1;31mGame Over!\033[0m")
                     plydead = True
 
 # area 3 (Museum: The butterfly effect should NOT do THIS much damage.)
@@ -3348,7 +3347,7 @@ You aren\'t where you were before.""")
                     plymove()
                     pass
                     if plyerror == True:
-                        print("You end up freezing in place as you forget what you can do in battle.")
+                        print("You freeze in place as you forget what you can do in battle.")
                         pass
                 if enemyhealth <= 0 and plyhealth > 0:
                     dinodead = True
@@ -3370,7 +3369,7 @@ You aren\'t where you were before.""")
                 plyturn = True
                 pass
                 if plyhealth <= 0:
-                    print("The Plastic Dinosaur brutally tears you apart as you faint to the ground.\n\n\033[1;31mGame Over!\033[0m")
+                    print("The Plastic Dinosaur brutally tears you apart as you fall to the ground.\n\n\033[1;31mGame Over!\033[0m")
                     plydead = True
 
 # Area 5 (The Vents: gregory, have you heard of a)
@@ -4007,14 +4006,14 @@ while plypos == 6 and plydead == False:
                 ply = input('What would you like to type? (Press leave to exit).\n>').lower()
                 match ply:
                     case 'leave':
-                        print('You get up decide to leave the computer alone.')
+                        print('You get up and decide to leave the computer alone.')
                         computer = False
                     case 'eat':
-                        print(f'You type \'{ply}\'. You hear a chomp sound emitted from the computer.\n\033[1;33mThe computer healed 2 HP.\033[0m')
+                        print(f'You type \'{ply}\'. You hear a chomp sound emitted from the computer\'s speakers.\n\033[1;33mThe computer healed 2 HP.\033[0m')
                         computerhealth += 2
                     case 'fight' | 'kill':
                         if weapon == 'Sword':
-                            print(f'You type \'{ply}\'. The computer all of the sudden flashes a bright white and transforms into a robotic beast that is very well known as the VIRUNNER.\nYou draw your sword immediatly. BATTLE START.')
+                            print(f'You type \'{ply}\'. The computer all of the sudden flashes a bright white and transforms into a robotic beast.\nYou draw your sword. BATTLE START!!')
                             computerhealth += 99
                             virunner(computerhealth)
                             plyspecial()
@@ -4030,7 +4029,7 @@ while plypos == 6 and plydead == False:
                                         plymove()
                                         pass
                                         if plyerror == True:
-                                            print("You end up freezing in place as you forget what you can do in battle.")
+                                            print("You freeze in place as you forget what you can do in battle.")
                                             pass
                                     if enemyhealth <= 0 and plyhealth > 0:
                                         if ply == 'special':
@@ -4038,7 +4037,7 @@ while plypos == 6 and plydead == False:
                                             swordstrength += 5
                                             computerhealth = -1
                                         else:
-                                            print(f"You won!\n{enemyname} explodes into a pile of rubish.\033[1;33mThe sword grew stronger.\033[0m")
+                                            print(f"You won!\n{enemyname} explodes into a pile of rubbish.\033[1;33mThe sword grew stronger.\033[0m")
                                             swordstrength += 1
                                             computerhealth = 0
                                         plypos = 6
@@ -4054,7 +4053,7 @@ while plypos == 6 and plydead == False:
                                         print(f"{enemyname} ends up dealing the final blow to you. You died to a rock.\n\n\033[1;31mGame Over!\033[0m")
                                         plydead = True
                         else:
-                            print(f'You type \'{ply}\'. The computer made a weird sound, but nothing happened after that.')
+                            print(f'You type \'{ply}\'. The computer made a weird sound, but nothing else happened.')
                     case 'wklv lv d sodfhkroghu. zdlw iru frro sxccoh.' | 'wklv lv d sodfhkroghu. zdlw iru frro sxccoh' | 'wklv lv d sodfhkroghu zdlw iru frro sxccoh':
                         print(f'You type \'{ply}\'. You are amazed by the flashing PLACEHOLDER on the screen.')
                     case _:
@@ -4120,27 +4119,27 @@ while plypos == 18 and plydead == False and insidehouse == False:
         case 'go west':
             print("A basic beige wall blocks your path. Doesn't look breakable.")
         case 'break wall':
-            print("It's not a breakable wall.")
+            print("It's too solid.")
         case 'go south':
             if 'Lantern' not in inventory:
-                print("You can't see well enough to be confident to go that way.")
+                print("You can't see well enough to go that way.")
             else:
                 if weapon == 'Lantern':
                     print("You head into the fog with your lantern lit. It is very foggy, but visible enough to see close around you.\nYour sense of direction seems to have fliped. You are facing North.\nWhat now?")
                     plypos = 20
                 else:
-                    print("You unfortuantly cannot see well enough as you do not have your lantern equipped.")
+                    print("You unfortunatly cannot see well enough as you do not have your lantern equipped.")
         case 'take key' | 'grab key':
             if 'Key' not in inventory:
                 print("You take the solid key from the skeleton.\n\033[1;33mKEY was added to your inventory.\033[0m")
                 inventory.append('Key')
             else:
-                print('You take the key out of your inventory to toss it around for a few seconds before immediatly putting it back.')
+                print('You take the key out of your inventory to toss it around for a few seconds before immediately putting it back.')
         case 'break door' | 'fight door' | 'kill door' | 'attack door':
             if weapon == 'Sword':
                 print(f"\033[1;31mYou manage to deal {plyatck * 5} damage to the metal door. \033[0mUnfortunatly, this door doesn't want to budge.")
             else:
-                print("You attempt to destory the door. However, it is stronger than the previous door and does not budge.")
+                print("You attempt to destroy the door. However, it is stronger than the previous door and does not budge.")
         case 'open door' | 'unlock door':
             if 'Key' in inventory:
                 print("You open the door with the key. You are now inside the house. The door remains open.")
@@ -4164,18 +4163,18 @@ while plypos == 18 and plydead == False and insidehouse == False:
                 print("You try to take the entire skeleton. It seems to be stuck to the bench. The key remains in the skeleton's hand.")
                 #  ,̶'̶ ̶ ̶,̶ ̶|̶ ̶,̶'̶ ̶_̶'̶
             else:
-                print("Rather than taking the skeleton, you shake the skeleton's hand for reciving the key.")
+                print("Rather than taking the skeleton, you shake the skeleton's hand for receiving the key.")
         case 'check skeleton':
             print("A very old skeleton. Looks to have scars scratched all around it.")
             if 'Key' not in inventory:
                 print("The skeleton seems to be holding a key.")
         case 'fight skeleton' | 'attack skeleton' | 'kill skeleton':
             if weapon == 'Sword' and 'Key' in inventory:
-                print(f"You slash the skeleton for {plyatck * 3} damage. The skeleton immediatly breaks and the skull falls to the floor. \033[1;33mThe sword grew stronger.\033[0m")
+                print(f"You slash the skeleton for {plyatck * 3} damage. The skeleton immediately breaks, and the skull falls to the floor. \033[1;33mThe sword grew stronger.\033[0m")
                 plyatck += 1
                 swordstrength += 1
             else:
-                print("You'd perfer not to fight a skeleton at this time.")
+                print("You'd prefer not to fight a skeleton at this time.")
         case 'enter house' | 'go in house' | 'go inside' | 'go into house' | 'go inside house':
             if 'Key' in inventory:
                 print("You open the door with the key to enter the house. You are now inside. The door remains open.")
@@ -4204,13 +4203,13 @@ while plypos == 18 and plydead == False and insidehouse == False:
                 print("You try to take the tree. It is unfortunatly apart of the ground.")
         case 'attack tree' | 'fight tree' | 'chop tree' | 'chop the tree down' | 'kill tree':
             if weapon == 'Sword':
-                print("You manage to chop the tree with your sword. The tree immediatly collapses and fades to nothing. \033[1;33mThe sword grew stronger.\nBRANCH added to your inventory.\033[0m")
+                print("You manage to chop the tree with your sword. The tree immediately collapses and fades to nothing. \033[1;33mThe sword grew stronger.\nBRANCH added to your inventory.\033[0m")
                 plyatck += 1
                 swordstrength += 1
                 inventory.append('Branch')
             else:
                 if ply == 'chop the tree down': print('NO!')
-                else: print("You attempt to chop the tree down. Unfortuantly, you do not have the right tools for this task.")
+                else: print("You attempt to chop the tree down. Unfortunatly, you do not have the right tools for this task.")
         case _:
             if globalcommands():
                 pass
@@ -4239,7 +4238,7 @@ while plypos == 18 and plydead == False and insidehouse == False:
                         print("You take the lantern from the shelf.\n\033[1;33mLANTERN added to your inventory.\033[0m")
                         inventory.append("Lantern")
                     else:
-                        print("You have already taken the lantern. You cannot find another item to take.")
+                        print("You have already taken the lantern. You cannot find another lantern to take.")
                 case 'look west':
                     print("Nothing but packed boxes. They are all sealed shut.")
                 case 'take photo':
@@ -4251,19 +4250,19 @@ while plypos == 18 and plydead == False and insidehouse == False:
                         print('You take a look at the photos. It appears to be a family of 5. You don\'t recongnize anyone in the photo.\nThe unscratched face appears to look like a middle aged human person. The name \'Lenard\' is written underneath their head.')
                         photocheck = True
                 case 'open boxes':
-                    print("You attempt to open the boxes. They are all fully sealed.")
+                    print("You attempt to open the boxes. They are all sealed shut.")
                 case 'break boxes':
                     print("You attempt to break the boxes. For some reason, they don't budge.")
                 case 'fight boxes' | 'kill boxes':
                     if weapon == 'Sword' and 'Bandana' not in inventory:
-                        print("You slash all of the boxes. You manage to find a bandana. It looks a bit cursed, but that doesn't bother you.\n\033[1;33mBANDANA added to your INVENTORY.\033[0m")
+                        print("You slash open all of the boxes. You find a bandana. It looks a bit cursed, but that doesn't bother you.\n\033[1;33mBANDANA added to your INVENTORY.\033[0m")
                         inventory.append('Bandana')
                     elif 'Bandana' in inventory: print("There are no boxes to break.")
-                    else: print("Boxes? You want to fight boxes? Like, unless you had a sword, there'd be no reason.")
+                    else: print("Boxes? You want to fight boxes?")
                 case 'take boxes':
                     print("You attempt to take the boxes. They feel as if they are glued to the ground.")
                 case 'look south':
-                    print("The area you were in before. The door is still open.")
+                    print("You've been here before. The door is still open.")
                 case 'go north' | 'go east' | 'go west':
                     print("The house doesn't seem to be big enough to move in that direction.")
                 case 'go south' | 'exit house' | 'leave house' | 'close door' | 'leave':
@@ -4288,17 +4287,17 @@ while plypos == 20 and plydead == False:
         case 'look east':
             print('An endless supply of dead trees.')
         case 'look west':
-            print('A nice looking horizon. A cliff seems to be present throughout the entirity of the path.')
+            print('A nice looking horizon. A cliff seems to be present throughout the entirety of the path.')
         case 'check cliff':
-            print('You look at what lies beneath the cliff. It looks to be a very long drop, but the bottom is visable.')
+            print('You look at what lies beneath the cliff. It looks to be a very long drop, but the bottom is visible.')
         case 'look south':
-            print('The road that you already treched.')
+            print('The road that you already traveled.')
         case 'go north':
             if forwardcheck:
                 print("You end up running into a person. They are greatly startled and send out a blood curling scream.")
                 if photocheck:
                     print("You notice that the person looks exactly like Lenard from the photo.")
-                print("Suddenly, both you and the person hear tons of rustling and very heavy footsteps right behind you. The person yells at you to RUN!\nBATTLE START!")
+                print("Suddenly, both you and the person hear rustling and heavy footsteps right behind you. The person yells at you to RUN!\nBATTLE START!")
                 plypos = 21
                 mysteriouscompanion()
                 plyspecial()
@@ -4309,7 +4308,7 @@ while plypos == 20 and plydead == False:
                 print("You keep moving forward. You feel like you see a person, but cannot truly make out the image.")
                 forwardcheck = True
         case 'go east':
-            print('You attempt to climb inbetween the dead trees. You can\'t seem to fit inside.')
+            print('You attempt to climb in-between the dead trees. You can\'t seem to fit inside.')
         case 'go west':
             print('You head towards the cliff. Something holds you back from jumping off. You head back to the path.')
         case 'go south':
@@ -4320,13 +4319,13 @@ while plypos == 20 and plydead == False:
                 print('There isn\'t any reason to head back to the old house.')
         case 'talk':
             if forwardcheck:
-                print("You try to speak to the figure. You hear something said back at you, but cannot make out what it was.")
+                print("You try to speak to the figure. You hear something said back at you, but you couldn't parse the words.")
             else:
                 print("You try to call out for someone, saying hello. You feel as if you hear something north from you.")
         case 'kill' | 'fight':
             if forwardcheck:
                 if weapon == 'Sword':
-                    print("You charge forwards and iniate combat with what is revealed to be a person.\nBATTLE START!")
+                    print("You charge forwards and initiate combat with what is revealed to be a person.\nBATTLE START!")
                     mysteriousPerson()
                     plyspecial()
                     battlestart()
@@ -4341,19 +4340,19 @@ while plypos == 20 and plydead == False:
         case 'equip nothing' | 'equip pretend splinters' | 'equip crowbar' | 'equip brick' | 'equip shard' | 'equip key':
             print("If you were to equip that, you would lose your vision as there would be no more light.")
         case 'jump off' | 'jump off the cliff' | 'jump off cliff':
-            print('You take a deep breath and decide to jump off the cliff. You fall for quite a while before hitting the ground. You unfortuantly did not land well and took major damage because of the fall, but you are still alive.\nYou have no idea where you are.')
+            print('You take a deep breath and jump off the cliff. You fall for quite a while before hitting the ground. You unfortuantly didn\'t land well, but you are still alive.\nYou have no idea where you are.')
             plypos = 22
             plyhealth = 1
         case 'jump':
-            print('You jump in place.')
+            print('You jump in place. Good job.')
         case _:
             if ply == 'equip splinters' and stoolexplode == False and armor != 'Splinters':
-                print('You decide to form the splinters into a protective stool.\n\033[1;33mYou equipped the splinters.\n\033[1;34mYou gained +1 defense.\033[0m')
+                print('You form the splinters into a protective stool.\n\033[1;33mYou equipped the splinters.\n\033[1;34mYou gained +1 defense.\033[0m')
                 armor = 'Splinters'
                 stoolexplode = True
                 plydefense = plydefenseDEFAULT + 1
             elif ply == 'equip sword' and 'Sword' in inventory:
-                print(f"When you reached for your sword, it emmited a bright glow. You don't need the lantern anymore.\n\033[1;33mYou tossed away the lantern.\nYou equipped the Sword. \033[1;31mYou gained +{swordstrength} attack.\033[0m")
+                print(f"When you reached for your sword, it emitted a bright light. You don't need the lantern anymore.\n\033[1;33mYou tossed away the lantern.\nYou equipped the Sword. \033[1;31mYou gained +{swordstrength} attack.\033[0m")
                 inventory.remove('Lantern')
                 weapon = 'Sword'
                 plyatck = plyatckDEFAULT + swordstrength
@@ -4380,7 +4379,7 @@ while plypos == 21 and plydead == False and enemyname == 'The Beast':
                 pass
         if enemyhealth <= 0 and plyhealth > 0:
             if ply == 'special' and weapon == 'Sword':
-                print("You won!\nThe beast was slained by the sword and falls to the ground.\n\033[1;33mThe Sword grew stronger.\033[0m")
+                print("You won!\nThe beast was slain by the sword and falls to the ground.\n\033[1;33mThe Sword grew stronger.\033[0m")
                 swordstrength += 2
                 plyatck = plyatckDEFAULT + swordstrength
                 if armor == 'Bandana':
@@ -4427,7 +4426,7 @@ while plypos == 21 and plydead == False and (enemyname == 'The Mysterious Person
             plymove()
             pass
             if plyerror == True:
-                print("You end up freezing in place as you forget what you can do in battle.")
+                print("You freeze in place as you forget what you can do in battle.")
                 pass
         if enemyhealth <= 0 and plyhealth > 0:
             if ply == 'special':
@@ -4453,15 +4452,15 @@ while plypos == 21 and plydead == False and (enemyname == 'The Mysterious Person
 
 # Area 22 (Stormed Horizons: I cannot see the end of the horizon. HATSUNE MIKU?! IS THAT YOU?!)
     # Lenard is alive :)
-#Quick Intermition to introduce the area and Lenard.
+#Quick Intermission to introduce the area and Lenard.
 if plypos == 22:
     if companion == 'The Mysterious Person' or companion == 'Lenard':
-        print('As you and the person stop, they introduce themselves to you. They greet you kindly and introduce themselves as Lenard.')
+        print('As you and the person stop, they introduce themself to you as Lenard.')
         if companion == 'The Mysterious Person':
             print('You introduce yourself to Lenard. \033[1;33mYou can now talk to Lenard by typing TALK.\033[0m')
             companion == 'Lenard'
         else:
-            print('You tell Lenard that you already knew that. They look visablly confused. \033[1;33mYou can now talk to Lenard by typing TALK.\033[0m')
+            print('You tell Lenard that you already knew that. They look visibly confused. \033[1;33mYou can now talk to Lenard by typing TALK.\033[0m')
     print('You find yourself in a new area. A storm seems to be approaching, but not at a fast pace.\nWhat now?')
 
 while plypos == 22 and plydead == False and companion == 'Lenard':
@@ -4489,3 +4488,4 @@ while plypos == 22 and plydead == False and companion != 'Lenard':
 
     else:
         print("Your thoughts seem incomprehensible.")
+        
